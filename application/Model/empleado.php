@@ -49,12 +49,13 @@ class empleado extends Model
         $query->execute($parameters);
     }
 
-    public function getAmountOfSongs()
+    public function cambiarEstado()
     {
-        $sql = "SELECT COUNT(id) AS amount_of_songs FROM song";
+        $sql = "UPDATE empleado set id_estado=? where idEmpleado=?";
         $query = $this->db->prepare($sql);
-        $query->execute();
+        $query->bindParam(1,$this->id_estado);
+        $query->bindParam(2,$this->idEmpleado);
+        return $query->execute();
 
-        return $query->fetch()->amount_of_songs;
     }
 }
