@@ -41,12 +41,18 @@ class empleado extends Model
     }
 
 
-    public function updateSong($artist, $track, $link, $song_id)
+    public function actualizarEmpleado()
     {
-        $sql = "UPDATE song SET artist = :artist, track = :track, link = :link WHERE id = :song_id";
+        $sql = "UPDATE empleado SET nombre = ?, apellido = ?, telefono = ?,correo = ?,id_rol = ?,id_estado = ? WHERE idEmpleado = ?";
         $query = $this->db->prepare($sql);
-        $parameters = array(':artist' => $artist, ':track' => $track, ':link' => $link, ':song_id' => $song_id);
-        $query->execute($parameters);
+        $query->bindParam(1,$this->nombre);
+        $query->bindParam(2,$this->apellido);
+        $query->bindParam(3,$this->telefono);
+        $query->bindParam(4,$this->correo);
+        $query->bindParam(5,$this->id_rol);
+        $query->bindParam(6,$this->id_estado);
+        $query->bindParam(7,$this->idEmpleado);
+        return $query->execute();
     }
 
     public function getAmountOfSongs()
