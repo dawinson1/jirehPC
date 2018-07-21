@@ -18,9 +18,9 @@ class empleado extends Model
         $this->$atributo = $valor;
     }
 
-    public function litarEmpleados()
+    public function listarEmpleados()
     {
-        $sql = "SELECT * FROM empleado";
+        $sql = "SELECT e.*,r.Nombre as nombrerol FROM empleado e INNER JOIN rol r ON r.idRol = e.id_rol";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();

@@ -200,15 +200,14 @@
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 </div>
-<script src="<?php echo URL; ?>js/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?php echo URL; ?>js/bootstrap.min.js"></script>
+
 <!-- SlimScroll -->
 <script src="<?php echo URL; ?>js/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="<?php echo URL; ?>js/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo URL; ?>js/adminlte.min.js"></script>
+<script src="<?php echo URL; ?>js/datatables.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 
 <script>

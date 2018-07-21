@@ -17,9 +17,16 @@
   <link rel="stylesheet" href="<?php echo URL; ?>css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo URL; ?>css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?php echo URL; ?>css/varios.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo URL; ?>css/_all-skins.min.css">
+
+  <link rel="stylesheet" href="<?php echo URL; ?>css/datatables.min.css">
+
+  <script src="<?php echo URL; ?>js/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+  <script src="<?php echo URL; ?>js/bootstrap.min.js"></script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,6 +37,9 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <script>
+    var Url = "<?=URL?>";
+  </script>
 </head>
 <body class="hold-transition skin-red sidebar-mini fixed">
 <!-- Site wrapper -->
