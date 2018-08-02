@@ -22,7 +22,7 @@ class empleadoController
     public function formEmpleado()
     {
         require APP . 'view/_templates/header.php';
-        require APP . 'view/empleado/.php';
+        require APP . 'view/empleado/formEmpleado.php';
         require APP . 'view/_templates/footer.php';
     }
 
