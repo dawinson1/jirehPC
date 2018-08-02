@@ -228,7 +228,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<?php echo URL; ?>empleado"><i class="fa fa-table"></i> Tabla Empleado</a></li>
-            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li><a href="<?php echo URL; ?>empleado/formEmpleado"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Empleado</a></li>
           </ul>
         </li>
         <li class="treeview">
