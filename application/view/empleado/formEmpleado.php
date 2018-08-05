@@ -1,3 +1,5 @@
+<div class="content-wrapper">
+<section class="content">
 <div class="box box-info">
             <div class="box-header">
               <h3 class="box-title">Color &amp; Time Picker</h3>
@@ -43,4 +45,6 @@
               </div>
             </div>
             <!-- /.box-body -->
+          </div>
+          </section>
           </div>

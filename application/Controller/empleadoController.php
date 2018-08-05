@@ -37,6 +37,7 @@ class empleadoController
                'correo'=>$value['correo'],
                'nombrerol'=>$value['nombrerol'],
                'id_estado'=>$value['id_estado']
+               
            );
        }
        echo json_encode($datos);

@@ -21,6 +21,8 @@
                   <th>Correo</th>
                   <th>Rol</th>
                   <th>id_estado</th>
+                  <th>Editar</th>
+                  <th>Elimar</th>
                 </tr>
                 </thead>
               </table>
