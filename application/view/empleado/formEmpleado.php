@@ -11,7 +11,7 @@
 
                 <div class="input-group my-colorpicker2 colorpicker-element">
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <input type="email" class="form-control" placeholder="Email">
+                <input type="email" class="form-control" placeholder="XD">
 
                   <div class="input-group-addon">
                     <i></i>

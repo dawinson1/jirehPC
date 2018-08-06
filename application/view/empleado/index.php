@@ -53,7 +53,8 @@ $(document).ready(function() {
             { "data": "telefono","className": 'centeer'  },
             { "data": "correo","className": 'centeer'  },
             { "data": "nombrerol","className": 'centeer' },
-            { "data": "id_estado", "orderable": false}
+            { "data": "id_estado", "orderable": false},
+            { "data": "Editar", "orderable": false}
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
         "scrollX": false,

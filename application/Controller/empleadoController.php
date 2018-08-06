@@ -37,7 +37,7 @@ class empleadoController
                'correo'=>$value['correo'],
                'nombrerol'=>$value['nombrerol'],
                'id_estado'=>$value['id_estado'],
-               
+               'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarEmpleado()">Editar</button>']
            );
        }
        echo json_encode($datos);
