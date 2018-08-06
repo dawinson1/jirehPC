@@ -4,85 +4,63 @@
             <div class="box-header">
               <h3 class="box-title">Empleado</h3>
             </div>
-            <div class="box-body">
-              
-              <div class="form-group">
-                <label>Color picker with addon:</label>
-
-                <div class="input-group my-colorpicker2 colorpicker-element">
+            <div class="box-body">  <!--<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+<<<<<<< HEAD
                 <input type="email" class="form-control" placeholder="XD">
+=======
+                <input type="email" class="form-control" placeholder="Email">
+              </div>-->
+>>>>>>> d3a65dd1557f58798253c5406d658623252147ad
 
-                  <div class="input-group-addon">
-                    <i></i>
-                  </div>
-                </div>
-                <!-- /.input group -->
-              </div>
-              <div class="form-group">
-                <label>Color picker with addon:</label>
-
-                <div class="input-group my-colorpicker2 colorpicker-element">
+              <div class="input-group">
+                <label for="">Nombres</label>
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                 <input type="email" class="form-control" placeholder="Email">
+              </div><br>
 
-                  <div class="input-group-addon">
-                    <i></i>
-                  </div>
-                </div>
-                <!-- /.input group -->
-              </div>
-              <!-- /.form group -->
-              <div class="form-group">
-                <label>Color picker with addon:</label>
-
-                <div class="input-group my-colorpicker2 colorpicker-element">
+              <div class="input-group">
+              <label for="">Apellidos:</label>
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                 <input type="email" class="form-control" placeholder="Email">
+              </div><br>
 
-                  <div class="input-group-addon">
-                    <i></i>
-                  </div>
-                </div>
-                <!-- /.input group -->
-              </div>
-
-              <!-- Color Picker -->
-              <div class="form-group">
-                <label>Color picker with addon:</label>
-
-                <div class="input-group my-colorpicker2 colorpicker-element">
+              <div class="input-group">
+              <label for="">Teléfono:</label>
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                 <input type="email" class="form-control" placeholder="Email">
+              </div><br>
 
-                  <div class="input-group-addon">
-                    <i></i>
-                  </div>
-                </div>
-                <!-- /.input group -->
-              </div>
-              <!-- /.form group -->
-
-              <!-- time Picker -->
-              <div class="form-group">
-                <label>Color picker with addon:</label>
-
-                <div class="input-group my-colorpicker2 colorpicker-element">
+              <div class="input-group">
+              <label for="">Correo:</label>
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                 <input type="email" class="form-control" placeholder="Email">
+              </div> <br>
 
-                  <div class="input-group-addon">
-                    <i></i>
-                  </div>
+              <div class="input-group">
+              <label for="">Id Rol:</label>
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Email">
+              </div> <br>
+
+              <div class="input-group">
+              <label for="">Id Estado:</label>
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Email">
+              </div><br>
+
+              <div class="input-group">
+              <label for="">  Cédula Empleado:</label>
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Email">
+              </div><br>
+              
+              
+
                 </div>
-                <!-- /.input group -->
-              </div>
-                  <!-- /.input group -->
-                </div>
-                <!-- /.form group -->
               </div>
             </div>
-            <!-- /.box-body -->
+            
           </div>
           </section>
           </div>
