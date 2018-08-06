@@ -42,7 +42,7 @@ $(document).ready(function() {
         $.fn.dataTable.ext.errMode = 'throw';
         tabla =	$('#tableEmpleado').DataTable( {
         "ajax": {
-            "url": Url+'empleado/listarEmpleado',
+            "url": Url+'/empleado/listarEmpleado',
             "type": "GET",
             "dataSrc": "",
             "deferRender": true
@@ -58,7 +58,7 @@ $(document).ready(function() {
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
         "scrollX": false,
         "language": {
-            "url": Url+"js/lenguaje.json"
+            "url": Url+"/js/lenguaje.json"
         },
         responsive: true,
         buttons: [

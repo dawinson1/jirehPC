@@ -2,7 +2,7 @@
 <section class="content">
 <div class="box box-info">
             <div class="box-header">
-              <h3 class="box-title">Color &amp; Time Picker</h3>
+              <h3 class="box-title">Empleado</h3>
             </div>
             <div class="box-body">
               <!-- Color Picker -->

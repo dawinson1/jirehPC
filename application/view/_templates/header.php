@@ -233,7 +233,7 @@
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="glyphicon glyphicon-book"></i> <span>Pedidos</span>
+            <i class="glyphicon glyphicon-shopping-cart"></i> <span>Pedidos</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

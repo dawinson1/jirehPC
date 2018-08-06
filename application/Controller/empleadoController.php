@@ -36,7 +36,7 @@ class empleadoController
                'telefono'=>$value['telefono'],
                'correo'=>$value['correo'],
                'nombrerol'=>$value['nombrerol'],
-               'id_estado'=>$value['id_estado']
+               'id_estado'=>$value['id_estado'],
                
            );
        }
