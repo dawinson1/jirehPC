@@ -5,19 +5,55 @@
               <h3 class="box-title">Empleado</h3>
             </div>
             <div class="box-body">
-              <!-- Color Picker -->
+              
               <div class="form-group">
-                <label>Color picker:</label>
-                <input type="text" class="form-control my-colorpicker1 colorpicker-element">
+                <label>Color picker with addon:</label>
+
+                <div class="input-group my-colorpicker2 colorpicker-element">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Email">
+
+                  <div class="input-group-addon">
+                    <i></i>
+                  </div>
+                </div>
+                <!-- /.input group -->
+              </div>
+              <div class="form-group">
+                <label>Color picker with addon:</label>
+
+                <div class="input-group my-colorpicker2 colorpicker-element">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Email">
+
+                  <div class="input-group-addon">
+                    <i></i>
+                  </div>
+                </div>
+                <!-- /.input group -->
               </div>
               <!-- /.form group -->
+              <div class="form-group">
+                <label>Color picker with addon:</label>
+
+                <div class="input-group my-colorpicker2 colorpicker-element">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Email">
+
+                  <div class="input-group-addon">
+                    <i></i>
+                  </div>
+                </div>
+                <!-- /.input group -->
+              </div>
 
               <!-- Color Picker -->
               <div class="form-group">
                 <label>Color picker with addon:</label>
 
                 <div class="input-group my-colorpicker2 colorpicker-element">
-                  <input type="text" class="form-control">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Email">
 
                   <div class="input-group-addon">
                     <i></i>
@@ -28,17 +64,19 @@
               <!-- /.form group -->
 
               <!-- time Picker -->
-              <div class="bootstrap-timepicker">
-                <div class="form-group">
-                  <label>Time picker:</label>
+              <div class="form-group">
+                <label>Color picker with addon:</label>
 
-                  <div class="input-group">
-                    <input type="text" class="form-control timepicker">
+                <div class="input-group my-colorpicker2 colorpicker-element">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Email">
 
-                    <div class="input-group-addon">
-                      <i class="fa fa-clock-o"></i>
-                    </div>
+                  <div class="input-group-addon">
+                    <i></i>
                   </div>
+                </div>
+                <!-- /.input group -->
+              </div>
                   <!-- /.input group -->
                 </div>
                 <!-- /.form group -->
