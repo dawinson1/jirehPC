@@ -25,6 +25,8 @@
   <link rel="stylesheet" href="<?php echo URL; ?>css/datatables.min.css">
 
   <script src="<?php echo URL; ?>js/jquery.min.js"></script>
+  <!--js Sweet alert-->
+  <script src="<?php echo URL; ?>js/sweetalert.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
   <script src="<?php echo URL; ?>js/bootstrap.min.js"></script>
 
@@ -264,8 +266,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-table"></i> Tabla Cliente</a></li>
-            <li><a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Cliente</a></li>
+            <li><a href="<?php echo URL; ?>cliente"><i class="fa fa-table"></i> Tabla Cliente</a></li>
+            <li><a href="<?php echo URL; ?>cliente/formCliente"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Cliente</a></li>
           </ul>
         </li>
         <li class="treeview">
