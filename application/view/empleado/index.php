@@ -12,7 +12,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="tableEmpleado" class="table table-bordered table-striped">
+            <table id="tableEmpleado" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Nombre</th>
@@ -20,7 +20,7 @@
                   <th>Teléfono</th>
                   <th>Correo</th>
                   <th>Rol</th>
-                  <th>id_estado</th>
+                  <th>Estado</th>
                   <th>Editar</th>
                   <th>Elimar</th>
                 </tr>
@@ -53,7 +53,7 @@ $(document).ready(function() {
             { "data": "telefono","className": 'centeer'  },
             { "data": "correo","className": 'centeer'  },
             { "data": "nombrerol","className": 'centeer' },
-            { "data": "id_estado", "orderable": false},
+            { "data": "Estado", "orderable": false},
             { "data": "Editar", "orderable": false}
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],

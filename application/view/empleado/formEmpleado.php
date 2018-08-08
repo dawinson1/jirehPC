@@ -61,14 +61,14 @@
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese la direccion de su hogar"
+                        <input type="email" class="form-control" placeholder="Ingrese la direccion de su hogar"
                         name="correoE" id="correoE">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="telCliente">id rol:</label>
+                    <label for="telCliente">Rol:</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
@@ -79,12 +79,15 @@
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="passCliente">id estado</label>
-
+                    <label for="passCliente">Estado:</label>
+            
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                        <input type="password" class="form-control" placeholder="Ingrese su Contraseña"
-                        name="passCliente" id="passCliente">
+                        <input type="number">
+                       <!-- <select name="" class="form-control form-control-sm">
+                         <option>12</option>
+                         <option>13</option>
+                               </select>-->
 
                     </div><!--cierre div del input-->
                 </div> <!--cierre del div contenedor del input-->

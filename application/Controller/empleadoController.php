@@ -30,14 +30,23 @@ class empleadoController
     {
        $empleado = $this->empleado->listarEmpleados();
        foreach($empleado as $value){
+           $idEm = $value['idEmpleado'];
+           $nomEm= $value['nombre'];
+           $apeEm= $value['apellido'];
+           $telEm= $value['telefono'];
+           $mailEm= $value['correo'];
+           $idRol= $value['id_rol'];
+           $idEstado =$value['id_estado'];
+
            $datos[] = array(
                'Nombre'=> $value['nombre'],
                'apellido'=>$value['apellido'],
                'telefono'=>$value['telefono'],
                'correo'=>$value['correo'],
                'nombrerol'=>$value['nombrerol'],
-               'id_estado'=>$value['id_estado'],
-               'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarEmpleado()">Editar</button>']
+               'Estado'=>$value['id_estado'],
+               'Editar'=>['<button type="button" class="btn btn-primary" id="editEmpleado" onclick="editarEmpleado
+               ('.$idEm.','."'".$nomEm."'".','."'".$apeEm."'".','."'".$telEm."'".','."'".$mailEm."'".','."'".$idRol."'".','."'".$idEstado."'".',)">Editar</button>'],
            );
        }
        echo json_encode($datos);
