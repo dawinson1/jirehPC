@@ -1,3 +1,4 @@
+<div id="cargarVista">
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <!-- Main content -->
@@ -12,17 +13,18 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="tableEmpleado" class="table table-bordered table-striped">
+              <table id="tableCliente" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                  <th>Cedula o NIT</th>
                   <th>Nombre</th>
                   <th>Apellido</th>
-                  <th>Teléfono</th>
                   <th>Correo</th>
-                  <th>Rol</th>
-                  <th>id_estado</th>
+                  <th>Dirección</th>
+                  <th>Telefono</th>
+                  <th>Contraseña</th>
                   <th>Editar</th>
-                  <th>Elimar</th>
+                  <th>Eliminar</th>
                 </tr>
                 </thead>
               </table>
@@ -37,24 +39,27 @@
     </section>
     <!-- /.content -->
   </div>
+</div>
 <script>
 $(document).ready(function() {
         $.fn.dataTable.ext.errMode = 'throw';
-        tabla =	$('#tableEmpleado').DataTable( {
+        tabla =	$('#tableCliente').DataTable( {
         "ajax": {
-            "url": Url+'/empleado/listarEmpleado',
+            "url": Url+'/cliente/listarCliente',
             "type": "GET",
             "dataSrc": "",
             "deferRender": true
         },
         "columns": [
+            { "data": "Cedula o NIT","className": 'centeer'  },
             { "data": "Nombre","className": 'centeer'  },
-            { "data": "apellido","className": 'centeer'  },
-            { "data": "telefono","className": 'centeer'  },
-            { "data": "correo","className": 'centeer'  },
-            { "data": "nombrerol","className": 'centeer' },
-            { "data": "id_estado", "orderable": false},
-            { "data": "Editar", "orderable": false}
+            { "data": "Apellido","className": 'centeer'  },
+            { "data": "Correo","className": 'centeer'  },
+            { "data": "Dirección","className": 'centeer' },
+            { "data": "Telefono", "className": 'centeer' },
+            { "data": "Contraseña", "className": 'centeer' },
+            { "data": "Editar", "orderable": false  },
+            { "data": "Eliminar", "orderable": false  }
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
         "scrollX": false,
@@ -82,4 +87,10 @@ $(document).ready(function() {
         } );
 
 });
+
+function editarCliente(idC,nomC,apeC,CorrC,dicCl,telC,contrC)
+{
+  
+
+}
 </script>

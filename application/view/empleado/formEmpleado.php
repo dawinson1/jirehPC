@@ -6,8 +6,7 @@
             </div>
             <div class="box-body">  <!--<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <input type="email" class="form-control" placeholder="Email">
-              </div>-->
+                <input type="email" class="form-control" placeholder="XD">
 
               <div class="input-group">
                 <label for="">Nombres:</label>
