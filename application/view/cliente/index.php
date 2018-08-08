@@ -1,3 +1,4 @@
+<div id="cargarVista">
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <!-- Main content -->
@@ -22,6 +23,8 @@
                   <th>Dirección</th>
                   <th>Telefono</th>
                   <th>Contraseña</th>
+                  <th>Editar</th>
+                  <th>Eliminar</th>
                 </tr>
                 </thead>
               </table>
@@ -36,6 +39,7 @@
     </section>
     <!-- /.content -->
   </div>
+</div>
 <script>
 $(document).ready(function() {
         $.fn.dataTable.ext.errMode = 'throw';
@@ -52,8 +56,10 @@ $(document).ready(function() {
             { "data": "Apellido","className": 'centeer'  },
             { "data": "Correo","className": 'centeer'  },
             { "data": "Dirección","className": 'centeer' },
-            { "data": "Telefono", "className": 'centeer'},
-            { "data": "Contraseña", "className": 'centeer'}
+            { "data": "Telefono", "className": 'centeer' },
+            { "data": "Contraseña", "className": 'centeer' },
+            { "data": "Editar", "orderable": false  },
+            { "data": "Eliminar", "orderable": false  }
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
         "scrollX": false,
@@ -81,4 +87,10 @@ $(document).ready(function() {
         } );
 
 });
+
+function editarCliente(idC,nomC,apeC,CorrC,dicCl,telC,contrC)
+{
+  
+
+}
 </script>

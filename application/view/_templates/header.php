@@ -27,6 +27,7 @@
   <script src="<?php echo URL; ?>js/jquery.min.js"></script>
   <!--js Sweet alert-->
   <script src="<?php echo URL; ?>js/sweetalert.min.js"></script>
+  
 <!-- Bootstrap 3.3.7 -->
   <script src="<?php echo URL; ?>js/bootstrap.min.js"></script>
 

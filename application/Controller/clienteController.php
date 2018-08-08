@@ -30,6 +30,14 @@ class clienteController
     {
        $cliente = $this->cliente->listarClientes();
        foreach($cliente as $value){
+           $idC = $value['id_cliente'];
+           $nomC = $value['nombreCliente'];
+           $apeC = $value['apellidoCliente'];
+           $CorrC = $value['correoCliente'];
+           $dicCl = $value['direccionCliente'];
+           $telC = $value['telefono'];
+           $contrC = $value['contrasena'];
+
            $datos[] = array(
                'Cedula o NIT'=> $value['id_cliente'],
                'Nombre'=>$value['nombreCliente'],
@@ -37,8 +45,10 @@ class clienteController
                'Correo'=>$value['correoCliente'],
                'Dirección'=>$value['direccionCliente'],
                'Telefono'=>$value['telefono'],
-               'Contraseña'=>$value['contrasena']
-               //'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarEmpleado()">Editar</button>']
+               'Contraseña'=>$value['contrasena'],
+               'Editar'=>['<button type="button" class="btn btn-primary" id="editCliente" onclick="editarCliente
+               ('.$idC.','."'".$nomC."'".','."'".$apeC."'".','."'".$CorrC."'".','."'".$dicCl."'".','."'".$telC."'".','."'".$contrC."'".',)">Editar</button>'],
+               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarCliente()">Eliminar</button>']
            );
        }
        echo json_encode($datos);
@@ -46,20 +56,26 @@ class clienteController
 
     public function crearCliente()
     {
-        $this->empleado->set('id_cliente',$_POST['identificador']);  
-        $this->empleado->set('nombreCliente',$_POST['nomCliente']);  
-        $this->empleado->set('apellidoCliente',$_POST['apeCliente']);  
-        $this->empleado->set('correoCliente',$_POST['correoCliente']);  
-        $this->empleado->set('direccionCliente',$_POST['direcCliente']);  
-        $this->empleado->set('telefono',$_POST['telCliente']);  
-        $this->empleado->set('contrasena',$_POST['passCliente']);
-        $g = $this->empleado->crearEmpleado();
-        echo $g;  
+        $this->cliente->set('id_cliente',$_POST['identificador']);  
+        $this->cliente->set('nombreCliente',$_POST['nomCliente']);  
+        $this->cliente->set('apellidoCliente',$_POST['apeCliente']);  
+        $this->cliente->set('correoCliente',$_POST['correoCliente']);  
+        $this->cliente->set('direccionCliente',$_POST['direcCliente']);  
+        $this->cliente->set('telefono',$_POST['telCliente']);  
+        $this->cliente->set('contrasena',$_POST['passCliente']);
+        echo $this->cliente->crearCliente();  
     }
 
     public function editarEmpleado()
     {
-        
+        $this->cliente->set('id_cliente',$_POST['identificador']);  
+        $this->cliente->set('nombreCliente',$_POST['nomCliente']);  
+        $this->cliente->set('apellidoCliente',$_POST['apeCliente']);  
+        $this->cliente->set('correoCliente',$_POST['correoCliente']);  
+        $this->cliente->set('direccionCliente',$_POST['direcCliente']);  
+        $this->cliente->set('telefono',$_POST['telCliente']);  
+        $this->cliente->set('contrasena',$_POST['passCliente']);
+        echo $this->cliente->crearCliente();  
     }
 
     public function cambiarEstado()

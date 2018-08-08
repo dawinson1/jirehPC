@@ -4,6 +4,7 @@
             <div class="box-header">
               <h3 class="box-title">Clientes</h3>
             </div>
+            <form>
             <div class="box-body"> <!--Este Div es es contenedor de los imputs-->
               
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
@@ -71,7 +72,7 @@
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                        <input type="number" class="form-control" placeholder="Ingrese su número teléfonico"
+                        <input type="text" class="form-control" placeholder="Ingrese su número teléfonico"
                         name="telCliente" id="telCliente">
 
                     </div><!--cierre div del inputt-->
@@ -89,7 +90,7 @@
                 </div> <!--cierre del div contenedor del input-->
 
             </div> <!--Cierre del Div contenedor-->
-
+            </form>
 
             <div class="box-footer"> <!--Div que separa el formulario y contendrá los botones-->
                 <button type="button" class="btn btn-default">Cancelar</button>
@@ -122,7 +123,7 @@
                 correoCliente: correoCliente,
                 direcCliente: direccionCliente,
                 telCliente: telefono,
-                pass: passCliente
+                passCliente: contrasena
                }
             }).done(function(data){
                 if(data){
