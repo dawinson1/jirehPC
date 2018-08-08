@@ -10,7 +10,14 @@
               </div>-->
 
               <div class="input-group">
-                <label for="">Nombres</label>
+                <label for="">Nombres:</label>
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Email">
+              </div>
+              <br>
+
+              <div class="input-group">
+                <label>Text</label>
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                 <input type="email" class="form-control" placeholder="Email">
               </div><br>
