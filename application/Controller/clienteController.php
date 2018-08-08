@@ -26,6 +26,12 @@ class clienteController
         require APP . 'view/_templates/footer.php';
     }
 
+    public function editCliente()
+    {
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/cliente/editCliente.php';
+        require APP . 'view/_templates/footer.php';
+    }
     public function listarCliente()
     {
        $cliente = $this->cliente->listarClientes();
@@ -53,6 +59,7 @@ class clienteController
        }
        echo json_encode($datos);
     }
+    
 
     public function crearCliente()
     {
@@ -66,7 +73,7 @@ class clienteController
         echo $this->cliente->crearCliente();  
     }
 
-    public function editarEmpleado()
+    public function editarCliente()
     {
         $this->cliente->set('id_cliente',$_POST['identificador']);  
         $this->cliente->set('nombreCliente',$_POST['nomCliente']);  
@@ -75,12 +82,12 @@ class clienteController
         $this->cliente->set('direccionCliente',$_POST['direcCliente']);  
         $this->cliente->set('telefono',$_POST['telCliente']);  
         $this->cliente->set('contrasena',$_POST['passCliente']);
-        echo $this->cliente->crearCliente();  
+        echo $this->cliente->editarCliente();  
     }
 
     public function cambiarEstado()
     {
-     
+        
     }
 
 }

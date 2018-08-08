@@ -41,7 +41,7 @@ class cliente extends Model
     }
 
 
-    public function actualizarCliente()
+    public function editarCliente()
     {
         $sql = "UPDATE cliente SET nombreCliente = ?, apellidoCliente = ?, correoCliente = ?,direccionCliente = ?,telefono = ?,contrasena = ? WHERE id_cliente = ?";
         $query = $this->db->prepare($sql);

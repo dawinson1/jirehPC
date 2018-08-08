@@ -94,7 +94,7 @@
 
             <div class="box-footer"> <!--Div que separa el formulario y contendrá los botones-->
                 <button type="button" class="btn btn-default">Cancelar</button>
-                <button type="button" class="btn btn-info pull-right" onclick="registrar()">Registrar</button>
+                <button type="button" class="btn btn-info pull-right" onclick="modiCliente()">Modificar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
             </div>
 
@@ -102,7 +102,7 @@
           </div>
 
 <script>
-        function registrar(){
+        function modiCliente(){
         var id_cliente = $('#identificador').val();
         var nombreCliente = $('#nomCliente').val();
         var apellidoCliente = $('#apeCliente').val();
@@ -115,7 +115,7 @@
             swal("Upss", "Los campos no pueden ir vacios!", "error");
         } else {
             $.ajax({
-                url: Url+'/cliente/crearCliente',
+                url: Url+'/cliente/editarCliente',
                 type:'POST',
                 data:{identificador: id_cliente,
                 nomCliente: nombreCliente,
@@ -140,6 +140,16 @@
                 }
             })
         }
+    }
+
+    function recibeDatosCliente(idC,nomC,apeC,CorrC,dicCl,telC,contrC) {
+        $('#identificador').val(idC);
+        $('#nomCliente').val(nomC);
+        $('#apeCliente').val(apeC);
+        $('#correoCliente').val(CorrC);
+        $('#direcCliente').val(dicCl);
+        $('#telCliente').val(telC);
+        $('#passCliente').val(contrC);
     }
 
 </script>

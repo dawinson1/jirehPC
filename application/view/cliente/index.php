@@ -1,4 +1,3 @@
-<div id="cargarVista">
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <!-- Main content -->
@@ -13,7 +12,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="tableCliente" class="table table-bordered table-striped">
+            <table id="tableCliente" class="display" style="width:100%">
                 <thead>
                 <tr>
                   <th>Cedula o NIT</th>
@@ -39,7 +38,7 @@
     </section>
     <!-- /.content -->
   </div>
-</div>
+
 <script>
 $(document).ready(function() {
         $.fn.dataTable.ext.errMode = 'throw';
@@ -88,9 +87,32 @@ $(document).ready(function() {
 
 });
 
+
 function editarCliente(idC,nomC,apeC,CorrC,dicCl,telC,contrC)
 {
-  
-
+  $.ajax({
+    url: Url+'cliente/editCliente',
+    type:'POST',
+    data:{idC: idC,
+      nomC: nomC,
+      apeC: apeC,
+      CorrC: CorrC,
+      dicCl: dicCl,
+      telC: telC,
+      contrC: contrC
+    },
+    }).done(function(data) {
+      if (data) {
+        /*window.location="<?php //echo URL; ?>cliente/editCliente";*/
+        $('#identificador').val(idC);
+        $('#nomCliente').val(nomC);
+        $('#apeCliente').val(apeC);
+        $('#correoCliente').val(CorrC);
+        $('#direcCliente').val(dicCl);
+        $('#telCliente').val(telC);
+        $('#passCliente').val(contrC);
+      }
+    })
 }
 </script>
+
