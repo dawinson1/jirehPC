@@ -142,14 +142,4 @@
         }
     }
 
-    function recibeDatosCliente(idC,nomC,apeC,CorrC,dicCl,telC,contrC) {
-        $('#identificador').val(idC);
-        $('#nomCliente').val(nomC);
-        $('#apeCliente').val(apeC);
-        $('#correoCliente').val(CorrC);
-        $('#direcCliente').val(dicCl);
-        $('#telCliente').val(telC);
-        $('#passCliente').val(contrC);
-    }
-
 </script>
