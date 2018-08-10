@@ -8,7 +8,7 @@
             <div class="box-body"> <!--Este Div es es contenedor de los imputs-->
               
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="identificador" >Documento de Identidad:</label>
+                    <label for="idEmpleado" >Documento de Identidad:</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
@@ -23,67 +23,67 @@
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="nomCliente">Nombres:</label>
+                    <label for="nombre">Nombres:</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese nombre del empleado"
-                        name="nombreE" id="nombreE">
+                        name="nombre" id="nombre">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="apeCliente">Apellidos:</label>
+                    <label for="apellido">Apellidos:</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese apellidos del empleado"
-                        name="apellidoE" id="apellidoE">
+                        name="apellido" id="apellido">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="correoCliente">Teléfono:</label>
+                    <label for="telefono">Teléfono:</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-phone-square"></i></span>
                         <input type="email" class="form-control" placeholder="Teléfono"
-                         name="telefonoE" id="telefonoE">
+                         name="telefono" id="telefono">
 
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="direcCliente">Correo:</label>
+                    <label for="correo">Correo:</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                        <input type="email" class="form-control" placeholder="Ingrese la direccion de su hogar"
-                        name="correoE" id="correoE">
+                        <input type="email" class="form-control" placeholder="Ingrese correo electrónico"
+                        name="correo" id="correo">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="telCliente">Rol:</label>
+                    <label for="id_rol">Rol:</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese su número teléfonico"
-                        name="telCliente" id="telCliente">
+                        <span class="input-group-addon"><i class="fa fa-coffee"></i></span>
+                        <input type="text" class="form-control" placeholder="Ingrese rol"
+                        name="id_rol" id="id_rol">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="passCliente">Estado:</label>
+                    <label for="id_estado">Estado 12 Activo/13 Inactivo </label>
             
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                        <input type="number">
+                        <input type="number" name="id_estado" min="12" max="13" >
                        <!-- <select name="" class="form-control form-control-sm">
                          <option>12</option>
                          <option>13</option>
@@ -97,9 +97,52 @@
 
             <div class="box-footer"> <!--Div que separa el formulario y contendrá los botones-->
                 <button type="button" class="btn btn-default">Cancelar</button>
-                <button type="button" class="btn btn-info pull-right" onclick="registrar()">Registrar</button>
+                <button type="button" class="btn btn-info pull-right" onclick="crearEmpleado()">Registrar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
           </div>
 
           </section>
           </div>
+
+          <script>
+        function crearEmpleado(){
+        var idEmpleado = $('#idEmpleado').val();
+        var nombre = $('#nombre').val();
+        var apellido = $('#apellido').val();
+        var telefono = $('#telefono').val();
+        var correo = $('#correo').val();
+        var id_rol = $('#id_rol').val();
+        var id_estado = $('#id_estado').val();
+    
+        if ((idEmpleado == "") || (nombre == "") || (apellido == "") || (telefono == "") || ( correo == "") || (id_rol == "") || (id_estado == "")) { //Valida si los campos estan vacios
+            swal("Upss", "Los campos no pueden ir vacios!", "error");
+        } else {
+            $.ajax({
+                url: Url+'/empleado/crearEmpleado',
+                type:'POST',
+                data:{ nombre: nombre,
+                apellido: apellido,
+                telefono: telefono,
+                idEmpleado: idEmpleado,
+                id_rol: id_rol,
+                id_estado: id_estado
+    
+               }
+            }).done(function(data){
+                if(data){
+                    swal("Bien Hecho!", "El Registro ha sido completado!", "success");
+                    $('#idEmpleado').val('');
+                    $('#nombre').val('');
+                    $('#apellido').val('');
+                    $('#telefono').val('');
+                    $('#correo').val('');
+                    $('#id_rol').val('');
+                    $('#id_estado').val('');
+                }else{
+                    swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
+                }
+            })
+        }
+    }
+
+</script>

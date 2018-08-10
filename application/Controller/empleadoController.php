@@ -54,15 +54,16 @@ class empleadoController
 
     public function crearEmpleado()
     {
+        
         $this->empleado->set('nombre',$_POST['nombre']);  
         $this->empleado->set('apellido',$_POST['apellido']);  
         $this->empleado->set('telefono',$_POST['telefono']);  
         $this->empleado->set('correo',$_POST['correo']);  
+        $this->empleado->set('idEmpleado',$_POST['idEmpleado']);
         $this->empleado->set('id_rol',$_POST['id_rol']);  
         $this->empleado->set('id_estado',$_POST['id_estado']);  
-        $this->empleado->set('idEmpleado',$_POST['idEmpleado']);
-        $g = $this->empleado->crearEmpleado();
-        echo $g;  
+        echo $this->empleado->crearEmpleado();
+    
     }
 
     public function editarEmpleado()

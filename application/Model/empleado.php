@@ -5,12 +5,11 @@ use Mini\Core\Model;
 
 class empleado extends Model
 {
-
+    private $idEmpleado;
     private $nombre;
     private $apellido;
     private $telefono;
     private $correo;
-    private $idEmpleado;
     private $id_rol;
     private $id_estado;
 
@@ -28,7 +27,7 @@ class empleado extends Model
 
     public function crearEmpleado()
     {
-        $sql = "INSERT INTO empleado (nombre, apellido, telefono,correo,idEmpleado,id_rol,id_estado) VALUES (?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO empleado (nombre,apellido,telefono,correo,idEmpleado,id_rol,id_estado) VALUES ('carñps',?,?,?,?,?,?)";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->nombre);
         $query->bindParam(2,$this->apellido);
