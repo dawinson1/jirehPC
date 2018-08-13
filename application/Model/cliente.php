@@ -24,6 +24,15 @@ class cliente extends Model
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
+    } 
+
+    public function buscarCliente()
+    {
+        $sql = "SELECT * FROM cliente WHERE id_cliente = ?";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(1,$this->id_cliente);
+        $query->execute();
+        return $query->fetchAll();
     }
 
     public function crearCliente()

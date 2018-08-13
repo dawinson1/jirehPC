@@ -2,7 +2,7 @@
 <section class="content">
 <div class="box box-info">
             <div class="box-header">
-              <h3 class="box-title">Clientes</h3>
+              <h3 class="box-title">Editar Cliente</h3>
             </div>
             <form>
             <div class="box-body"> <!--Este Div es contenedor de los imputs-->
@@ -15,7 +15,7 @@
                         <input type="text" class="form-control" placeholder="Ingrese su número de cedula o el NIT de la empresa"
                             name="identificador" id="identificador">
 
-                        <div class="input-group-addon"> <!--Este div es opcional, servirá cuando queramos que en frente del input este otro icono-->
+                        <div class="input-group-addon" id="lup_identificador"> <!--Este div es opcional, servirá cuando queramos que en frente del input este otro icono-->
                         <i class="glyphicon glyphicon-search"></i>
                         </div> <!--Cierre del div opcional-->
 
@@ -141,5 +141,22 @@
             })
         }
     }
+/*$(function(){
+    $.ajax({
+     url: Url+'cliente/buscandoCliente',
+     type:'POST',
+     dataType:'json'
+ }).done(function(data){
+     //console.log(data);
+        document.getElementById("identificador").disabled = true;
+        document.getElementById("lup_identificador").disabled = true;
+     })
+
+ })
+
+
+function mostrarCliente(){
+
+}*/
 
 </script>

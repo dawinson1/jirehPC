@@ -34,11 +34,11 @@ class loginController
         session_start();
         $login = $this->login->inicioSesion();
         foreach ($login as $dato) {
-            //$password = $dato['contrasena'];
+            $password = $dato['contrasena'];
             if ($dato->rowCount()>0) {
                 //$query->fetch(PDO::FETCH_ASSOC);
                 
-                //if (password_verify($password,$dato["contrasena"])) {
+                if (password_verify($password,$dato['contrasena'])) {
                     $_SESSION['loggedin']=true;
                     $_SESSION['username']=$dato["nombreCliente"];
                     $_SESSION['start']=time();
@@ -49,12 +49,12 @@ class loginController
                             //window.location="<?php echo URL; ?>cliente";                
                             swal("Bienvenido $_SESSION[username] !", "Has iniciado sesion!", "success");
                           </script>';
-                /*}else {
+                }else {
                     
                     echo '<script>            
                             swal("Upss", "Nombre de usuario o contraseña son incorrectas!", "error");
                           </script>';
-                }*/
+                }
             }
         }
     }

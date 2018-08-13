@@ -88,9 +88,47 @@ $(document).ready(function() {
 });
 
 
-function editarCliente(idC,nomC,apeC,CorrC,dicCl,telC,contrC)
+function editarCliente(idC) //funcion para buscar los datos del cliente que se desea modificar
 {
-  
+  $.ajax({
+    url: Url+'/cliente/crearCliente',
+    type:'POST',
+    data:{
+      identificador: idC
+    }
+    }).done(function(data){
+        //window.location="<?php echo URL; ?>cliente/editCliente"; 
+    })
+}
+
+function eliminarCliente(idC) {
+  swal({
+        title: "¿Estas Seguro?",
+        text: "Si eliminas este registro ya no se podrá recuperar!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }) 
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("Registro eliminado!", {
+            icon: "success",
+          });
+          $.ajax({
+            url:'clientesController.php?valor=eliminar',
+            type:'POST',
+            data:{txtId:id}
+        }).done(function(data){
+            if(data){
+                listar();
+            }else{
+                swal("Algo anda mal!", "La eliminacion no se ha ejecutado!", "error");
+            }
+        })
+        } else {
+          swal("Eliminación cancelada!");
+        }
+      });
 }
 </script>
 

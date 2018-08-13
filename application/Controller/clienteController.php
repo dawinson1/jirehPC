@@ -1,31 +1,24 @@
 <?php
-
 namespace Mini\Controller;
-
 use Mini\Model\cliente;
-
 class clienteController
 {
     private $cliente;
-
     function __construct(){
         $this->cliente = new cliente();
     }
-
     public function index()
     {
         require APP . 'view/_templates/header.php';
         require APP . 'view/cliente/index.php';
         require APP . 'view/_templates/footer.php';
     }
-
     public function formCliente()
     {
         require APP . 'view/_templates/header.php';
         require APP . 'view/cliente/formCliente.php';
         require APP . 'view/_templates/footer.php';
     }
-
     public function editCliente()
     {
         require APP . 'view/_templates/header.php';
@@ -43,7 +36,6 @@ class clienteController
            $dicCl = $value['direccionCliente'];
            $telC = $value['telefono'];
            $contrC = $value['contrasena'];
-
            $datos[] = array(
                'Cedula o NIT'=> $value['id_cliente'],
                'Nombre'=>$value['nombreCliente'],
@@ -60,7 +52,6 @@ class clienteController
        echo json_encode($datos);
     }
     
-
     public function crearCliente()
     {
         $this->cliente->set('id_cliente',$_POST['identificador']);  
@@ -72,7 +63,6 @@ class clienteController
         $this->cliente->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
         echo $this->cliente->crearCliente();  
     }
-
     public function editarCliente()
     {
         $this->cliente->set('id_cliente',$_POST['identificador']);  
@@ -84,10 +74,8 @@ class clienteController
         $this->cliente->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
         echo $this->cliente->editarCliente();  
     }
-
     public function cambiarEstado()
     {
         
     }
-
 }
