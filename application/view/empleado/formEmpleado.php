@@ -83,7 +83,7 @@
             
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                        <input type="number" name="id_estado" min="12" max="13" >
+                        <input type="text" id="id_estado" name="id_estado">
                        <!-- <select name="" class="form-control form-control-sm">
                          <option>12</option>
                          <option>13</option>
@@ -107,7 +107,7 @@
           <script>
         function crearEmpleado(){
         var idEmpleado = $('#idEmpleado').val();
-        var nombre = $('#nombre').val();
+        var nombreEmpleado = $('#nombre').val();
         var apellido = $('#apellido').val();
         var telefono = $('#telefono').val();
         var correo = $('#correo').val();
@@ -118,12 +118,13 @@
             swal("Upss", "Los campos no pueden ir vacios!", "error");
         } else {
             $.ajax({
-                url: Url+'/empleado/crearEmpleado',
+                url: Url+'empleado/crearEmpleado',
                 type:'POST',
-                data:{ nombre: nombre,
+                data:{ nombre: nombreEmpleado, // nombre será enviada al controller, nombreEmpleado ->formulario.
                 apellido: apellido,
                 telefono: telefono,
                 idEmpleado: idEmpleado,
+                correo: correo,
                 id_rol: id_rol,
                 id_estado: id_estado
     

@@ -27,7 +27,7 @@ class empleado extends Model
 
     public function crearEmpleado()
     {
-        $sql = "INSERT INTO empleado (nombre,apellido,telefono,correo,idEmpleado,id_rol,id_estado) VALUES ('carñps',?,?,?,?,?,?)";
+        $sql = "INSERT INTO empleado (nombre,apellido,telefono,correo,idEmpleado,id_rol,id_estado) VALUES (?,?,?,?,?,?,?)";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->nombre);
         $query->bindParam(2,$this->apellido);
