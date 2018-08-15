@@ -120,7 +120,7 @@
             $.ajax({
                 url: Url+'empleado/crearEmpleado',
                 type:'POST',
-                data:{ nombre: nombreEmpleado, // nombre será enviada al controller, nombreEmpleado ->formulario.
+                data:{ nombre: nombreEmpleado, /* nombre será enviada al controller, nombreEmpleado viene ->formulario.*/
                 apellido: apellido,
                 telefono: telefono,
                 idEmpleado: idEmpleado,

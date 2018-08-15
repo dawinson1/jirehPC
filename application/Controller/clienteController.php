@@ -63,6 +63,7 @@ class clienteController
         $this->cliente->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
         echo $this->cliente->crearCliente();  
     }
+
     public function editarCliente()
     {
         $this->cliente->set('id_cliente',$_POST['identificador']);  
@@ -74,6 +75,7 @@ class clienteController
         $this->cliente->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
         echo $this->cliente->editarCliente();  
     }
+    
     public function cambiarEstado()
     {
         

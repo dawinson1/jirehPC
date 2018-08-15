@@ -40,7 +40,7 @@ class empleado extends Model
     }
 
 
-    public function actualizarEmpleado()
+    public function editarEmpleado()
     {
         $sql = "UPDATE empleado SET nombre = ?, apellido = ?, telefono = ?,correo = ?,id_rol = ?,id_estado = ? WHERE idEmpleado = ?";
         $query = $this->db->prepare($sql);

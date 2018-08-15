@@ -221,7 +221,7 @@
 
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">MENÚ</li>
         <li class="treeview">
           <a href="#">
             <i class="glyphicon glyphicon-user"></i> <span>Empleado</span>
@@ -234,6 +234,42 @@
             <li><a href="<?php echo URL; ?>empleado/formEmpleado"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Empleado</a></li>
           </ul>
         </li>
+
+        <!--roles falta-->
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-coffee"></i> <span>Rol</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo URL; ?>empleado"><i class="fa fa-table"></i> Tabla Empleado</a></li>
+            <li><a href="<?php echo URL; ?>empleado/formEmpleado"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Empleado</a></li>
+          </ul>
+          
+        </li>
+      <!--roles-->
+
+      <!--estados-->
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-coffee"></i> <span>Estado</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo URL; ?>empleado"><i class="fa fa-table"></i> Tabla Empleado</a></li>
+            <li><a href="<?php echo URL; ?>empleado/formEmpleado"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Empleado</a></li>
+          </ul>
+          
+        </li>
+      <!--estados-->
+
+
         <li class="treeview">
           <a href="#">
             <i class="glyphicon glyphicon-shopping-cart"></i> <span>Pedidos</span>
