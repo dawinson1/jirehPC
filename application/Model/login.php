@@ -14,24 +14,26 @@ class login extends Model
         $this->$atributo = $valor;
     }
 
-    public function inicioSesion()
+    public function buscarDatosLog()
     {
 
         /*foreach ($datos as $dato) {
            $username = $username;
            $password = $password;*/
 
-           $sql = "SELECT * FROM cliente WHERE id_cliente = ?";
+           $sql = "SELECT * FROM cliente WHERE id_cliente = ? OR contrasena = ?";
            $query = $this->db->prepare($sql);
            $query->bindParam(1,$this->id_cliente);
-           $query->execute();
-           return $query->fetchAll();
-   
-           /*if ($query->rowCount()>0) {
+           $password = $query->bindParam(2,$this->contrasena);
+           return $query->execute();
+           var_dump($query);
+
+
+           if ($query->rowCount()>0) {
                //$query->fetch(PDO::FETCH_ASSOC);
-               
-               if (password_verify($password,$query["contrasena"])) {
-                session_start();
+               session_start();
+               if (password_verify($query["contrasena"],$password)) {
+
                    $_SESSION['loggedin']=true;
                    $_SESSION['username']=$query["nombreCliente"];
                    $_SESSION['start']=time();
@@ -49,7 +51,7 @@ class login extends Model
                          </script>';
                }
            }
-        }*/
+        
 
         
 

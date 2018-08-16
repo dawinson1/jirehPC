@@ -24,40 +24,8 @@ class loginController
         $this->login->set('id_cliente',$_POST['identificador']);
         $this->login->set('contrasena',($_POST["passCliente"]));
 
-
-        echo $this->login->inicioSesion(); 
+        echo $this->login->buscarDatosLog();
         //return $datos->fetchAll();
     }
-
-    public function logeo()
-    {
-        session_start();
-        $login = $this->login->inicioSesion();
-        foreach ($login as $dato) {
-            $password = $dato['contrasena'];
-            if ($dato->rowCount()>0) {
-                //$query->fetch(PDO::FETCH_ASSOC);
-                
-                if (password_verify($password,$dato['contrasena'])) {
-                    $_SESSION['loggedin']=true;
-                    $_SESSION['username']=$dato["nombreCliente"];
-                    $_SESSION['start']=time();
-                    $_SESSION['expire']=$_SESSION['start']+(5*60);
-        
-                    echo '<script>
-                            var Url = "<?=URL?>";
-                            //window.location="<?php echo URL; ?>cliente";                
-                            swal("Bienvenido $_SESSION[username] !", "Has iniciado sesion!", "success");
-                          </script>';
-                }else {
-                    
-                    echo '<script>            
-                            swal("Upss", "Nombre de usuario o contraseña son incorrectas!", "error");
-                          </script>';
-                }
-            }
-        }
-    }
-
     
 }

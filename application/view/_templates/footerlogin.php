@@ -7,7 +7,7 @@
 
 <script src="<?php echo URL; ?>js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="<?php echo URL; ?>js/icheck.min.js"></script>
+<script src="<?php echo URL; ?>js/icheck.min.js">
 <script>
   $(function () {
     $('input').iCheck({

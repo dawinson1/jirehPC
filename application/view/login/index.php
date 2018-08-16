@@ -1,4 +1,4 @@
-<body class="hold-transition login-page">
+<body background="<?php echo URL; ?>img/Azul.jpg">
 <div class="login-box">
   <div class="login-logo">
     <a href="../../index2.html"><b>Jireh</b>PC</a>
