@@ -54,6 +54,7 @@ class empleadoController
                'Estado'=>$value['id_estado'],
                'Editar'=>['<button type="button" class="btn btn-primary" id="editEmpleado" onclick="editarEmpleado
                ('.$idEm.','."'".$nomEm."'".','."'".$apeEm."'".','."'".$telEm."'".','."'".$mailEm."'".','."'".$idRol."'".','."'".$idEstado."'".',)">Editar</button>'],
+               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarEmpleado('.$idEm.')">Eliminar</button>']
            );
        }
        echo json_encode($datos);
@@ -84,6 +85,12 @@ class empleadoController
         $this->empleado->set('id_estado',$_POST['id_estado']); 
        // $this->empleado->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
         echo $this->empleado->editarEmpleado();  
+    }
+
+    public function eliminarEmpleado()
+    {
+        $this->empleado->set('idEmpleado',$_POST[('idEmpleado')]);
+        echo $this->empleado->eliminarEmpleado();  
     }
 
     public function cambiarEstado()

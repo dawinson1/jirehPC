@@ -8,13 +8,14 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Empleado</h3>
+              <b class="box-title">Empleado</b>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
             <table id="tableEmpleado" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                 <th>Cédula</th>
                   <th>Nombre</th>
                   <th>Apellido</th>
                   <th>Teléfono</th>
@@ -48,13 +49,16 @@ $(document).ready(function() {
             "deferRender": true
         },
         "columns": [
+            
             { "data": "Nombre","className": 'centeer'  },
             { "data": "apellido","className": 'centeer'  },
             { "data": "telefono","className": 'centeer'  },
             { "data": "correo","className": 'centeer'  },
+            { "data": "idEmpleado","className": 'centeer'  },
             { "data": "nombrerol","className": 'centeer' },
             { "data": "Estado", "orderable": false},
-            { "data": "Editar", "orderable": false}
+            { "data": "Editar", "orderable": false},
+            { "data": "Eliminar", "orderable": false}
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
         "scrollX": false,
@@ -82,4 +86,35 @@ $(document).ready(function() {
         } );
 
 });
+
+function eliminarEmpleado(idEmp) {
+  swal({
+        title: "¿Estas Seguro?",
+        text: "Si eliminas este registro ya no se podrá recuperar!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }) 
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("Registro eliminado!", {
+            icon: "success",
+          });
+          $.ajax({
+            url:Url+'/empleado/eliminarEmpleado',
+            type:'POST',
+            data:{idEmpleado:idEm}
+        }).done(function(data){
+            if(data){
+              location.reload();
+            }else{
+                swal("Algo anda mal!", "La eliminacion no se ha ejecutado!", "error");
+            }
+        })
+        } else {
+          swal("Eliminación cancelada!");
+        }
+      });
+}
+
 </script>

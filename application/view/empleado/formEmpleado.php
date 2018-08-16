@@ -2,7 +2,8 @@
 <section class="content">
 <div class="box box-info">
             <div class="box-header">
-              <h3 class="box-title">Empleado</h3>
+              <b class="box-title">Empleado</b>
+              
             </div>
             <form>
             <div class="box-body"> <!--Este Div es es contenedor de los imputs-->

@@ -54,6 +54,14 @@ class empleado extends Model
         return $query->execute();
     }
 
+    public function eliminarEmpleado()
+    {
+        $sql="DELETE FROM empleado WHERE idEmpleado = ?";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(1,$this->idEmpleado);
+        return $query->execute();
+    }
+
     public function cambiarEstado()
     {
         $sql = "UPDATE empleado set id_estado=? where idEmpleado=?";
