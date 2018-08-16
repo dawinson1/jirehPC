@@ -8,7 +8,7 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Empleado</h3>
+              <b class="box-title">Clientes</b>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -38,14 +38,19 @@
     <!-- /.content -->
 </div>
 
-<div id="modalClienteEdit" class="hidden">
-<section class="content">
+<div class="hidden">
+
+  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+<section class="content modal-content">
 <div class="box box-info">
-            <div class="box-header">
-              <h3 class="box-title">Clientes</h3>
+            <div class="box-header modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 class="box-title">Editar Clientes</h3>
             </div>
             <form>
-            <div class="box-body"> <!--Este Div es contenedor de los imputs-->
+            <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
               
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
                     <label for="identificador" >Cedula o NIT</label>
@@ -132,13 +137,16 @@
             </div> <!--Cierre del Div contenedor-->
             </form>
 
-            <div class="box-footer"> <!--Div que separa el formulario y contendrá los botones-->
+            <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
                 <button type="button" class="btn btn-default">Cancelar</button>
                 <button type="button" class="btn btn-info pull-right" onclick="registrar()">Registrar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
             </div>
 
           </section>
+
+          </div>
+          </div>
 </div>
 
 <script>
@@ -191,21 +199,7 @@ $(document).ready(function() {
 
 function editarCliente(idC,nomC,apeC,CorrC,dicCl,telC,contrC) //funcion para buscar los datos del cliente que se desea modificar
 {
-  $.ajax({
-    url: Url+'/cliente/editarCliente',
-    type:'POST',
-    data:{
-      identificador: idC,
-      nomCliente: nomC,
-      apeCliente: apeC,
-      correoCliente: CorrC,
-      direcCliente: dicCl,
-      telCliente: telC,
-      passCliente: contrC
-    }
-    })/*.done(function(data){
-        window.location="<?php echo URL; ?>cliente/editCliente"; 
-    })*/
+  $("#myModal").modal();
 }
 
 function eliminarCliente(idC) {

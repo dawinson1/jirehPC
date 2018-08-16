@@ -50,40 +50,6 @@ class clienteController
        }
        echo json_encode($datos);
     }
-    
-    public function editarCliente()
-    {
-        $idCli = $_POST['identificador'];  
-        $nomCli = $_POST['nomCliente'];  
-        $apeCli = $_POST['apeCliente'];  
-        $corCli = $_POST['correoCliente'];  
-        $dicCli = $_POST['direcCliente'];  
-        $telCli = $_POST['telCliente'];  
-        $passCli = $_POST['passCliente']; 
-
-        echo 'header("location:<?php echo URL; ?>editCliente");
-        <input type="text" class="form-control" placeholder="Ingrese su número de cedula o el NIT de la empresa"
-        name="identificador" id="identificador" value="'.$idCli.'">
-
-        <input type="text" class="form-control" placeholder="Ingrese sus nombres"
-        name="nomCliente" id="nomCliente" value="'."'".$nomCli."'".'">
-
-        <input type="text" class="form-control" placeholder="Ingrese sus apellidos"
-        name="apeCliente" id="apeCliente" value="'."'".$apeCli."'".'">
-
-        <input type="email" class="form-control" placeholder="example@domain.com"
-        name="correoCliente" id="correoCliente" value="'."'".$corCli."'".'">
-
-        <input type="text" class="form-control" placeholder="Ingrese la direccion de su hogar"
-        name="direcCliente" id="direcCliente" value="'."'".$dicCli."'".'">
-
-        <input type="text" class="form-control" placeholder="Ingrese su número teléfonico"
-        name="telCliente" id="telCliente" value="'."'".$telCli."'".'">
-
-        <input type="password" class="form-control" placeholder="Ingrese su Contraseña"
-        name="passCliente" id="passCliente" value="'."'".$passCli."'".'">
-        ';  
-    }
 
     public function crearCliente()
     {
@@ -96,12 +62,8 @@ class clienteController
         $this->cliente->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
         echo $this->cliente->crearCliente();  
     }
-<<<<<<< HEAD
-    public function modificarCliente()
-=======
 
     public function editarCliente()
->>>>>>> 2a980a597076ff8c6551639ff97a1d30d90e2f38
     {
         $this->cliente->set('id_cliente',$_POST['identificador']);  
         $this->cliente->set('nombreCliente',$_POST['nomCliente']);  
@@ -118,11 +80,6 @@ class clienteController
         $this->cliente->set('id_cliente',$_POST['identificador']);  
         echo $this->cliente->eliminarCliente();  
     }
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 2a980a597076ff8c6551639ff97a1d30d90e2f38
     public function cambiarEstado()
     {
         
