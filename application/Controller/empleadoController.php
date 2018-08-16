@@ -26,6 +26,13 @@ class empleadoController
         require APP . 'view/_templates/footer.php';
     }
 
+    public function editEmpleado()
+    {
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/empleado/editEmpleado.php';
+        require APP . 'view/_templates/footer.php';
+    }
+
     public function listarEmpleado()
     {
        $empleado = $this->empleado->listarEmpleados();
@@ -68,7 +75,15 @@ class empleadoController
 
     public function editarEmpleado()
     {
-        
+        $this->empleado->set('nombre',$_POST['nombre']);  
+        $this->empleado->set('apellido',$_POST['apellido']);  
+        $this->empleado->set('telefono',$_POST['telefono']);  
+        $this->empleado->set('correo',$_POST['correo']);  
+        $this->empleado->set('idEmpleado',$_POST['idEmpleado']);  
+        $this->empleado->set('id_rol',$_POST['id_rol']);  
+        $this->empleado->set('id_estado',$_POST['id_estado']); 
+       // $this->empleado->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
+        echo $this->empleado->editarEmpleado();  
     }
 
     public function cambiarEstado()

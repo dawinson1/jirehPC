@@ -96,7 +96,12 @@ class clienteController
         $this->cliente->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
         echo $this->cliente->crearCliente();  
     }
+<<<<<<< HEAD
     public function modificarCliente()
+=======
+
+    public function editarCliente()
+>>>>>>> 2a980a597076ff8c6551639ff97a1d30d90e2f38
     {
         $this->cliente->set('id_cliente',$_POST['identificador']);  
         $this->cliente->set('nombreCliente',$_POST['nomCliente']);  
@@ -113,7 +118,11 @@ class clienteController
         $this->cliente->set('id_cliente',$_POST['identificador']);  
         echo $this->cliente->eliminarCliente();  
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 2a980a597076ff8c6551639ff97a1d30d90e2f38
     public function cambiarEstado()
     {
         
