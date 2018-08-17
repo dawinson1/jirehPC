@@ -27,6 +27,9 @@
 
 
     <a href="#">He olvidado mi contraseña</a><br>
+    <?php var_dump($contrasena);
+    var_dump($VAR1);
+    ?>
     <a href="#" class="text-center">Registra cuenta nueva</a>
 
   </div>
@@ -39,14 +42,15 @@ function start(){
         var id_cliente = $('#CCoNIT').val();
         var contrasena = $('#passlog').val();
     
-        if ((id_cliente == "") || (contrasena == "")) { //Valida si los campos estan vacios
-            swal("Upss", "Los campos no pueden ir vacios!", "error");
-        } else {
+    //    if ((id_cliente == "") || (contrasena == "")) { //Valida si los campos estan vacios
+    //        swal("Upss", "Los campos no pueden ir vacios!", "error");
+    //    } else {
             $.ajax({
                 url: Url+'/login/inicioSesion',
                 type:'POST',
                 data:{identificador: id_cliente,
                 passCliente: contrasena
+            
                }
             }).done(function(data){
                 if(data){
@@ -57,5 +61,5 @@ function start(){
                 }
             })
         }
-    }
+   // }
 </script>

@@ -38,10 +38,8 @@
     <!-- /.content -->
 </div>
 
-<div class="hidden">
-
-  <div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
+<div class="modal fade" id="myModal" role="dialog"> <!--Div que contiene la ventana modal-->
+<div class="modal-dialog">
 
 <section class="content modal-content">
 <div class="box box-info">
@@ -138,16 +136,16 @@
             </form>
 
             <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
-                <button type="button" class="btn btn-default">Cancelar</button>
-                <button type="button" class="btn btn-info pull-right" onclick="registrar()">Registrar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-info pull-right" onclick="enviarEditCliente()">Modificar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
             </div>
 
           </section>
 
-          </div>
-          </div>
 </div>
+</div>
+
 
 <script>
 
@@ -196,10 +194,61 @@ $(document).ready(function() {
         } );
 
 });
-
-function editarCliente(idC,nomC,apeC,CorrC,dicCl,telC,contrC) //funcion para buscar los datos del cliente que se desea modificar
+function editarCliente(idC,nomC,apeC,CorrC,dicCl,telC,contrC) //funcion plasmar los datos del usuario en los inputs
 {
-  $("#myModal").modal();
+  $('#identificador').val(idC);
+  $('#nomCliente').val(nomC);
+  $('#apeCliente').val(apeC);
+  $('#correoCliente').val(CorrC);
+  $('#direcCliente').val(dicCl);
+  $('#telCliente').val(telC);
+  $('#passCliente').val(contrC);
+  document.getElementById("identificador").disabled = true;
+  $("#myModal").modal("show");
+}
+
+
+function enviarEditCliente() //funcion para enviar los cambios al controlador
+{
+  var id_cliente = $('#identificador').val();
+        var nombreCliente = $('#nomCliente').val();
+        var apellidoCliente = $('#apeCliente').val();
+        var correoCliente = $('#correoCliente').val();
+        var direccionCliente = $('#direcCliente').val();
+        var telefono = $('#telCliente').val();
+        var contrasena = $('#passCliente').val();
+    
+        if ((id_cliente == "") || (nombreCliente == "") || (apellidoCliente == "") || (correoCliente == "") || (direccionCliente == "") || (telefono == "") || (contrasena == "")) { //Valida si los campos estan vacios
+            swal("Upss", "Los campos no pueden ir vacios!", "error");
+        } else {
+            $.ajax({
+                url: Url+'/cliente/editarCliente',
+                type:'POST',
+                data:{identificador: id_cliente,
+                nomCliente: nombreCliente,
+                apeCliente: apellidoCliente,
+                correoCliente: correoCliente,
+                direcCliente: direccionCliente,
+                telCliente: telefono,
+                passCliente: contrasena
+               }
+            }).done(function(data){
+                if(data){
+                    swal("Bien Hecho!", "El Registro ha sido completado!", "success");
+                    $('#identificador').val('');
+                    $('#nomCliente').val('');
+                    $('#apeCliente').val('');
+                    $('#correoCliente').val('');
+                    $('#direcCliente').val('');
+                    $('#telCliente').val('');
+                    $('#passCliente').val('');
+                    $("#myModal").modal("hide");
+                    setTimeout('location.reload()',2000);
+                }else{
+                    swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
+                }
+            })
+        }
 }
 
 function eliminarCliente(idC) {

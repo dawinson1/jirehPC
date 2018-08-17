@@ -72,7 +72,7 @@ class clienteController
         $this->cliente->set('direccionCliente',$_POST['direcCliente']);  
         $this->cliente->set('telefono',$_POST['telCliente']);  
         $this->cliente->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
-        echo $this->cliente->modificarCliente();  
+        echo $this->cliente->editarCliente();  
     }
 
     public function eliminarCliente()

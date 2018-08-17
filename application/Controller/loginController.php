@@ -9,7 +9,7 @@ class loginController
     private $login;
 
     function __construct(){
-        $this->login = new login();
+        $this->login = new login(); 
     }
 
     public function index()
@@ -23,8 +23,10 @@ class loginController
     {
         $this->login->set('id_cliente',$_POST['identificador']);
         $this->login->set('contrasena',($_POST["passCliente"]));
-
+        $pass= $_POST["passCliente"];
+        return $pass;
         echo $this->login->buscarDatosLog();
+    
         //return $datos->fetchAll();
     }
     
