@@ -5,11 +5,12 @@ use Mini\Core\Model;
 
 class empleado extends Model
 {
-    private $idEmpleado;
+    
     private $nombre;
     private $apellido;
     private $telefono;
     private $correo;
+    private $idEmpleado;
     private $id_rol;
     private $id_estado;
 
@@ -18,7 +19,8 @@ class empleado extends Model
     }
 
     public function listarEmpleados()
-    {
+    {   
+        //$sql = "SELECT e.nombre, e.apellido, e.telefono, e.correo, e.idEmpleado as Cédula, r.Nombre as Rol,e.id_estado from empleado e JOIN rol r ON (e.id_rol=r.idRol)";
         $sql = "SELECT e.*,r.Nombre as nombrerol FROM empleado e INNER JOIN rol r ON r.idRol = e.id_rol";
         $query = $this->db->prepare($sql);
         $query->execute();

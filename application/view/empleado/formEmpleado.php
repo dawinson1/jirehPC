@@ -5,7 +5,7 @@
               <b class="box-title">Empleado</b>
               
             </div>
-            <form>
+            <form autocomplete="off">
             <div class="box-body"> <!--Este Div es es contenedor de los imputs-->
               
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
@@ -78,6 +78,7 @@
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
+                
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
                     <label for="id_estado">Estado 12 Activo/13 Inactivo </label>
