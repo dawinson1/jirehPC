@@ -22,12 +22,21 @@ class loginController
     public function inicioSesion()
     {
         $this->login->set('id_cliente',$_POST['identificador']);
-        $this->login->set('contrasena',($_POST["passCliente"]));
         $pass= $_POST["passCliente"];
-        return $pass;
-        echo $this->login->buscarDatosLog();
-    
+        echo $this->login->buscarDatosLog($pass);
         //return $datos->fetchAll();
+    }
+
+    public function singout(){
+
+        unset($_SESSION['loggedin']);
+        unset($_SESSION['username']);
+        unset($_SESSION['start']);
+        unset($_SESSION['expire']);
+        $_SESSION = [];
+        session_destroy();
+
+        $this->index();
     }
     
 }

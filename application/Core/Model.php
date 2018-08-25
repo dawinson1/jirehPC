@@ -28,6 +28,7 @@ class Model
      */
     private function openDatabaseConnection()
     {
+        
         // set the (optional) options of the PDO connection. in this case, we set the fetch mode to
         // "objects", which means all results will be objects, like this: $result->user_name !
         // For example, fetch mode FETCH_ASSOC would return results like this: $result["user_name] !
@@ -40,7 +41,8 @@ class Model
         } else {
             $databaseEncodingenc = "; charset=" . DB_CHARSET;
         }
-
+        
+        session_start();
         // generate a database connection, using the PDO connector
         // @see http://net.tutsplus.com/tutorials/php/why-you-should-be-using-phps-pdo-for-database-access/
         $this->db = new PDO(DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_NAME . $databaseEncodingenc, DB_USER, DB_PASS, $options);

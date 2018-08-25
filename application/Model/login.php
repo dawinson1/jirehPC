@@ -14,51 +14,35 @@ class login extends Model
         $this->$atributo = $valor;
     }
 
-    public function buscarDatosLog()
+    public function buscarDatosLog($pass)
     {
 
-        /*foreach ($datos as $dato) {
-           $username = $username;
-           $password = $password;
+        $sql = "SELECT * FROM cliente WHERE id_cliente = ?";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(1,$this->id_cliente);
+        $query->execute();
+        $result = $query->fetch();
+        //var_dump($result);
 
-           $sql = "SELECT * FROM cliente WHERE id_cliente = ?";
-           $query = $this->db->prepare($sql);
-           $query->bindParam(1,$this->id_cliente);
-           $password = $query->bindParam(2,$this->contrasena);
-           return $query->execute();
-           var_dump($query);*/
+        $password = $pass;
+        //var_dump($password);
 
-           $VAR1 = $this->db->prepare('SELECT * FROM cliente WHERE id_cliente = ?');
-           $VAR1->bindParam(1,$this->id_cliente);
-           $VAR1->bindParam(2,$this->contrasena);
-           $password = $pass;
+        //if ($result->rowCount()>0) {
 
-           if ($VAR1->rowCount()>0) {
-               //$query->fetch(PDO::FETCH_ASSOC);
-               
-               if (password_verify($password,$VAR1["contrasena"])) {
-                session_start();
-                   $_SESSION['loggedin']=true;
-                   $_SESSION['username']=$VAR1["nombreCliente"];
-                   $_SESSION['start']=time();
-                   $_SESSION['expire']=$_SESSION['start']+(5*60);
-       
-                   echo '<script>
-                           var Url = "<?=URL?>";
-                           //window.location="<?php echo URL; ?>cliente";                
-                           swal("Bienvenido $_SESSION[username] !", "Has iniciado sesion!", "success");
-                         </script>';
-               }else {
-                   
-                   echo '<script>            
-                           swal("Upss", "Nombre de usuario o contraseña son incorrectas!", "error");
-                         </script>';
-               }
-           }
-        
-
-        
-
+            if (password_verify($password,$result["contrasena"])) {
+                
+                $_SESSION['loggedin']=true;
+                $_SESSION['username']=$result["nombreCliente"];
+                $_SESSION['start']=time();
+                $_SESSION['expire']=$_SESSION['start']+(5*60);
+                echo '1';
+    
+            }else {
+                echo '2';
+            }
+       // }
     }
+       
+
 
 }

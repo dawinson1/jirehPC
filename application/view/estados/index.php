@@ -52,7 +52,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese su número de cedula o el NIT de la empresa"
-                            name="identificador" id="identificador">
+                            name="identificador" id="identificador" autocomplete="off">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -63,7 +63,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese Nombre del Estado"
-                        name="nomEstado" id="nomEstado">
+                        name="nomEstado" id="nomEstado" autocomplete="off">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
