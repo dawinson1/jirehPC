@@ -239,8 +239,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>empleado"><i class="fa fa-table"></i> Tabla Empleado</a></li>
-            <li><a href="<?php echo URL; ?>empleado/formEmpleado"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Empleado</a></li>
+            <li><a href="<?php echo URL; ?>Rol"><i class="fa fa-table"></i> Tabla Roles</a></li>
+            <li><a href="<?php echo URL; ?>rol/formRol"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Rol</a></li>
           </ul>
           
         </li>

@@ -7,7 +7,6 @@ use Mini\Model\empleado;
 class empleadoController
 {
     private $empleado;
-
     function __construct(){
         $this->empleado = new empleado();
     }
@@ -44,13 +43,13 @@ class empleadoController
            $mailEm= $value['correo'];
            $idRol= $value['id_rol'];
            $idEstado =$value['id_estado'];
-
            $datos[] = array(
                'Nombre'=> $value['nombre'],
-               'apellido'=>$value['apellido'],
-               'telefono'=>$value['telefono'],
-               'correo'=>$value['correo'],
-               'nombrerol'=>$value['nombrerol'],
+               'Apellido'=>$value['apellido'],
+               'Teléfono'=>$value['telefono'],
+               'Correo'=>$value['correo'],
+               'Cédula'=>$value['idEmpleado'],
+               'Rol'=>$value['id_rol'],
                'Estado'=>$value['id_estado'],
                'Editar'=>['<button type="button" class="btn btn-primary" id="editEmpleado" onclick="editarEmpleado
                ('.$idEm.','."'".$nomEm."'".','."'".$apeEm."'".','."'".$telEm."'".','."'".$mailEm."'".','."'".$idRol."'".','."'".$idEstado."'".',)">Editar</button>'],
@@ -89,7 +88,7 @@ class empleadoController
 
     public function eliminarEmpleado()
     {
-        $this->empleado->set('idEmpleado',$_POST[('idEmpleado')]);
+        $this->empleado->set('idEmpleado',$_POST[('idEmpleado')]); /*el de la izq es de la bd, izq viene por ajax*/ 
         echo $this->empleado->eliminarEmpleado();  
     }
 
