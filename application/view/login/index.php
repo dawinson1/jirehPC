@@ -5,7 +5,7 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Inicia sesión para comenzar</p>
+    <p class="login-box-msg">Inicia sesión para comenzarz</p>
 
     <form action="" method="" autocomplete="off">
       <div class="form-group has-feedback">
@@ -24,12 +24,8 @@
         <!-- /.col -->
       </div>
     </form>
-
-
+    
     <a href="#">He olvidado mi contraseña</a><br>
-    <?php var_dump($contrasena);
-    var_dump($VAR1);
-    ?>
     <a href="#" class="text-center">Registra cuenta nueva</a>
 
   </div>
@@ -42,24 +38,24 @@ function start(){
         var id_cliente = $('#CCoNIT').val();
         var contrasena = $('#passlog').val();
     
-    //    if ((id_cliente == "") || (contrasena == "")) { //Valida si los campos estan vacios
-    //        swal("Upss", "Los campos no pueden ir vacios!", "error");
-    //    } else {
+        if ((id_cliente == "") || (contrasena == "")) { //Valida si los campos estan vacios
+            swal("Upss", "Los campos no pueden ir vacios!", "error");
+        } else {
             $.ajax({
-                url: Url+'/login/inicioSesion',
+                url: Url+'login/inicioSesion',
                 type:'POST',
                 data:{identificador: id_cliente,
                 passCliente: contrasena
             
                }
             }).done(function(data){
-                if(data){
-                    //swal("Bien Hecho!", "El Registro ha sido completado!", "success");
-
-                }else{
-                    swal("Algo anda mal!","", "error");
-                }
+              if(data==1){
+                location.href = Url+'cliente';
+              }
+              if(data==2){
+                swal("Upss", "Usuario y/o Contraseña no son correctos!", "error");
+              }
             })
         }
-   // }
+    }
 </script>

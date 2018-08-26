@@ -11,7 +11,7 @@
               <b class="box-title">Clientes</b>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body table-responsive">
             <table id="tableCliente" class="display" style="width:100%">
                 <thead>
                 <tr>
@@ -170,10 +170,11 @@ $(document).ready(function() {
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
         "scrollX": false,
+        // "dom": 'lrtipB',
         "language": {
             "url": Url+"/js/lenguaje.json"
         },
-        responsive: true,
+        
         buttons: [
             {extend: 'copy',exportOptions: {columns: [0,1,2,3,4]}},
             {extend: 'csv',exportOptions: {columns: [0,1,2,3,4]}},
@@ -243,7 +244,8 @@ function enviarEditCliente() //funcion para enviar los cambios al controlador
                     $('#telCliente').val('');
                     $('#passCliente').val('');
                     $("#myModal").modal("hide");
-                    setTimeout('location.reload()',2000);
+                    //setTimeout('location.reload()',2000);
+                    tabla.ajax.reload(null,false);
                 }else{
                     swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
                 }

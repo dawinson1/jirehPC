@@ -4,7 +4,7 @@
             <div class="box-header">
               <h3 class="box-title">Registrar Estado</h3>
             </div>
-            <form>
+            <form autocomplete="off">
             <div class="box-body"> <!--Este Div es contenedor de los imputs-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
