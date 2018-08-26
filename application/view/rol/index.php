@@ -47,12 +47,12 @@
             <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
               
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="identificador" >ID</label>
+                    <label for="idRol" >ID</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese su número de cedula o el NIT de la empresa"
-                            name="identificador" id="identificador">
+                            name="idRol" id="idRol">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -129,24 +129,24 @@ $(document).ready(function() {
 });
 function editarRol(id,nomb) //funcion plasmar los datos del usuario en los inputs
 {
-  $('#identificador').val(id);
+  $('#idRol').val(id);
   $('#nomRol').val(nomb);
-  document.getElementById("identificador").disabled = true;
+  document.getElementById("idRol").disabled = true;
   $("#myModal").modal("show");
 }
 
 
 function eviarEditRol(){
         var patron = /[0-9]/;
-        var nombreRol = $('#nomRol').val();
-        var idRol = $('#identificador').val();
+        var nomRol = $('#nomRol').val();
+        var idRol = $('#idRol').val();
 
 
         if ((nombreRol == "")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
             return false;
         }
-        else if (patron.test(nombreRol)){ 
+        else if (patron.test(nomRol)){ 
 //sintaxis para validar que el campo no contenga números. 
 //patron es la experesion regular, dentro del .test() se pone la variable a comparar
             swal("Upss", "No se permite ingresar números!", "error");
@@ -155,8 +155,8 @@ function eviarEditRol(){
                 url: Url+'rol/editarRol',
                 type:'POST',
                 data:{
-                identificador: idRol,
-                nombreRol: nombreRol
+                    idRol: idRol,
+                Nombre: nomRol
                }
             }).done(function(data){
                 if(data){
@@ -187,7 +187,7 @@ function eliminarRol(idRol) {
           $.ajax({
             url:Url+'/rol/eliminarRol',
             type:'POST',
-            data:{identificador:idRol}
+            data:{idRol:idRol}
         }).done(function(data){
             if(data){
                 setTimeout('location.reload()',2000);

@@ -26,15 +26,15 @@ class rolController
     {
        $rol = $this->rol->listarRol();
        foreach($rol as $value){
-           $ID = $value['idRol'];
-           $nomRol = $value['nombre'];
+           $idRol = $value['idRol'];
+           $nomRol = $value['Nombre'];
 
            $datos[] = array(
-               'ID'=> $value['idRol'],
+               'idRol'=> $value['idRol'],
                'Nombre'=>$value['Nombre'],
                'Editar'=>['<button type="button" class="btn btn-primary" id="editarRol" onclick="editarRol
-               ('.$ID.','."'".$nomRol."'".')">Editar</button>'],
-               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarEstado('.$ID.')">Eliminar</button>']
+               ('.$idRol.','."'".$nomRol."'".')">Editar</button>'],
+               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarEstado('.$idRol.')">Eliminar</button>']
            );
        }
        echo json_encode($datos);
@@ -48,14 +48,14 @@ class rolController
 
     public function editarRol()
     {
-        $this->estados->set('idRol',$_POST['identificador']);  
-        $this->estados->set('Nombre',$_POST['nomRol']);  
-        echo $this->estados->editarRol();  
+        $this->rol->set('idRol',$_POST['idRol']);  
+        $this->rol->set('Nombre',$_POST['nomRol']);  
+        echo $this->rol->editarRol();  
     }
 
     public function eliminarRol()
     {
-        $this->estados->set('idRol',$_POST['identificador']);  
-        echo $this->estados->eliminarEstado();  
+        $this->rol->set('idRol',$_POST['idRol']);  
+        echo $this->rol->eliminarEstado();  
     }
 }
