@@ -15,7 +15,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Blank Page</title>
+  <title>Jireh PC | Administración</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -187,10 +187,6 @@
               </li>
             </ul>
           </li>
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#"><i class="fa fa-gears"></i></a>
-          </li>
         </ul>
       </div>
     </nav>
@@ -228,40 +224,6 @@
             <li><a href="<?php echo URL; ?>empleado/formEmpleado"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Empleado</a></li>
           </ul>
         </li>
-
-        <!--roles falta-->
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-coffee"></i> <span>Rol</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>Rol"><i class="fa fa-table"></i> Tabla Roles</a></li>
-            <li><a href="<?php echo URL; ?>rol/formRol"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Rol</a></li>
-          </ul>
-          
-        </li>
-      <!--roles-->
-
-      <!--estados-->
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-coffee"></i> <span>Estado</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>estados"><i class="fa fa-table"></i> Tabla Estados</a></li>
-            <li><a href="<?php echo URL; ?>estados/formEstado"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Estado</a></li>
-          </ul>
-          
-        </li>
-      <!--estados-->
 
 
         <li class="treeview">
@@ -312,7 +274,64 @@
             <li><a href="#"><i class="fa fa-table"></i> Tabla Existencias</a></li>
           </ul>
         </li>
+
+      <li class="header">Host Estados y Roles</li>
+
+      <!--roles falta-->
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-coffee"></i> <span>Rol</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo URL; ?>Rol"><i class="fa fa-table"></i> Tabla Roles</a></li>
+            <li><a href="<?php echo URL; ?>rol/formRol"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Rol</a></li>
+          </ul>
+          
+        </li>
+      <!--roles-->
+
+      <!--estados-->
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-coffee"></i> <span>Estado</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo URL; ?>estados"><i class="fa fa-table"></i> Tabla Estados</a></li>
+            <li><a href="<?php echo URL; ?>estados/formEstado"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Estado</a></li>
+          </ul>
+          
+        </li>
+
+      <!--estados-->
+
+      <!--estados pedidos-->
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-coffee"></i> <span>EstadoS Pedidos</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo URL; ?>estado_pedido"><i class="fa fa-table"></i> Tabla Estados Pedidos</a></li>
+            <li><a href="<?php echo URL; ?>estado_pedido/formEstadosPedidos"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Estado Pedidos</a></li>
+          </ul>
+          
+        </li>
+        
+      <!--estados pedidos-->
+
       </ul>
+
     </section>
     <!-- /.sidebar -->
   </aside>    

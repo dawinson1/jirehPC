@@ -31,7 +31,7 @@ class estadosController
            $datos[] = array(
                'ID'=> $value['id_estado'],
                'Nombre'=>$value['nombre'],
-               'Editar'=>['<button type="button" class="btn btn-primary" id="editCliente" onclick="editarEstado
+               'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarEstado
                ('.$idE.','."'".$nomE."'".')">Editar</button>'],
                'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarEstado('.$idE.')">Eliminar</button>']
            );

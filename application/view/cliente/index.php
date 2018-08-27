@@ -12,7 +12,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
-            <table id="tableCliente" class="display" style="width:100%">
+            <table id="tableCliente" class="display table table-hover" style="width:100%">
                 <thead>
                 <tr>
                   <th>Cedula o NIT</th>
