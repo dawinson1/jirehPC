@@ -4,7 +4,7 @@ use Mini\Model\rol;
 class rolController
 {
     private $rol;
-    function __construct2(){
+    function __construct(){
         $this->rol = new rol();
     }
 
@@ -24,17 +24,17 @@ class rolController
 
     public function listarRol()
     {
-       $rol = $this->rol->listarRol();
+       $rol = $this->rol->listaRol(); // Esta función viene del modelo.
        foreach($rol as $value){
-           $ID = $value['idRol'];
-           $nomRol = $value['nombre'];
+           $idR = $value['idRol'];
+           $nomR = $value['Nombre'];
 
            $datos[] = array(
                'ID'=> $value['idRol'],
                'Nombre'=>$value['Nombre'],
-               'Editar'=>['<button type="button" class="btn btn-primary" id="editarRol" onclick="editarRol
-               ('.$ID.','."'".$nomRol."'".')">Editar</button>'],
-               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarEstado('.$ID.')">Eliminar</button>']
+               'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarRol
+               ('.$idR.','."'".$nomR."'".')">Editar</button>'],
+               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarRol('.$idR.')">Eliminar</button>']
            );
        }
        echo json_encode($datos);
@@ -42,20 +42,20 @@ class rolController
 
     public function crearRol()
     {
-        $this->rol->set('Nombre',$_POST['Nombre']);  
+        $this->rol->set('Nombre',$_POST['nomRol']);  
         echo $this->rol->crearRol();  
     }
 
     public function editarRol()
     {
-        $this->estados->set('idRol',$_POST['identificador']);  
-        $this->estados->set('Nombre',$_POST['nomRol']);  
-        echo $this->estados->editarRol();  
+        $this->rol->set('idRol',$_POST['identificador']);  
+        $this->rol->set('Nombre',$_POST['nomRol']);  
+        echo $this->rol->editarRol();  
     }
 
     public function eliminarRol()
     {
-        $this->estados->set('idRol',$_POST['identificador']);  
-        echo $this->estados->eliminarEstado();  
+        $this->rol->set('idRol',$_POST['identificador']);  
+        echo $this->rol->eliminarRol();  
     }
 }

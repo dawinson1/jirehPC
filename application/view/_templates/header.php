@@ -293,7 +293,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>Rol"><i class="fa fa-table"></i> Tabla Roles</a></li>
+            <li><a href="<?php echo URL; ?>rol"><i class="fa fa-table"></i> Tabla Roles</a></li>
             <li><a href="<?php echo URL; ?>rol/formRol"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Rol</a></li>
           </ul>
           
@@ -322,7 +322,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-coffee"></i> <span>EstadoS Pedidos</span>
+            <i class="fa fa-coffee"></i> <span>Estado Pedidos</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -335,6 +335,25 @@
         </li>
         
       <!--estados pedidos-->
+
+<!--Categoria-->
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-coffee"></i> <span>Categoría</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo URL; ?>categoria"><i class="fa fa-table"></i> Tabla Categorias</a></li>
+            <li><a href="<?php echo URL; ?>categoria/formCategoria"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Estado Pedidos</a></li>
+          </ul>
+          
+        </li>
+        
+      <!--Categoria-->
+
 
       </ul>
 

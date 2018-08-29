@@ -8,11 +8,11 @@
 
           <div class="box">
             <div class="box-header">
-              <b class="box-title">Rol</b>
+              <b class="box-title">Categoría</b>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <table id="tableRol" class="display" style="width:100%">
+            <table id="tableCategoria" class="display" style="width:100%">
                 <thead>
                 <tr>
                   <th>ID</th>
@@ -41,7 +41,7 @@
 <div class="box box-info">
             <div class="box-header modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 class="box-title">Editar Rol</h3>
+              <h3 class="box-title">Editar Categoría</h3>
             </div>
             <form>
             <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
@@ -51,19 +51,19 @@
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese Id rol"
+                        <input type="text" class="form-control" placeholder="Ingrese Id"
                             name="identificador" id="identificador" autocomplete="off">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="nomRol">Nombre</label>
+                    <label for="nomCat">Nombre</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese Nombre del Rol"
-                        name="nomRol" id="nomRol">
+                        <input type="text" class="form-control" placeholder="Ingrese Nombre de la Categoría"
+                        name="nomCat" id="nomCat">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -74,7 +74,7 @@
 
             <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-info pull-right" onclick="enviarEditRol()">Modificar</button>
+                <button type="button" class="btn btn-info pull-right" onclick="enviarEditCategoria()">Modificar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
             </div>
 
@@ -127,36 +127,36 @@ $(document).ready(function() {
         } );
 
 });
-function editarRol(idR,nomR) //funcion plasmar los datos del usuario en los inputs
+function editarRol(idCa,nomCa) //funcion plasmar los datos del usuario en los inputs
 {
-  $('#identificador').val(idR);
-  $('#nomRol').val(nomR);
+  $('#identificador').val(idCa);
+  $('#nomCat').val(nomCa);
   document.getElementById("identificador").disabled = true;
   $("#myModal").modal("show");
 }
 
 
-function enviarEditRol(){
+function enviarEditCategoria(){
         var patron = /[0-9]/;
-        var nombreR = $('#nomRol').val();
-        var idRol = $('#identificador').val();
+        var nombreC = $('#nomCat').val();
+        var idCat = $('#identificador').val();
 
 
-        if ((nombreR == "")) { //Valida si los campos estan vacios
+        if ((nombreC == "")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
             return false;
         }
-        else if (patron.test(nombreR)){ 
+        else if (patron.test(nombreC)){ 
 //sintaxis para validar que el campo no contenga números. 
 //patron es la experesion regular, dentro del .test() se pone la variable a comparar
             swal("Upss", "No se permite ingresar números!", "error");
         }else {
             $.ajax({
-                url: Url+'rol/editarRol',
+                url: Url+'categoria/editarCategoria',
                 type:'POST',
                 data:{
-                    identificador: idRol,
-                    nomRol: nombreR
+                    identificador: idCat,
+                    nomCat: nombreC
                }
             }).done(function(data){
                 if(data){
@@ -171,7 +171,7 @@ function enviarEditRol(){
 
     }
 
-function eliminarRol(idR) {
+function eliminarRol(idCa) {
   swal({
         title: "¿Estas Seguro?",
         text: "Si eliminas este registro ya no se podrá recuperar!",
@@ -185,9 +185,9 @@ function eliminarRol(idR) {
             icon: "success",
           });
           $.ajax({
-            url:Url+'/rol/eliminarRol',
+            url:Url+'/categoria/eliminarCategoria',
             type:'POST',
-            data:{identificador:idR}
+            data:{identificador:idCa}
         }).done(function(data){
             if(data){
                 setTimeout('location.reload()',2000);
@@ -201,4 +201,3 @@ function eliminarRol(idR) {
       });
 }
 </script>
-

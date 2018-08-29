@@ -3,49 +3,48 @@ namespace Mini\Model;
 
 use Mini\Core\Model;
 
-class rol extends Model
+class categoria extends Model
 {
 
-    private $idRol;
+    private $id_categoria;
     private $Nombre;
 
     public function set($atributo,$valor){
         $this->$atributo = $valor;
     }
 
-    public function listaRol()// como se llame esta funcion se debe llamar así mismo dentro de la funcion del Controller
-    
+    public function listarCategoria()
     {
-        $sql = "SELECT * FROM rol";
+        $sql = "SELECT * FROM categoria";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
     } 
 
-    public function crearRol()
+    public function crearCategoria()
     {
-        $sql = "INSERT INTO rol (Nombre) VALUES (?)";
+        $sql = "INSERT INTO categoria (Nombre) VALUES (?)";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->Nombre);
         return $query->execute();
     }
 
 
-    public function editarRol()
+    public function editarCategoria()
     {
-        $sql = "UPDATE rol SET Nombre = ? WHERE idRol = ?";
+        $sql = "UPDATE categoria SET Nombre = ? WHERE id_categoria = ?";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->Nombre);
-        $query->bindParam(2,$this->idRol);
+        $query->bindParam(2,$this->id_categoria);
         return $query->execute();
     }
 
-    public function eliminarRol()
+    public function eliminarCategoria()
     {
-        $sql = "DELETE FROM rol WHERE idRol = ?";
+        $sql = "DELETE FROM categoria WHERE id_categoria = ?";
         $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->idRol);
+        $query->bindParam(1,$this->id_categoria);
         return $query->execute();
 
     }
-} ?>
+}
