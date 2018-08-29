@@ -4,7 +4,7 @@
             <div class="box-header">
               <h3 class="box-title">Registrar Categoría</h3>
             </div>
-            <form>
+            <form autocomplete="off">
             <div class="box-body"> <!--Este Div es contenedor de los imputs-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
@@ -54,7 +54,7 @@
             }).done(function(data){
                 if(data){
                     swal("Bien Hecho!", "El Registro ha sido completado!", "success");
-                    $('#nomEstado').val('');
+                    $('#nomCat').val('');
                 }else{
                     swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
                 }
