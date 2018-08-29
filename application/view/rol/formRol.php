@@ -54,7 +54,7 @@
             }).done(function(data){
                 if(data){
                     swal("Bien Hecho!", "El Registro ha sido completado!", "success");
-                    $('#nomEstado').val('');
+                    $('#nomRol').val('');
                 }else{
                     swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
                 }
