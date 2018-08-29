@@ -88,9 +88,9 @@
 
 $(document).ready(function() {
         $.fn.dataTable.ext.errMode = 'throw';
-        tabla =	$('#tableRol').DataTable( {
+        tabla =	$('#tableCategoria').DataTable( {
         "ajax": {
-            "url": Url+'/rol/listarRol', // función en el controlador 
+            "url": Url+'/categoria/listarCat', // función en el controlador 
             "type": "GET",
             "dataSrc": "",
             "deferRender": true
@@ -127,7 +127,7 @@ $(document).ready(function() {
         } );
 
 });
-function editarRol(idCa,nomCa) //funcion plasmar los datos del usuario en los inputs
+function editarCategoria(idCa,nomCa) //funcion plasmar los datos del usuario en los inputs
 {
   $('#identificador').val(idCa);
   $('#nomCat').val(nomCa);
@@ -162,7 +162,8 @@ function enviarEditCategoria(){
                 if(data){
                     swal("Bien Hecho!", "La modificación ha sido completada!", "success");
                     $("#myModal").modal("hide");
-                    setTimeout('location.reload()',2000);
+                   // setTimeout('location.reload()',2000);
+                   tabla.ajax.reload(null,false);
                 }else{
                     swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
                 }
@@ -171,7 +172,7 @@ function enviarEditCategoria(){
 
     }
 
-function eliminarRol(idCa) {
+function eliminarCategoria(idCa) {
   swal({
         title: "¿Estas Seguro?",
         text: "Si eliminas este registro ya no se podrá recuperar!",
@@ -190,7 +191,8 @@ function eliminarRol(idCa) {
             data:{identificador:idCa}
         }).done(function(data){
             if(data){
-                setTimeout('location.reload()',2000);
+               // setTimeout('location.reload()',2000);
+               tabla.ajax.reload(null,false);
             }else{
                 swal("Algo anda mal!", "La eliminacion no se ha ejecutado!", "error");
             }

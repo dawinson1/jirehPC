@@ -21,7 +21,7 @@ class categoriaController
         require APP . 'view/_templates/footer.php';
     }
 
-    public function listarCategoria()
+    public function listarCat()
     {
        $categoria = $this->categoria->listarCategoria();
        foreach($categoria as $value){
@@ -47,14 +47,14 @@ class categoriaController
 
     public function editarCategoria()
     {
-        $this->categoria->set('id_estado',$_POST['identificador']);  
+        $this->categoria->set('id_categoria',$_POST['identificador']);  
         $this->categoria->set('Nombre',$_POST['nomCat']);  
         echo $this->categoria->editarCategoria();  
     }
 
     public function eliminarCategoria()
     {
-        $this->categoria->set('id_estado',$_POST['identificador']);  
+        $this->categoria->set('id_categoria',$_POST['identificador']);  
         echo $this->categoria->eliminarCategoria();  
     }
 }
