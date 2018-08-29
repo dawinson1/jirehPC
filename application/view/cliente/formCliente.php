@@ -4,7 +4,7 @@
             <div class="box-header">
               <h3 class="box-title">Clientes</h3>
             </div>
-            <form>
+            <form enctype="multipart/form-data">
             <div class="box-body"> <!--Este Div es contenedor de los imputs-->
               
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
@@ -83,8 +83,20 @@
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                        <input type="password" class="form-control" placeholder="Ingrese su Contraseña"
+                        <input type="password" class="form-control" placeholder="Ingrese su Contraseña" autocomplete="off"
                         name="passCliente" id="passCliente">
+
+                    </div><!--cierre div del input-->
+                </div> <!--cierre del div contenedor del input-->
+
+                <div class="form-group"> <!--Comienzo del div contenedor del input-->
+                    <label for="imgClient">Foto de perfil</label>
+
+                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
+                      
+                        <input type="file" class="form-control file" name="imgClient" id="imgClient"
+                        accept="image/*">
+                        
 
                     </div><!--cierre div del input-->
                 </div> <!--cierre del div contenedor del input-->
@@ -141,5 +153,12 @@
             })
         }
     }
+
+$('#imgClient').fileinput({
+        theme: 'fa',
+        language: 'es',
+        showUpload : false ,
+        allowedFileExtensions: ['jpg', 'png', 'gif']
+    }); 
 
 </script>

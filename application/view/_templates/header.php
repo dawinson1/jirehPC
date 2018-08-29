@@ -8,7 +8,7 @@
 		
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <!-- Mirrored from adminlte.io/themes/AdminLTE/pages/examples/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Jul 2018 00:03:46 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
@@ -20,6 +20,8 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="<?php echo URL; ?>css/bootstrap.min.css">
+  <!-- css plugin file input -->
+  <link rel="stylesheet" href="<?php echo URL; ?>css/fileinput.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo URL; ?>css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -36,6 +38,10 @@
   <script src="<?php echo URL; ?>js/jquery.min.js"></script>
   <!--js Sweet alert-->
   <script src="<?php echo URL; ?>js/sweetalert.min.js"></script>
+
+  <!--js plugin file input-->
+  <script src="<?php echo URL; ?>js/fileinput.min.js"></script>
+  <script src="<?php echo URL; ?>js/locales/es.js"></script>
   
 <!-- Bootstrap 3.3.7 -->
   <script src="<?php echo URL; ?>js/bootstrap.min.js"></script>
@@ -274,7 +280,7 @@
             <li><a href="#"><i class="fa fa-table"></i> Tabla Existencias</a></li>
           </ul>
         </li>
-
+        
       <li class="header">Host Estados y Roles</li>
 
       <!--roles falta-->

@@ -5,11 +5,11 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Inicia sesión para comenzarz</p>
+    <p class="login-box-msg">Inicia sesión para comenzar</p>
 
     <form action="" method="" autocomplete="off">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Escrisa su cedula o NIT" id="CCoNIT" name="CCoNIT">
+        <input type="text" class="form-control" placeholder="Escriba su cédula o NIT" id="CCoNIT" name="CCoNIT">
         <span class="fa fa-address-card form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -19,7 +19,7 @@
       <div class="row">
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="button" onclick="start()" class="btn btn-primary">Iniciar Sesion</button>
+          <button type="button" onclick="start()" class="btn btn-primary">Iniciar Sesión</button>
         </div>
         <!-- /.col -->
       </div>
@@ -39,7 +39,7 @@ function start(){
         var contrasena = $('#passlog').val();
     
         if ((id_cliente == "") || (contrasena == "")) { //Valida si los campos estan vacios
-            swal("Upss", "Los campos no pueden ir vacios!", "error");
+            swal("Upss", "Los campos no pueden ir vacíos!", "error");
         } else {
             $.ajax({
                 url: Url+'login/inicioSesion',
