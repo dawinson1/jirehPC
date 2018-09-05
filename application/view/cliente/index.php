@@ -4,7 +4,7 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-       
+
 
           <div class="box">
             <div class="box-header">
@@ -12,7 +12,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
-            <table id="tableCliente" class="display table table-hover" style="width:100%">
+            <table id="tableCliente" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
                   <th>Cedula o NIT</th>
@@ -22,6 +22,8 @@
                   <th>Dirección</th>
                   <th>Telefono</th>
                   <th>Editar</th>
+                  <th>Foto Perfil</th>
+                  <th>Actualizar<br> Foto</th>
                   <th>Eliminar</th>
                 </tr>
                 </thead>
@@ -49,9 +51,9 @@
             </div>
             <form>
             <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
-              
+
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="identificador" >Cedula o NIT</label>
+                    <label for="identificador" >Cédula o NIT</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
@@ -121,16 +123,6 @@
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="passCliente">Contraseña</label>
-
-                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                        <input type="password" class="form-control" placeholder="Ingrese su Contraseña" autocomplete="off"
-                        name="passCliente" id="passCliente">
-
-                    </div><!--cierre div del input-->
-                </div> <!--cierre del div contenedor del input-->
 
             </div> <!--Cierre del Div contenedor-->
             </form>
@@ -138,6 +130,57 @@
             <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-info pull-right" onclick="enviarEditCliente()">Modificar</button>
+              </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
+            </div>
+
+          </section>
+
+</div>
+</div>
+
+<!-- Ventan modal para la actualización de la imagen de perfil-->
+
+<div class="modal fade" id="myModalFile" role="dialog"> <!--Div que contiene la ventana modal-->
+<div class="modal-dialog">
+
+<section class="content modal-content">
+<div class="box box-info">
+            <div class="box-header modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 class="box-title">Actualizar Foto de perfil</h3>
+            </div>
+            <form autocomplete="off" enctype="multipart/form-data" id="actImgPerfilClient">
+            <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
+
+              <div class="form-group hidden" id="DivInputImg"> <!--Comienzo del div contenedor del input-->
+                  <label for="idClientMimg" >Cedula o NIT</label>
+
+                  <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
+                      <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
+                      <input type="text" class="form-control"
+                          name="idClientMimg" id="idClientMimg">
+
+                  </div><!--cierre div del inputt-->
+              </div> <!--cierre del div contenedor del input-->
+
+                <div class="form-group"> <!--Comienzo del div contenedor del input-->
+                    <label for="imgClient" >Selecciones imagen de perfil</label>
+
+                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
+
+                        <input type="file" class="form-control"
+                            name="imgClient" id="imgClient">
+
+                    </div><!--cierre div del inputt-->
+                </div> <!--cierre del div contenedor del input-->
+
+
+            </div> <!--Cierre del Div contenedor-->
+            </form>
+
+            <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-info pull-right" onclick="actuaImg()">Actualizar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
             </div>
 
@@ -166,6 +209,11 @@ $(document).ready(function() {
             { "data": "Dirección","className": 'centeer' },
             { "data": "Telefono", "className": 'centeer' },
             { "data": "Editar", "orderable": false  },
+            { "data": "Foto Perfil", "render":function(data,type,row){
+              return '<center><img src="<?php echo URL; ?>'+data+'" width="120" height="80" /></center>';
+              }
+            },
+            { "data": "Actualizar Foto", "orderable": false  },
             { "data": "Eliminar", "orderable": false  }
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
@@ -174,7 +222,7 @@ $(document).ready(function() {
         "language": {
             "url": Url+"/js/lenguaje.json"
         },
-        
+
         buttons: [
             {extend: 'copy',exportOptions: {columns: [0,1,2,3,4]}},
             {extend: 'csv',exportOptions: {columns: [0,1,2,3,4]}},
@@ -195,19 +243,6 @@ $(document).ready(function() {
         } );
 
 });
-function editarCliente(idC,nomC,apeC,CorrC,dicCl,telC,contrC) //funcion plasmar los datos del usuario en los inputs
-{
-  $('#identificador').val(idC);
-  $('#nomCliente').val(nomC);
-  $('#apeCliente').val(apeC);
-  $('#correoCliente').val(CorrC);
-  $('#direcCliente').val(dicCl);
-  $('#telCliente').val(telC);
-  $('#passCliente').val(contrC);
-  document.getElementById("identificador").disabled = true;
-  $("#myModal").modal("show");
-}
-
 
 function enviarEditCliente() //funcion para enviar los cambios al controlador
 {
@@ -217,9 +252,8 @@ function enviarEditCliente() //funcion para enviar los cambios al controlador
         var correoCliente = $('#correoCliente').val();
         var direccionCliente = $('#direcCliente').val();
         var telefono = $('#telCliente').val();
-        var contrasena = $('#passCliente').val();
-    
-        if ((id_cliente == "") || (nombreCliente == "") || (apellidoCliente == "") || (correoCliente == "") || (direccionCliente == "") || (telefono == "") || (contrasena == "")) { //Valida si los campos estan vacios
+
+        if ((id_cliente == "") || (nombreCliente == "") || (apellidoCliente == "") || (correoCliente == "") || (direccionCliente == "") || (telefono == "")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
         } else {
             $.ajax({
@@ -230,8 +264,7 @@ function enviarEditCliente() //funcion para enviar los cambios al controlador
                 apeCliente: apellidoCliente,
                 correoCliente: correoCliente,
                 direcCliente: direccionCliente,
-                telCliente: telefono,
-                passCliente: contrasena
+                telCliente: telefono
                }
             }).done(function(data){
                 if(data){
@@ -242,7 +275,6 @@ function enviarEditCliente() //funcion para enviar los cambios al controlador
                     $('#correoCliente').val('');
                     $('#direcCliente').val('');
                     $('#telCliente').val('');
-                    $('#passCliente').val('');
                     $("#myModal").modal("hide");
                     //setTimeout('location.reload()',2000);
                     tabla.ajax.reload(null,false);
@@ -253,6 +285,69 @@ function enviarEditCliente() //funcion para enviar los cambios al controlador
         }
 }
 
+function actuaImg() //funcion para enviar los cambios al controlador
+{
+  var datosimg = new FormData($('#actImgPerfilClient')[0]);
+  console.log(datosimg)
+
+      $.ajax({
+          url: Url+'/cliente/actImgCliente',
+          type:'POST',
+          data: datosimg,
+          contentType: false,
+          processData: false,
+        }).done(function(data){
+          if (data=='Error Archivo') {
+            swal("Algo anda mal!", "Es posible que la imagen este dañada!", "error");
+          }
+          if (data=='img no permitida') {
+            swal("¿Que haces?", "Este formato no esta permitido!", "error");
+          }
+          if (data=='La imagen ya existe') {
+            swal("Wow", "Esta imagen ya existe! Intenta cambiarle el nombre a tu archivo.", "error");
+          }
+          if (data=='Error al guardar imagen') {
+            swal("Lo sentimos :(", "Hubo un error al guardar la imagen", "error");
+          }
+          if (data==1) {
+            swal("Bien Hecho!", "La tu imagen  ha sido actualizada!", "success");
+            $('#idClientMimg').val('');
+            $('#imgClient').fileinput('clear');
+            $("#myModalFile").modal("hide");
+            tabla.ajax.reload(null,false);
+          }
+
+          })
+}
+
+
+function showModalImg(idC) //funcion plasmar los datos del usuario en los inputs
+{
+  $('#idClientMimg').val(idC);
+  //document.getElementById("idClientMimg").disabled = true;
+  $('#DivInputImg').hide();
+  $("#myModalFile").modal("show");
+}
+
+function editarCliente(idC,nomC,apeC,CorrC,dicCl,telC) //funcion plasmar los datos del usuario en los inputs
+{
+  $('#identificador').val(idC);
+  $('#nomCliente').val(nomC);
+  $('#apeCliente').val(apeC);
+  $('#correoCliente').val(CorrC);
+  $('#direcCliente').val(dicCl);
+  $('#telCliente').val(telC);
+  document.getElementById("identificador").disabled = true;
+  $("#myModal").modal("show");
+}
+
+$('#imgClient').fileinput({
+        theme: 'fa',
+        language: 'es',
+        showUpload : false,
+        allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg']
+    });
+
 function eliminarCliente(idC) {
   swal({
         title: "¿Estas Seguro?",
@@ -260,7 +355,7 @@ function eliminarCliente(idC) {
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      }) 
+      })
       .then((willDelete) => {
         if (willDelete) {
           swal("Registro eliminado!", {
@@ -272,15 +367,12 @@ function eliminarCliente(idC) {
             data:{identificador:idC}
         }).done(function(data){
             if(data){
-              location.reload();
+              tabla.ajax.reload(null,false);
             }else{
                 swal("Algo anda mal!", "La eliminacion no se ha ejecutado!", "error");
             }
         })
-        } else {
-          swal("Eliminación cancelada!");
         }
       });
 }
 </script>
-

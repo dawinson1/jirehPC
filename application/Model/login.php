@@ -30,19 +30,20 @@ class login extends Model
         //if ($result->rowCount()>0) {
 
             if (password_verify($password,$result["contrasena"])) {
-                
+
                 $_SESSION['loggedin']=true;
                 $_SESSION['username']=$result["nombreCliente"];
+                $_SESSION['imgPerfil']=$result["Url_imgClient"];
                 $_SESSION['start']=time();
                 $_SESSION['expire']=$_SESSION['start']+(5*60);
                 echo '1';
-    
+
             }else {
                 echo '2';
             }
        // }
     }
-       
+
 
 
 }

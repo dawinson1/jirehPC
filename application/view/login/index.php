@@ -9,11 +9,11 @@
 
     <form action="" method="" autocomplete="off">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Escriba su cédula o NIT" id="CCoNIT" name="CCoNIT">
+        <input type="text" class="form-control" placeholder="Escriba su cédula o NIT" onkeypress="process(event, this)" id="CCoNIT" name="CCoNIT">
         <span class="fa fa-address-card form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Ingrese su contraseña" id="passlog" name="passlog" autocomplete="off">
+        <input type="password" class="form-control" placeholder="Ingrese su contraseña" onkeypress="process(event, this)" id="passlog" name="passlog" autocomplete="off">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -24,7 +24,7 @@
         <!-- /.col -->
       </div>
     </form>
-    
+
     <a href="#">He olvidado mi contraseña</a><br>
     <a href="#" class="text-center">Registra cuenta nueva</a>
 
@@ -34,10 +34,18 @@
 <!-- /.login-box -->
 
 <script>
+// para que se pueda ejecutar esta función kis inputs deben tener este comando onkeypress="process(event, this);
+function process(e) { // función que detecta si se preciona enter o intro y ejecuta la función start();
+    var code = (e.keyCode ? e.keyCode : e.which);
+    if (code == 13) { //Enter keycode
+        start();
+    }
+}
+
 function start(){
         var id_cliente = $('#CCoNIT').val();
         var contrasena = $('#passlog').val();
-    
+
         if ((id_cliente == "") || (contrasena == "")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacíos!", "error");
         } else {
@@ -46,7 +54,7 @@ function start(){
                 type:'POST',
                 data:{identificador: id_cliente,
                 passCliente: contrasena
-            
+
                }
             }).done(function(data){
               if(data==1){

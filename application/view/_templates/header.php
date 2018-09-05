@@ -1,11 +1,11 @@
 <?php
     namespace Mini\Model;
-    
+
     use PDO;
 	if(!isset($_SESSION['username'])){
     header('Location: /Proyecto/jirehPC/login');
   }
-		
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -42,7 +42,7 @@
   <!--js plugin file input-->
   <script src="<?php echo URL; ?>js/fileinput.min.js"></script>
   <script src="<?php echo URL; ?>js/locales/es.js"></script>
-  
+
 <!-- Bootstrap 3.3.7 -->
   <script src="<?php echo URL; ?>js/bootstrap.min.js"></script>
 
@@ -169,13 +169,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo URL; ?>img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="<?php echo URL; ?><?php echo $_SESSION['imgPerfil']; ?>" class="user-image" alt="User Image">
               <span class="hidden-xs"><?php echo $_SESSION['username']; ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo URL; ?>img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="<?php echo URL; ?><?php echo $_SESSION['imgPerfil']; ?>" class="img-circle" alt="User Image">
 
                 <p>
                 <?php echo $_SESSION['username']; ?>
@@ -207,7 +207,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo URL; ?>img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<?php echo URL; ?><?php echo $_SESSION['imgPerfil']; ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $_SESSION['username']; ?></p>
@@ -280,7 +280,7 @@
             <li><a href="#"><i class="fa fa-table"></i> Tabla Existencias</a></li>
           </ul>
         </li>
-        
+
       <li class="header">Host Estados y Roles</li>
 
       <!--roles falta-->
@@ -296,7 +296,7 @@
             <li><a href="<?php echo URL; ?>rol"><i class="fa fa-table"></i> Tabla Roles</a></li>
             <li><a href="<?php echo URL; ?>rol/formRol"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Rol</a></li>
           </ul>
-          
+
         </li>
       <!--roles-->
 
@@ -313,7 +313,7 @@
             <li><a href="<?php echo URL; ?>estados"><i class="fa fa-table"></i> Tabla Estados</a></li>
             <li><a href="<?php echo URL; ?>estados/formEstado"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Estado</a></li>
           </ul>
-          
+
         </li>
 
       <!--estados-->
@@ -331,9 +331,9 @@
             <li><a href="<?php echo URL; ?>estado_pedido"><i class="fa fa-table"></i> Tabla Estados Pedidos</a></li>
             <li><a href="<?php echo URL; ?>estado_pedido/formEstadosPedidos"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Estado Pedidos</a></li>
           </ul>
-          
+
         </li>
-        
+
       <!--estados pedidos-->
 
 <!--Categoria-->
@@ -349,9 +349,9 @@
             <li><a href="<?php echo URL; ?>categoria"><i class="fa fa-table"></i> Tabla Categorias</a></li>
             <li><a href="<?php echo URL; ?>categoria/formCategoria"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Estado Pedidos</a></li>
           </ul>
-          
+
         </li>
-        
+
       <!--Categoria-->
 
 
@@ -359,4 +359,4 @@
 
     </section>
     <!-- /.sidebar -->
-  </aside>    
+  </aside>

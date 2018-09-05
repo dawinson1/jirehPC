@@ -13,6 +13,7 @@ class cliente extends Model
     private $direccionCliente;
     private $telefono;
     private $contrasena;
+    private $Url_imgClient;
 
     public function set($atributo,$valor){
         $this->$atributo = $valor;
@@ -24,7 +25,7 @@ class cliente extends Model
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
-    } 
+    }
 
     public function buscarCliente()
     {
@@ -37,7 +38,7 @@ class cliente extends Model
 
     public function crearCliente()
     {
-        $sql = "INSERT INTO cliente (id_cliente, nombreCliente, apellidoCliente,correoCliente,direccionCliente,telefono,contrasena) VALUES (?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO cliente (id_cliente, nombreCliente, apellidoCliente,correoCliente,direccionCliente,telefono,contrasena,Url_imgClient) VALUES (?,?,?,?,?,?,?,?)";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->id_cliente);
         $query->bindParam(2,$this->nombreCliente);
@@ -46,9 +47,19 @@ class cliente extends Model
         $query->bindParam(5,$this->direccionCliente);
         $query->bindParam(6,$this->telefono);
         $query->bindParam(7,$this->contrasena);
+        $query->bindParam(8,$this->Url_imgClient);
         return $query->execute();
+
     }
 
+    public function editarImgCliente()
+    {
+      $sql = "UPDATE cliente SET Url_imgClient = ? WHERE id_cliente = ?";
+      $query = $this->db->prepare($sql);
+      $query->bindParam(1,$this->Url_imgClient);
+      $query->bindParam(2,$this->id_cliente);
+      return $query->execute();
+    }
 
     public function editarCliente()
     {
