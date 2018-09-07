@@ -63,15 +63,14 @@ class cliente extends Model
 
     public function editarCliente()
     {
-        $sql = "UPDATE cliente SET nombreCliente = ?, apellidoCliente = ?, correoCliente = ?,direccionCliente = ?,telefono = ?,contrasena = ? WHERE id_cliente = ?";
+        $sql = "UPDATE cliente SET nombreCliente = ?, apellidoCliente = ?, correoCliente = ?,direccionCliente = ?,telefono = ? WHERE id_cliente = ?";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->nombreCliente);
         $query->bindParam(2,$this->apellidoCliente);
         $query->bindParam(3,$this->correoCliente);
         $query->bindParam(4,$this->direccionCliente);
         $query->bindParam(5,$this->telefono);
-        $query->bindParam(6,$this->contrasena);
-        $query->bindParam(7,$this->id_cliente);
+        $query->bindParam(6,$this->id_cliente);
         return $query->execute();
     }
 
