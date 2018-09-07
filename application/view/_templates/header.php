@@ -253,8 +253,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-table"></i> Tabla Productos</a></li>
-            <li><a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Productos</a></li>
+            <li><a href="<?php echo URL; ?>producto"><i class="fa fa-table"></i> Tabla Productos</a></li>
+            <li><a href="<?php echo URL; ?>producto/formProducto"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Productos</a></li>
           </ul>
         </li>
         <li class="treeview">
