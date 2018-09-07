@@ -90,20 +90,19 @@
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
                 
-
+                <!--INPUT DE ESTADO-->
                 <div class="form-group col-xs-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="id_estado">Estado 12 Activo/13 Inactivo </label>
-            
-                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                        <input type="text" id="id_estado" name="id_estado"  autocomplete="off">
-                       <!-- <select name="" class="form-control form-control-sm">
-                         <option>12</option>
-                         <option>13</option>
-                               </select>-->
+                    <label for="id_estado">Estado:</label>
 
-                    </div><!--cierre div del input-->
+                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
+                        <span class="input-group-addon"><i class="fa fa-coffee"></i></span>
+                        <input type="text" class="form-control" placeholder="12 Activo o 13 Inactivo"
+                        name="id_estado" id="id_estado"  autocomplete="off">
+
+                    </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
+                 <!--INPUT DE ESTADO-->
+
 
             </div> <!--Cierre del Div contenedor-->
             </form>

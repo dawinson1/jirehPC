@@ -7,7 +7,7 @@
             <form autocomplete="off">
             <div class="box-body"> <!--Este Div es contenedor de los imputs-->
 
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
+                <div class="form-group col-xs-6"> <!--Comienzo del div contenedor del input-->
                     <label for="nomTipoM">Nombre</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->

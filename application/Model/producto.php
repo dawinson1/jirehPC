@@ -6,7 +6,7 @@ use Mini\Core\Model;
 class producto extends Model
 {
 
-    private $id_cliente;
+    private $referencia;
     private $nombreCliente;
     private $apellidoCliente;
     private $correoCliente;

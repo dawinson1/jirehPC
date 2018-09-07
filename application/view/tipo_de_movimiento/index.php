@@ -186,12 +186,12 @@ function eliminarTipoMov(idTM) {
             icon: "success",
           });
           $.ajax({
-            url:Url+'/tipoMov/eliminarTipoMov',
+            url:Url+'/tipo_de_movimiento/eliminarTipoMov',
             type:'POST',
             data:{identificador:idTM}
         }).done(function(data){
             if(data){
-                setTimeout('location.reload()',2000);
+                tabla.ajax.reload(null,false);
             }else{
                 swal("Algo anda mal!", "La eliminacion no se ha ejecutado!", "error");
             }
