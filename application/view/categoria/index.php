@@ -63,7 +63,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese Nombre de la Categoría"
-                        name="nomCat" id="nomCat">
+                        name="nomCat" id="nomCat"  autocomplete="off" >
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->

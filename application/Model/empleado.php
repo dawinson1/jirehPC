@@ -10,9 +10,11 @@ class empleado extends Model
     private $apellido;
     private $telefono;
     private $correo;
+    private $pass;
     private $idEmpleado;
     private $id_rol;
     private $id_estado;
+    
 
     public function set($atributo,$valor){
         $this->$atributo = $valor;
@@ -29,30 +31,32 @@ class empleado extends Model
 
     public function crearEmpleado()
     {
-        $sql = "INSERT INTO empleado (nombre,apellido,telefono,correo,idEmpleado,id_rol,id_estado) VALUES (?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO empleado (nombre,apellido,telefono,correo,pass,idEmpleado,id_rol,id_estado) VALUES (?,?,?,?,?,?,?,?)";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->nombre);
         $query->bindParam(2,$this->apellido);
         $query->bindParam(3,$this->telefono);
         $query->bindParam(4,$this->correo);
-        $query->bindParam(5,$this->idEmpleado);
-        $query->bindParam(6,$this->id_rol);
-        $query->bindParam(7,$this->id_estado);
+        $query->bindParam(5,$this->pass);
+        $query->bindParam(6,$this->idEmpleado);
+        $query->bindParam(7,$this->id_rol);
+        $query->bindParam(8,$this->id_estado);
         return $query->execute();
     }
 
 
     public function editarEmpleado()
     {
-        $sql = "UPDATE empleado SET nombre = ?, apellido = ?, telefono = ?,correo = ?,id_rol = ?,id_estado = ? WHERE idEmpleado = ?";
+        $sql = "UPDATE empleado SET nombre = ?, apellido = ?, telefono = ?,correo = ?, pass = ?, id_rol = ?,id_estado = ? WHERE idEmpleado = ?";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->nombre);
         $query->bindParam(2,$this->apellido);
         $query->bindParam(3,$this->telefono);
         $query->bindParam(4,$this->correo);
-        $query->bindParam(5,$this->id_rol);
-        $query->bindParam(6,$this->id_estado);
-        $query->bindParam(7,$this->idEmpleado);
+        $query->bindParam(5,$this->pass);
+        $query->bindParam(6,$this->id_rol);
+        $query->bindParam(7,$this->id_estado);
+        $query->bindParam(8,$this->idEmpleado);
         return $query->execute();
     }
 

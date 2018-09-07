@@ -4,16 +4,16 @@
             <div class="box-header">
               <h3 class="box-title">Registrar Categoría</h3>
             </div>
-            <form autocomplete="off">
+            <form>
             <div class="box-body"> <!--Este Div es contenedor de los imputs-->
 
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
+                <div class="form-group col-xs-6"> <!--Comienzo del div contenedor del input-->
                     <label for="nomCat">Nombre Categoría</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese Nombre de la Categoría"
-                        name="nomCat" id="nomCat">
+                        name="nomCat" id="nomCat"  autocomplete="off">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->

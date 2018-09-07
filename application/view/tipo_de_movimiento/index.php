@@ -4,15 +4,15 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-
+       
 
           <div class="box">
             <div class="box-header">
-              <b class="box-title">Rol</b>
+              <b class="box-title">Tipo de Movimiento</b>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <table id="tableRol" class="display" style="width:100%">
+            <table id="tableTipoDeMovimiento" class="display" style="width:100%">
                 <thead>
                 <tr>
                   <th>ID</th>
@@ -41,29 +41,29 @@
 <div class="box box-info">
             <div class="box-header modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 class="box-title">Editar Rol</h3>
+              <h3 class="box-title">Editar Tipo de Movimiento</h3>
             </div>
             <form>
             <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
-
+              
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="identificador" >Id</label>
+                    <label for="identificador" >ID</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese Id rol"
+                        <input type="text" class="form-control" placeholder="Ingrese Id"
                             name="identificador" id="identificador" autocomplete="off">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="nomRol">Nombre</label>
+                    <label for="nomTipoM">Nombre</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese Nombre del Rol"
-                        name="nomRol" id="nomRol" autocomplete="off">
+                        <input type="text" class="form-control" placeholder="Ingrese Nombre del Tipo de Movimiento"
+                        name="nomTipoM" id="nomTipoM" autocomplete="off">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -74,7 +74,7 @@
 
             <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-info pull-right" onclick="enviarEditRol()">Modificar</button>
+                <button type="button" class="btn btn-info pull-right" onclick="enviarEditTipoMov()">Modificar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
             </div>
 
@@ -88,9 +88,9 @@
 
 $(document).ready(function() {
         $.fn.dataTable.ext.errMode = 'throw';
-        tabla =	$('#tableRol').DataTable( {
+        tabla =	$('#tableTipoDeMovimiento').DataTable( {
         "ajax": {
-            "url": Url+'/rol/listarRol', // función en el controlador
+            "url": Url+'/tipo_de_movimiento/listarTipoMov',
             "type": "GET",
             "dataSrc": "",
             "deferRender": true
@@ -127,42 +127,43 @@ $(document).ready(function() {
         } );
 
 });
-function editarRol(idR,nomR) //funcion plasmar los datos del usuario en los inputs
+function editarTipoMov(idTM,nomTM) //funcion plasmar los datos del usuario en los inputs
 {
-  $('#identificador').val(idR);
-  $('#nomRol').val(nomR);
+  $('#identificador').val(idTM);
+  $('#nomTipoM').val(nomTM);
   document.getElementById("identificador").disabled = true;
   $("#myModal").modal("show");
 }
 
 
-function enviarEditRol(){
+function enviarEditTipoMov(){
         var patron = /[0-9]/;
-        var nombreR = $('#nomRol').val();
-        var idRol = $('#identificador').val();
+        var nombreTM = $('#nomTipoM').val();
+        var idTipoM = $('#identificador').val();
 
 
-        if ((nombreR == "")) { //Valida si los campos estan vacios
+        if ((nombreTM == "")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
             return false;
         }
-        else if (patron.test(nombreR)){
-//sintaxis para validar que el campo no contenga números.
+        else if (patron.test(nombreTM)){ 
+//sintaxis para validar que el campo no contenga números. 
 //patron es la experesion regular, dentro del .test() se pone la variable a comparar
             swal("Upss", "No se permite ingresar números!", "error");
         }else {
             $.ajax({
-                url: Url+'rol/editarRol',
+                url: Url+'tipo_de_movimiento/editarTipoMov',
                 type:'POST',
                 data:{
-                    identificador: idRol,
-                    nomRol: nombreR
+                identificador: idTipoM,
+                nomTipoM: nombreTM
                }
             }).done(function(data){
                 if(data){
-                    swal("Bien Hecho!", "La modificación ha sido completada!", "success");
+                    swal("Bien Hecho!", "La modificación ha sido completado!", "success");
                     $("#myModal").modal("hide");
-                    setTimeout('location.reload()',2000);
+                    tabla.ajax.reload(null,false);
+                   // setTimeout('location.reload()',1000);
                 }else{
                     swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
                 }
@@ -171,23 +172,23 @@ function enviarEditRol(){
 
     }
 
-function eliminarRol(idR) {
+function eliminarTipoMov(idTM) {
   swal({
         title: "¿Estas Seguro?",
         text: "Si eliminas este registro ya no se podrá recuperar!",
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      })
+      }) 
       .then((willDelete) => {
         if (willDelete) {
-          swal("Estado eliminado!", {
+          swal("Tipo de Movimiento eliminado!", {
             icon: "success",
           });
           $.ajax({
-            url:Url+'/rol/eliminarRol',
+            url:Url+'/tipoMov/eliminarTipoMov',
             type:'POST',
-            data:{identificador:idR}
+            data:{identificador:idTM}
         }).done(function(data){
             if(data){
                 setTimeout('location.reload()',2000);
@@ -201,3 +202,4 @@ function eliminarRol(idR) {
       });
 }
 </script>
+

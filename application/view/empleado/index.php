@@ -57,7 +57,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese su número de cedula o el NIT de la empresa"
-                            name="idEmpleado" id="idEmpleado">
+                            name="idEmpleado" id="idEmpleado" autocomplete="off">
 
                         <div class="input-group-addon"> <!--Este div es opcional, servirá cuando queramos que en frente del input este otro icono-->
                         <i class="glyphicon glyphicon-search"></i>
@@ -72,7 +72,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese nombre"
-                        name="nombre" id="nombre">
+                        name="nombre" id="nombre" autocomplete="off">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -83,7 +83,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese sus apellidos"
-                        name="apellido" id="apellido">
+                        name="apellido" id="apellido" autocomplete="off">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -94,7 +94,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                         <input type="text" class="form-control" placeholder="Número de Teléfono"
-                         name="telefono" id="telefono">
+                         name="telefono" id="telefono" autocomplete="off">
 
 
                     </div><!--cierre div del inputt-->
@@ -106,11 +106,21 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-map-signs"></i></span>
                         <input type="email" class="form-control" placeholder="Ingrese la direccion de Correo"
-                        name="correo" id="correo">
+                        name="correo" id="correo" autocomplete="off">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
+                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
+                    <label for="passEmpl">Contraseña</label>
+
+                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
+                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                        <input type="password" class="form-control" placeholder="Ingrese su Contraseña" autocomplete="off"
+                        name="passEmpl" id="passEmpl">
+
+                    </div><!--cierre div del input-->
+                </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
                     <label for="id_rol">Rol</label>
@@ -118,7 +128,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese número de Rol"
-                        name="id_rol" id="id_rol">
+                        name="id_rol" id="id_rol" autocomplete="off">
 
                     </div><!--cierre div del input-->
                 </div> <!--cierre del div contenedor del input-->
@@ -130,7 +140,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese Estado"
-                        name="id_estado" id="id_estado">
+                        name="id_estado" id="id_estado" autocomplete="off">
 
                     </div><!--cierre div del input-->
                 </div> <!--cierre del div contenedor del input-->
@@ -229,13 +239,14 @@ function eliminarEmpleado(idEm) {
       });
 }
 
-function editarEmpleado(idEm,nomEm,apeEm,telEm,mailEm,idRol,idEstado) //funcion plasmar los datos del usuario en los inputs
+function editarEmpleado(idEm,nomEm,apeEm,telEm,mailEm,contrEm,idRol,idEstado) //funcion plasmar los datos del usuario en los inputs
 {
   $('#idEmpleado').val(idEm);
   $('#nombre').val(nomEm);
   $('#apellido').val(apeEm);
   $('#telefono').val(telEm);
   $('#correo').val(mailEm);
+  $('#passEmpl').val(contrEm);
   $('#id_rol').val(idRol);
   $('#id_estado').val(idEstado);
   document.getElementById("idEmpleado").disabled = true;
@@ -250,10 +261,11 @@ function enviarEditEmpleado() //funcion para enviar los cambios al controlador
         var apeEm = $('#apellido').val();
         var telEm = $('#telefono').val();
         var mailEm = $('#correo').val();
+        var contrEm = $('#passEmpl').val();
         var idRol = $('#id_rol').val();
         var idEstado = $('#id_estado').val();
     
-        if ((idEm == "") || (nomEm == "") || (apeEm == "") || (telEm == "") || (mailEm == "") || (idRol == "") || (idEstado == "")) { //Valida si los campos estan vacios
+        if ((idEm == "") || (nomEm == "") || (apeEm == "") || (telEm == "") || (mailEm == "") || (contrEm == "") || (idRol == "") || (idEstado == "")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
         } else {
             $.ajax({
@@ -264,6 +276,7 @@ function enviarEditEmpleado() //funcion para enviar los cambios al controlador
                     apellido: apeEm,
                     telefono:telEm,
                     correo: mailEm,
+                    passEmpl:contrEm,
                     id_rol: idRol,
                     id_estado:idEstado
                 /*correo(Controlador), mailEm trae los datos que llegan por el id del inpt */
@@ -276,6 +289,7 @@ function enviarEditEmpleado() //funcion para enviar los cambios al controlador
                     $('#apellido').val('');
                     $('#telefono').val('');
                     $('#correo').val('');
+                    $('#passEmpl').val('');
                     $('#id_rol').val('');
                     $('#id_estado').val('');
                     $("#myModal").modal("hide");
