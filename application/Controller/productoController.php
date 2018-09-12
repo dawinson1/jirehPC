@@ -22,23 +22,23 @@ class productoController
     public function editCliente()
     {
         require APP . 'view/_templates/header.php';
-        require APP . 'view/cliente/editCliente.php';
+        require APP . 'view/producto/editarProducto.php';
         require APP . 'view/_templates/footer.php';
     }
     public function listarCliente()
     {
        $cliente = $this->cliente->listarClientes();
        foreach($cliente as $value){
-           $idC = $value['id_cliente'];
-           $nomC = $value['nombreCliente'];
-           $apeC = $value['apellidoCliente'];
-           $CorrC = $value['correoCliente'];
-           $dicCl = $value['direccionCliente'];
-           $telC = $value['telefono'];
-           $contrC = $value['contrasena'];
-           $imgC = $value['Url_imgClient'];
+           $idC = $value['referencia'];
+           $nomC = $value['id_categoria'];
+           $apeC = $value['nombreProducto'];
+           $CorrC = $value['cantidad'];
+           $dicCl = $value['stock'];
+           $telC = $value['precioUnit'];
+           $contrC = $value['marca'];
+           $imgC = $value['Url_imgProduct'];
            $datos[] = array(
-               'Cedula o NIT'=> $value['id_cliente'],
+               'Referencia'=> $value['id_cliente'],
                'Nombre'=>$value['nombreCliente'],
                'Apellido'=>$value['apellidoCliente'],
                'Correo'=>$value['correoCliente'],

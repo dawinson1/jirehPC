@@ -111,16 +111,7 @@
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
-                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="passEmpl">Contraseña</label>
-
-                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                        <input type="password" class="form-control" placeholder="Ingrese su Contraseña" autocomplete="off"
-                        name="passEmpl" id="passEmpl">
-
-                    </div><!--cierre div del input-->
-                </div> <!--cierre del div contenedor del input-->
+                 <!--Aca iba el espacio de la contraseña-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
                     <label for="id_rol">Rol</label>
@@ -228,7 +219,8 @@ function eliminarEmpleado(idEm) {
             data:{idEmpleado:idEm}
         }).done(function(data){
             if(data){
-              setTimeout('location.reload()',1000);
+                tabla.ajax.reload(null,false); // usar esta funcion en vez de la de abajo
+             // setTimeout('location.reload()',1000);
             }else{
                 swal("Algo anda mal!", "La eliminacion no se ha ejecutado!", "error");
             }
@@ -239,14 +231,13 @@ function eliminarEmpleado(idEm) {
       });
 }
 
-function editarEmpleado(idEm,nomEm,apeEm,telEm,mailEm,contrEm,idRol,idEstado) //funcion plasmar los datos del usuario en los inputs
+function editarEmpleado(idEm,nomEm,apeEm,telEm,mailEm,idRol,idEstado) //funcion plasmar los datos del usuario en los inputs
 {
   $('#idEmpleado').val(idEm);
   $('#nombre').val(nomEm);
   $('#apellido').val(apeEm);
   $('#telefono').val(telEm);
   $('#correo').val(mailEm);
-  $('#passEmpl').val(contrEm);
   $('#id_rol').val(idRol);
   $('#id_estado').val(idEstado);
   document.getElementById("idEmpleado").disabled = true;
@@ -261,11 +252,10 @@ function enviarEditEmpleado() //funcion para enviar los cambios al controlador
         var apeEm = $('#apellido').val();
         var telEm = $('#telefono').val();
         var mailEm = $('#correo').val();
-        var contrEm = $('#passEmpl').val();
         var idRol = $('#id_rol').val();
         var idEstado = $('#id_estado').val();
     
-        if ((idEm == "") || (nomEm == "") || (apeEm == "") || (telEm == "") || (mailEm == "") || (contrEm == "") || (idRol == "") || (idEstado == "")) { //Valida si los campos estan vacios
+        if ((idEm == "") || (nomEm == "") || (apeEm == "") || (telEm == "") || (mailEm == "") || (idRol == "") || (idEstado == "")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
         } else {
             $.ajax({
@@ -276,7 +266,6 @@ function enviarEditEmpleado() //funcion para enviar los cambios al controlador
                     apellido: apeEm,
                     telefono:telEm,
                     correo: mailEm,
-                    passEmpl:contrEm,
                     id_rol: idRol,
                     id_estado:idEstado
                 /*correo(Controlador), mailEm trae los datos que llegan por el id del inpt */
@@ -289,11 +278,11 @@ function enviarEditEmpleado() //funcion para enviar los cambios al controlador
                     $('#apellido').val('');
                     $('#telefono').val('');
                     $('#correo').val('');
-                    $('#passEmpl').val('');
                     $('#id_rol').val('');
                     $('#id_estado').val('');
                     $("#myModal").modal("hide");
-                    setTimeout('location.reload()',2000);
+                    tabla.ajax.reload(null,false);
+                    //setTimeout('location.reload()',2000);
                 }else{
                     swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
                 }

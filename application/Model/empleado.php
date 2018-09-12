@@ -22,7 +22,7 @@ class empleado extends Model
 
     public function listarEmpleados()
     {   
-        //$sql = "SELECT e.nombre, e.apellido, e.telefono, e.correo, e.idEmpleado as Cédula, r.Nombre as Rol,e.id_estado from empleado e JOIN rol r ON (e.id_rol=r.idRol)";
+       // $sql = "SELECT e.nombre, e.apellido, e.telefono, e.correo, e.idEmpleado as Cédula, r.Nombre as Rol,e.id_estado from empleado e INNER JOIN rol r ON (e.id_rol=r.idRol)";
         $sql = "SELECT e.*,r.Nombre as nombrerol FROM empleado e INNER JOIN rol r ON r.idRol = e.id_rol";
         $query = $this->db->prepare($sql);
         $query->execute();
@@ -47,16 +47,15 @@ class empleado extends Model
 
     public function editarEmpleado()
     {
-        $sql = "UPDATE empleado SET nombre = ?, apellido = ?, telefono = ?,correo = ?, pass = ?, id_rol = ?,id_estado = ? WHERE idEmpleado = ?";
+        $sql = "UPDATE empleado SET nombre = ?, apellido = ?, telefono = ?,correo = ?, id_rol = ?,id_estado = ? WHERE idEmpleado = ?";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->nombre);
         $query->bindParam(2,$this->apellido);
         $query->bindParam(3,$this->telefono);
         $query->bindParam(4,$this->correo);
-        $query->bindParam(5,$this->pass);
-        $query->bindParam(6,$this->id_rol);
-        $query->bindParam(7,$this->id_estado);
-        $query->bindParam(8,$this->idEmpleado);
+        $query->bindParam(5,$this->id_rol);
+        $query->bindParam(6,$this->id_estado);
+        $query->bindParam(7,$this->idEmpleado);
         return $query->execute();
     }
 

@@ -41,8 +41,7 @@ class empleadoController
            $apeEm= $value['apellido'];
            $telEm= $value['telefono'];
            $mailEm= $value['correo'];
-           $contrEm= $value['pass'];
-           $idRol= $value['id_rol'];
+           $idRol= $value['nombrerol']; // se cambió por nombrerol para que apareciera el nombre del rol en la tabla
            $idEstado =$value['id_estado'];
            $datos[] = array(
                'Nombre'=> $value['nombre'],
@@ -50,10 +49,10 @@ class empleadoController
                'Teléfono'=>$value['telefono'],
                'Correo'=>$value['correo'],
                'Cédula'=>$value['idEmpleado'],
-               'Rol'=>$value['id_rol'],
+               'Rol'=>$value['nombrerol'],
                'Estado'=>$value['id_estado'],
                'Editar'=>['<button type="button" class="btn btn-primary" id="editEmpleado" onclick="editarEmpleado
-               ('.$idEm.','."'".$nomEm."'".','."'".$apeEm."'".','."'".$telEm."'".','."'".$mailEm."'".','."'".$contrEm."'".','."'".$idRol."'".','."'".$idEstado."'".',)">Editar</button>'],
+               ('.$idEm.','."'".$nomEm."'".','."'".$apeEm."'".','."'".$telEm."'".','."'".$mailEm."'".','."'".$idRol."'".','."'".$idEstado."'".',)">Editar</button>'],
                'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarEmpleado('.$idEm.')">Eliminar</button>']
            );
        }
@@ -81,7 +80,6 @@ class empleadoController
         $this->empleado->set('apellido',$_POST['apellido']);  
         $this->empleado->set('telefono',$_POST['telefono']);  
         $this->empleado->set('correo',$_POST['correo']);  
-        $this->empleado->set('pass',password_hash($_POST["passEmpl"],PASSWORD_BCRYPT));
         $this->empleado->set('idEmpleado',$_POST['idEmpleado']);  
         $this->empleado->set('id_rol',$_POST['id_rol']);  
         $this->empleado->set('id_estado',$_POST['id_estado']); 

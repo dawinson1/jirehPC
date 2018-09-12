@@ -15,15 +15,15 @@
             <table id="tableCliente" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
-                  <th>Cedula o NIT</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Correo</th>
-                  <th>Dirección</th>
-                  <th>Telefono</th>
+                  <th>Referencia</th>
+                  <th>Categoria</th>
+                  <th>Producto</th>
+                  <th>Stock</th>
+                  <th>Precio Unitario</th>
+                  <th>Marca</th>
                   <th>Editar</th>
-                  <th>Foto Perfil</th>
-                  <th>Actualizar<br> Foto</th>
+                  <th>Imagen</th>
+                  <th>Actualizar Imagen</th>
                   <th>Eliminar</th>
                 </tr>
                 </thead>

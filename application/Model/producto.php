@@ -7,13 +7,13 @@ class producto extends Model
 {
 
     private $referencia;
-    private $nombreCliente;
-    private $apellidoCliente;
-    private $correoCliente;
-    private $direccionCliente;
-    private $telefono;
-    private $contrasena;
-    private $Url_imgClient;
+    private $id_categoria		;
+    private $nombreProducto;
+    private $cantidad;
+    private $stock;
+    private $precioUnit;
+    private $marca;
+    private $Url_imgProduct;
 
     public function set($atributo,$valor){
         $this->$atributo = $valor;
@@ -27,59 +27,59 @@ class producto extends Model
         return $query->fetchAll();
     }
 
-    public function buscarCliente()
+    public function buscarProducto()
     {
-        $sql = "SELECT * FROM cliente WHERE id_cliente = ?";
+        $sql = "SELECT * FROM producto WHERE referencia = ?";
         $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->id_cliente);
+        $query->bindParam(1,$this->referencia);
         $query->execute();
         return $query->fetchAll();
     }
 
-    public function crearCliente()
+    public function crearProducto()
     {
-        $sql = "INSERT INTO cliente (id_cliente, nombreCliente, apellidoCliente,correoCliente,direccionCliente,telefono,contrasena,Url_imgClient) VALUES (?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO producto (referencia, id_categoria, nombreProducto,cantidad,stock,precioUnit,marca,Url_imgProduct) VALUES (?,?,?,?,?,?,?,?)";
         $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->id_cliente);
-        $query->bindParam(2,$this->nombreCliente);
-        $query->bindParam(3,$this->apellidoCliente);
-        $query->bindParam(4,$this->correoCliente);
-        $query->bindParam(5,$this->direccionCliente);
-        $query->bindParam(6,$this->telefono);
-        $query->bindParam(7,$this->contrasena);
-        $query->bindParam(8,$this->Url_imgClient);
+        $query->bindParam(1,$this->referencia);
+        $query->bindParam(2,$this->id_categoria);
+        $query->bindParam(3,$this->nombreProducto);
+        $query->bindParam(4,$this->cantidad);
+        $query->bindParam(5,$this->stock);
+        $query->bindParam(6,$this->precioUnit);
+        $query->bindParam(7,$this->marca);
+        $query->bindParam(8,$this->Url_imgProduct);
         return $query->execute();
 
     }
 
-    public function editarImgCliente()
+    public function editarImgProducto()
     {
-      $sql = "UPDATE cliente SET Url_imgClient = ? WHERE id_cliente = ?";
+      $sql = "UPDATE producto SET Url_imgProduct = ? WHERE referencia = ?";
       $query = $this->db->prepare($sql);
-      $query->bindParam(1,$this->Url_imgClient);
-      $query->bindParam(2,$this->id_cliente);
+      $query->bindParam(1,$this->Url_imgProduct);
+      $query->bindParam(2,$this->referencia);
       return $query->execute();
     }
 
-    public function editarCliente()
+    public function editarProducto()
     {
-        $sql = "UPDATE cliente SET nombreCliente = ?, apellidoCliente = ?, correoCliente = ?,direccionCliente = ?,telefono = ?,contrasena = ? WHERE id_cliente = ?";
+        $sql = "UPDATE producto SET id_categoria = ?, nombreProducto = ?, cantidad = ?,stock = ?,precioUnit = ?,marca = ? WHERE referencia = ?";
         $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->nombreCliente);
-        $query->bindParam(2,$this->apellidoCliente);
-        $query->bindParam(3,$this->correoCliente);
-        $query->bindParam(4,$this->direccionCliente);
-        $query->bindParam(5,$this->telefono);
-        $query->bindParam(6,$this->contrasena);
-        $query->bindParam(7,$this->id_cliente);
+        $query->bindParam(1,$this->id_categoria);
+        $query->bindParam(2,$this->nombreProducto);
+        $query->bindParam(3,$this->cantidad);
+        $query->bindParam(4,$this->stock);
+        $query->bindParam(5,$this->precioUnit);
+        $query->bindParam(6,$this->marca);
+        $query->bindParam(7,$this->referencia);
         return $query->execute();
     }
 
-    public function eliminarCliente()
+    public function eliminarProducto()
     {
-        $sql = "DELETE FROM cliente WHERE id_cliente = ?";
+        $sql = "DELETE FROM producto WHERE referencia = ?";
         $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->id_cliente);
+        $query->bindParam(1,$this->referencia);
         return $query->execute();
 
     }

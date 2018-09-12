@@ -33,7 +33,7 @@ class loginController
         unset($_SESSION['username']);
         unset($_SESSION['start']);
         unset($_SESSION['expire']);
-        $_SESSION = [];
+        $_SESSION = []; // COMENTAR LINEAS SI SE QUIERE HACER OTRO PROYECTO SESSION Y DESTROY
         session_destroy();
 
         $this->index();
