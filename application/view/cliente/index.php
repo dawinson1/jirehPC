@@ -23,7 +23,7 @@
                   <th>Telefono</th>
                   <th>Editar</th>
                   <th>Foto Perfil</th>
-                  <th>Actualizar<br> Foto</th>
+                  <th>Actualizar<br>Foto</th>
                   <th>Eliminar</th>
                 </tr>
                 </thead>
