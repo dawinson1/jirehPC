@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="<?php echo URL; ?>css/bootstrap.min.css">
   <!-- css plugin file input -->
   <link rel="stylesheet" href="<?php echo URL; ?>css/fileinput.min.css">
+  <!--data picker css -->
+  <link rel="stylesheet" href="<?php echo URL; ?>css/bootstrap-datepicker.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo URL; ?>css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -42,6 +44,9 @@
   <!--js plugin file input-->
   <script src="<?php echo URL; ?>js/fileinput.min.js"></script>
   <script src="<?php echo URL; ?>js/locales/es.js"></script>
+
+  <!--data picker js-->
+  <script src="<?php echo URL; ?>js/bootstrap-datepicker.min.js"></script>
 
 <!-- Bootstrap 3.3.7 -->
   <script src="<?php echo URL; ?>js/bootstrap.min.js"></script>
@@ -240,8 +245,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-table"></i> Tabla Pedidos</a></li>
-            <li><a href="#"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Pedidos</a></li>
+            <li><a href="<?php echo URL; ?>pedido"><i class="fa fa-table"></i> Tabla Pedidos</a></li>
+            <li><a href="<?php echo URL; ?>pedido/formPedidos"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Pedidos</a></li>
           </ul>
         </li>
         <li class="treeview">
