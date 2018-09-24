@@ -19,6 +19,14 @@ class pedido extends Model
         $this->$atributo = $valor;
     }
 
+    public function listarProductos()
+    {
+      $sql = "SELECT referencia, nombreProducto, cantidad, precioUnit FROM producto";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+      return $query->fetchAll();
+    }
+
     public function listarPedidos()
     {
         $sql = "SELECT * FROM pedido";

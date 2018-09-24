@@ -63,7 +63,7 @@
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="refProduct">Referencia del producto</label>
+                    <label for="refProduct">Buscar producto</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
@@ -71,20 +71,8 @@
                         name="refProduct" id="refProduct">
 
                         <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
+                          <button type="button" class="btn btn-info btn-flat" onclick="srcProduct()"><i class="fa fa-search"></i></button>
                         </span>
-
-                    </div><!--cierre div del inputt-->
-                </div> <!--cierre del div contenedor del input-->
-
-                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="nomProduct">Nombre del producto</label>
-
-                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-                        <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
-                        <input type="email" class="form-control"
-                         name="nomProduct" id="nomProduct" disabled>
-
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -134,6 +122,48 @@
 </div> <!--cierre div row-->
           </section>
           </div>
+
+<!-- Ventan modal para la actualización de la imagen de perfil-->
+
+<div class="modal fade" id="Addproducts" role="dialog"> <!--Div que contiene la ventana modal-->
+<div class="modal-dialog modal-lg">
+
+<section class="content modal-content">
+<div class="box box-info">
+            <div class="box-header modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 class="box-title">Seleccione un producto</h3>
+            </div>
+
+              <!-- /.box-header -->
+              <div class="table-responsive">
+              <table id="tableProducts" class="table table-striped table-bordered" style="width:100%">
+                  <thead>
+                  <tr>
+                    <th>Referencia</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Valor total</th>
+                    <th>Opción</th>
+                  </tr>
+                  </thead>
+                </table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+            <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-info pull-right" onclick="actuaImg()">Actualizar</button>
+              </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
+            </div>
+
+          </section>
+
+</div>
+</div>
 
 <script>
         function registrar(){
@@ -211,18 +241,16 @@
         }
 
     }
-
+//puglin file input
     $('#imgClient').fileinput({
             theme: 'fa',
             language: 'es',
             showUpload : false,
             allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg']
         });
-
+//desactivar inputs
 $(function(){
-
   document.getElementById("nomCliente").disabled = true;
-  document.getElementById("nomProduct").disabled = true;
   document.getElementById("nomEmployee").disabled = true;
 })
 
@@ -231,4 +259,39 @@ $(function(){
       autoclose: true,
       format: 'dd-mm-yy'
     })
+
+//listas
+//listarProductos
+
+$(document).ready(function() {
+        $.fn.dataTable.ext.errMode = 'throw';
+        tabla =	$('#tableProducts').DataTable( {
+        "ajax": {
+            "url": Url+'/pedido/ListProducts',
+            "type": "GET",
+            "dataSrc": "",
+            "deferRender": true
+        },
+        "columns": [
+            { "data": "Referencia","className": 'centeer'  },
+            { "data": "Nombre","className": 'centeer'  },
+            { "data": "Cantidad","className": 'centeer'  },
+            { "data": "PrecioUnit","className": 'centeer'  },
+            { "data": "Elegir", "orderable": false  },
+            { "data": "Actualizar", "orderable": false  }
+        ],
+        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
+        "scrollX": false,
+        // "dom": 'lrtipB',
+        "language": {
+            "url": Url+"/js/lenguaje.json"
+        },
+        } );
+});
+
+// funciones modales
+
+function srcProduct(){
+  $("#Addproducts").modal("show");
+}
 </script>
