@@ -52,6 +52,17 @@ class producto extends Model
 
     }
 
+    public function actualizarStock()// habrá que probar esta función solo para actualizar el campo stock en bd.
+                                     // porque todavia no tengo claro como se agrega al stock por medio de la cantidad.
+    {
+        $sql = "UPDATE producto SET (stock = stock + cantidad) = ? WHERE referencia = ?";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(1,$this->stock);
+        $query->bindParam(2,$this->referencia);
+        return $query->execute();
+
+    }
+
     public function editarImgProducto()
     {
       $sql = "UPDATE producto SET Url_imgProduct = ? WHERE referencia = ?";

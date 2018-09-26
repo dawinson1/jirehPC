@@ -1,114 +1,145 @@
-<div class="content-wrapper">
-<section class="content">
-<div class="box box-info">
-            <div class="box-header">
-              <h3 class="box-title">Registrar Producto</h3>
-            </div>
-            <form enctype="multipart/form-data" autocomplete="off">
-            <div class="box-body"> <!--Este Div es contenedor de los imputs-->
 
-                <div class="form-group col-xs-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="identificador" >Cedula o NIT</label>
+          <!--
+                            NUEVA VISTA DE PRODUCTO MEJORADA HACIA ABAJO
+           -->
+
+<div class="content-wrapper">
+  <center><h3 class="box-title">Registrar Producto</h3></center>
+<section class="content">
+<div class="row">
+
+<div class="col-md-12">
+<div class="box box-info">
+
+            <form enctype="multipart/form-data" autocomplete="off" id="actImgPerfilClient">
+            <div class="box-body"> <!--Este Div es contenedor de los imputs-->
+              <div class="row"> <!--row para poder mover los inputs text y el input file -->
+
+              <div class="col-md-6">
+
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="identificador" >Referencia</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese su número de cedula o el NIT de la empresa"
+                        <input type="text" class="form-control" placeholder="Referencia del Producto"
                             name="identificador" id="identificador">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
-                <div class="form-group col-xs-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="nomCliente">Nombre</label>
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="nomCat">Categoria</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese sus nombres"
-                        name="nomCliente" id="nomCliente">
+                        <input type="text" class="form-control" placeholder="Ingrese Categoria del Producto"
+                        name="nomCat" id="nomCat">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
-                <div class="form-group col-xs-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="apeCliente">Apellido</label>
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="prodNom">Nombre</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese sus apellidos"
-                        name="apeCliente" id="apeCliente">
+                        <input type="text" class="form-control" placeholder="Nombre del Producto"
+                        name="prodNom" id="prodNom">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="imgClient" >Selecciones imagen de perfil</label>
-
-                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-
-                        <input type="file" class="form-control"
-                            name="imgClient" id="imgClient">
-
-                    </div><!--cierre div del inputt-->
-                </div> <!--cierre del div contenedor del input-->
-
-                <div class="form-group col-xs-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="correoCliente">Correo</label>
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="cantPro">Cantidad</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                        <input type="email" class="form-control" placeholder="example@domain.com"
-                         name="correoCliente" id="correoCliente">
+                        <input type="text" class="form-control" placeholder="Cantidad de Productos"
+                         name="cantPro" id="cantPro">
 
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
-                <div class="form-group col-xs-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="direcCliente">Dirección</label>
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="stockPro">Stock</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-map-signs"></i></span>
-                        <input type="text" class="form-control" placeholder="Ejemplo: Cra o Clle 21 #45-55"
-                        name="direcCliente" id="direcCliente">
+                        <input type="text" class="form-control" placeholder="Muestra Cantidad en bodega"
+                        name="stockPro" id="stockPro">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
-                <div class="form-group col-xs-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="telCliente">Teléfono</label>
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="preUni">Precio Unitario</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese su número teléfonico"
-                        name="telCliente" id="telCliente">
+                        <input type="text" class="form-control" placeholder="Ingrese Precio Unitario del Producto"
+                        name="preUni" id="preUni">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
-                <div class="form-group col-xs-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="passCliente">Contraseña</label>
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="nMarc">Marca</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                        <input type="password" class="form-control" placeholder="Ingrese su Contraseña" autocomplete="off"
-                        name="passCliente" id="passCliente">
+                        <input type="text" class="form-control" placeholder="Ingrese marca del Producto" autocomplete="off"
+                        name="nMarc" id="nMarc">
 
                     </div><!--cierre div del input-->
                 </div> <!--cierre del div contenedor del input-->
 
+              </div>
 
+              <div class="col-md-6">
+
+                          <div class="box-body"> <!--Este Div es contenedor de los imputs-->
+
+                            <div class="form-group"> <!--Comienzo del div contenedor del input-->
+                                <label for="imgProdu" >Seleccione imagen del Producto</label>
+
+                                <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
+
+                                    <input type="file" class="form-control"
+                                        name="imgProdu" id="imgProdu">
+
+                                </div><!--cierre div del inputt-->
+                            </div> <!--cierre del div contenedor del input-->
+
+
+                          </div> <!--Cierre del Div contenedor-->
+
+              </div> <!--cierre div col-md-6-->
+
+            </div> <!-- cierre del div row para mover los inputs -->
             </div> <!--Cierre del Div contenedor-->
+
+            </div>
+</div> <!--cierre div col-md-6-->
+
+
+<div class="col-md-12">
+
             </form>
 
             <div class="box-footer"> <!--Div que separa el formulario y contendrá los botones-->
                 <button type="button" class="btn btn-default">Cancelar</button>
                 <button type="button" class="btn btn-info pull-right" onclick="registrar()">Registrar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
-            </div>
 
+</div> <!--cierre div col-md-6-->
+
+</div> <!--cierre div row-->
           </section>
           </div>
 
+<!--AJAX-->
 <script>
         function registrar(){
         var patronNum = /[0-9]/;

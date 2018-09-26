@@ -27,64 +27,67 @@ class productoController
     }
     public function listarCliente()
     {
-       $cliente = $this->cliente->listarClientes();
-       foreach($cliente as $value){
-           $idC = $value['referencia'];
-           $nomC = $value['id_categoria'];
-           $apeC = $value['nombreProducto'];
-           $CorrC = $value['cantidad'];
-           $dicCl = $value['stock'];
-           $telC = $value['precioUnit'];
-           $contrC = $value['marca'];
-           $imgC = $value['Url_imgProduct'];
+       $producto = $this->producto->listarClientes();
+       foreach($producto as $value){
+           $ref = $value['referencia'];
+           $nomCate = $value['id_categoria'];
+           $nomPr = $value['nombreProducto'];
+           $cant = $value['cantidad'];
+           $stck = $value['stock'];
+           $price = $value['precioUnit'];
+           $brand = $value['marca'];
+           $imgP = $value['Url_imgProduct'];
            $datos[] = array(
-               'Referencia'=> $value['id_cliente'],
-               'Nombre'=>$value['nombreCliente'],
-               'Apellido'=>$value['apellidoCliente'],
-               'Correo'=>$value['correoCliente'],
-               'Dirección'=>$value['direccionCliente'],
-               'Telefono'=>$value['telefono'],
+               'Referencia'=> $value['referencia'],
+               'Categoria'=>$value['id_categoria'],
+               'Nombre'=>$value['nombreProducto'],
+               'Cantidad'=>$value['cantidad'],
+               'Stock'=>$value['stock'],
+               'Precio Unitario'=>$value['precioUnit'],
+               'Marca'=>$value['marca'],
                'Editar'=>['<button type="button" class="btn btn-primary" id="editCliente" onclick="editarCliente
-               ('.$idC.','."'".$nomC."'".','."'".$apeC."'".','."'".$CorrC."'".','."'".$dicCl."'".','."'".$telC."'".','."'".$contrC."'".',)">Editar</button>'],
+           $nomCate = $value['id_categoria'];
+               ('.$ref.','."'".$nomCate."'".','."'".$nomPr."'".','."'".$cant."'".','."'".$stck."'".','."'".$price."'".','."'".$brand."'".',)">Editar</button>'],
                'Foto Perfil'=>$value['Url_imgClient'],
-               'Actualizar Foto'=>['<button type="button" class="btn btn-primary" onclick="showModalImg('.$idC.')"><i class="fa fa-file-image-o"></i></button>'],
-               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarCliente('.$idC.')">Eliminar</button>']
+               'Actualizar Foto'=>['<button type="button" class="btn btn-primary" onclick="showModalImg('.$ref.')"><i class="fa fa-file-image-o"></i></button>'],
+               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarCliente('.$ref.')">Eliminar</button>']
            );
        }
        echo json_encode($datos);
     }
 
-    public function crearCliente()
+    public function crearProducto()
     {
-    $this->cliente->set('id_cliente',$_POST['identificador']);
-    $this->cliente->set('nombreCliente',$_POST['nomCliente']);
-    $this->cliente->set('apellidoCliente',$_POST['apeCliente']);
-    $this->cliente->set('correoCliente',$_POST['correoCliente']);
-    $this->cliente->set('direccionCliente',$_POST['direcCliente']);
-    $this->cliente->set('telefono',$_POST['telCliente']);
-    $this->cliente->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
-    $this->cliente->set('Url_imgClient',$_POST['perfilClient']);
-    echo $this->cliente->crearCliente();
+    $this->producto->set('referencia',$_POST['identificador']);
+    $this->producto->set('id_categoria',$_POST['nomCat']);
+    $this->producto->set('nombreProducto',$_POST['prodNom']);
+    $this->producto->set('cantidad',$_POST['cantPro']);
+    $this->producto->set('stock',$_POST['stockPro']);
+    $this->producto->set('precioUnit',$_POST['preUni']);
+    $this->producto->set('marca',($_POST["nMarc"]);
+    $this->producto->set('Url_imgProduct',$_POST['imgProdu']);
+    echo $this->producto->crearProducto();
     }
 
-    public function editarCliente()
+    public function editarProducto()
     {
-        $this->cliente->set('id_cliente',$_POST['identificador']);
-        $this->cliente->set('nombreCliente',$_POST['nomCliente']);
-        $this->cliente->set('apellidoCliente',$_POST['apeCliente']);
-        $this->cliente->set('correoCliente',$_POST['correoCliente']);
-        $this->cliente->set('direccionCliente',$_POST['direcCliente']);
-        $this->cliente->set('telefono',$_POST['telCliente']);
-        $this->cliente->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
-        echo $this->cliente->editarCliente();
+      $this->producto->set('referencia',$_POST['identificador']);
+      $this->producto->set('id_categoria',$_POST['nomCat']);
+      $this->producto->set('nombreProducto',$_POST['prodNom']);
+      $this->producto->set('cantidad',$_POST['cantPro']);
+      $this->producto->set('stock',$_POST['stockPro']);
+      $this->producto->set('precioUnit',$_POST['preUni']);
+      $this->producto->set('marca',($_POST["nMarc"]);
+      $this->producto->set('Url_imgProduct',$_POST['imgProdu']);
+      echo $this->producto->crearProducto();
     }
 
-    public function actImgCliente()
+    public function editarImgProducto()
     {
-        $this->cliente->set('id_cliente',$_POST['idClientMimg']);
+        $this->cliente->set('referencia',$_POST['imgProdu']);
 
         //Declaramos las variables que necesitaremos para la validacion de la imagen
-        $idCliente = $_POST['idClientMimg']; // esta variable sirve para guardar la imagen en una carpeta con su  id
+        $referencia = $_POST['idClientMimg']; // esta variable sirve para guardar la imagen en una carpeta con su  id
         $imgPerfil = $_FILES['imgClient']; // aqui guardamos el nombre de la imagen
 
         if ($imgPerfil["error"]>0) { // verifica si el Archivo no contenga algun error
@@ -130,7 +133,7 @@ class productoController
     public function eliminarCliente()
     {
       $id = $_POST['identificador'];
-      $carpeta = ('img/perfiles/'.$id);
+      $carpeta = ('img/producto/'.$id);
 
 
     		foreach(glob($carpeta . "/*") as $archivos_carpeta)
