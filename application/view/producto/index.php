@@ -12,12 +12,13 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
-            <table id="tableCliente" class="table table-striped table-bordered" style="width:100%">
+            <table id="tableProducto" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
                   <th>Referencia</th>
                   <th>Categoria</th>
                   <th>Producto</th>
+                  <th>Cantidad</th>
                   <th>Stock</th>
                   <th>Precio Unitario</th>
                   <th>Marca</th>
@@ -47,81 +48,105 @@
 <div class="box box-info">
             <div class="box-header modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 class="box-title">Editar Clientes</h3>
+              <h3 class="box-title">Editar Producto</h3>
             </div>
             <form>
             <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
 
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="identificador" >Cédula o NIT</label>
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="identificador" >Referencia</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese su número de cedula o el NIT de la empresa"
+                        <input type="text" class="form-control" placeholder="Referencia del Producto"
                             name="identificador" id="identificador">
 
-                        <div class="input-group-addon"> <!--Este div es opcional, servirá cuando queramos que en frente del input este otro icono-->
-                        <i class="glyphicon glyphicon-search"></i>
-                        </div> <!--Cierre del div opcional-->
-
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="nomCliente">Nombre</label>
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="nomCat">Categoria</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese sus nombres"
-                        name="nomCliente" id="nomCliente">
+                        <input type="text" class="form-control" placeholder="Ingrese Categoria del Producto"
+                        name="nomCat" id="nomCat">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="apeCliente">Apellido</label>
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="prodNom">Producto</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese sus apellidos"
-                        name="apeCliente" id="apeCliente">
+                        <input type="text" class="form-control" placeholder="Nombre del Producto"
+                        name="prodNom" id="prodNom">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="correoCliente">Correo</label>
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="cantPro">Cantidad</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                        <input type="email" class="form-control" placeholder="example@domain.com"
-                         name="correoCliente" id="correoCliente">
+                        <input type="text" class="form-control" placeholder="Cantidad de Productos"
+                         name="cantPro" id="cantPro">
 
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="direcCliente">Dirección</label>
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="stockPro">Stock</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-map-signs"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese la direccion de su hogar"
-                        name="direcCliente" id="direcCliente">
+                        <input type="text" class="form-control" placeholder="Muestra Cantidad en bodega"
+                        name="stockPro" id="stockPro">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="telCliente">Teléfono</label>
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="preUni">Precio Unitario</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese su número teléfonico"
-                        name="telCliente" id="telCliente">
+                        <input type="text" class="form-control" placeholder="Ingrese Precio Unitario del Producto"
+                        name="preUni" id="preUni">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
+
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="nMarc">Marca</label>
+
+                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
+                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                        <input type="text" class="form-control" placeholder="Ingrese marca del Producto" autocomplete="off"
+                        name="nMarc" id="nMarc">
+
+                    </div><!--cierre div del input-->
+                </div> <!--cierre del div contenedor del input-->
+
+              </div>
+
+              <div class="col-md-6">
+
+                          <div class="box-body"> <!--Este Div es contenedor de los imputs-->
+
+                            <div class="form-group"> <!--Comienzo del div contenedor del input-->
+                                <label for="imgProdu" >Seleccione imagen del Producto</label>
+
+                                <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
+
+                                    <input type="file" class="form-control"
+                                        name="imgProdu" id="imgProdu">
+
+                                </div><!--cierre div del inputt-->
+                            </div> <!--cierre del div contenedor del input-->
 
 
             </div> <!--Cierre del Div contenedor-->
@@ -129,7 +154,7 @@
 
             <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-info pull-right" onclick="enviarEditCliente()">Modificar</button>
+                <button type="button" class="btn btn-info pull-right" onclick="enviarEditProducto()">Modificar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
             </div>
 
@@ -147,29 +172,30 @@
 <div class="box box-info">
             <div class="box-header modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 class="box-title">Actualizar Foto de perfil</h3>
+              <h3 class="box-title">Actualizar imagen del Producto</h3>
             </div>
-            <form autocomplete="off" enctype="multipart/form-data" id="actImgPerfilClient">
+            <form autocomplete="off" enctype="multipart/form-data" id="actImgProduct">
             <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
 
               <div class="form-group hidden" id="DivInputImg"> <!--Comienzo del div contenedor del input-->
-                  <label for="idClientMimg" >Cedula o NIT</label>
+                  <label for="refProdImg" >Referencia</label>
 
                   <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                       <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
                       <input type="text" class="form-control"
-                          name="idClientMimg" id="idClientMimg">
+                          name="refProdImg" id="refProdImg">
 
                   </div><!--cierre div del inputt-->
               </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="imgClient" >Selecciones imagen de perfil</label>
+                                <label for="imgProdu" >Seleccione imagen del Producto</label>
+                    
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
 
                         <input type="file" class="form-control"
-                            name="imgClient" id="imgClient">
+                            name="imgProdu" id="imgProdu">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -194,26 +220,27 @@
 
 $(document).ready(function() {
         $.fn.dataTable.ext.errMode = 'throw';
-        tabla =	$('#tableCliente').DataTable( {
+        tabla =	$('#tableProducto').DataTable( {
         "ajax": {
-            "url": Url+'/cliente/listarCliente',
+            "url": Url+'/producto/listarProducto',
             "type": "GET",
             "dataSrc": "",
             "deferRender": true
         },
         "columns": [
-            { "data": "Cedula o NIT","className": 'centeer'  },
-            { "data": "Nombre","className": 'centeer'  },
-            { "data": "Apellido","className": 'centeer'  },
-            { "data": "Correo","className": 'centeer'  },
-            { "data": "Dirección","className": 'centeer' },
-            { "data": "Telefono", "className": 'centeer' },
+            { "data": "Referencia","className": 'centeer'  },
+            { "data": "Categoria","className": 'centeer'  },
+            { "data": "Producto","className": 'centeer'  },
+            { "data": "Cantidad","className": 'centeer'  },
+            { "data": "Stock","className": 'centeer' },
+            { "data": "Precio Unitario", "className": 'centeer' },
+            { "data": "Marca", "className": 'centeer' },
             { "data": "Editar", "orderable": false  },
-            { "data": "Foto Perfil", "render":function(data,type,row){
+            { "data": "Imagen", "render":function(data,type,row){
               return '<center><img src="<?php echo URL; ?>'+data+'" width="120" height="80" /></center>';
               }
             },
-            { "data": "Actualizar Foto", "orderable": false  },
+            { "data": "Actualizar Imagen", "orderable": false  },
             { "data": "Eliminar", "orderable": false  }
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
@@ -244,37 +271,42 @@ $(document).ready(function() {
 
 });
 
-function enviarEditCliente() //funcion para enviar los cambios al controlador
+function enviarEditProducto() //funcion para enviar los cambios al controlador
 {
-  var id_cliente = $('#identificador').val();
-        var nombreCliente = $('#nomCliente').val();
-        var apellidoCliente = $('#apeCliente').val();
-        var correoCliente = $('#correoCliente').val();
-        var direccionCliente = $('#direcCliente').val();
-        var telefono = $('#telCliente').val();
+        var referencia = $('#identificador').val();
+        var id_categoria = $('#nomCat').val();
+        var nombreProducto = $('#prodNom').val();
+        var cantidad = $('#cantPro').val();
+        var stock = $('#stockPro').val();
+        var precioUnit = $('#preUni').val();
+        var marca = $('#nMarc').val();
 
-        if ((id_cliente == "") || (nombreCliente == "") || (apellidoCliente == "") || (correoCliente == "") || (direccionCliente == "") || (telefono == "")) { //Valida si los campos estan vacios
+        if ((referencia == "") || (id_categoria == "") || (nombreProducto == "") || (cantidad == "")  || (stock == "") || (precioUnit == "")  ) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
+
         } else {
             $.ajax({
-                url: Url+'/cliente/editarCliente',
+                url: Url+'/producto/editarProduct',
                 type:'POST',
-                data:{identificador: id_cliente,
-                nomCliente: nombreCliente,
-                apeCliente: apellidoCliente,
-                correoCliente: correoCliente,
-                direcCliente: direccionCliente,
-                telCliente: telefono
+                data:{identificador: referencia,
+                    nomCat: id_categoria,
+                    prodNom: nombreProducto,
+                    cantPro: cantidad,
+                    stockPro: stock,
+                    preUni: precioUnit,
+                    nMarc: marca,
+                    
                }
             }).done(function(data){
                 if(data){
                     swal("Bien Hecho!", "El Registro ha sido completado!", "success");
                     $('#identificador').val('');
-                    $('#nomCliente').val('');
-                    $('#apeCliente').val('');
-                    $('#correoCliente').val('');
-                    $('#direcCliente').val('');
-                    $('#telCliente').val('');
+                    $('#nomCat').val('');
+                    $('#prodNom').val('');
+                    $('#cantPro').val('');
+                    $('#stockPro').val('');
+                    $('#preUni').val('');
+                    $('#nMarc').val('');
                     $("#myModal").modal("hide");
                     //setTimeout('location.reload()',2000);
                     tabla.ajax.reload(null,false);
@@ -287,11 +319,11 @@ function enviarEditCliente() //funcion para enviar los cambios al controlador
 
 function actuaImg() //funcion para enviar los cambios al controlador
 {
-  var datosimg = new FormData($('#actImgPerfilClient')[0]);
+  var datosimg = new FormData($('#actImgProduct')[0]);
   console.log(datosimg)
 
       $.ajax({
-          url: Url+'/cliente/actImgCliente',
+          url: Url+'/producto/editarImgProducto',
           type:'POST',
           data: datosimg,
           contentType: false,
@@ -310,9 +342,9 @@ function actuaImg() //funcion para enviar los cambios al controlador
             swal("Lo sentimos :(", "Hubo un error al guardar la imagen", "error");
           }
           if (data==1) {
-            swal("Bien Hecho!", "La tu imagen  ha sido actualizada!", "success");
-            $('#idClientMimg').val('');
-            $('#imgClient').fileinput('clear');
+            swal("Bien Hecho!", "La imagen  ha sido actualizada!", "success");
+            $('#refProdImg').val('');
+            $('#imgProdu').fileinput('clear');
             $("#myModalFile").modal("hide");
             tabla.ajax.reload(null,false);
           }
@@ -329,26 +361,27 @@ function showModalImg(idC) //funcion plasmar los datos del usuario en los inputs
   $("#myModalFile").modal("show");
 }
 
-function editarCliente(idC,nomC,apeC,CorrC,dicCl,telC) //funcion plasmar los datos del usuario en los inputs
+function editarProducto(ref,nomCate,nomPr,cant,stck,price,brand) //funcion plasmar los datos del usuario en los inputs
 {
-  $('#identificador').val(idC);
-  $('#nomCliente').val(nomC);
-  $('#apeCliente').val(apeC);
-  $('#correoCliente').val(CorrC);
-  $('#direcCliente').val(dicCl);
-  $('#telCliente').val(telC);
+  $('#identificador').val(ref);
+  $('#id_categoria').val(nomCate);// revisar para poner el nombre y no el id.
+  $('#nombreProducto').val(nomPr);
+  $('#cantidad').val(cant);
+  $('#stock').val(stck);
+  $('#precioUnit').val(price);
+  $('#marca').val(brand);
   document.getElementById("identificador").disabled = true;
   $("#myModal").modal("show");
 }
 
-$('#imgClient').fileinput({
+$('#imgProdu').fileinput({
         theme: 'fa',
         language: 'es',
         showUpload : false,
         allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg']
     });
 
-function eliminarCliente(idC) {
+function eliminarProducto(ref) {
   swal({
         title: "¿Estas Seguro?",
         text: "Si eliminas este registro ya no se podrá recuperar!",
@@ -362,9 +395,9 @@ function eliminarCliente(idC) {
             icon: "success",
           });
           $.ajax({
-            url:Url+'/cliente/eliminarCliente',
+            url:Url+'/producto/eliminarProducto',
             type:'POST',
-            data:{identificador:idC}
+            data:{identificador:ref}
         }).done(function(data){
             if(data){
               tabla.ajax.reload(null,false);

@@ -1,8 +1,3 @@
-
-          <!--
-                            NUEVA VISTA DE PRODUCTO MEJORADA HACIA ABAJO
-           -->
-
 <div class="content-wrapper">
   <center><h3 class="box-title">Registrar Producto</h3></center>
 <section class="content">
@@ -11,7 +6,7 @@
 <div class="col-md-12">
 <div class="box box-info">
 
-            <form enctype="multipart/form-data" autocomplete="off" id="actImgPerfilClient">
+            <form enctype="multipart/form-data" autocomplete="off" id="formProduct">
             <div class="box-body"> <!--Este Div es contenedor de los imputs-->
               <div class="row"> <!--row para poder mover los inputs text y el input file -->
 
@@ -145,65 +140,44 @@
         var patronNum = /[0-9]/;
         var patronLetrEspecial = /\D/;
         var patronSoloLetr = /[^A-Za-z ]/;
-        var patronCorreo = /\w+@\w+\.+[a-z]/;
+        
 
-        var id_cliente = $('#identificador').val();
-        var nombreCliente = $('#nomCliente').val();
-        var apellidoCliente = $('#apeCliente').val();
-        var correoCliente = $('#correoCliente').val();
-        var direccionCliente = $('#direcCliente').val();
-        var telefono = $('#telCliente').val();
-        var contrasena = $('#passCliente').val();
-        var imgClient = 'img/TedDefault.jpg';
+        var referencia = $('#identificador').val();
+        var id_categoria = $('#nomCat').val();
+        var nombreProducto = $('#prodNom').val();
+        var cantidad = $('#cantPro').val();
+        var stock = $('#stockPro').val();
+        var precioUnit = $('#preUni').val();
+        var marca = $('#nMarc').val();
+        var Url_imgProduct =  $('#imgProdu').val();
 
-        if ((id_cliente == "") || (nombreCliente == "") || (apellidoCliente == "") || (correoCliente == "") || (direccionCliente == "") ) { //Valida si los campos estan vacios
+        if ((referencia == "") || (id_categoria == "") || (nombreProducto == "") || (cantidad == "")  || (stock == "") || (Url_imgProduct == "")  ) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
 
-        } else if (patronLetrEspecial.test(id_cliente)){
-//sintaxis para validar que el campo no contenga números. patron es la experesion regular, dentro del .test() se pone la variable a comparar
-
-            swal("Upss", "No se permite ingresar letras y/o caracteres en el campo Cedula o NIT!", "error");
-
-        }else if (patronSoloLetr.test(nombreCliente)){
-
-              swal("Upss", "No se permite ingresar números y/o caracteres en el campo Nombre!", "error");
-
-        } else if (patronSoloLetr.test(apellidoCliente)){
-
-              swal("Upss", "No se permite ingresar números y/o caracteres en el campo Apellido!", "error");
-
-        } else if (!patronCorreo.test(correoCliente)){
-
-              swal("Upss", "El correo ingresado no es válido!", "error");
-
-        } else if (patronLetrEspecial.test(telefono)){
-
-              swal("Upss", "El teléfono ingresado no es válido!", "error");
-
-        } else{
+        }else{
 
           $.ajax({
-                url: Url+'/cliente/crearCliente',
+                url: Url+'/producto/crearProducto',
                 type:'POST',
-                data:{identificador: id_cliente,
-                nomCliente: nombreCliente,
-                apeCliente: apellidoCliente,
-                correoCliente: correoCliente,
-                direcCliente: direccionCliente,
-                telCliente: telefono,
-                passCliente: contrasena,
-                perfilClient: imgClient
+                data:{identificador: referencia,
+                    nomCat: id_categoria,
+                    prodNom: nombreProducto,
+                    cantPro: cantidad,
+                    stockPro: stock,
+                    preUni: precioUnit,
+                    nMarc: marca,
+                    imgProdu: Url_imgProduct
                }
             }).done(function(data){
                 if(data){
                     swal("Bien Hecho!", "El Registro ha sido completado!", "success");
                     $('#identificador').val('');
-                    $('#nomCliente').val('');
-                    $('#apeCliente').val('');
-                    $('#correoCliente').val('');
-                    $('#direcCliente').val('');
-                    $('#telCliente').val('');
-                    $('#passCliente').val('');
+                    $('#nomCat').val('');
+                    $('#prodNom').val('');
+                    $('#cantPro').val('');
+                    $('#stockPro').val('');
+                    $('#preUni').val('');
+                    $('#nMarc').val('');
                 }else{
                     swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
                 }
@@ -212,7 +186,7 @@
 
     }
 
-$('#imgClient').fileinput({
+$('#imgProdu').fileinput({
         theme: 'fa',
         language: 'es',
         showUpload : false,

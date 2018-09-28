@@ -311,8 +311,8 @@ function actuaImg() //funcion para enviar los cambios al controlador
           }
           if (data==1) {
             swal("Bien Hecho!", "La tu imagen  ha sido actualizada!", "success");
-            $('#idClientMimg').val('');
-            $('#imgClient').fileinput('clear');
+            $('#refProdImg').val('');
+            $('#imgProdu').fileinput('clear');
             $("#myModalFile").modal("hide");
             tabla.ajax.reload(null,false);
           }

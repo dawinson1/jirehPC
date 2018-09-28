@@ -19,7 +19,7 @@ class producto extends Model
         $this->$atributo = $valor;
     }
 
-    public function listarProducto()
+    public function listarProductos()
     {
         $sql = "SELECT * FROM producto";
         $query = $this->db->prepare($sql);

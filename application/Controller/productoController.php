@@ -19,15 +19,15 @@ class productoController
         require APP . 'view/producto/formProducto.php';
         require APP . 'view/_templates/footer.php';
     }
-    public function editCliente()
+    public function editarProducto()
     {
         require APP . 'view/_templates/header.php';
         require APP . 'view/producto/editarProducto.php';
         require APP . 'view/_templates/footer.php';
     }
-    public function listarCliente()
+    public function listarProducto()
     {
-       $producto = $this->producto->listarClientes();
+       $producto = $this->producto->listarProductos();
        foreach($producto as $value){
            $ref = $value['referencia'];
            $nomCate = $value['id_categoria'];
@@ -45,12 +45,11 @@ class productoController
                'Stock'=>$value['stock'],
                'Precio Unitario'=>$value['precioUnit'],
                'Marca'=>$value['marca'],
-               'Editar'=>['<button type="button" class="btn btn-primary" id="editCliente" onclick="editarCliente
-           $nomCate = $value['id_categoria'];
+               'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarProducto
                ('.$ref.','."'".$nomCate."'".','."'".$nomPr."'".','."'".$cant."'".','."'".$stck."'".','."'".$price."'".','."'".$brand."'".',)">Editar</button>'],
                'Foto Perfil'=>$value['Url_imgClient'],
                'Actualizar Foto'=>['<button type="button" class="btn btn-primary" onclick="showModalImg('.$ref.')"><i class="fa fa-file-image-o"></i></button>'],
-               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarCliente('.$ref.')">Eliminar</button>']
+               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarProducto('.$ref.')">Eliminar</button>']
            );
        }
        echo json_encode($datos);
@@ -64,12 +63,12 @@ class productoController
     $this->producto->set('cantidad',$_POST['cantPro']);
     $this->producto->set('stock',$_POST['stockPro']);
     $this->producto->set('precioUnit',$_POST['preUni']);
-    $this->producto->set('marca',($_POST["nMarc"]);
+    $this->producto->set('marca',$_POST['nMarc']);
     $this->producto->set('Url_imgProduct',$_POST['imgProdu']);
     echo $this->producto->crearProducto();
     }
 
-    public function editarProducto()
+    public function editarProduct()
     {
       $this->producto->set('referencia',$_POST['identificador']);
       $this->producto->set('id_categoria',$_POST['nomCat']);
@@ -77,18 +76,18 @@ class productoController
       $this->producto->set('cantidad',$_POST['cantPro']);
       $this->producto->set('stock',$_POST['stockPro']);
       $this->producto->set('precioUnit',$_POST['preUni']);
-      $this->producto->set('marca',($_POST["nMarc"]);
+      $this->producto->set('marca',$_POST['nMarc']);
       $this->producto->set('Url_imgProduct',$_POST['imgProdu']);
-      echo $this->producto->crearProducto();
+      echo $this->producto->editarProducto();
     }
 
     public function editarImgProducto()
     {
-        $this->cliente->set('referencia',$_POST['imgProdu']);
+        $this->producto->set('referencia',$_POST['refProdImg']);
 
         //Declaramos las variables que necesitaremos para la validacion de la imagen
-        $referencia = $_POST['idClientMimg']; // esta variable sirve para guardar la imagen en una carpeta con su  id
-        $imgPerfil = $_FILES['imgClient']; // aqui guardamos el nombre de la imagen
+        $referencia = $_POST['refProdImg']; // esta variable sirve para guardar la imagen en una carpeta con su  id
+        $imgPerfil = $_FILES['imgProdu']; // aqui guardamos el nombre de la imagen
 
         if ($imgPerfil["error"]>0) { // verifica si el Archivo no contenga algun error
           echo "Error Archivo";
@@ -111,8 +110,8 @@ class productoController
 
               if ($resultado) { //si el resutado es verdadero envio los datos al Modelo
 
-                $this->cliente->set('Url_imgClient',$nombreImg);
-                echo $this->cliente->editarImgCliente();
+                $this->producto->set('Url_imgProduct',$nombreImg);
+                echo $this->producto->editarImgProducto();
 
               } else { //si llega haber alguna falla a guardar al imagen mostrará este mensaje
                 echo "Error al guardar imagen";
@@ -130,7 +129,7 @@ class productoController
 
     }
 
-    public function eliminarCliente()
+    public function eliminarProducto()
     {
       $id = $_POST['identificador'];
       $carpeta = ('img/producto/'.$id);
@@ -150,8 +149,8 @@ class productoController
     		rmdir($carpeta);
 
 
-        $this->cliente->set('id_cliente',$_POST['identificador']);
-        echo $this->cliente->eliminarCliente();
+        $this->producto->set('referencia',$_POST['identificador']);
+        echo $this->producto->eliminarProducto();
     }
     public function cambiarEstado()
     {
