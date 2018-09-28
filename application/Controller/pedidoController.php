@@ -105,27 +105,12 @@ class pedidoController
 
     //listarPedidos
     //listas productos
-    public function ListProducts(){
-
+    public function ListProducts()
+    {
       $pedido = $this->pedido->listarProductos();
-      foreach($pedido as $value){
-          $idProd = $value['referencia'];
-          $nomProd = $value['nombreProducto'];
-          $CantAct = $value['cantidad'];
-          $PrecUnit = $value['precioUnit'];
-          $datos[] = array(
-              'Referencia'=> $value['referencia'],
-              'Nombre'=>$value['nombreProducto'],
-              'Cantidad'=>$value['cantidad'],
-              'PrecioUnit'=>$value['precioUnit'],
-              'Elegir'=>['<button type="button" class="btn btn-primary" id="editCliente" onclick="editarCliente
-              ('.$idProd.','."'".$nomProd."'".','."'".$CantAct."'".','."'".$PrecUnit."'".')">Seleccionar</button>'],
-              'Actualizar'=>['<button type="button" class="btn btn-primary" onclick="showModalImg()"><i class="fa fa-file-image-o"></i></button>']
-          );
-      }
-      echo json_encode($datos);
-
+      echo json_encode($pedido);
     }
+
     public function cambiarEstado()
     {
 

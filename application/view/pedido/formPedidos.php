@@ -6,7 +6,7 @@
 <div class="col-md-12">
 <div class="box box-info">
 
-            <form enctype="multipart/form-data" autocomplete="off" id="actImgPerfilClient">
+            <form autocomplete="off">
             <div class="box-body"> <!--Este Div es contenedor de los imputs-->
 
 
@@ -63,21 +63,6 @@
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="refProduct">Buscar producto</label>
-
-                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-                        <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese la referencia del producto"
-                        name="refProduct" id="refProduct">
-
-                        <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat" onclick="srcProduct()"><i class="fa fa-search"></i></button>
-                        </span>
-
-                    </div><!--cierre div del inputt-->
-                </div> <!--cierre del div contenedor del input-->
-
-                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
                     <label for="direcCliente">Estado</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
@@ -101,6 +86,32 @@
                     <input type="text" class="form-control pull-right" id="datepicker">
                   </div>
                 </div> <!--Cierre del Div contenedor-->
+
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="refProduct">Agregar producto</label>
+
+                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
+
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-info btn-flat" onclick="srcProduct()"><i class="fa fa-plus"></i></button>
+                        </span>
+
+                    </div><!--cierre div del inputt-->
+                </div> <!--cierre del div contenedor del input-->
+
+                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                  <table class="table table-striped table-bordered" style="width:100%">
+                      <thead>
+                      <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                      </tr>
+                      </thead>
+                      <tbody id="addProducts">
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
 
             </div> <!--Cierre del Div contenedor-->
 
@@ -134,29 +145,32 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h3 class="box-title">Seleccione un producto</h3>
             </div>
-
+            <div class="box-body"> <!--Este Div es contenedor de los imputs-->
               <!-- /.box-header -->
-              <div class="table-responsive">
-              <table id="tableProducts" class="table table-striped table-bordered" style="width:100%">
-                  <thead>
-                  <tr>
-                    <th>Referencia</th>
-                    <th>Nombre</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th>Valor total</th>
-                    <th>Opción</th>
-                  </tr>
-                  </thead>
-                </table>
+              <div class="form-group">
+
+                  <label form="">Selecciones un producto</label>
+                  <select id="productSelect" class="form-control" name="productSelect">
+
+                  </select>
+
               </div>
+
+              <div class="form-group">
+                  <label for="cantidadProduct" >Cantidad</label>
+                      <span></span>
+                      <input type="text" class="form-control"
+                          name="cantidadProduct" id="cantidadProduct">
+
+              </div> <!--cierre del div contenedor del input-->
               <!-- /.box-body -->
+            </div>
             </div>
             <!-- /.box -->
 
             <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-info pull-right" onclick="actuaImg()">Actualizar</button>
+                <button type="button" class="btn btn-info pull-right" onclick="agregar()">Agregar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
             </div>
 
@@ -252,6 +266,7 @@
 $(function(){
   document.getElementById("nomCliente").disabled = true;
   document.getElementById("nomEmployee").disabled = true;
+  listarSelectProd();
 })
 
 //Date picker
@@ -263,31 +278,46 @@ $(function(){
 //listas
 //listarProductos
 
-$(document).ready(function() {
-        $.fn.dataTable.ext.errMode = 'throw';
-        tabla =	$('#tableProducts').DataTable( {
-        "ajax": {
-            "url": Url+'/pedido/ListProducts',
-            "type": "GET",
-            "dataSrc": "",
-            "deferRender": true
-        },
-        "columns": [
-            { "data": "Referencia","className": 'centeer'  },
-            { "data": "Nombre","className": 'centeer'  },
-            { "data": "Cantidad","className": 'centeer'  },
-            { "data": "PrecioUnit","className": 'centeer'  },
-            { "data": "Elegir", "orderable": false  },
-            { "data": "Actualizar", "orderable": false  }
-        ],
-        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
-        "scrollX": false,
-        // "dom": 'lrtipB',
-        "language": {
-            "url": Url+"/js/lenguaje.json"
-        },
-        } );
-});
+function listarSelectProd() {
+  $.ajax({
+     url:Url+'/pedido/ListProducts',
+     type:'POST',
+     dataType:'json'
+ }).done(function(data){
+     //console.log(data);
+     var valueSelect = '';
+     data.forEach(function(p){
+      valueSelect+='<option value='+p.referencia+'>'+p.nombreProducto+'</option>';
+     })
+     $('#productSelect').empty();
+     $('#productSelect').html('<option value="" selected="selected"></option>');
+     $('#productSelect').append(valueSelect);
+ })
+}
+
+function agregar() {
+  var Product = $("#productSelect option:selected").text();
+  var cantidad = $('#cantidadProduct').val();
+
+  if (Product == '') {
+    swal("", "Debes seleccionar un producto", "error");
+  }else if (cantidad == '') {
+    swal("", "Debes ingresar una cantidad", "error");
+  }else {
+    var valueTable = '';
+
+    valueTable+='<tr>';
+    valueTable+='<td>'+Product+'</td>';
+    valueTable+='<td>'+cantidad+'</td>';
+    valueTable+='</tr>';
+
+    $('#addProducts').append(valueTable);
+    $('#productSelect option').remove();
+    $('#cantidadProduct').val('');
+    $("#Addproducts").modal("hide");
+  }
+  
+}
 
 // funciones modales
 

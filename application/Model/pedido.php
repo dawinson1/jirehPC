@@ -21,7 +21,7 @@ class pedido extends Model
 
     public function listarProductos()
     {
-      $sql = "SELECT referencia, nombreProducto, cantidad, precioUnit FROM producto";
+      $sql = "SELECT referencia, nombreProducto FROM producto";
       $query = $this->db->prepare($sql);
       $query->execute();
       return $query->fetchAll();
