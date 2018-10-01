@@ -18,18 +18,17 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
                         <input type="text" class="form-control" placeholder="Referencia del Producto"
-                            name="identificador" id="identificador">
+                            name="identificador" id="identificador" maxlength="29">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="nomCat">Categoria</label>
+                    <label for="selectCat">Categoria</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese Categoria del Producto"
-                        name="nomCat" id="nomCat">
+                       <select id="selectCat" class="form-control" name="selectCat"></select>
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -40,7 +39,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Nombre del Producto"
-                        name="prodNom" id="prodNom">
+                        name="prodNom" id="prodNom" maxlength="24">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -51,7 +50,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                         <input type="text" class="form-control" placeholder="Cantidad de Productos"
-                         name="cantPro" id="cantPro">
+                         name="cantPro" id="cantPro" maxlength="11">
 
 
                     </div><!--cierre div del inputt-->
@@ -63,7 +62,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-map-signs"></i></span>
                         <input type="text" class="form-control" placeholder="Muestra Cantidad en bodega"
-                        name="stockPro" id="stockPro">
+                        name="stockPro" id="stockPro" maxlength="11">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -74,7 +73,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese Precio Unitario del Producto"
-                        name="preUni" id="preUni">
+                        name="preUni" id="preUni" maxlength="11">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -85,7 +84,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese marca del Producto" autocomplete="off"
-                        name="nMarc" id="nMarc">
+                        name="nMarc" id="nMarc" maxlength="20">
 
                     </div><!--cierre div del input-->
                 </div> <!--cierre del div contenedor del input-->
@@ -137,42 +136,62 @@
 <!--AJAX-->
 <script>
         function registrar(){
+
+        var datosimgProd = new FormData($('#formProduct')[0]);
+
         var patronNum = /[0-9]/;
         var patronLetrEspecial = /\D/;
         var patronSoloLetr = /[^A-Za-z ]/;
+        var Max_LengthReferencia = 29;
+        var Max_LengthNombre = 24;
+        var Max_LengthCantidad = 11;
+        var Max_LengthMarca = 20;
         
 
         var referencia = $('#identificador').val();
-        var id_categoria = $('#nomCat').val();
+        var Max_referencia = $('#identificador').val().length;
+        var id_categoria = $('#selectCat').val();
         var nombreProducto = $('#prodNom').val();
+        var Max_nombreProducto = $('#prodNom').val().length;
         var cantidad = $('#cantPro').val();
+        var Max_Cantidad = $('#cantPro').val().length;
         var stock = $('#stockPro').val();
+        var Max_Stock = $('#stockPro').val().length;
         var precioUnit = $('#preUni').val();
+        var Max_PrecioU = $('#preUni').val().length;
         var marca = $('#nMarc').val();
+        var Max_Marca = $('#nMarc').val().length;
         var Url_imgProduct =  $('#imgProdu').val();
 
-        if ((referencia == "") || (id_categoria == "") || (nombreProducto == "") || (cantidad == "")  || (stock == "") || (Url_imgProduct == "")  ) { //Valida si los campos estan vacios
-            swal("Upss", "Los campos no pueden ir vacios!", "error");
+        if ((referencia == "") || (id_categoria == "") || (nombreProducto == "") || (cantidad == "") || (stock == "") || (precioUnit == "") || (marca == "") || (Url_imgProduct == "")) {
+            swal("Upss!", "Los campos no pueden ir vacíos!", "error");
+        } else if (patronLetrEspecial.test(cantidad)) {
+            swal("Upss!", "En el campo Cantidad solo deben ir números!", "error");
+        }
+        else if (patronLetrEspecial.test(stock)) {
+            swal("Upss!", "En el campo Stock solo deben ir números!", "error");
+        }
+        else if (patronLetrEspecial.test(precioUnit)) {
+            swal("Upss!", "En el campo Precio Unitario solo deben ir números!", "error");
+        }
+        else if (patronNum.test(marca)) {
+            swal("Upss!", "En el campo Marca solo deben ir Letras!", "error");
+        }
+        else if ((Max_referencia > Max_LengthReferencia) ||(Max_nombreProducto > Max_LengthNombre) || (Max_Cantidad > Max_LengthCantidad) || (Max_Stock > Max_LengthCantidad) || (Max_PrecioU > Max_LengthCantidad) || (Max_Marca > Max_LengthMarca)) {
+            swal("Upss!", "Ingresaste una longitud no válida en un campo!", "error");
+        } else {
 
-        }else{
-
-          $.ajax({
+            $.ajax({
                 url: Url+'/producto/crearProducto',
                 type:'POST',
-                data:{identificador: referencia,
-                    nomCat: id_categoria,
-                    prodNom: nombreProducto,
-                    cantPro: cantidad,
-                    stockPro: stock,
-                    preUni: precioUnit,
-                    nMarc: marca,
-                    imgProdu: Url_imgProduct
-               }
+                data: datosimgProd,
+                contentType: false,
+                processData: false,
             }).done(function(data){
                 if(data){
                     swal("Bien Hecho!", "El Registro ha sido completado!", "success");
                     $('#identificador').val('');
-                    $('#nomCat').val('');
+                    $('#selectCat').val('');
                     $('#prodNom').val('');
                     $('#cantPro').val('');
                     $('#stockPro').val('');
@@ -182,8 +201,8 @@
                     swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
                 }
             })
-        }
 
+        }
     }
 
 $('#imgProdu').fileinput({
@@ -192,4 +211,37 @@ $('#imgProdu').fileinput({
         showUpload : false,
         allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg']
     });
+
+$(function(){
+
+
+listarSelectCat();
+
+
+})
+
+function listarSelectCat(){
+$.ajax({
+
+    url:Url+'/producto/listarCategoria',
+    type: 'POST',
+    dataType:'json'
+}).done(function(data){
+
+    var selectCat = '';
+    data.forEach(function(c){
+
+    selectCat+='<option value='+c.id_categoria+'>'+c.Nombre+'</option>';
+    })
+    $('#selectCat').empty();
+    $('#selectCat').html('<option value=""selected="selected"></option>');
+    $('#selectCat').append(selectCat);
+
+
+
+})
+
+}
+
+
 </script>

@@ -27,6 +27,14 @@ class producto extends Model
         return $query->fetchAll();
     }
 
+    public function listarCategoria()
+    {
+        $sql = "SELECT * FROM categoria";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
     public function buscarProducto()
     {
         $sql = "SELECT * FROM producto WHERE referencia = ?";

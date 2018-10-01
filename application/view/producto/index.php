@@ -17,7 +17,7 @@
                 <tr>
                   <th>Referencia</th>
                   <th>Categoria</th>
-                  <th>Producto</th>
+                  <th>Nombre</th>
                   <th>Cantidad</th>
                   <th>Stock</th>
                   <th>Precio Unitario</th>
@@ -50,38 +50,36 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h3 class="box-title">Editar Producto</h3>
             </div>
-            <form>
+            <form  enctype="multipart/form-data" id="modalEditProducto">
             <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
 
-                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
+                <div class="form-group col-md-6" id="idReferenciaP"> <!--Comienzo del div contenedor del input-->
                     <label for="identificador" >Referencia</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
                         <input type="text" class="form-control" placeholder="Referencia del Producto"
-                            name="identificador" id="identificador">
+                            name="identificador" id="identificador" maxlength="29" >
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="nomCat">Categoria</label>
+                    <label for="selectCat">Categoria</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese Categoria del Producto"
-                        name="nomCat" id="nomCat">
-
+                        <select id="selectCat" class="form-control" name="selectCat"></select>
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="prodNom">Producto</label>
+                    <label for="prodNom">Nombre</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Nombre del Producto"
-                        name="prodNom" id="prodNom">
+                        name="prodNom" id="prodNom" maxlength="24" >
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -92,7 +90,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                         <input type="text" class="form-control" placeholder="Cantidad de Productos"
-                         name="cantPro" id="cantPro">
+                         name="cantPro" id="cantPro"  maxlength="11" >
 
 
                     </div><!--cierre div del inputt-->
@@ -104,7 +102,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-map-signs"></i></span>
                         <input type="text" class="form-control" placeholder="Muestra Cantidad en bodega"
-                        name="stockPro" id="stockPro">
+                        name="stockPro" id="stockPro"  maxlength="11">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -115,7 +113,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese Precio Unitario del Producto"
-                        name="preUni" id="preUni">
+                        name="preUni" id="preUni"  maxlength="11">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -126,27 +124,12 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese marca del Producto" autocomplete="off"
-                        name="nMarc" id="nMarc">
+                        name="nMarc" id="nMarc" maxlength="20">
 
                     </div><!--cierre div del input-->
                 </div> <!--cierre del div contenedor del input-->
 
               </div>
-
-              <div class="col-md-6">
-
-                          <div class="box-body"> <!--Este Div es contenedor de los imputs-->
-
-                            <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                                <label for="imgProdu" >Seleccione imagen del Producto</label>
-
-                                <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-
-                                    <input type="file" class="form-control"
-                                        name="imgProdu" id="imgProdu">
-
-                                </div><!--cierre div del inputt-->
-                            </div> <!--cierre del div contenedor del input-->
 
 
             </div> <!--Cierre del Div contenedor-->
@@ -189,8 +172,7 @@
               </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                                <label for="imgProdu" >Seleccione imagen del Producto</label>
-                    
+                    <label for="imgProdu" >Seleccione imagen del Producto</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
 
@@ -230,7 +212,7 @@ $(document).ready(function() {
         "columns": [
             { "data": "Referencia","className": 'centeer'  },
             { "data": "Categoria","className": 'centeer'  },
-            { "data": "Producto","className": 'centeer'  },
+            { "data": "Nombre","className": 'centeer'  },
             { "data": "Cantidad","className": 'centeer'  },
             { "data": "Stock","className": 'centeer' },
             { "data": "Precio Unitario", "className": 'centeer' },
@@ -273,48 +255,77 @@ $(document).ready(function() {
 
 function enviarEditProducto() //funcion para enviar los cambios al controlador
 {
-        var referencia = $('#identificador').val();
-        var id_categoria = $('#nomCat').val();
-        var nombreProducto = $('#prodNom').val();
-        var cantidad = $('#cantPro').val();
-        var stock = $('#stockPro').val();
-        var precioUnit = $('#preUni').val();
-        var marca = $('#nMarc').val();
 
-        if ((referencia == "") || (id_categoria == "") || (nombreProducto == "") || (cantidad == "")  || (stock == "") || (precioUnit == "")  ) { //Valida si los campos estan vacios
-            swal("Upss", "Los campos no pueden ir vacios!", "error");
+var patronNum = /[0-9]/;
+var patronLetrEspecial = /\D/;
+var patronSoloLetr = /[^A-Za-z ]/;
+var Max_LengthReferencia = 29;
+var Max_LengthNombre = 24;
+var Max_LengthCantidad = 11;
+var Max_LengthMarca = 20;
 
-        } else {
-            $.ajax({
-                url: Url+'/producto/editarProduct',
-                type:'POST',
-                data:{identificador: referencia,
-                    nomCat: id_categoria,
-                    prodNom: nombreProducto,
-                    cantPro: cantidad,
-                    stockPro: stock,
-                    preUni: precioUnit,
-                    nMarc: marca,
-                    
-               }
-            }).done(function(data){
-                if(data){
-                    swal("Bien Hecho!", "El Registro ha sido completado!", "success");
-                    $('#identificador').val('');
-                    $('#nomCat').val('');
-                    $('#prodNom').val('');
-                    $('#cantPro').val('');
-                    $('#stockPro').val('');
-                    $('#preUni').val('');
-                    $('#nMarc').val('');
-                    $("#myModal").modal("hide");
-                    //setTimeout('location.reload()',2000);
-                    tabla.ajax.reload(null,false);
-                }else{
-                    swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
-                }
-            })
+
+var referencia = $('#identificador').val();
+var Max_referencia = $('#identificador').val().length;
+var id_categoria = $('#selectCat').val();
+var nombreProducto = $('#prodNom').val();
+var Max_nombreProducto = $('#prodNom').val().length;
+var cantidad = $('#cantPro').val();
+var Max_Cantidad = $('#cantPro').val().length;
+var stock = $('#stockPro').val();
+var Max_Stock = $('#stockPro').val().length;
+var precioUnit = $('#preUni').val();
+var Max_PrecioU = $('#preUni').val().length;
+var marca = $('#nMarc').val();
+var Max_Marca = $('#nMarc').val().length;
+
+if ((referencia == "") || (id_categoria == "") || (nombreProducto == "") || (cantidad == "") || (stock == "") || (precioUnit == "") || (marca == "")) {
+    swal("Upss!", "Los campos no pueden ir vacíos!", "error");
+} else if (patronLetrEspecial.test(cantidad)) {
+    swal("Upss!", "En el campo Cantidad solo deben ir números!", "error");
+}
+else if (patronLetrEspecial.test(stock)) {
+    swal("Upss!", "En el campo Stock solo deben ir números!", "error");
+}
+else if (patronLetrEspecial.test(precioUnit)) {
+    swal("Upss!", "En el campo Precio Unitario solo deben ir números!", "error");
+}
+else if (patronNum.test(marca)) {
+    swal("Upss!", "En el campo Marca solo deben ir Letras!", "error");
+}
+else if ((Max_referencia > Max_LengthReferencia) ||(Max_nombreProducto > Max_LengthNombre) || (Max_Cantidad > Max_LengthCantidad) || (Max_Stock > Max_LengthCantidad) || (Max_PrecioU > Max_LengthCantidad) || (Max_Marca > Max_LengthMarca)) {
+    swal("Upss!", "Ingresaste una longitud no válida en un campo!", "error");
+} else {
+
+    $.ajax({
+        url: Url+'/producto/editarProduct',
+        type:'POST',
+        data: {identificador: referencia,
+                selectCat: id_categoria,
+                prodNom: nombreProducto,
+                cantPro: cantidad,
+                stockPro: stock,
+                preUni: precioUnit,
+                nMarc: marca    
         }
+    }).done(function(data){
+        if(data){
+            swal("Bien Hecho!", "El Registro ha sido completado!", "success");
+            $('#identificador').val('');
+            $('#selectCat').val('');
+            $('#prodNom').val('');
+            $('#cantPro').val('');
+            $('#stockPro').val('');
+            $('#preUni').val('');
+            $('#nMarc').val('');
+            $("#myModal").modal("hide");
+            tabla.ajax.reload(null,false);
+        }else{
+            swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
+        }
+    })
+
+}
 }
 
 function actuaImg() //funcion para enviar los cambios al controlador
@@ -323,7 +334,7 @@ function actuaImg() //funcion para enviar los cambios al controlador
   console.log(datosimg)
 
       $.ajax({
-          url: Url+'/producto/editarImgProducto',
+          url: Url+'/producto/actImgProducto',
           type:'POST',
           data: datosimg,
           contentType: false,
@@ -353,10 +364,10 @@ function actuaImg() //funcion para enviar los cambios al controlador
 }
 
 
-function showModalImg(idC) //funcion plasmar los datos del usuario en los inputs
+function showModalImg(ref) //funcion plasmar los datos del usuario en los inputs
 {
-  $('#idClientMimg').val(idC);
-  //document.getElementById("idClientMimg").disabled = true;
+  $('#refProdImg').val(ref);
+  //document.getElementById("refProdImg").disabled = true;
   $('#DivInputImg').hide();
   $("#myModalFile").modal("show");
 }
@@ -364,15 +375,53 @@ function showModalImg(idC) //funcion plasmar los datos del usuario en los inputs
 function editarProducto(ref,nomCate,nomPr,cant,stck,price,brand) //funcion plasmar los datos del usuario en los inputs
 {
   $('#identificador').val(ref);
-  $('#id_categoria').val(nomCate);// revisar para poner el nombre y no el id.
-  $('#nombreProducto').val(nomPr);
-  $('#cantidad').val(cant);
-  $('#stock').val(stck);
-  $('#precioUnit').val(price);
-  $('#marca').val(brand);
-  document.getElementById("identificador").disabled = true;
+  $('#selectCat').val(nomCate);// revisar para poner el nombre y no el id.
+  $('#prodNom').val(nomPr);
+  $('#cantPro').val(cant);
+  $('#stockPro').val(stck);
+  $('#preUni').val(price);
+  $('#nMarc').val(brand);
+  //document.getElementById("identificador").disabled = true;
+  $("#idReferenciaP").hide();
   $("#myModal").modal("show");
+
+
+
+
+
+
+
 }
+//select ventana modal categoria
+$(function(){
+
+
+listarSelectCat();
+
+
+})
+
+
+function listarSelectCat() {
+  $.ajax({
+     url:Url+'/producto/listarCategoria',
+     type:'POST',
+     dataType:'json'
+ }).done(function(data){
+     //console.log(data);
+     var selectCat = '';
+     data.forEach(function(c){
+        selectCat+='<option value='+c.id_categoria+'>'+c.Nombre+'</option>';
+     })
+     $('#selectCat').empty();
+     $('#selectCat').html('<option value="" selected="selected"></option>');
+     $('#selectCat').append(selectCat);
+ })
+}
+
+
+
+
 
 $('#imgProdu').fileinput({
         theme: 'fa',
