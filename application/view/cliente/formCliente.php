@@ -102,7 +102,7 @@
         function registrar(){
         var patronNum = /[0-9]/;
         var patronLetrEspecial = /\D/;
-        var patronSoloLetr = /[^A-Za-z ]/;
+        var patronSoloLetr = /[^A-Za-záéíóúüñ ]/;
         var patronCorreo = /\w+@\w+\.+[a-z]/;
 
         var id_cliente = $('#identificador').val();

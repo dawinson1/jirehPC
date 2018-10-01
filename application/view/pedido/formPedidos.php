@@ -137,7 +137,7 @@
 <!-- Ventan modal para la actualización de la imagen de perfil-->
 
 <div class="modal fade" id="Addproducts" role="dialog"> <!--Div que contiene la ventana modal-->
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog modal-sm">
 
 <section class="content modal-content">
 <div class="box box-info">
@@ -266,6 +266,7 @@
 $(function(){
   document.getElementById("nomCliente").disabled = true;
   document.getElementById("nomEmployee").disabled = true;
+  $('#cantidadProduct').attr('maxlength','3');
   listarSelectProd();
 })
 
@@ -290,19 +291,27 @@ function listarSelectProd() {
       valueSelect+='<option value='+p.referencia+'>'+p.nombreProducto+'</option>';
      })
      $('#productSelect').empty();
-     $('#productSelect').html('<option value="" selected="selected"></option>');
+     $('#productSelect').html('<option value="" selected="selected">Seleccionar</option>');
      $('#productSelect').append(valueSelect);
  })
 }
 
 function agregar() {
+  var patronLetrEspecial = /\D/;
+  var Max_Length = 3;
+
   var Product = $("#productSelect option:selected").text();
   var cantidad = $('#cantidadProduct').val();
+  var cantTength = $("#cantidadProduct").val().length;
 
-  if (Product == '') {
+  if (Product == 'Seleccionar') {
     swal("", "Debes seleccionar un producto", "error");
   }else if (cantidad == '') {
     swal("", "Debes ingresar una cantidad", "error");
+  }else if (patronLetrEspecial.test(cantidad)) {
+    swal("", "Debes ingresar una cantidad válida", "error");
+  }else if (cantTength > Max_Length) {
+    swal("Wow", "Has ingresado una longitud no válida, inténtalo de nuevo, por favor no vuelvas a eliminar el atributo maxlength", "error");
   }else {
     var valueTable = '';
 
@@ -315,8 +324,8 @@ function agregar() {
     $('#productSelect option').remove();
     $('#cantidadProduct').val('');
     $("#Addproducts").modal("hide");
+    listarSelectProd();
   }
-  
 }
 
 // funciones modales
