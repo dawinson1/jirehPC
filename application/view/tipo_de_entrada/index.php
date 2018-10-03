@@ -8,11 +8,11 @@
 
           <div class="box">
             <div class="box-header">
-              <b class="box-title">Tipo de Movimiento</b>
+              <b class="box-title">Tipo de Entrada</b>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <table id="tableTipoDeMovimiento" class="display" style="width:100%">
+            <table id="tableTipoDeEntrada" class="display" style="width:100%">
                 <thead>
                 <tr>
                   <th>ID</th>
@@ -41,7 +41,7 @@
 <div class="box box-info">
             <div class="box-header modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 class="box-title">Editar Tipo de Movimiento</h3>
+              <h3 class="box-title">Editar Tipo de Entrada</h3>
             </div>
             <form>
             <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
@@ -58,12 +58,12 @@
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="nomTipoM">Nombre</label>
+                    <label for="nomTipoE">Nombre</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese Nombre del Tipo de Movimiento"
-                        name="nomTipoM" id="nomTipoM" autocomplete="off">
+                        name="nomTipoE" id="nomTipoE" autocomplete="off" maxlength="20">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -74,7 +74,7 @@
 
             <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-info pull-right" onclick="enviarEditTipoMov()">Modificar</button>
+                <button type="button" class="btn btn-info pull-right" onclick="enviarEditTipoEnt()">Modificar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
             </div>
 
@@ -88,9 +88,9 @@
 
 $(document).ready(function() {
         $.fn.dataTable.ext.errMode = 'throw';
-        tabla =	$('#tableTipoDeMovimiento').DataTable( {
+        tabla =	$('#tableTipoDeEntrada').DataTable( {
         "ajax": {
-            "url": Url+'/tipo_de_movimiento/listarTipoMov',
+            "url": Url+'/tipo_de_entrada/listarTipoEnt',
             "type": "GET",
             "dataSrc": "",
             "deferRender": true
@@ -127,36 +127,43 @@ $(document).ready(function() {
         } );
 
 });
-function editarTipoMov(idTM,nomTM) //funcion plasmar los datos del usuario en los inputs
+function editarTipoEnt(idTE,nomTE) //funcion plasmar los datos del usuario en los inputs
 {
-  $('#identificador').val(idTM);
-  $('#nomTipoM').val(nomTM);
+  $('#identificador').val(idTE);
+  $('#nomTipoE').val(nomTE);
   document.getElementById("identificador").disabled = true;
   $("#myModal").modal("show");
 }
 
 
-function enviarEditTipoMov(){
+function enviarEditTipoEnt(){
         var patron = /[0-9]/;
-        var nombreTM = $('#nomTipoM').val();
-        var idTipoM = $('#identificador').val();
+        var nombreTE = $('#nomTipoE').val();
+        var idTipoE = $('#identificador').val();
+        var length_nombre = $('#nomTipoE').val().length;
+
+        var Max_LengthNombre = 20;
 
 
-        if ((nombreTM == "")) { //Valida si los campos estan vacios
+        if ((nombreTE == "")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
             return false;
         }
-        else if (patron.test(nombreTM)){ 
+        else if (patron.test(nombreTE)){ 
 //sintaxis para validar que el campo no contenga números. 
 //patron es la experesion regular, dentro del .test() se pone la variable a comparar
             swal("Upss", "No se permite ingresar números!", "error");
-        }else {
+        }else if (length_nombre>Max_LengthNombre) {
+      swal("Upss", "Nombre solo debe tener Máximo 20 caracteres!", "error");
+         }
+
+        else {
             $.ajax({
-                url: Url+'tipo_de_movimiento/editarTipoMov',
+                url: Url+'tipo_de_entrada/editarTipoEnt',
                 type:'POST',
                 data:{
-                identificador: idTipoM,
-                nomTipoM: nombreTM
+                identificador: idTipoE,
+                nomTipoE: nombreTE
                }
             }).done(function(data){
                 if(data){
@@ -172,7 +179,7 @@ function enviarEditTipoMov(){
 
     }
 
-function eliminarTipoMov(idTM) {
+function eliminarTipoEnt(idTE) {
   swal({
         title: "¿Estas Seguro?",
         text: "Si eliminas este registro ya no se podrá recuperar!",
@@ -182,13 +189,13 @@ function eliminarTipoMov(idTM) {
       }) 
       .then((willDelete) => {
         if (willDelete) {
-          swal("Tipo de Movimiento eliminado!", {
+          swal("Tipo de Entrada eliminado!", {
             icon: "success",
           });
           $.ajax({
-            url:Url+'/tipo_de_movimiento/eliminarTipoMov',
+            url:Url+'/tipo_de_entrada/eliminarTipoEnt',
             type:'POST',
-            data:{identificador:idTM}
+            data:{identificador:idTE}
         }).done(function(data){
             if(data){
                 tabla.ajax.reload(null,false);

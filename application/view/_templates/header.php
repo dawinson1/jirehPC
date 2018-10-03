@@ -363,14 +363,14 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-lemon-o"></i> <span>Tipo de Movimiento</span>
+            <i class="fa fa-lemon-o"></i> <span>Tipo de Entrada</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>tipo_de_movimiento"><i class="fa fa-table"></i> Tabla Tipo de Movimiento</a></li>
-            <li><a href="<?php echo URL; ?>tipo_de_movimiento/formTipoMov"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Tipo de Movimiento</a></li>
+            <li><a href="<?php echo URL; ?>tipo_de_entrada"><i class="fa fa-table"></i> Tabla Tipo de Entrada</a></li>
+            <li><a href="<?php echo URL; ?>tipo_de_entrada/formTipoEnt"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Tipo de Entrada</a></li>
           </ul>
 
         </li>
