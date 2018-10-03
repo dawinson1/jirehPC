@@ -13,7 +13,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese Nombre del Nuevo Rol"
-                        name="nomRol" id="nomRol" autocomplete="off">
+                        name="nomRol" id="nomRol" autocomplete="off" maxlength="24">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -36,15 +36,19 @@
         var patron = /[0-9]/;  // cree la expresion regular y lo guarde en la variable patron.
         var nombreR = $('#nomRol').val();
 
+        var max_length = 24;
+        var length_nombreR = $('#nomRol').val().length;
 
         if ((nombreR == "")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
         }
-        else if (patron.test(nombreR)){ 
-//sintaxis para validar que el campo no contenga números. 
+        else if (patron.test(nombreR)){
+//sintaxis para validar que el campo no contenga números.
 //patron es la experesion regular, dentro del .test() se pone la variable a comparar
             swal("Upss", "No se permite ingresar números!", "error");
-        }else {
+        } else if (length_nombreR > max_length ) {
+            swal("Upss", "Has ingresado una longitud no válida!", "error");
+        } else {
             $.ajax({
                 url: Url+'rol/crearRol',
                 type:'POST',
@@ -61,7 +65,7 @@
             })
         }
 
-            
+
 
     }
 

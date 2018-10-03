@@ -4,7 +4,7 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-       
+
 
           <div class="box">
             <div class="box-header">
@@ -45,7 +45,7 @@
             </div>
             <form>
             <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
-              
+
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
                     <label for="identificador" >ID</label>
 
@@ -63,7 +63,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese Nombre del Estado"
-                        name="nomEstado" id="nomEstado" autocomplete="off">
+                        name="nomEstado" id="nomEstado" autocomplete="off" maxlength="14">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -141,15 +141,20 @@ function eviarEditEstado(){
         var nombreEstado = $('#nomEstado').val();
         var idEstado = $('#identificador').val();
 
+        var Max_length =14;
+        var length_nombreEstado = $('#nomEstado').val().length;
+
 
         if ((nombreEstado == "")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
             return false;
         }
-        else if (patron.test(nombreEstado)){ 
-//sintaxis para validar que el campo no contenga números. 
+        else if (patron.test(nombreEstado)){
+//sintaxis para validar que el campo no contenga números.
 //patron es la experesion regular, dentro del .test() se pone la variable a comparar
             swal("Upss", "No se permite ingresar números!", "error");
+        } else if (length_nombreEstado >Max_length) {
+          swal("Upss", "Has ingresado una logitud no válida!", "error");
         }else {
             $.ajax({
                 url: Url+'estados/editarEstado',
@@ -162,7 +167,7 @@ function eviarEditEstado(){
                 if(data){
                     swal("Bien Hecho!", "La modificación ha sido completado!", "success");
                     $("#myModal").modal("hide");
-                    setTimeout('location.reload()',2000);
+                    tabla.ajax.reload(null,false);
                 }else{
                     swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
                 }
@@ -178,7 +183,7 @@ function eliminarEstado(idE) {
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      }) 
+      })
       .then((willDelete) => {
         if (willDelete) {
           swal("Estado eliminado!", {
@@ -190,7 +195,7 @@ function eliminarEstado(idE) {
             data:{identificador:idE}
         }).done(function(data){
             if(data){
-                setTimeout('location.reload()',2000);
+                tabla.ajax.reload(null,false);
             }else{
                 swal("Algo anda mal!", "La eliminacion no se ha ejecutado!", "error");
             }
@@ -201,4 +206,3 @@ function eliminarEstado(idE) {
       });
 }
 </script>
-

@@ -63,7 +63,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese Nombre del Rol"
-                        name="nomRol" id="nomRol" autocomplete="off">
+                        name="nomRol" id="nomRol" autocomplete="off" maxlength="24">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -141,6 +141,8 @@ function enviarEditRol(){
         var nombreR = $('#nomRol').val();
         var idRol = $('#identificador').val();
 
+        var max_length = 24;
+        var length_nombreR = $('#nomRol').val().length;
 
         if ((nombreR == "")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
@@ -150,6 +152,8 @@ function enviarEditRol(){
 //sintaxis para validar que el campo no contenga números.
 //patron es la experesion regular, dentro del .test() se pone la variable a comparar
             swal("Upss", "No se permite ingresar números!", "error");
+        } else if (length_nombreR > max_length ) {
+            swal("Upss", "Has ingresado una longitud no válida!", "error");
         }else {
             $.ajax({
                 url: Url+'rol/editarRol',
@@ -162,7 +166,7 @@ function enviarEditRol(){
                 if(data){
                     swal("Bien Hecho!", "La modificación ha sido completada!", "success");
                     $("#myModal").modal("hide");
-                    setTimeout('location.reload()',2000);
+                    tabla.ajax.reload(null,false);
                 }else{
                     swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
                 }
@@ -190,7 +194,7 @@ function eliminarRol(idR) {
             data:{identificador:idR}
         }).done(function(data){
             if(data){
-                setTimeout('location.reload()',2000);
+                tabla.ajax.reload(null,false);
             }else{
                 swal("Algo anda mal!", "La eliminacion no se ha ejecutado!", "error");
             }

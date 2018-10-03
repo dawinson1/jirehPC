@@ -13,7 +13,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese Nombre del Nuevo Estado"
-                        name="nomEstado" id="nomEstado">
+                        name="nomEstado" id="nomEstado" maxlength="14">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -36,14 +36,19 @@
         var patron = /[0-9]/;  // cree la expresion regular y lo guarde en la variable patron.
         var nombreEstado = $('#nomEstado').val();
 
+        var Max_length =14;
+        var length_nombreEstado = $('#nomEstado').val().length;
+
 
         if ((nombreEstado == "")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
         }
-        else if (patron.test(nombreEstado)){ 
-//sintaxis para validar que el campo no contenga números. 
+        else if (patron.test(nombreEstado)){
+//sintaxis para validar que el campo no contenga números.
 //patron es la experesion regular, dentro del .test() se pone la variable a comparar
             swal("Upss", "No se permite ingresar números!", "error");
+        } else if (length_nombreEstado >Max_length) {
+          swal("Upss", "Has ingresado una logitud no válida!", "error");
         }else {
             $.ajax({
                 url: Url+'estados/crearEstado',
@@ -61,7 +66,7 @@
             })
         }
 
-            
+
 
     }
 
