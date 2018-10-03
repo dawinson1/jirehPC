@@ -63,7 +63,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese Nombre del Estado"
-                        name="nomEstadoPedido" id="nomEstadoPedido" autocomplete="off">
+                        name="nomEstadoPedido" id="nomEstadoPedido" autocomplete="off" maxlength="20" >
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -140,6 +140,10 @@ function eviarEditEstadoPedido(){
         var patron = /[0-9]/;
         var nombreEstado = $('#nomEstadoPedido').val();
         var idEstado = $('#identificador').val();
+        var length_nombre = $('#nomEstadoPedido').val().length;
+
+        var Max_LengthNombre = 20;
+
 
 
         if ((nombreEstado == "")) { //Valida si los campos estan vacios
@@ -150,7 +154,11 @@ function eviarEditEstadoPedido(){
 //sintaxis para validar que el campo no contenga números. 
 //patron es la experesion regular, dentro del .test() se pone la variable a comparar
             swal("Upss", "No se permite ingresar números!", "error");
-        }else {
+        } else if (length_nombre>Max_LengthNombre) {
+      swal("Upss", "Nombre solo debe tener Máximo 20 caracteres!", "error");
+         }
+               
+        else {
             $.ajax({
                 url: Url+'estado_pedido/editarEstadoPedido',
                 type:'POST',

@@ -140,6 +140,9 @@ function enviarEditCategoria(){
         var patron = /[0-9]/;
         var nombreC = $('#nomCat').val();
         var idCat = $('#identificador').val();
+        var length_nombre = $('#nomCat').val().length;
+        var Max_LengthNombre = 25;
+
 
 
         if ((nombreC == "")) { //Valida si los campos estan vacios
@@ -150,7 +153,9 @@ function enviarEditCategoria(){
 //sintaxis para validar que el campo no contenga números. 
 //patron es la experesion regular, dentro del .test() se pone la variable a comparar
             swal("Upss", "No se permite ingresar números!", "error");
-        }else {
+        }else if (length_nombre>Max_LengthNombre) {
+      swal("Upss", "Nombre solo debe tener Máximo 25 caracteres!", "error");
+         } {
             $.ajax({
                 url: Url+'categoria/editarCategoria',
                 type:'POST',

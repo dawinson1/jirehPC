@@ -13,7 +13,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese Nombre de la Categoría"
-                        name="nomCat" id="nomCat"  autocomplete="off" maxlength="20">
+                        name="nomCat" id="nomCat"  autocomplete="off" maxlength="25">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -35,6 +35,8 @@
         function crearCategoria(){
         var patron = /[0-9]/;  // cree la expresion regular y lo guarde en la variable patron.
         var nombreC = $('#nomCat').val();
+        var length_nombre = $('#nomCat').val().length;
+        var Max_LengthNombre = 25;
 
 
         if ((nombreC == "")) { //Valida si los campos estan vacios
@@ -44,7 +46,9 @@
 //sintaxis para validar que el campo no contenga números. 
 //patron es la experesion regular, dentro del .test() se pone la variable a comparar
             swal("Upss", "No se permite ingresar números!", "error");
-        }else {
+        }else if (length_nombre>Max_LengthNombre) {
+      swal("Upss", "Nombre solo debe tener Máximo 25 caracteres!", "error");
+         }{
             $.ajax({
                 url: Url+'categoria/crearCategoria',
                 type:'POST',
