@@ -64,6 +64,7 @@ class clienteController
     $this->cliente->set('telefono',$_POST['telCliente']);
     $this->cliente->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
     $this->cliente->set('Url_imgClient',$_POST['perfilClient']);
+    $this->cliente->set('rolCliente',$_POST['rolCliente']);
     echo $this->cliente->crearCliente();
     }
 
