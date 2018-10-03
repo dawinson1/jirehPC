@@ -3,18 +3,18 @@
 <div class="box box-info">
             <div class="box-header">
               <b class="box-title">Empleado</b>
-              
+
             </div>
             <form>
             <div class="box-body"> <!--Este Div es es contenedor de los imputs-->
-              
+
                 <div class="form-group col-xs-6"> <!--Comienzo del div contenedor del input-->
                     <label for="idEmpleado" >Documento de Identidad:</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese documento del empleado"
-                            name="idEmpleado" id="idEmpleado"  autocomplete="off">
+                            name="idEmpleado" id="idEmpleado"  autocomplete="off" maxlength="10">
 
                         <div class="input-group-addon"> <!--Este div es opcional, servirá cuando queramos que en frente del input este otro icono-->
                         <i class="glyphicon glyphicon-search"></i>
@@ -29,7 +29,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese nombre del empleado"
-                        name="nombre" id="nombre"  autocomplete="off">
+                        name="nombre" id="nombre"  autocomplete="off" maxlength="24">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -40,7 +40,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese apellidos del empleado"
-                        name="apellido" id="apellido"  autocomplete="off">
+                        name="apellido" id="apellido"  autocomplete="off" maxlength="24">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -51,7 +51,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-phone-square"></i></span>
                         <input type="email" class="form-control" placeholder="Teléfono"
-                         name="telefono" id="telefono" autocomplete="off">
+                         name="telefono" id="telefono" autocomplete="off" maxlength="19">
 
 
                     </div><!--cierre div del inputt-->
@@ -63,7 +63,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                         <input type="email" class="form-control" placeholder="Ingrese correo electrónico"
-                        name="correo" id="correo"  autocomplete="off">
+                        name="correo" id="correo"  autocomplete="off" maxlength="29">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -74,7 +74,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
                         <input type="password" class="form-control" placeholder="Ingrese su Contraseña"
-                        name="passEmpl" id="passEmpl"  autocomplete="off">
+                        name="passEmpl" id="passEmpl"  autocomplete="off" maxlength="15">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -84,20 +84,22 @@
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-coffee"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese rol"
-                        name="id_rol" id="id_rol"  autocomplete="off">
+                        <select id="id_rol" class="form-control" name="id_rol">
+
+                        </select>
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
-                
+
                 <!--INPUT DE ESTADO-->
                 <div class="form-group col-xs-6"> <!--Comienzo del div contenedor del input-->
                     <label for="id_estado">Estado:</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-coffee"></i></span>
-                        <input type="text" class="form-control" placeholder="12 Activo o 13 Inactivo"
-                        name="id_estado" id="id_estado"  autocomplete="off">
+                        <select id="id_estado" class="form-control" name="id_estado">
+
+                        </select>
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -117,8 +119,27 @@
           </div>
 
           <script>
-          
+
         function crearEmpleado(){
+        var patronNum = /[0-9]/;
+        var patronLetrEspecial = /\D/;
+        var patronSoloLetr = /[^A-Za-záéíóúüñ ]/;
+        var patronCorreo = /\w+@\w+\.+[a-z]/
+
+        var Max_LengthTel = 19;
+        var Max_LengthID = 10;
+        var Max_LengthNomsDicc = 24;
+        var Max_LengthEmail = 29;
+        var Max_Lengthpass = 15;
+        var Min_Lengthpass = 8;
+
+        var length_idEmpleado = $('#idEmpleado').val().length;
+        var length_nombreEmpleado = $('#nombre').val().length;
+        var length_apellido = $('#apellido').val().length;
+        var length_telefono = $('#telefono').val().length;
+        var length_correo = $('#correo').val().length;
+        var length_pass = $('#passEmpl').val().length;
+
         var idEmpleado = $('#idEmpleado').val();
         var nombreEmpleado = $('#nombre').val();
         var apellido = $('#apellido').val();
@@ -127,10 +148,37 @@
         var pass = $('#passEmpl').val();
         var id_rol = $('#id_rol').val();
         var id_estado = $('#id_estado').val();
-    
-        if ((idEmpleado == "") || (nombre == "") || (apellido == "") || (telefono == "") || ( correo == "") || ( pass == "") ||  (id_rol == "") || (id_estado == "")) { //Valida si los campos estan vacios
+
+        if ((idEmpleado == "") || (nombre == "") || (apellido == "") || (telefono == "") || ( correo == "") || ( pass == "") ||  (id_rol == "Seleccionar") || (id_estado == "Seleccionar")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
-        } else {
+        } else if (patronLetrEspecial.test(idEmpleado)){
+      //sintaxis para validar que el campo no contenga números. patron es la experesion regular, dentro del .test() se pone la variable a comparar
+          //$( "#alertID" ).addClass( "has-error" );
+          swal("Upss", "No se permite ingresar letras y/o caracteres especiales!", "error");
+
+        }else if (patronSoloLetr.test(nombreEmpleado)){
+
+            swal("Upss", "No se permite ingresar números y/o caracteres en el campo Nombre!", "error");
+
+          } else if (patronSoloLetr.test(apellido)){
+
+            swal("Upss", "No se permite ingresar números y/o caracteres en el campo Apellido!", "error");
+
+          } else if (!patronCorreo.test(correo)){
+
+            swal("Upss", "El correo ingresado no es válido!", "error");
+
+          } else if (patronLetrEspecial.test(telefono)){
+
+            swal("Upss", "El teléfono ingresado no es válido!", "error");
+
+          } else if ((length_idEmpleado>Max_LengthID) || (length_nombreEmpleado>Max_LengthNomsDicc) ||
+            (length_apellido>Max_LengthNomsDicc) || (length_correo>Max_LengthEmail) ||
+            (length_telefono>Max_LengthTel)) {
+              swal("Upss", "Has ingresado una longitud no válida!", "error");
+          }else if ((length_pass>Max_Lengthpass) || (length_pass<Min_Lengthpass)) {
+            swal("Upss", "La contraseña debe tener como mínimo 8-15 caracteres!", "error");
+          }else {
             $.ajax({
                 url: Url+'empleado/crearEmpleado',
                 type:'POST',
@@ -142,7 +190,6 @@
                 passEmpl: pass,
                 id_rol: id_rol,
                 id_estado: id_estado
-    
                }
             }).done(function(data){
                 if(data){
@@ -162,4 +209,42 @@
         }
     }
 
+$(function(){
+  listarSelectRol();
+  listarSelectEstado();
+})
+
+function listarSelectRol() {
+  $.ajax({
+     url:Url+'/empleado/listarRoles',
+     type:'POST',
+     dataType:'json'
+ }).done(function(data){
+     //console.log(data);
+     var valueSelectRol = '';
+     data.forEach(function(p){
+      valueSelectRol+='<option value='+p.idRol+'>'+p.Nombre+'</option>';
+     })
+     $('#id_rol').empty();
+     $('#id_rol').html('<option value="" selected="selected">Seleccionar</option>');
+     $('#id_rol').append(valueSelectRol);
+ })
+}
+
+function listarSelectEstado() {
+  $.ajax({
+     url:Url+'/empleado/listarEstados',
+     type:'POST',
+     dataType:'json'
+ }).done(function(data){
+     //console.log(data);
+     var valueSelectEstado = '';
+     data.forEach(function(p){
+      valueSelectEstado+='<option value='+p.id_estado+'>'+p.nombre+'</option>';
+     })
+     $('#id_estado').empty();
+     $('#id_estado').html('<option value="" selected="selected">Seleccionar</option>');
+     $('#id_estado').append(valueSelectEstado);
+ })
+}
 </script>

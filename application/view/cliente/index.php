@@ -58,7 +58,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese su número de cedula o el NIT de la empresa"
-                            name="identificador" id="identificador">
+                            name="identificador" id="identificador" maxlength="14">
 
                         <div class="input-group-addon"> <!--Este div es opcional, servirá cuando queramos que en frente del input este otro icono-->
                         <i class="glyphicon glyphicon-search"></i>
@@ -73,7 +73,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese sus nombres"
-                        name="nomCliente" id="nomCliente">
+                        name="nomCliente" id="nomCliente" maxlength="24">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -84,7 +84,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese sus apellidos"
-                        name="apeCliente" id="apeCliente">
+                        name="apeCliente" id="apeCliente" maxlength="24">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -95,7 +95,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                         <input type="email" class="form-control" placeholder="example@domain.com"
-                         name="correoCliente" id="correoCliente">
+                         name="correoCliente" id="correoCliente" maxlength="29">
 
 
                     </div><!--cierre div del inputt-->
@@ -107,7 +107,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-map-signs"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese la direccion de su hogar"
-                        name="direcCliente" id="direcCliente">
+                        name="direcCliente" id="direcCliente" maxlength="24">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -118,7 +118,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
                         <input type="text" class="form-control" placeholder="Ingrese su número teléfonico"
-                        name="telCliente" id="telCliente">
+                        name="telCliente" id="telCliente" maxlength="14">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -246,16 +246,58 @@ $(document).ready(function() {
 
 function enviarEditCliente() //funcion para enviar los cambios al controlador
 {
-  var id_cliente = $('#identificador').val();
-        var nombreCliente = $('#nomCliente').val();
-        var apellidoCliente = $('#apeCliente').val();
-        var correoCliente = $('#correoCliente').val();
-        var direccionCliente = $('#direcCliente').val();
-        var telefono = $('#telCliente').val();
+  var patronNum = /[0-9]/;
+  var patronLetrEspecial = /\D/;
+  var patronSoloLetr = /[^A-Za-záéíóúüñ ]/;
+  var patronCorreo = /\w+@\w+\.+[a-z]/;
 
-        if ((id_cliente == "") || (nombreCliente == "") || (apellidoCliente == "") || (correoCliente == "") || (direccionCliente == "") || (telefono == "")) { //Valida si los campos estan vacios
-            swal("Upss", "Los campos no pueden ir vacios!", "error");
-        } else {
+  var Max_LengthIDtTel = 14;
+  var Max_LengthNomsDicc = 24;
+  var Max_LengthEmail = 29;
+
+  var length_id_cliente = $('#identificador').val().length;
+  var length_nombreCliente = $('#nomCliente').val().length;
+  var length_apellidoCliente = $('#apeCliente').val().length;
+  var length_correoCliente = $('#correoCliente').val().length;
+  var length_telefono = $('#telCliente').val().length;
+
+  var id_cliente = $('#identificador').val();
+  var nombreCliente = $('#nomCliente').val();
+  var apellidoCliente = $('#apeCliente').val();
+  var correoCliente = $('#correoCliente').val();
+  var direccionCliente = $('#direcCliente').val();
+  var telefono = $('#telCliente').val();
+
+  if ((id_cliente == "") || (nombreCliente == "") || (apellidoCliente == "") || (correoCliente == "") || (direccionCliente == "") || (telefono == "") ) { //Valida si los campos estan vacios
+    swal("Upss", "Los campos no pueden ir vacios!", "error");
+
+  } else if (patronLetrEspecial.test(id_cliente)){
+    //sintaxis para validar que el campo no contenga números. patron es la experesion regular, dentro del .test() se pone la variable a comparar
+    //$( "#alertID" ).addClass( "has-error" );
+    swal("Upss", "No se permite ingresar letras y/o caracteres especiales!", "error");
+
+  }else if (patronSoloLetr.test(nombreCliente)){
+
+      swal("Upss", "No se permite ingresar números y/o caracteres en el campo Nombre!", "error");
+
+    } else if (patronSoloLetr.test(apellidoCliente)){
+
+      swal("Upss", "No se permite ingresar números y/o caracteres en el campo Apellido!", "error");
+
+    } else if (!patronCorreo.test(correoCliente)){
+
+      swal("Upss", "El correo ingresado no es válido!", "error");
+
+    } else if (patronLetrEspecial.test(telefono)){
+
+      swal("Upss", "El teléfono ingresado no es válido!", "error");
+
+    } else if ((length_id_cliente>Max_LengthIDtTel) || (length_nombreCliente>Max_LengthNomsDicc) ||
+      (length_apellidoCliente>Max_LengthNomsDicc) || (length_correoCliente>Max_LengthEmail) ||
+      (length_telefono>Max_LengthIDtTel)) {
+
+        swal("Upss", "Has ingresado una longitud no válida!", "error");    
+    } else {
             $.ajax({
                 url: Url+'/cliente/editarCliente',
                 type:'POST',

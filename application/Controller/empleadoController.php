@@ -61,40 +61,47 @@ class empleadoController
 
     public function crearEmpleado()
     {
-        
-        $this->empleado->set('nombre',$_POST['nombre']);  
-        $this->empleado->set('apellido',$_POST['apellido']);  
-        $this->empleado->set('telefono',$_POST['telefono']);  
-        $this->empleado->set('correo',$_POST['correo']);  
+
+        $this->empleado->set('nombre',$_POST['nombre']);
+        $this->empleado->set('apellido',$_POST['apellido']);
+        $this->empleado->set('telefono',$_POST['telefono']);
+        $this->empleado->set('correo',$_POST['correo']);
         $this->empleado->set('pass',password_hash($_POST["passEmpl"],PASSWORD_BCRYPT));
         $this->empleado->set('idEmpleado',$_POST['idEmpleado']);
-        $this->empleado->set('id_rol',$_POST['id_rol']);  
-        $this->empleado->set('id_estado',$_POST['id_estado']);  
+        $this->empleado->set('id_rol',$_POST['id_rol']);
+        $this->empleado->set('id_estado',$_POST['id_estado']);
         echo $this->empleado->crearEmpleado();
-    
+
     }
 
     public function editarEmpleado()
     {
-        $this->empleado->set('nombre',$_POST['nombre']);  
-        $this->empleado->set('apellido',$_POST['apellido']);  
-        $this->empleado->set('telefono',$_POST['telefono']);  
-        $this->empleado->set('correo',$_POST['correo']);  
-        $this->empleado->set('idEmpleado',$_POST['idEmpleado']);  
-        $this->empleado->set('id_rol',$_POST['id_rol']);  
-        $this->empleado->set('id_estado',$_POST['id_estado']); 
-        echo $this->empleado->editarEmpleado();  
+        $this->empleado->set('nombre',$_POST['nombre']);
+        $this->empleado->set('apellido',$_POST['apellido']);
+        $this->empleado->set('telefono',$_POST['telefono']);
+        $this->empleado->set('correo',$_POST['correo']);
+        $this->empleado->set('idEmpleado',$_POST['idEmpleado']);
+        $this->empleado->set('id_rol',$_POST['id_rol']);
+        $this->empleado->set('id_estado',$_POST['id_estado']);
+        echo $this->empleado->editarEmpleado();
     }
 
     public function eliminarEmpleado()
     {
-        $this->empleado->set('idEmpleado',$_POST[('idEmpleado')]); /*el de la izq es de la bd, izq viene por ajax*/ 
-        echo $this->empleado->eliminarEmpleado();  
+        $this->empleado->set('idEmpleado',$_POST[('idEmpleado')]); /*el de la izq es de la bd, izq viene por ajax*/
+        echo $this->empleado->eliminarEmpleado();
     }
 
-    public function cambiarEstado()
+    public function listarRoles()
     {
-     
+      $empleado = $this->empleado->listarRoles();
+      echo json_encode($empleado);
+    }
+
+    public function listarEstados()
+    {
+      $empleado = $this->empleado->listarEstados();
+      echo json_encode($empleado);
     }
 
 }

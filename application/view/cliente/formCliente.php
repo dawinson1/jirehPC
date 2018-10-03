@@ -105,67 +105,67 @@
 
 <script>
 function registrar(){
-var patronNum = /[0-9]/;
-var patronLetrEspecial = /\D/;
-var patronSoloLetr = /[^A-Za-záéíóúüñ ]/;
-var patronCorreo = /\w+@\w+\.+[a-z]/;
+  var patronNum = /[0-9]/;
+  var patronLetrEspecial = /\D/;
+  var patronSoloLetr = /[^A-Za-záéíóúüñ ]/;
+  var patronCorreo = /\w+@\w+\.+[a-z]/;
 
-var Max_LengthIDtTel = 14;
-var Max_LengthNomsDicc = 24;
-var Max_LengthEmail = 29;
-var Max_Lengthpass = 15;
-var Min_Lengthpass = 8;
+  var Max_LengthIDtTel = 14;
+  var Max_LengthNomsDicc = 24;
+  var Max_LengthEmail = 29;
+  var Max_Lengthpass = 15;
+  var Min_Lengthpass = 8;
 
-var length_id_cliente = $('#identificador').val().length;
-var length_nombreCliente = $('#nomCliente').val().length;
-var length_apellidoCliente = $('#apeCliente').val().length;
-var length_correoCliente = $('#correoCliente').val().length;
-var length_telefono = $('#telCliente').val().length;
-var length_contrasena = $('#passCliente').val().length;
+  var length_id_cliente = $('#identificador').val().length;
+  var length_nombreCliente = $('#nomCliente').val().length;
+  var length_apellidoCliente = $('#apeCliente').val().length;
+  var length_correoCliente = $('#correoCliente').val().length;
+  var length_telefono = $('#telCliente').val().length;
+  var length_contrasena = $('#passCliente').val().length;
 
-var id_cliente = $('#identificador').val();
-var nombreCliente = $('#nomCliente').val();
-var apellidoCliente = $('#apeCliente').val();
-var correoCliente = $('#correoCliente').val();
-var direccionCliente = $('#direcCliente').val();
-var telefono = $('#telCliente').val();
-var contrasena = $('#passCliente').val();
-var imgClient = 'img/TedDefault.jpg';
-var rolCliente = 'Usuario';
+  var id_cliente = $('#identificador').val();
+  var nombreCliente = $('#nomCliente').val();
+  var apellidoCliente = $('#apeCliente').val();
+  var correoCliente = $('#correoCliente').val();
+  var direccionCliente = $('#direcCliente').val();
+  var telefono = $('#telCliente').val();
+  var contrasena = $('#passCliente').val();
+  var imgClient = 'img/TedDefault.jpg';
+  var rolCliente = 'Usuario';
 
-if ((id_cliente == "") || (nombreCliente == "") || (apellidoCliente == "") || (correoCliente == "") || (direccionCliente == "") ) { //Valida si los campos estan vacios
+  if ((id_cliente == "") || (nombreCliente == "") || (apellidoCliente == "") || (correoCliente == "") || (direccionCliente == "") ) { //Valida si los campos estan vacios
     swal("Upss", "Los campos no pueden ir vacios!", "error");
 
-} else if (patronLetrEspecial.test(id_cliente)){
+  } else if (patronLetrEspecial.test(id_cliente)){
 //sintaxis para validar que el campo no contenga números. patron es la experesion regular, dentro del .test() se pone la variable a comparar
     //$( "#alertID" ).addClass( "has-error" );
     swal("Upss", "No se permite ingresar letras y/o caracteres especiales!", "error");
 
-}else if (patronSoloLetr.test(nombreCliente)){
+  }else if (patronSoloLetr.test(nombreCliente)){
 
       swal("Upss", "No se permite ingresar números y/o caracteres en el campo Nombre!", "error");
 
-} else if (patronSoloLetr.test(apellidoCliente)){
+    } else if (patronSoloLetr.test(apellidoCliente)){
 
       swal("Upss", "No se permite ingresar números y/o caracteres en el campo Apellido!", "error");
 
-} else if (!patronCorreo.test(correoCliente)){
+    } else if (!patronCorreo.test(correoCliente)){
 
       swal("Upss", "El correo ingresado no es válido!", "error");
 
-} else if (patronLetrEspecial.test(telefono)){
+    } else if (patronLetrEspecial.test(telefono)){
 
       swal("Upss", "El teléfono ingresado no es válido!", "error");
 
-} else if ((length_id_cliente>Max_LengthIDtTel) || (length_nombreCliente>Max_LengthNomsDicc) ||
-    (length_apellidoCliente>Max_LengthNomsDicc) || (length_correoCliente>Max_LengthEmail) ||
-    (length_telefono>Max_LengthIDtTel)) {
-      swal("Upss", "Has ingresado una longitud no válida!", "error");
-}else if ((length_contrasena>Max_Lengthpass) || (length_contrasena<Min_Lengthpass)) {
+    } else if ((length_id_cliente>Max_LengthIDtTel) || (length_nombreCliente>Max_LengthNomsDicc) ||
+      (length_apellidoCliente>Max_LengthNomsDicc) || (length_correoCliente>Max_LengthEmail) ||
+      (length_telefono>Max_LengthIDtTel)) {
+        swal("Upss", "Has ingresado una longitud no válida!", "error");
+    }else if ((length_contrasena>Max_Lengthpass) || (length_contrasena<Min_Lengthpass)) {
       swal("Upss", "La contraseña debe tener como mínimo 8-15 caracteres!", "error");
-} else{
-//$( "#alertID" ).removeClass( "has-error" );
-  $.ajax({
+    } else{
+      //$( "#alertID" ).removeClass( "has-error" );
+    $.ajax({
         url: Url+'/cliente/crearCliente',
         type:'POST',
         data:{identificador: id_cliente,
@@ -178,8 +178,8 @@ if ((id_cliente == "") || (nombreCliente == "") || (apellidoCliente == "") || (c
         perfilClient: imgClient,
         rolCliente: rolCliente
         }
-    }).done(function(data){
-        if(data){
+      }).done(function(data){
+          if(data){
             swal("Bien Hecho!", "El Registro ha sido completado!", "success");
             $('#identificador').val('');
             $('#nomCliente').val('');
@@ -188,11 +188,11 @@ if ((id_cliente == "") || (nombreCliente == "") || (apellidoCliente == "") || (c
             $('#direcCliente').val('');
             $('#telCliente').val('');
             $('#passCliente').val('');
-        }else{
-            swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
+          }else{
+              swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
+            }
+          })
         }
-    })
-  }
 }
 
 

@@ -5,7 +5,7 @@ use Mini\Core\Model;
 
 class empleado extends Model
 {
-    
+
     private $nombre;
     private $apellido;
     private $telefono;
@@ -14,16 +14,34 @@ class empleado extends Model
     private $idEmpleado;
     private $id_rol;
     private $id_estado;
-    
+
 
     public function set($atributo,$valor){
         $this->$atributo = $valor;
     }
 
     public function listarEmpleados()
-    {   
+    {
        // $sql = "SELECT e.nombre, e.apellido, e.telefono, e.correo, e.idEmpleado as Cédula, r.Nombre as Rol,e.id_estado from empleado e INNER JOIN rol r ON (e.id_rol=r.idRol)";
         $sql = "SELECT e.*,r.Nombre as nombrerol FROM empleado e INNER JOIN rol r ON r.idRol = e.id_rol";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function listarRoles()
+    {
+       // $sql = "SELECT e.nombre, e.apellido, e.telefono, e.correo, e.idEmpleado as Cédula, r.Nombre as Rol,e.id_estado from empleado e INNER JOIN rol r ON (e.id_rol=r.idRol)";
+        $sql = "SELECT * FROM rol";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function listarEstados()
+    {
+       // $sql = "SELECT e.nombre, e.apellido, e.telefono, e.correo, e.idEmpleado as Cédula, r.Nombre as Rol,e.id_estado from empleado e INNER JOIN rol r ON (e.id_rol=r.idRol)";
+        $sql = "SELECT * FROM estados";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
