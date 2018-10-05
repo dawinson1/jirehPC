@@ -41,7 +41,8 @@ class empleadoController
            $apeEm= $value['apellido'];
            $telEm= $value['telefono'];
            $mailEm= $value['correo'];
-           $idRol= $value['nombrerol']; // se cambió por nombrerol para que apareciera el nombre del rol en la tabla
+           $nomRol= $value['nombrerol']; // se cambió por nombrerol para que apareciera el nombre del rol en la tabla
+           $idRol= $value['id_rol'];
            $idEstado =$value['id_estado'];
            $datos[] = array(
                'Nombre'=> $value['nombre'],
