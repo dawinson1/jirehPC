@@ -43,17 +43,17 @@ function process(e) { // función que detecta si se preciona enter o intro y eje
 }
 
 function start(){
-        var id_cliente = $('#CCoNIT').val();
+        var id_user = $('#CCoNIT').val();
         var contrasena = $('#passlog').val();
 
-        if ((id_cliente == "") || (contrasena == "")) { //Valida si los campos estan vacios
+        if ((id_user == "") || (contrasena == "")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacíos!", "error");
         } else {
             $.ajax({
                 url: Url+'login/inicioSesion',
                 type:'POST',
-                data:{identificador: id_cliente,
-                passCliente: contrasena
+                data:{identificador: id_user,
+                pass: contrasena
 
                }
             }).done(function(data){

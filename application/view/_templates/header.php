@@ -1,10 +1,24 @@
 <?php
     namespace Mini\Model;
+    namespace Mini\Controller;
 
     use PDO;
 	if(!isset($_SESSION['username'])){
     header('Location: /Proyecto/jirehPC/login');
   }
+
+  // Máxima duración de sesión activa en minutos
+  define( 'MAX_SESSION_TIEMPO', 60 * 5 );
+
+  // Controla cuando se ha creado y cuando tiempo ha recorrido
+  if ( isset( $_SESSION[ 'ULTIMA_ACTIVIDAD' ] ) &&
+  ( time() - $_SESSION[ 'ULTIMA_ACTIVIDAD' ] > MAX_SESSION_TIEMPO ) ) {
+
+    // Si ha pasado el tiempo sobre el limite destruye la session
+    header('Location: /Proyecto/jirehPC/login/singout');
+  }
+
+  $_SESSION[ 'ULTIMA_ACTIVIDAD' ] = time();
 
 ?>
 <!DOCTYPE html>
