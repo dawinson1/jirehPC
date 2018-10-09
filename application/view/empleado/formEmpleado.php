@@ -148,6 +148,7 @@
         var pass = $('#passEmpl').val();
         var id_rol = $('#id_rol').val();
         var id_estado = $('#id_estado').val();
+        var imgEmpleado = 'img/TedDefault.jpg';
 
         if ((idEmpleado == "") || (nombre == "") || (apellido == "") || (telefono == "") || ( correo == "") || ( pass == "") ||  (id_rol == "Seleccionar") || (id_estado == "Seleccionar")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");

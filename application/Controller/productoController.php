@@ -48,7 +48,7 @@ class productoController
                'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarProducto
                ('."'".$ref."'".','."'".$nomCate."'".','."'".$nomPr."'".','."'".$cant."'".','."'".$stck."'".','."'".$price."'".','."'".$brand."'".',)">Editar</button>'],
                'Imagen'=>$value['Url_imgProduct'],
-               'Actualizar Imagen'=>['<button type="button" class="btn btn-primary" onclick="showModalImg('.$ref.')"><i class="fa fa-file-image-o"></i></button>'],
+               'Actualizar Imagen'=>['<button type="button" class="btn btn-primary" onclick="showModalImg('."'".$ref."'".')"><i class="fa fa-file-image-o"></i></button>'],
                'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarProducto('."'".$ref."'".')">Eliminar</button>']
            );
        }
