@@ -9,6 +9,9 @@ class tipo_de_entradaController
     }
     public function index()
     {
+      if (!($_SESSION['Rol'] == 'Administrador')) {
+        header('Location: /Proyecto/jirehPC/error/error500');
+      }
         require APP . 'view/_templates/header.php';
         require APP . 'view/tipo_de_entrada/index.php';
         require APP . 'view/_templates/footer.php';
@@ -16,6 +19,9 @@ class tipo_de_entradaController
 
     public function formTipoEnt()
     {
+      if (!($_SESSION['Rol'] == 'Administrador')) {
+        header('Location: /Proyecto/jirehPC/error/error500');
+      }
         require APP . 'view/_templates/header.php';
         require APP . 'view/tipo_de_entrada/formTipoEnt.php';
         require APP . 'view/_templates/footer.php';
@@ -41,20 +47,20 @@ class tipo_de_entradaController
 
     public function crearTipoEnt()
     {
-        $this->tipoEnt->set('Nombre',$_POST['nomTipoE']);  
-        echo $this->tipoEnt->crearTipoEnt();  
+        $this->tipoEnt->set('Nombre',$_POST['nomTipoE']);
+        echo $this->tipoEnt->crearTipoEnt();
     }
 
     public function editarTipoEnt()
     {
-        $this->tipoEnt->set('Id_tipoEnt',$_POST['identificador']);  
-        $this->tipoEnt->set('Nombre',$_POST['nomTipoE']);  
-        echo $this->tipoEnt->editarTipoEnt();  
+        $this->tipoEnt->set('Id_tipoEnt',$_POST['identificador']);
+        $this->tipoEnt->set('Nombre',$_POST['nomTipoE']);
+        echo $this->tipoEnt->editarTipoEnt();
     }
 
     public function eliminarTipoEnt()
     {
-        $this->tipoEnt->set('Id_tipoEnt',$_POST['identificador']);  
-        echo $this->tipoEnt->eliminarTipoEnt();  
+        $this->tipoEnt->set('Id_tipoEnt',$_POST['identificador']);
+        echo $this->tipoEnt->eliminarTipoEnt();
     }
 }

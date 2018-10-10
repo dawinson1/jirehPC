@@ -10,9 +10,14 @@
  */
 
 namespace Mini\Controller;
-
-class ErrorController
+use Mini\Model\error;
+class errorController
 {
+
+    private $error;
+    function __construct(){
+        $this->error = new error();
+      }
     /**
      * PAGE: index
      * This method handles the error page that will be shown when a page is not found
@@ -21,7 +26,15 @@ class ErrorController
     {
         // load views
         require APP . 'view/_templates/header.php';
-        require APP . 'view/error/index.php';
+        require APP . 'view/error/error404.php';
+        require APP . 'view/_templates/footer.php';
+    }
+
+    public function error500()
+    {
+        // load views
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/error/error500.php';
         require APP . 'view/_templates/footer.php';
     }
 }

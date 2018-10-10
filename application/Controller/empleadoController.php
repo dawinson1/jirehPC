@@ -13,6 +13,9 @@ class empleadoController
 
     public function index()
     {
+      if (!($_SESSION['Rol'] == 'Administrador')) {
+        header('Location: /Proyecto/jirehPC/error/error500');
+      }
         require APP . 'view/_templates/header.php';
         require APP . 'view/empleado/index.php';
         require APP . 'view/_templates/footer.php';
@@ -20,15 +23,11 @@ class empleadoController
 
     public function formEmpleado()
     {
+      if (!($_SESSION['Rol'] == 'Administrador')) {
+        header('Location: /Proyecto/jirehPC/error/error500');
+      }
         require APP . 'view/_templates/header.php';
         require APP . 'view/empleado/formEmpleado.php';
-        require APP . 'view/_templates/footer.php';
-    }
-
-    public function editEmpleado()
-    {
-        require APP . 'view/_templates/header.php';
-        require APP . 'view/empleado/editEmpleado.php';
         require APP . 'view/_templates/footer.php';
     }
 

@@ -12,6 +12,9 @@ class estado_pedidoController
     }
     public function index()
     {
+      if (!($_SESSION['Rol'] == 'Administrador')) {
+        header('Location: /Proyecto/jirehPC/error/error500');
+      }
         require APP . 'view/_templates/header.php';
         require APP . 'view/estado_pedido/index.php';
         require APP . 'view/_templates/footer.php';
@@ -19,6 +22,9 @@ class estado_pedidoController
 
     public function formEstadosPedidos()
     {
+      if (!($_SESSION['Rol'] == 'Administrador')) {
+        header('Location: /Proyecto/jirehPC/error/error500');
+      }
         require APP . 'view/_templates/header.php';
         require APP . 'view/estado_pedido/formEstadosPedidos.php';
         require APP . 'view/_templates/footer.php';
@@ -44,20 +50,20 @@ class estado_pedidoController
 
     public function crearEstadoPedido()
     {
-        $this->estado_pedido->set('Nombre',$_POST['nomEstPedido']);  
-        echo $this->estado_pedido->crearEstadoPedido();  
+        $this->estado_pedido->set('Nombre',$_POST['nomEstPedido']);
+        echo $this->estado_pedido->crearEstadoPedido();
     }
 
     public function editarEstadoPedido()
     {
-        $this->estado_pedido->set('idEstadoPedido',$_POST['identificador']);  
-        $this->estado_pedido->set('Nombre',$_POST['nomEstPedido']);  
-        echo $this->estado_pedido->editarEstadoPedido();  
+        $this->estado_pedido->set('idEstadoPedido',$_POST['identificador']);
+        $this->estado_pedido->set('Nombre',$_POST['nomEstPedido']);
+        echo $this->estado_pedido->editarEstadoPedido();
     }
 
     public function eliminarEstadoPedido()
     {
-        $this->estado_pedido->set('idEstadoPedido',$_POST['identificador']);  
-        echo $this->estado_pedido->eliminarEstadoPedido();  
+        $this->estado_pedido->set('idEstadoPedido',$_POST['identificador']);
+        echo $this->estado_pedido->eliminarEstadoPedido();
     }
 }

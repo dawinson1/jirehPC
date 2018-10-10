@@ -9,6 +9,9 @@ class categoriaController
     }
     public function index()
     {
+      if (!($_SESSION['Rol'] == 'Administrador')) {
+        header('Location: /Proyecto/jirehPC/error/error500');
+      }
         require APP . 'view/_templates/header.php';
         require APP . 'view/categoria/index.php';
         require APP . 'view/_templates/footer.php';
@@ -16,6 +19,9 @@ class categoriaController
 
     public function formCategoria()
     {
+      if (!($_SESSION['Rol'] == 'Administrador')) {
+        header('Location: /Proyecto/jirehPC/error/error500');
+      }
         require APP . 'view/_templates/header.php';
         require APP . 'view/categoria/formCategoria.php';
         require APP . 'view/_templates/footer.php';
@@ -41,20 +47,20 @@ class categoriaController
 
     public function crearCategoria()
     {
-        $this->categoria->set('Nombre',$_POST['nomCat']);  
-        echo $this->categoria->crearCategoria();  
+        $this->categoria->set('Nombre',$_POST['nomCat']);
+        echo $this->categoria->crearCategoria();
     }
 
     public function editarCategoria()
     {
-        $this->categoria->set('id_categoria',$_POST['identificador']);  
-        $this->categoria->set('Nombre',$_POST['nomCat']);  
-        echo $this->categoria->editarCategoria();  
+        $this->categoria->set('id_categoria',$_POST['identificador']);
+        $this->categoria->set('Nombre',$_POST['nomCat']);
+        echo $this->categoria->editarCategoria();
     }
 
     public function eliminarCategoria()
     {
-        $this->categoria->set('id_categoria',$_POST['identificador']);  
-        echo $this->categoria->eliminarCategoria();  
+        $this->categoria->set('id_categoria',$_POST['identificador']);
+        echo $this->categoria->eliminarCategoria();
     }
 }

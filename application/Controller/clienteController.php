@@ -19,12 +19,7 @@ class clienteController
         require APP . 'view/cliente/formCliente.php';
         require APP . 'view/_templates/footer.php';
     }
-    public function editCliente()
-    {
-        require APP . 'view/_templates/header.php';
-        require APP . 'view/cliente/editCliente.php';
-        require APP . 'view/_templates/footer.php';
-    }
+
     public function listarCliente()
     {
        $cliente = $this->cliente->listarClientes();

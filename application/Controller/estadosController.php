@@ -9,6 +9,9 @@ class estadosController
     }
     public function index()
     {
+      if (!($_SESSION['Rol'] == 'Administrador')) {
+        header('Location: /Proyecto/jirehPC/error/error500');
+      }
         require APP . 'view/_templates/header.php';
         require APP . 'view/estados/index.php';
         require APP . 'view/_templates/footer.php';
@@ -16,6 +19,9 @@ class estadosController
 
     public function formEstado()
     {
+      if (!($_SESSION['Rol'] == 'Administrador')) {
+        header('Location: /Proyecto/jirehPC/error/error500');
+      }
         require APP . 'view/_templates/header.php';
         require APP . 'view/estados/formEstado.php';
         require APP . 'view/_templates/footer.php';
@@ -41,20 +47,20 @@ class estadosController
 
     public function crearEstado()
     {
-        $this->estados->set('nombre',$_POST['nomEstado']);  
-        echo $this->estados->crearEstado();  
+        $this->estados->set('nombre',$_POST['nomEstado']);
+        echo $this->estados->crearEstado();
     }
 
     public function editarEstado()
     {
-        $this->estados->set('id_estado',$_POST['identificador']);  
-        $this->estados->set('nombre',$_POST['nomEstado']);  
-        echo $this->estados->editarEstado();  
+        $this->estados->set('id_estado',$_POST['identificador']);
+        $this->estados->set('nombre',$_POST['nomEstado']);
+        echo $this->estados->editarEstado();
     }
 
     public function eliminarEstado()
     {
-        $this->estados->set('id_estado',$_POST['identificador']);  
-        echo $this->estados->eliminarEstado();  
+        $this->estados->set('id_estado',$_POST['identificador']);
+        echo $this->estados->eliminarEstado();
     }
 }

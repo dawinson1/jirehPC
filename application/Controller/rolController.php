@@ -10,6 +10,9 @@ class rolController
 
     public function index()
     {
+      if (!($_SESSION['Rol'] == 'Administrador')) {
+        header('Location: /Proyecto/jirehPC/error/error500');
+      }
         require APP . 'view/_templates/header.php';
         require APP . 'view/rol/index.php';
         require APP . 'view/_templates/footer.php';
@@ -17,6 +20,9 @@ class rolController
 
     public function formRol()
     {
+      if (!($_SESSION['Rol'] == 'Administrador')) {
+        header('Location: /Proyecto/jirehPC/error/error500');
+      }
         require APP . 'view/_templates/header.php';
         require APP . 'view/rol/formRol.php';
         require APP . 'view/_templates/footer.php';
@@ -42,20 +48,20 @@ class rolController
 
     public function crearRol()
     {
-        $this->rol->set('Nombre',$_POST['nomRol']);  
-        echo $this->rol->crearRol();  
+        $this->rol->set('Nombre',$_POST['nomRol']);
+        echo $this->rol->crearRol();
     }
 
     public function editarRol()
     {
-        $this->rol->set('idRol',$_POST['identificador']);  
-        $this->rol->set('Nombre',$_POST['nomRol']);  
-        echo $this->rol->editarRol();  
+        $this->rol->set('idRol',$_POST['identificador']);
+        $this->rol->set('Nombre',$_POST['nomRol']);
+        echo $this->rol->editarRol();
     }
 
     public function eliminarRol()
     {
-        $this->rol->set('idRol',$_POST['identificador']);  
-        echo $this->rol->eliminarRol();  
+        $this->rol->set('idRol',$_POST['identificador']);
+        echo $this->rol->eliminarRol();
     }
 }

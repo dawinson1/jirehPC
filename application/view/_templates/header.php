@@ -3,12 +3,13 @@
     namespace Mini\Controller;
 
     use PDO;
+  //validación que si haya sesion iniciada
 	if(!isset($_SESSION['username'])){
     header('Location: /Proyecto/jirehPC/login');
   }
 
   // Máxima duración de sesión activa en minutos
-  define( 'MAX_SESSION_TIEMPO', 60 * 5 );
+  define( 'MAX_SESSION_TIEMPO', 60 * 10 );
 
   // Controla cuando se ha creado y cuando tiempo ha recorrido
   if ( isset( $_SESSION[ 'ULTIMA_ACTIVIDAD' ] ) &&
@@ -84,7 +85,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="../../index2.html" class="logo">
+    <a href="<?php echo URL; ?>cliente" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>J</b>PC</span>
       <!-- logo for regular state and mobile devices -->
@@ -237,6 +238,9 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENÚ</li>
+
+        <?php if ($_SESSION['Rol'] == 'Administrador') {  ?>
+
         <li class="treeview">
           <a href="#">
             <i class="glyphicon glyphicon-user"></i> <span>Empleado</span>
@@ -250,6 +254,7 @@
           </ul>
         </li>
 
+        <?php } ?>
 
         <li class="treeview">
           <a href="#">
@@ -288,6 +293,9 @@
             <li><a href="<?php echo URL; ?>cliente/formCliente"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Cliente</a></li>
           </ul>
         </li>
+
+        <?php if ($_SESSION['Rol'] == 'Administrador') {  ?>
+
         <li class="treeview">
           <a href="#">
             <i class="glyphicon glyphicon-check"></i> <span>Existencias</span>
@@ -391,6 +399,7 @@
 
       <!--Tipo de Movimiento-->
 
+      <?php } ?>
 
       </ul>
 
