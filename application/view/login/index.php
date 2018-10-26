@@ -1,7 +1,7 @@
 <body background="<?php echo URL; ?>img/Azul.jpg">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Jireh</b>PC</a>
+    <a href="#"><b>Jireh</b>PC</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -25,7 +25,7 @@
       </div>
     </form>
 
-    <a href="#">He olvidado mi contraseña</a><br>
+    <a href="<?php echo URL; ?>login/recuPass">He olvidado mi contraseña</a><br>
     <a href="#" class="text-center">Registra cuenta nueva</a>
 
   </div>
