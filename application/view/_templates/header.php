@@ -281,6 +281,9 @@
             <li><a href="<?php echo URL; ?>producto/formProducto"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Productos</a></li>
           </ul>
         </li>
+
+        <?php if ($_SESSION['Rol'] == 'Administrador') {  ?> <!--ára inhabilitar  los forms en el rol cliente-->
+
         <li class="treeview">
           <a href="#">
             <i class="glyphicon glyphicon-user"></i> <span>Cliente</span>
@@ -293,6 +296,8 @@
             <li><a href="<?php echo URL; ?>cliente/formCliente"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Cliente</a></li>
           </ul>
         </li>
+
+         <?php } ?>
 
         <?php if ($_SESSION['Rol'] == 'Administrador') {  ?>
 

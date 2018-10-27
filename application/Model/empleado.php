@@ -14,6 +14,7 @@ class empleado extends Model
     private $idEmpleado;
     private $id_rol;
     private $id_estado;
+    private $Url_imgEmpleado;
 
 
     public function set($atributo,$valor){
@@ -49,7 +50,7 @@ class empleado extends Model
 
     public function crearEmpleado()
     {
-        $sql = "INSERT INTO empleado (nombre,apellido,telefono,correo,pass,idEmpleado,id_rol,id_estado) VALUES (?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO empleado (nombre,apellido,telefono,correo,pass,idEmpleado,id_rol,id_estado,Url_imgEmpleado) VALUES (?,?,?,?,?,?,?,?,?)";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->nombre);
         $query->bindParam(2,$this->apellido);
@@ -59,7 +60,17 @@ class empleado extends Model
         $query->bindParam(6,$this->idEmpleado);
         $query->bindParam(7,$this->id_rol);
         $query->bindParam(8,$this->id_estado);
+        $query->bindParam(9,$this->Url_imgEmpleado);
         return $query->execute();
+    }
+    
+    public function editarImgEmpleado()
+    {
+      $sql = "UPDATE empleado SET Url_imgEmpleado = ? WHERE idEmpleado = ?";
+      $query = $this->db->prepare($sql);
+      $query->bindParam(1,$this->Url_imgEmpleado);
+      $query->bindParam(2,$this->idEmpleado);
+      return $query->execute();
     }
 
 

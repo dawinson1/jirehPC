@@ -58,7 +58,8 @@ function start(){
                }
             }).done(function(data){
               if(data==1){
-                location.href = Url+'cliente';
+                //location.href = Url+'cliente';
+                setTimeout("location.href = Url+'producto'",500);
               }
               if(data==2){
                 swal("Upss", "Usuario y/o Contraseña no son correctos!", "error");

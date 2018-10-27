@@ -153,7 +153,7 @@
             <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
 
               <div class="form-group hidden" id="DivInputImg"> <!--Comienzo del div contenedor del input-->
-                  <label for="idClientMimg" >Cedula o NIT</label>
+                  <label for="idClientMimg" >Cédula</label>
 
                   <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                       <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
@@ -164,7 +164,7 @@
               </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="imgClient" >Selecciones imagen de perfil</label>
+                    <label for="imgClient" >Seleccione imagen de perfil</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
 
