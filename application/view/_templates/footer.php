@@ -2,7 +2,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.0
     </div>
-    <strong>Copyright &copy; <?=date('Y')?> <a href="http://oferta.senasofiaplus.edu.co/sofia-oferta/">Sena</a>.</strong> Todos los derechos reservados
+    <strong>Copyright &copy; <?=date('Y')?> C.G Software  .</strong> Todos los derechos reservados
   </footer>
 
   <!-- Control Sidebar -->
