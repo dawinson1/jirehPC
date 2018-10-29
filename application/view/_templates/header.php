@@ -249,9 +249,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>empleado"><i class="fa fa-table"></i> Tabla Empleado</a></li>
-            <li><a href="<?php echo URL; ?>empleado/formEmpleado"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Empleado</a></li>
+            <li><a href="<?php echo URL; ?>empleado"><i class="fa fa-table"></i> Consultar Empleado</a></li>
+            <li><a href="<?php echo URL; ?>empleado/formEmpleado"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Empleado</a></li>
           </ul>
+
         </li>
 
         <?php } ?>
@@ -264,8 +265,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>pedido"><i class="fa fa-table"></i> Tabla Pedidos</a></li>
-            <li><a href="<?php echo URL; ?>pedido/formPedidos"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Pedidos</a></li>
+            <li><a href="<?php echo URL; ?>pedido"><i class="fa fa-table"></i> Consultar Pedidos</a></li>
+            <li><a href="<?php echo URL; ?>pedido/formPedidos"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Pedidos</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -277,8 +278,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>producto"><i class="fa fa-table"></i> Tabla Productos</a></li>
-            <li><a href="<?php echo URL; ?>producto/formProducto"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Productos</a></li>
+            <li><a href="<?php echo URL; ?>producto"><i class="fa fa-table"></i> Consultar Productos</a></li>
+            <li><a href="<?php echo URL; ?>producto/formProducto"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Productos</a></li>
           </ul>
         </li>
 
@@ -292,8 +293,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>cliente"><i class="fa fa-table"></i> Tabla Cliente</a></li>
-            <li><a href="<?php echo URL; ?>cliente/formCliente"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Cliente</a></li>
+            <li><a href="<?php echo URL; ?>cliente"><i class="fa fa-table"></i> Consultar Cliente</a></li>
+            <li><a href="<?php echo URL; ?>cliente/formCliente"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Cliente</a></li>
           </ul>
         </li>
 
@@ -309,7 +310,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-table"></i> Tabla Existencias</a></li>
+            <li><a href="#"><i class="fa fa-table"></i> Consultar Existencias</a></li>
           </ul>
         </li>
 
@@ -325,8 +326,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>rol"><i class="fa fa-table"></i> Tabla Roles</a></li>
-            <li><a href="<?php echo URL; ?>rol/formRol"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Rol</a></li>
+            <li><a href="<?php echo URL; ?>rol"><i class="fa fa-table"></i> Consultar Roles</a></li>
+            <li><a href="<?php echo URL; ?>rol/formRol"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Rol</a></li>
           </ul>
 
         </li>
@@ -342,8 +343,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>estados"><i class="fa fa-table"></i> Tabla Estados</a></li>
-            <li><a href="<?php echo URL; ?>estados/formEstado"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Estado</a></li>
+            <li><a href="<?php echo URL; ?>estados"><i class="fa fa-table"></i> Consultar Estados</a></li>
+            <li><a href="<?php echo URL; ?>estados/formEstado"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Estado</a></li>
           </ul>
 
         </li>
@@ -360,8 +361,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>estado_pedido"><i class="fa fa-table"></i> Tabla Estados Pedidos</a></li>
-            <li><a href="<?php echo URL; ?>estado_pedido/formEstadosPedidos"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Estado Pedidos</a></li>
+            <li><a href="<?php echo URL; ?>estado_pedido"><i class="fa fa-table"></i> Consultar Estados Pedidos</a></li>
+            <li><a href="<?php echo URL; ?>estado_pedido/formEstadosPedidos"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Estado Pedidos</a></li>
           </ul>
 
         </li>
@@ -378,8 +379,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>categoria"><i class="fa fa-table"></i> Tabla Categorias</a></li>
-            <li><a href="<?php echo URL; ?>categoria/formCategoria"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Estado Pedidos</a></li>
+            <li><a href="<?php echo URL; ?>categoria"><i class="fa fa-table"></i> Consultar Categorias</a></li>
+            <li><a href="<?php echo URL; ?>categoria/formCategoria"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Estado Pedidos</a></li>
           </ul>
 
         </li>
@@ -396,8 +397,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>tipo_de_entrada"><i class="fa fa-table"></i> Tabla Tipo de Entrada</a></li>
-            <li><a href="<?php echo URL; ?>tipo_de_entrada/formTipoEnt"><i class="glyphicon glyphicon-plus-sign"></i> Formulario Tipo de Entrada</a></li>
+            <li><a href="<?php echo URL; ?>tipo_de_entrada"><i class="fa fa-table"></i> Consultar Tipo de Entrada</a></li>
+            <li><a href="<?php echo URL; ?>tipo_de_entrada/formTipoEnt"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Tipo de Entrada</a></li>
           </ul>
 
         </li>
