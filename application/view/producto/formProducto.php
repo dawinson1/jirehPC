@@ -1,5 +1,5 @@
 <div class="content-wrapper">
-  <center><h3 class="box-title">Registrar Producto</h3></center>
+  <center><h3 class="box-title">Registrar un nuevo Producto</h3></center>
 <section class="content">
 <div class="row">
 
