@@ -5,9 +5,9 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg"></p>
+    <p class="login-box-msg" id="msgRecuPass"></p>
 
-    <form action="" method="" autocomplete="off">
+    <form action="" method="" autocomplete="off" id="formRecuPass">
       <div class="form-group newPassInput has-feedback">
         <input type="password" class="form-control" placeholder="Digite su nueva contraseña"
         onkeypress="process(event, this)" id="pass1" name="pass1" maxlength="15">
@@ -79,8 +79,9 @@ function newPass(){
             }).done(function(data){
               if (data=='Update success') {
                 swal("Felicidades","Su contraseña se ha actualizado correctamente", "success");
-                $('#pass1').val('');
-                $('#pass2').val('');
+                $('#formRecuPass').remove();
+                $('#msgRecuPass').append('Has restaurado su contraseña exitosamente, ahora puedes'+
+                 '<a href="href="<?php echo URL; ?>login">Iniciar sesión<a/>');
               }
               if (data=='Delete Token Error') {
                 $('#alertsNewPass').text('Hubo un error al eliminar el token');
@@ -114,7 +115,9 @@ function newPass(){
          }
       }).done(function(data){
         if (data=='no encontro datos') {
-          location.href = Url+'login';
+          $('#formRecuPass').remove();
+          $('#msgRecuPass').append('Este enlace de restablecimiento de contraseña ha caducado. Haga '+
+           '<a href="href="<?php echo URL; ?>login">clic aquí<a/>'+' para volver a enviar un nuevo enlace de restablecimiento de contraseña.');
         }
         if (data=='email no coincide') {
           location.href = Url+'login';
