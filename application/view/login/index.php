@@ -9,11 +9,11 @@
 
     <form action="" method="" autocomplete="off">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Escriba su cédula o NIT" onkeypress="process(event, this)" id="CCoNIT" name="CCoNIT">
+        <input type="text" class="form-control" placeholder="Escriba su cédula" onkeypress="process(event, this)" id="CCoNIT" name="CCoNIT" maxlength="14">
         <span class="fa fa-address-card form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Ingrese su contraseña" onkeypress="process(event, this)" id="passlog" name="passlog" autocomplete="off">
+        <input type="password" class="form-control" placeholder="Ingrese su contraseña" onkeypress="process(event, this)" id="passlog" name="passlog" maxlength="15">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -24,7 +24,7 @@
         <!-- /.col -->
       </div>
     </form>
-
+    <br>
     <a href="<?php echo URL; ?>login/recuPass">He olvidado mi contraseña</a><br>
     <a href="#" class="text-center">Registra cuenta nueva</a>
 

@@ -59,7 +59,7 @@ function recu(){
           $('#emailInput').removeClass('has-error');
           swal({
             title: "Espere un momento por favor",
-            text: "Estamos generando el correo para restaurar su contraseña",
+            text: " ",
             icon: Url+'img/gif/Loading_icon.gif',
             imageClass: "contact-form-image",
             buttons: false,
