@@ -22,8 +22,10 @@
                   <th>Cédula</th>
                   <th>Rol</th>
                   <th>Estado</th>
+                  <th>Foto Perfil</th>
                   <th>Editar</th>
                   <th>Eliminar</th>
+                  <th>Actualizar<br>Foto</th>
                 </tr>
                 </thead>
               </table>
@@ -153,6 +155,56 @@
 
 </div>
 </div>
+<!-- Ventan modal para la actualización de la imagen de perfil-->
+
+<div class="modal fade" id="myModalFile" role="dialog"> <!--Div que contiene la ventana modal-->
+<div class="modal-dialog">
+
+<section class="content modal-content">
+<div class="box box-info">
+            <div class="box-header modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 class="box-title">Actualizar Foto de perfil</h3>
+            </div>
+            <form autocomplete="off" enctype="multipart/form-data" id="actImgPerfilEmpleado">
+            <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
+
+              <div class="form-group hidden" id="DivInputImg"> <!--Comienzo del div contenedor del input-->
+                  <label for="idEmpleadoimg" >Cédula:</label>
+
+                  <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
+                      <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
+                      <input type="text" class="form-control"
+                          name="idEmpleadoimg" id="idEmpleadoimg">
+
+                  </div><!--cierre div del inputt-->
+              </div> <!--cierre del div contenedor del input-->
+
+                <div class="form-group"> <!--Comienzo del div contenedor del input-->
+                    <label for="imgEmpleado" >Seleccione Imagen de Perfil</label>
+
+                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
+
+                        <input type="file" class="form-control"
+                            name="imgEmpleado" id="imgEmpleado">
+
+                    </div><!--cierre div del inputt-->
+                </div> <!--cierre del div contenedor del input-->
+
+
+            </div> <!--Cierre del Div contenedor-->
+            </form>
+
+            <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-info pull-right" onclick="actuaImg()">Actualizar</button>
+              </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
+            </div>
+
+          </section>
+
+</div>
+</div>
 
 <script>
 $(document).ready(function() {
@@ -172,8 +224,13 @@ $(document).ready(function() {
             { "data": "Cédula","className": 'centeer'  },
             { "data": "Rol","className": 'centeer' },
             { "data": "Estado", "className": 'centeer'},
+            { "data": "Foto Perfil", "render":function(data,type,row){
+              return '<center><img src="<?php echo URL; ?>'+data+'" width="120" height="80" /></center>';
+              }
+            },
             { "data": "Editar", "orderable": false},
-            { "data": "Eliminar", "orderable": false}
+            { "data": "Eliminar", "orderable": false},
+            { "data": "Actualizar Foto", "orderable": false  }
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
         "scrollX": false,
@@ -245,6 +302,13 @@ function editarEmpleado(idEm,nomEm,apeEm,telEm,mailEm,idRol,idEstado) //funcion 
   document.getElementById("idEmpleado").disabled = true;
   $("#myModal").modal("show");
 }
+
+$('#imgEmpleado').fileinput({
+        theme: 'fa',
+        language: 'es',
+        showUpload : false,
+        allowedFileExtensions: ['jpg', 'png', 'jpeg']
+    });
 
 
 function enviarEditEmpleado() //funcion para enviar los cambios al controlador
@@ -334,6 +398,52 @@ function enviarEditEmpleado() //funcion para enviar los cambios al controlador
             })
         }
 }
+
+function actuaImg() //funcion para enviar los cambios al controlador
+{
+  var datosimg = new FormData($('#actImgPerfilEmpleado')[0]);
+  console.log(datosimg)
+
+      $.ajax({
+          url: Url+'/empleado/actImgEmpleado',
+          type:'POST',
+          data: datosimg,
+          contentType: false,
+          processData: false,
+        }).done(function(data){
+          if (data=='Error Archivo') {
+            swal("Algo anda mal!", "Es posible que la imagen este dañada!", "error");
+          }
+          if (data=='img no permitida') {
+            swal("¿Que haces?", "Este formato no esta permitido!", "error");
+          }
+          if (data=='La imagen ya existe') {
+            swal("Wow", "Esta imagen ya existe! Intenta cambiarle el nombre a tu archivo.", "error");
+          }
+          if (data=='Error al guardar imagen') {
+            swal("Lo sentimos :(", "Hubo un error al guardar la imagen", "error");
+          }
+          if (data==1) {
+            swal("Bien Hecho!", "La tu imagen  ha sido actualizada!", "success");
+            $('#idEmpleadoimg').val('');
+            $('#imgEmpleado').fileinput('clear');
+            $("#myModalFile").modal("hide");
+            tabla.ajax.reload(null,false);
+          }
+
+          })
+}
+
+
+function showModalImg(idEm) //funcion plasmar los datos del usuario en los inputs
+{
+  $('#idEmpleadoimg').val(idEm);
+  //document.getElementById("idClientMimg").disabled = true;
+  $('#DivInputImg').hide();
+  $("#myModalFile").modal("show");
+}
+
+
 
 $(function(){
   listarSelectRol();

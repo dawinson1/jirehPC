@@ -43,6 +43,7 @@ class empleadoController
            $nomRol= $value['nombrerol']; // se cambió por nombrerol para que apareciera el nombre del rol en la tabla
            $idRol= $value['id_rol'];
            $idEstado =$value['id_estado'];
+           $imgE = $value['Url_imgEmpleado'];
            $datos[] = array(
                'Nombre'=> $value['nombre'],
                'Apellido'=>$value['apellido'],
@@ -53,6 +54,8 @@ class empleadoController
                'Estado'=>$value['id_estado'],
                'Editar'=>['<button type="button" class="btn btn-primary" id="editEmpleado" onclick="editarEmpleado
                ('.$idEm.','."'".$nomEm."'".','."'".$apeEm."'".','."'".$telEm."'".','."'".$mailEm."'".','."'".$idRol."'".','."'".$idEstado."'".',)">Editar</button>'],
+               'Foto Perfil'=>$value['Url_imgEmpleado'],
+               'Actualizar Foto'=>['<button type="button" class="btn btn-primary" onclick="showModalImg('.$idEm.')"><i class="fa fa-file-image-o"></i></button>'],
                'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarEmpleado('.$idEm.')">Eliminar</button>']
            );
        }
@@ -61,7 +64,6 @@ class empleadoController
 
     public function crearEmpleado()
     {
-
         $this->empleado->set('nombre',$_POST['nombre']);
         $this->empleado->set('apellido',$_POST['apellido']);
         $this->empleado->set('telefono',$_POST['telefono']);
@@ -70,8 +72,8 @@ class empleadoController
         $this->empleado->set('idEmpleado',$_POST['idEmpleado']);
         $this->empleado->set('id_rol',$_POST['id_rol']);
         $this->empleado->set('id_estado',$_POST['id_estado']);
+        $this->empleado->set('Url_imgEmpleado',$_POST['perfilEmpleado']);
         echo $this->empleado->crearEmpleado();
-
     }
 
     public function editarEmpleado()
@@ -86,8 +88,72 @@ class empleadoController
         echo $this->empleado->editarEmpleado();
     }
 
+    public function actImgEmpleado()
+    {
+        $this->empleado->set('idEmpleado',$_POST['idEmpleadoimg']);
+
+        //Declaramos las variables que necesitaremos para la validacion de la imagen
+        $id_Empleado = $_POST['idEmpleadoimg']; // esta variable sirve para guardar la imagen en una carpeta con su  id
+        $imgPerfil = $_FILES['imgEmpleado']; // aqui guardamos el nombre de la imagen
+
+        if ($imgPerfil["error"]>0) { // verifica si el Archivo no contenga algun error
+          echo "Error Archivo";
+        } else { // si el archivo está esta bien procedera a ejecutar la siguientes instrucciones
+
+          $imgPermitidas = array("image/png", "image/jpg", "image/jpeg"); //array que contiene la extension de imagenes permitidas
+
+          if (in_array($imgPerfil["type"], $imgPermitidas)) { // validacion si el tipo de imagen es valida
+
+            $ruta = 'img/perfiles/'.$id_Empleado.'/'; //ruta en donde se guardará la imagen
+            $nombreImg = $ruta.$imgPerfil["name"]; //nombre de la imagen con la ruta concatenada
+
+            if (!file_exists($ruta)) { // valida si la carpeta no existá, si es así, la crea
+              mkdir($ruta);
+            }
+            /*
+            if (!file_exists($nombreImg)) { //si la imagen no existe, procedera a mover la imagen a la carpeta (opcional)
+            */
+              $resultado = @move_uploaded_file($imgPerfil["tmp_name"], $nombreImg);
+
+              if ($resultado) { //si el resutado es verdadero envio los datos al Modelo
+
+                $this->empleado->set('Url_imgEmpleado',$nombreImg);
+                echo $this->empleado->editarImgEmpleado();
+
+              } else { //si llega haber alguna falla a guardar al imagen mostrará este mensaje
+                echo "Error al guardar imagen";
+              }
+
+            /*} else { //si la imagen existe enviará este mensaje
+              echo "La imagen ya existe";
+            }*/
+
+          } else { // si no es valida mostrará este echo
+            echo "img no permitida";
+          }
+
+        } // fin validaciones
+
+    }
+
     public function eliminarEmpleado()
     {
+      $id = $_POST['idEmpleado'];
+      $carpeta = ('img/perfiles/'.$id);
+
+
+    		foreach(glob($carpeta . "/*") as $archivos_carpeta)
+    		{
+    			if (is_dir($archivos_carpeta))
+    			{
+    				eliminarDir($archivos_carpeta);
+    			}
+    			else
+    			{
+    				unlink($archivos_carpeta);
+    			}
+    		}
+    		rmdir($carpeta);
         $this->empleado->set('idEmpleado',$_POST[('idEmpleado')]); /*el de la izq es de la bd, izq viene por ajax*/
         echo $this->empleado->eliminarEmpleado();
     }

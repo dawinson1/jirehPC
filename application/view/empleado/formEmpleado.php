@@ -190,7 +190,8 @@
                 correo: correo,
                 passEmpl: pass,
                 id_rol: id_rol,
-                id_estado: id_estado
+                id_estado: id_estado,
+                perfilEmpleado: imgEmpleado
                }
             }).done(function(data){
                 if(data){

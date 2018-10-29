@@ -9,12 +9,18 @@ class clienteController
     }
     public function index()
     {
+      if (!($_SESSION['Rol'] == 'Administrador')) {
+        header('Location: /Proyecto/jirehPC/error/error500');
+      }
         require APP . 'view/_templates/header.php';
         require APP . 'view/cliente/index.php';
         require APP . 'view/_templates/footer.php';
     }
     public function formCliente()
     {
+      if (!($_SESSION['Rol'] == 'Administrador')) {
+        header('Location: /Proyecto/jirehPC/error/error500');
+      }
         require APP . 'view/_templates/header.php';
         require APP . 'view/cliente/formCliente.php';
         require APP . 'view/_templates/footer.php';
