@@ -35,6 +35,14 @@ class producto extends Model
         return $query->fetchAll();
     }
 
+    public function listarCatalogo()
+    {
+        $sql = "SELECT referencia, nombreProducto, cantidad, precioUnit, marca, Url_imgProduct FROM producto";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
     public function buscarProducto()
     {
         $sql = "SELECT * FROM producto WHERE referencia = ?";

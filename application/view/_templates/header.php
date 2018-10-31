@@ -280,6 +280,7 @@
           <ul class="treeview-menu">
             <li><a href="<?php echo URL; ?>producto"><i class="fa fa-table"></i> Consultar Productos</a></li>
             <li><a href="<?php echo URL; ?>producto/formProducto"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Productos</a></li>
+            <li><a href="<?php echo URL; ?>producto/catalogo"><i class="fa fa-cubes"></i> Catálogo</a></li>
           </ul>
         </li>
 

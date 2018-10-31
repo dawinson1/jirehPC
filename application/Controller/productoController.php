@@ -25,6 +25,12 @@ class productoController
         require APP . 'view/producto/editarProducto.php';
         require APP . 'view/_templates/footer.php';
     }
+    public function catalogo()
+    {
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/producto/catalogo.php';
+        require APP . 'view/_templates/footer.php';
+    }
     public function listarProducto()
     {
        $producto = $this->producto->listarProductos();
@@ -198,6 +204,13 @@ class productoController
     {
       $categoria = $this->producto->listarCategoria();
       echo json_encode($categoria);
+
+    }
+
+    public function listarCatalogo()
+    {
+      $catalogo = $this->producto->listarCatalogo();
+      echo json_encode($catalogo);
 
     }
 }
