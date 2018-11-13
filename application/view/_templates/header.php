@@ -55,7 +55,9 @@
   <script src="<?php echo URL; ?>js/jquery.min.js"></script>
   <!--js Sweet alert-->
   <script src="<?php echo URL; ?>js/sweetalert.min.js"></script>
-
+  <!--simple pagination-->
+  <script src="<?php echo URL; ?>js/jquery.simplePagination.js"></script>
+  <link rel="stylesheet" href="<?php echo URL; ?>css/simplePagination.css">
   <!--js plugin file input-->
   <script src="<?php echo URL; ?>js/fileinput.min.js"></script>
   <script src="<?php echo URL; ?>js/locales/es.js"></script>

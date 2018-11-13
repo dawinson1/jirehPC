@@ -43,6 +43,14 @@ class producto extends Model
         return $query->fetchAll();
     }
 
+    public function countCatalogo()
+    {
+        $sql = "SELECT COUNT(*) AS conteo FROM producto";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll()[0]['conteo'];
+    }
+
     public function buscarProducto()
     {
         $sql = "SELECT * FROM producto WHERE referencia = ?";
@@ -109,5 +117,13 @@ class producto extends Model
         $query->bindParam(1,$this->referencia);
         return $query->execute();
 
+    }
+
+    public function pagProducts($limit, $start_from)
+    {
+      $sql = "SELECT * FROM producto ORDER BY referencia ASC LIMIT $start_from, $limit";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+      return $query->fetchAll();
     }
 }

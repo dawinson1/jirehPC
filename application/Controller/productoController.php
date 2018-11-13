@@ -27,6 +27,7 @@ class productoController
     }
     public function catalogo()
     {
+        $cantidadRegistros = $this->countCatalogo();
         require APP . 'view/_templates/header.php';
         require APP . 'view/producto/catalogo.php';
         require APP . 'view/_templates/footer.php';
@@ -211,6 +212,17 @@ class productoController
     {
       $catalogo = $this->producto->listarCatalogo();
       echo json_encode($catalogo);
+    }
 
+    public function countCatalogo()
+    {
+      $countCatalogo = $this->producto->countCatalogo();
+      return $countCatalogo;
+    }
+
+    public function pagProducts($limit, $start_from)
+    {
+      $productosPag = $this->producto->countCatalogo();
+      return $productosPag;
     }
 }

@@ -225,7 +225,7 @@ $(document).ready(function() {
             { "data": "Actualizar Imagen", "orderable": false  },
             { "data": "Eliminar", "orderable": false  }
         ],
-        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
+        "lengthMenu": [[5, 10, 15, 100, -1], [5, 10, 15, 100, "Todo"]],
         "scrollX": false,
         // "dom": 'lrtipB',
         "language": {
@@ -306,7 +306,7 @@ else if ((Max_referencia > Max_LengthReferencia) ||(Max_nombreProducto > Max_Len
                 cantPro: cantidad,
                 stockPro: stock,
                 preUni: precioUnit,
-                nMarc: marca    
+                nMarc: marca
         }
     }).done(function(data){
         if(data){

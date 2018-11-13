@@ -1,10 +1,12 @@
 <body background="<?php echo URL; ?>img/Azul.jpg">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Jireh</b>PC</a>
+    <a href="#">
+    <h2 style="color:white; font-size:120%; text-shadow: 3px 3px black;"><b>Jireh</b> PC</h2>
+    </a>
   </div>
   <!-- /.login-logo -->
-  <div class="login-box-body">
+  <div class="login-box-body" style="border-radius: 15px;">
     <p class="login-box-msg" id="msgRecuPass"></p>
 
     <form action="" method="" autocomplete="off" id="formRecuPass">

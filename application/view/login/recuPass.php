@@ -2,10 +2,12 @@
 <div class="login-box">
 
   <div class="login-logo">
-    <a href="../../index2.html"><b>Jireh</b>PC</a>
+    <a href="#">
+    <h2 style="color:white; font-size:120%; text-shadow: 3px 3px black;"><b>Jireh</b> PC</h2>
+    </a>
   </div>
   <!-- /.login-logo -->
-  <div class="login-box-body">
+  <div class="login-box-body" style="border-radius: 15px;">
     <p class="login-box-msg">A continuación enviaremos una dirección a su correo para continuar con el proceso de restaurar su contraseña</p>
 
     <form action="" method="" autocomplete="off">

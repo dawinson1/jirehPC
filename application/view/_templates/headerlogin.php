@@ -20,6 +20,8 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="<?php echo URL; ?>css/blue.css">
 
+  <script src="<?php echo URL; ?>js/jquery.min.js"></script>
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
