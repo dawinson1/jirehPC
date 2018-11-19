@@ -4,22 +4,22 @@
 <div class="row">
 
 <div class="col-md-12">
-<div class="box box-info">
+  <div class="box box-info">
 
-            <form autocomplete="off">
+          <form enctype="multipart/form-data" autocomplete="off" id="datosPedido">
             <div class="box-body"> <!--Este Div es contenedor de los imputs-->
 
 
                 <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="idClient" >Cédula o NIT del cliente</label>
+                    <label for="idClient" >Cédula del cliente</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese la cédula o el NIT del Cliente"
-                            name="idClient" id="idClient">
+                        <input type="text" class="form-control" placeholder="Haz clic en la lupa para buscar"
+                            name="idClient" id="idClient" readonly="readonly" maxlength="10">
 
                             <span class="input-group-btn">
-                              <button type="button" class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
+                              <button type="button" class="btn btn-info btn-flat" onclick="modalCli()"><i class="fa fa-search"></i></button>
                             </span>
 
                     </div><!--cierre div del inputt-->
@@ -31,7 +31,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
                         <input type="text" class="form-control"
-                        name="nomCliente" id="nomCliente" disabled>
+                        name="nomCliente" id="nomCliente">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -41,11 +41,11 @@
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese la cédula o el NIT del Cliente"
-                            name="idEmployee" id="idEmployee">
+                        <input type="text" class="form-control" placeholder="Haz clic en la lupa para buscar"
+                            name="idEmployee" id="idEmployee" readonly="readonly" maxlength="10">
 
                             <span class="input-group-btn">
-                              <button type="button" class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
+                              <button type="button" class="btn btn-info btn-flat" onclick="modalEmp()"><i class="fa fa-search"></i></button>
                             </span>
 
                     </div><!--cierre div del inputt-->
@@ -65,12 +65,10 @@
                 <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
                     <label for="direcCliente">Estado</label>
 
-                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
+                    <div class="input-group"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-map-signs"></i></span>
-                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                          <option selected="selected">Elige un estado al pedido</option>
-                          <option value="1">Pendiente</option>
-                          <option value="2">Finalizado</option>
+                        <select id="selectEstado" name="selectEstado" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true">
+
                         </select>
 
                     </div><!--cierre div del inputt-->
@@ -83,52 +81,104 @@
                     <div class="input-group-addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control pull-right" id="datepicker">
+                    <input type="text" class="form-control pull-right" name="datepicker" id="datepicker" readonly="readonly">
                   </div>
                 </div> <!--Cierre del Div contenedor-->
 
-                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="refProduct">Agregar producto</label>
-
-                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-
-                        <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat" onclick="srcProduct()"><i class="fa fa-plus"></i></button>
-                        </span>
-
-                    </div><!--cierre div del inputt-->
-                </div> <!--cierre del div contenedor del input-->
-
-                <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                  <table class="table table-striped table-bordered" style="width:100%">
-                      <thead>
-                      <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                      </tr>
-                      </thead>
-                      <tbody id="addProducts">
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-            </div> <!--Cierre del Div contenedor-->
-
-            </div>
-</div> <!--cierre div col-md-12-->
-
-
-<div class="col-md-12">
+                <h4><b>Total Pedido: $<b class="totalPedido">0</b></b></h4>
+                <input type="text" class="totalPedido hidden" name="totalPedido">
 
             </form>
 
-            <div class="box-footer"> <!--Div que separa el formulario y contendrá los botones-->
-                <button type="button" class="btn btn-default">Cancelar</button>
-                <button type="button" class="btn btn-info pull-right" onclick="registrar()">Registrar</button>
+              <div class="col-md-12">
+
+              </div>
+    </div>
+  </div> <!--Cierre del Div contenedor-->
+</div>
+
+  <div class="col-md-12">
+    <div class="box box-body">
+      <div class="form-group"> <!--Comienzo del div contenedor del input-->
+          <div class="col-md-offset-5"><h4>Seleccione un producto</h4></div>
+
+          <div class="input-group my-colorpicker2 colorpicker-element col-md-12"> <!--comienzo div del inputt-->
+
+                <table class="table table-striped table-bordered" id="listProducts" style="width:100%">
+                    <thead>
+                    <tr>
+                      <th>Referencia</th>
+                      <th>Producto</th>
+                      <th>Cantidad <br> disponible</th>
+                      <th>Precio</th>
+                      <th>Ingrese cantidad</th>
+                      <th>Opción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($listProdPed as $list):
+                        $refer = $list['referencia'];
+                        $nomProd = $list['nombreProducto'];
+                        $cantProd = $list['cantidad'];
+                        $precioProd = $list['precioUnit'];
+                      ?>
+                        <tr>
+                          <td><?php echo $refer ?></td>
+                          <td><?php echo $nomProd ?></td>
+                          <td><?php echo $cantProd ?></td>
+                          <td><?php echo $precioProd ?></td>
+                          <td> <input type="text" name="cantProdInput"  id ="<?php echo $refer; ?>" placeholder="Digite una cantidad" maxlength="3"> </td>
+                          <td>
+                            <button type="button" class="btn btn-primary"
+                            onclick="selectProd('<?php echo $refer; ?>', '<?php echo $nomProd; ?>', '<?php echo $precioProd; ?>')">Seleccionar</button>
+                         </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                  </table>
+
+          </div>
+      </div>
+    </div>
+  </div>
+
+        <form enctype="multipart/form-data" autocomplete="off" id="datosDetallePedido">
+          <div class="col-md-12">
+            <div class="box">
+              <table class="table table-striped table-bordered" style="width:100%" id="addProducts">
+                  <thead>
+                  <tr>
+                    <th>Referencia</th>
+                    <th>Producto</th>
+                    <th>Cantidad solicitada</th>
+                    <th>Precio unitario</th>
+                    <th> Precio total</th>
+                    <th>Opción</th>
+                  </tr>
+                  </thead>
+                  <tbody id="listDetalle">
+                  </tbody>
+                </table>
+
+                <div class="container">
+                  <h4><b>Total Pedido: $<b class="totalPedido">0</b></b></h4>
+                </div>
+              </div>
+          </div>
+        </form>
+
+          <div class="col-md-12">
+
+              <div class="box-footer"> <!--Div que separa el formulario y contendrá los botones-->
+                  <button type="button" class="btn btn-default">Cancelar</button>
+                  <button type="button" class="btn btn-info pull-right" onclick="registrar()">Registrar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
 
-</div> <!--cierre div col-md-6-->
+          </div> <!--cierre div col-md-6-->
+</div> <!--cierre div col-md-12-->
+
+
+
 
 </div> <!--cierre div row-->
           </section>
@@ -136,163 +186,222 @@
 
 <!-- Ventan modal para la actualización de la imagen de perfil-->
 
-<div class="modal fade" id="Addproducts" role="dialog"> <!--Div que contiene la ventana modal-->
-<div class="modal-dialog modal-sm">
+<div class="modal fade" id="modalSelectClient" role="dialog"> <!--Div que contiene la ventana modal-->
+  <div class="modal-dialog modal-sm">
 
-<section class="content modal-content">
-<div class="box box-info">
-            <div class="box-header modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 class="box-title">Seleccione un producto</h3>
-            </div>
+    <section class="content modal-content" style="border-radius: 10px;">
+      <div class="box box-info">
+        <div class="box-header modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h3 class="box-title">Buscar Cliente</h3>
+        </div>
             <div class="box-body"> <!--Este Div es contenedor de los imputs-->
               <!-- /.box-header -->
-              <div class="form-group">
+              <div class="form-group id_label_single">
 
-                  <label form="">Selecciones un producto</label>
-                  <select id="productSelect" class="form-control" name="productSelect">
+                  <label form="">Lista de Clientes</label>
+                  <select id="clientSelect" class="form-control js-example-basic-single"
+                    name="clientSelect" style="width: 100%">
 
                   </select>
 
               </div>
 
-              <div class="form-group">
-                  <label for="cantidadProduct" >Cantidad</label>
-                      <span></span>
-                      <input type="text" class="form-control"
-                          name="cantidadProduct" id="cantidadProduct">
-
-              </div> <!--cierre del div contenedor del input-->
               <!-- /.box-body -->
             </div>
-            </div>
+      </div>
             <!-- /.box -->
 
-            <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-info pull-right" onclick="agregar()">Agregar</button>
-              </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
-            </div>
+      <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-info pull-right" onclick="agregar()">Agregar</button>
+      </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
+  </div>
 
-          </section>
+    </section>
+
+</div>
+
+<div class="modal fade" id="modalSelectEmp" role="dialog"> <!--Div que contiene la ventana modal-->
+  <div class="modal-dialog modal-sm">
+
+    <section class="content modal-content" style="border-radius: 10px;">
+      <div class="box box-info">
+        <div class="box-header modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h3 class="box-title">Buscar Empleado</h3>
+        </div>
+            <div class="box-body"> <!--Este Div es contenedor de los imputs-->
+              <!-- /.box-header -->
+              <div class="form-group id_label_single">
+
+                  <label form="">Lista de Empleados</label>
+                  <select id="empSelect" class="form-control js-example-basic-single"
+                    name="empSelect" style="width: 100%">
+
+                  </select>
+
+              </div>
+
+              <!-- /.box-body -->
+            </div>
+      </div>
+            <!-- /.box -->
+
+      <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-info pull-right" onclick="agregarEmp()">Agregar</button>
+      </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
+  </div>
+
+    </section>
 
 </div>
 </div>
 
 <script>
-        function registrar(){
-        var patronNum = /[0-9]/;
-        var patronLetrEspecial = /\D/;
-        var patronSoloLetr = /[^A-Za-z ]/;
-        var patronCorreo = /\w+@\w+\.+[a-z]/;
+function registrar(){
+  var patronNum = /[0-9]/;
+  var patronLetrEspecial = /\D/;
+  var patronSoloLetr = /[^A-Za-z ]/;
+  var patronCorreo = /\w+@\w+\.+[a-z]/;
 
-        var id_cliente = $('#identificador').val();
-        var nombreCliente = $('#nomCliente').val();
-        var apellidoCliente = $('#apeCliente').val();
-        var correoCliente = $('#correoCliente').val();
-        var direccionCliente = $('#direcCliente').val();
-        var telefono = $('#telCliente').val();
-        var contrasena = $('#passCliente').val();
-        var imgClient = $('#imgClient').val();
+  var id_cliente = $('#idClient').val();
+  var id_empleado = $('#idEmployee').val();
+  var selectEstado = $('#selectEstado').val();
+  var datePedido = $('#datepicker').val();
+  var id_productos = $('.idProd').attr('name');
+  var cantProducts = $('.cantProd').attr('name');
+  var precioProducts = $('.precUnit').attr('name');
+  var precioTotalProducts = $('.totPrec').attr('name');
+  var totalPedido =$('.totalPedido').text();
 
-        if ((id_cliente == "") || (nombreCliente == "") || (apellidoCliente == "") || (correoCliente == "") || (direccionCliente == "") || (imgClient == "") ) { //Valida si los campos estan vacios
-            swal("Upss", "Los campos no pueden ir vacios!", "error");
+  if (selectEstado == 0) { //Valida si los campos estan vacios
+    swal("Upss", "No has Seleccionado un Estado al pedido!", "error");
 
-        } else if (patronLetrEspecial.test(id_cliente)){
-//sintaxis para validar que el campo no contenga números. patron es la experesion regular, dentro del .test() se pone la variable a comparar
+  } else if ((id_cliente=='') || (id_empleado=='')) {
+    swal("Upss", "No has Seleccionado a un cliente y/o empleado!", "error");
+  } else if (datePedido=='') {
+    swal("Upss", "No has Seleccionado una fecha de entrega al pedido!", "error");
+  } else if (id_productos === undefined || id_productos.length == 0) {
+     swal("Upss", "No has asignado productos al pedido!", "error");
+  } else{
+    var datesPed = new FormData($('#datosPedido')[0]);
+  $.ajax({
+      url: Url+'/pedido/savePedido',
+      type:'POST',
+      data: datesPed,
+      contentType: false,
+      processData: false,
+    }).done(function(data){
 
-            swal("Upss", "No se permite ingresar letras y/o caracteres en el campo Cedula o NIT!", "error");
+      if (data=='pedidoCreado') {
+        var datesDetalle = new FormData($('#datosDetallePedido')[0]);
+        $.ajax({
+            url: Url+'/detalle_pedido/saveDetallePedido',
+            type:'POST',
+            data: datesDetalle,
+            contentType: false,
+            processData: false,
+          }).done(function(data){
+            if (data>=1) {
+              swal("Increible!", "El pedido ha sido guardado!", "success");
+              $('#listDetalle').empty();
+              $('#idClient').val('');
+              $('#idEmployee').val('');
+              $('#selectEstado').val('');
+              $('#datepicker').val('');
+              $('.totalPedido').val('0');
+              $('.totalPedido').text('0');
+              //tabla.ajax.reload(null,false);
+            }
+            if (data=='ErrorAlGuadarPedido') {
+              swal("Algo anda mal!", "El pedido no ha sido guardado!", "error");
+            }
+          })
+      }
+      if (data=='errorCrearPedido') {
+        swal("Algo salió mal", "El pedido no se logro crear el pedido", "error");
+      }
 
-        }else if (patronSoloLetr.test(nombreCliente)){
+      })
+  }
 
-              swal("Upss", "No se permite ingresar números y/o caracteres en el campo Nombre!", "error");
+}
 
-        } else if (patronSoloLetr.test(apellidoCliente)){
-
-              swal("Upss", "No se permite ingresar números y/o caracteres en el campo Apellido!", "error");
-
-        } else if (!patronCorreo.test(correoCliente)){
-
-              swal("Upss", "El correo ingresado no es válido!", "error");
-
-        } else if (patronLetrEspecial.test(telefono)){
-
-              swal("Upss", "El teléfono ingresado no es válido!", "error");
-
-        } else{
-
-          var datosimg = new FormData($('#actImgPerfilClient')[0]);
-          console.log(datosimg)
-
-              $.ajax({
-                  url: Url+'/cliente/actImgCliente',
-                  type:'POST',
-                  data: datosimg,
-                  contentType: false,
-                  processData: false,
-                }).done(function(data){
-                  if (data=='Error Archivo') {
-                    swal("Algo anda mal!", "Es posible que la imagen este dañada!", "error");
-                  }
-                  if (data=='img no permitida') {
-                    swal("¿Que haces?", "Este formato no esta permitido!", "error");
-                  }
-                  if (data=='La imagen ya existe') {
-                    swal("Wow", "Esta imagen ya existe! Intenta cambiarle el nombre a tu archivo.", "error");
-                  }
-                  if (data=='Error al guardar imagen') {
-                    swal("Lo sentimos :(", "Hubo un error al guardar la imagen", "error");
-                  }
-                  if (data==1) {
-                    swal("Bien Hecho!", "La tu imagen  ha sido actualizada!", "success");
-                    $('#idClientMimg').val('');
-                    $('#imgClient').fileinput('clear');
-                    $("#myModalFile").modal("hide");
-                    tabla.ajax.reload(null,false);
-                  }
-
-                  })
-        }
-
-    }
-//puglin file input
-    $('#imgClient').fileinput({
-            theme: 'fa',
-            language: 'es',
-            showUpload : false,
-            allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg']
-        });
 //desactivar inputs
 $(function(){
+  //document.getElementById("idClient").disabled = true;
+  //document.getElementById("idEmployee").disabled = true;
   document.getElementById("nomCliente").disabled = true;
   document.getElementById("nomEmployee").disabled = true;
   $('#cantidadProduct').attr('maxlength','3');
-  listarSelectProd();
+  listSelectClient();
+  ListEstados();
+  listSelectEmp();
 })
 
 //Date picker
     $('#datepicker').datepicker({
       autoclose: true,
-      format: 'dd-mm-yy'
+      format: 'dd-mm-yy',
+      startDate: 'd',
+      clearBtn: true
     })
 
 //listas
-//listarProductos
+//listar select Clientes
 
-function listarSelectProd() {
+function listSelectClient() {
   $.ajax({
-     url:Url+'/pedido/ListProducts',
+     url:Url+'/pedido/ListClients',
      type:'POST',
      dataType:'json'
  }).done(function(data){
      //console.log(data);
      var valueSelect = '';
-     data.forEach(function(p){
-      valueSelect+='<option value='+p.referencia+'>'+p.nombreProducto+'</option>';
+     data.forEach(function(c){
+      valueSelect+='<option value='+c.id_cliente+'>'+c.id_cliente+'--'+c.nombreCliente+' '+c.apellidoCliente+'</option>';
      })
-     $('#productSelect').empty();
-     $('#productSelect').html('<option value="" selected="selected">Seleccionar</option>');
-     $('#productSelect').append(valueSelect);
+     $('#clientSelect').empty();
+     $('#clientSelect').html('<option value="" selected="selected">Seleccionar</option>');
+     $('#clientSelect').append(valueSelect);
+ })
+}
+
+//listar select Empleado
+
+function listSelectEmp() {
+  $.ajax({
+     url:Url+'/pedido/ListEmployees',
+     type:'POST',
+     dataType:'json'
+ }).done(function(data){
+     //console.log(data);
+     var valueSelect = '';
+     data.forEach(function(e){
+      valueSelect+='<option value='+e.idEmpleado+'>'+e.idEmpleado+'--'+e.nombre+' '+e.apellido+'</option>';
+     })
+     $('#empSelect').empty();
+     $('#empSelect').html('<option value="" selected="selected">Seleccionar</option>');
+     $('#empSelect').append(valueSelect);
+ })
+}
+//listar estados pedido
+function ListEstados() {
+  $.ajax({
+     url:Url+'/pedido/ListEstados',
+     type:'POST',
+     dataType:'json'
+ }).done(function(data){
+     //console.log(data);
+     var valueSelect = '';
+     data.forEach(function(est){
+      valueSelect+='<option value='+est.idEstadoPedido+'>'+est.Nombre+'</option>';
+     })
+     $('#selectEstado').empty();
+     $('#selectEstado').html('<option value="0" selected="selected">Seleccione un estado al pedido</option>');
+     $('#selectEstado').append(valueSelect);
  })
 }
 
@@ -300,37 +409,123 @@ function agregar() {
   var patronLetrEspecial = /\D/;
   var Max_Length = 3;
 
-  var Product = $("#productSelect option:selected").text();
-  var cantidad = $('#cantidadProduct').val();
-  var cantTength = $("#cantidadProduct").val().length;
+  var ProductText = $("#clientSelect option:selected").text();
+  var ProductVal = $("#clientSelect").val();
+  var changeText = '';
 
-  if (Product == 'Seleccionar') {
-    swal("", "Debes seleccionar un producto", "error");
-  }else if (cantidad == '') {
-    swal("", "Debes ingresar una cantidad", "error");
-  }else if (patronLetrEspecial.test(cantidad)) {
-    swal("", "Debes ingresar una cantidad válida", "error");
-  }else if (cantTength > Max_Length) {
-    swal("Wow", "Has ingresado una longitud no válida, inténtalo de nuevo, por favor no vuelvas a eliminar el atributo maxlength", "error");
-  }else {
-    var valueTable = '';
+  changeText = ProductText.substring(12,ProductText.length);
+  //alert(texto);
 
-    valueTable+='<tr>';
-    valueTable+='<td>'+Product+'</td>';
-    valueTable+='<td>'+cantidad+'</td>';
-    valueTable+='</tr>';
+  $("#idClient").val(ProductVal);
+  $("#nomCliente").val(changeText);
+  $("#modalSelectClient").modal("hide");
+  listSelectClient();
+}
 
-    $('#addProducts').append(valueTable);
-    $('#productSelect option').remove();
-    $('#cantidadProduct').val('');
-    $("#Addproducts").modal("hide");
-    listarSelectProd();
-  }
+function agregarEmp() {
+  var patronLetrEspecial = /\D/;
+  var Max_Length = 3;
+
+  var ProductText = $("#empSelect option:selected").text();
+  var ProductVal = $("#empSelect").val();
+  var changeText = '';
+
+  changeText = ProductText.substring(12,ProductText.length);
+  //alert(texto);
+
+  $("#idEmployee").val(ProductVal);
+  $("#nomEmployee").val(changeText);
+  $("#modalSelectEmp").modal("hide");
+  listSelectClient();
 }
 
 // funciones modales
 
-function srcProduct(){
-  $("#Addproducts").modal("show");
+function modalCli(){
+  $("#modalSelectClient").modal("show");
 }
+
+function modalEmp(){
+  $("#modalSelectEmp").modal("show");
+}
+
+$(document).ready(function() {
+        $.fn.dataTable.ext.errMode = 'throw';
+        tabla =	$('#listProducts').DataTable( {
+
+        "lengthMenu": [[4, 8, 15, 50, -1], [4, 8, 15, 50, "Todo"]],
+        "scrollX": false,
+        // "dom": 'lrtipB',
+        "language": {
+            "url": Url+"/js/lenguaje.json"
+        },
+
+        buttons: [
+            {extend: 'copy',exportOptions: {columns: [0,1,2,3,4]}},
+            {extend: 'csv',exportOptions: {columns: [0,1,2,3,4]}},
+            {extend: 'excel',title: 'Empleado',exportOptions: {columns: [0,1,2,3,4]}},
+            {extend: 'pdf', title: 'Empleado',exportOptions: {columns: [0,1,2,3,4]}},
+            {extend: 'print',
+            exportOptions: {columns: [0,1,2,3,4]},
+            customize: function (win){
+            $(win.document.body).addClass('white-bg');
+            $(win.document.body).css('font-size', '10px');
+
+            $(win.document.body).find('table')
+            .addClass('compact')
+            .css('font-size', 'inherit');
+            }
+        }
+        ]
+        } );
+
+});
+
+function selectProd(refer,nomProd,precioProd) {
+  let cantidadProd = $('#'+refer+'').val();
+  var totalPrecio = cantidadProd*precioProd;
+
+  if ((isNaN(cantidadProd))) {
+    swal("Upss","Solo se permite ingresar números", "error");
+  } else {
+    $('#addProducts').append(
+      "<tr id='tr"+refer+"'>"+
+      "<input type='hidden' name='idProd[]' value='"+refer+"' class='idProd'><input type='hidden' name='cantProd[]' value='"+cantidadProd+"' class='cantProd'>"+
+      "<input type='hidden' name='precUnit[]' value='"+precioProd+"' class='precUnit'><input type='hidden' name='totPrec[]' class='totPrec' value='"+totalPrecio+"' class='totPrec'>"+
+      "<td>"+refer+"</td><td>"+nomProd+"</td><td>"+cantidadProd+
+      "</td><td>"+precioProd+"</td><td>"+totalPrecio+
+      "</td><td><button class='btn btn-danger' type='button' onclick='$("+'"'+"#tr"+refer+'"'+").remove(), sumTotales()'>Eliminar</button></td></tr>"
+    );
+  }
+
+  $('#'+refer+'').val('');
+  sumTotales();
+}
+
+function sumTotales() {
+  $('.totalPedido').val('');
+  $('.totalPedido').text('');
+  var suma = 0;
+  $('.totPrec').each(function(){
+    if (isNaN(parseFloat($(this).val()))) {
+
+      suma += 0;
+
+    } else {
+
+      suma += parseFloat($(this).val());
+
+    }
+  });
+  $('.totalPedido').text(suma);
+  $('.totalPedido').val(suma);
+}
+
+//plugin slect2
+$(document).ready(function() {
+    $('.js-example-basic-single').select2({
+      placeholder: 'Seleccione a un clientes',
+      theme: "classic"
+    });
+});
 </script>

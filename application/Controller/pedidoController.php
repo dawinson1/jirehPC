@@ -15,6 +15,7 @@ class pedidoController
     }
     public function formPedidos()
     {
+        $listProdPed = $this->listProd();
         require APP . 'view/_templates/header.php';
         require APP . 'view/pedido/formPedidos.php';
         require APP . 'view/_templates/footer.php';
@@ -104,15 +105,41 @@ class pedidoController
     }
 
     //listarPedidos
-    //listas productos
-    public function ListProducts()
+    //función para listar los clientes en un select
+    public function ListClients()
     {
-      $pedido = $this->pedido->listarProductos();
-      echo json_encode($pedido);
+      $clients = $this->pedido->listarClientes();
+      echo json_encode($clients);
     }
 
-    public function cambiarEstado()
+    //función para listar los estados en un select
+    public function ListEstados()
     {
+      $estados = $this->pedido->listarEstadosPed();
+      echo json_encode($estados);
+    }
 
+    //función para listar los empleados en un select
+    public function ListEmployees()
+    {
+      $emplo = $this->pedido->listarEmpleados();
+      echo json_encode($emplo);
+    }
+
+    //función para listar los productos en la tabla
+    public function listProd()
+    {
+      $productosPed = $this->pedido->listarProductos();
+      return $productosPed;
+    }
+
+    public function savePedido()
+    {
+      $this->pedido->set('idCliente',$_POST['idClient']);
+      $this->pedido->set('fechaEntrega',$_POST['datepicker']);
+      $this->pedido->set('id_empleado',$_POST['idEmployee']);
+      $this->pedido->set('idEstado_pedido',$_POST['selectEstado']);
+      $this->pedido->set('total',$_POST['totalPedido']);
+      echo $this->pedido->crearPedido();
     }
 }

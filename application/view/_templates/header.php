@@ -8,8 +8,8 @@
     header('Location: /Proyecto/jirehPC/login');
   }
 
-  // Máxima duración de sesión activa en minutos
-  define( 'MAX_SESSION_TIEMPO', 60 * 10 );
+  // Máxima duración de sesión activa (segundo * minutos * horas)
+  define( 'MAX_SESSION_TIEMPO', 60 * 60 * 2 );
 
   // Controla cuando se ha creado y cuando tiempo ha recorrido
   if ( isset( $_SESSION[ 'ULTIMA_ACTIVIDAD' ] ) &&
@@ -58,6 +58,9 @@
   <!--simple pagination-->
   <script src="<?php echo URL; ?>js/jquery.simplePagination.js"></script>
   <link rel="stylesheet" href="<?php echo URL; ?>css/simplePagination.css">
+  <!--select2 plugin-->
+  <script src="<?php echo URL; ?>js/select2.min.js"></script>
+  <link rel="stylesheet" href="<?php echo URL; ?>css/select2.min.css">
   <!--js plugin file input-->
   <script src="<?php echo URL; ?>js/fileinput.min.js"></script>
   <script src="<?php echo URL; ?>js/locales/es.js"></script>

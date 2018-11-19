@@ -5,15 +5,11 @@ use Mini\Core\Model;
 
 class pedido extends Model
 {
-
-    private $referencia;
-    private $id_categoria		;
-    private $nombreProducto;
-    private $cantidad;
-    private $stock;
-    private $precioUnit;
-    private $marca;
-    private $Url_imgProduct;
+    private $idCliente;
+    private $fechaEntrega;
+    private $id_empleado;
+    private $idEstado_pedido;
+    private $total;
 
     public function set($atributo,$valor){
         $this->$atributo = $valor;
@@ -21,10 +17,34 @@ class pedido extends Model
 
     public function listarProductos()
     {
-      $sql = "SELECT referencia, nombreProducto FROM producto";
-      $query = $this->db->prepare($sql);
-      $query->execute();
-      return $query->fetchAll();
+        $sql = "SELECT * FROM producto";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function listarClientes()
+    {
+        $sql = "SELECT * FROM cliente";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function listarEmpleados()
+    {
+        $sql = "SELECT * FROM empleado";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function listarEstadosPed()
+    {
+        $sql = "SELECT * FROM estado_pedido";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
     }
 
     public function listarPedidos()
@@ -44,29 +64,31 @@ class pedido extends Model
         return $query->fetchAll();
     }
 
-    public function crearPedidos()
+    private function ultimoPedido()
     {
-        $sql = "INSERT INTO pedido (referencia, id_categoria, nombreProducto,cantidad,stock,precioUnit,marca,Url_imgProduct) VALUES (?,?,?,?,?,?,?,?)";
-        $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->referencia);
-        $query->bindParam(2,$this->id_categoria);
-        $query->bindParam(3,$this->nombreProducto);
-        $query->bindParam(4,$this->cantidad);
-        $query->bindParam(5,$this->stock);
-        $query->bindParam(6,$this->precioUnit);
-        $query->bindParam(7,$this->marca);
-        $query->bindParam(8,$this->Url_imgProduct);
-        return $query->execute();
-
+      $sql = "SELECT max(id_pedido) as idPedido FROM pedido";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+      return $query->fetch();
     }
 
-    public function editarImgPedidos()
+    public function crearPedido()
     {
-      $sql = "UPDATE pedido SET Url_imgProduct = ? WHERE referencia = ?";
-      $query = $this->db->prepare($sql);
-      $query->bindParam(1,$this->Url_imgProduct);
-      $query->bindParam(2,$this->referencia);
-      return $query->execute();
+        $sql = "INSERT INTO pedido (idCliente, fechaEntrega, id_empleado, idEstado_pedido, total) VALUES (?,?,?,?,?)";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(1,$this->idCliente);
+        $query->bindParam(2,$this->fechaEntrega);
+        $query->bindParam(3,$this->id_empleado);
+        $query->bindParam(4,$this->idEstado_pedido);
+        $query->bindParam(5,$this->total);
+        $pedGuardado = $query->execute();
+
+        if ($pedGuardado) {
+          echo 'pedidoCreado';
+        } else {
+          echo 'errorCrearPedido';
+        }
+
     }
 
     public function editarPedidos()

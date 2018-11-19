@@ -3,52 +3,100 @@ namespace Mini\Model;
 
 use Mini\Core\Model;
 
-class producto extends Model
+class detalle_pedido extends Model
 {
 
-    private $referencia;
-    private $id_categoria;
-    private $nombreProducto;
+    private $idDetalle_pedido;
+    private $Producto_Referencia;
+    private $Pedido_idPedido;
     private $cantidad;
-    private $stock;
-    private $precioUnit;
-    private $marca;
-    private $Url_imgProduct;
+    private $valor_unit;
+    private $valor_subTotal;
 
     public function set($atributo,$valor){
         $this->$atributo = $valor;
     }
 
-    public function listarProductos()
+    public function verPedidos()
     {
-        $sql = "SELECT * FROM producto";
+        $sql = "SELECT p.idCliente AS idCli, c.nombreCliente as nomCli, e.idEmpleado AS idEmp,
+		    e.nombre AS nomEmp, p.fechaEntrega AS entrega, pr.referencia AS refer,
+		    pr.nombreProducto AS nomPro, dp.cantidad AS cantSoli,
+        dp.valor_unit AS Vcu, dp.valor_subTotal AS Vsub,
+        p.total AS Vtot, p.id_pedido AS IDPedido
+        FROM detalle_pedido dp
+        INNER JOIN producto pr ON (pr.referencia = dp.Producto_Referencia)
+        INNER JOIN pedido p ON (p.id_pedido = dp.Pedido_idPedido)
+        INNER JOIN empleado e ON (e.idEmpleado = p.id_empleado)
+        INNER JOIN cliente c ON (c.id_cliente = p.idCliente)
+        WHERE p.id_pedido = ?";
         $query = $this->db->prepare($sql);
+        $query->bindParam(1,$this->Pedido_idPedido);
         $query->execute();
         return $query->fetchAll();
     }
 
-    public function listarCategoria()
+    public function listarPedidos()
     {
-        $sql = "SELECT * FROM categoria";
-        $query = $this->db->prepare($sql);
-        $query->execute();
-        return $query->fetchAll();
+      $sql = "SELECT p.*, est.Nombre AS nomEst, c.nombreCliente AS nomCli,
+      e.nombre AS nomEmplo
+      FROM pedido p
+      INNER JOIN estado_pedido est ON (est.idEstadoPedido = p.idEstado_pedido)
+      INNER JOIN empleado e ON (e.idEmpleado = p.id_empleado)
+      INNER JOIN cliente c ON (c.id_cliente = p.idCliente)";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+      return $query->fetchAll();
     }
 
-    public function listarCatalogo()
+    public function ultimoPedido()
     {
-        $sql = "SELECT referencia, nombreProducto, cantidad, precioUnit, marca, Url_imgProduct FROM producto";
-        $query = $this->db->prepare($sql);
-        $query->execute();
-        return $query->fetchAll();
+      $sql = "SELECT max(id_pedido) as idPedido FROM pedido";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+      return $query->fetch();
     }
 
-    public function countCatalogo()
+    public function saveDetails()
     {
-        $sql = "SELECT COUNT(*) AS conteo FROM producto";
+        $sql = "INSERT INTO detalle_pedido VALUES (NULL,?,?,?,?,?)";
         $query = $this->db->prepare($sql);
-        $query->execute();
-        return $query->fetchAll()[0]['conteo'];
+        $query->bindParam(1,$this->Producto_Referencia);
+        $query->bindParam(2,$this->Pedido_idPedido);
+        $query->bindParam(3,$this->cantidad);
+        $query->bindParam(4,$this->valor_unit);
+        $query->bindParam(5,$this->valor_subTotal);
+        $saveDeta = $query->execute();
+
+        if ($saveDeta) {
+          return true;
+        } else {
+          return false;
+        }
+
+    }
+
+    public function updateDetails()
+    {
+      $sql = "UPDATE detalle_pedido SET Producto_Referencia = ?, Pedido_idPedido = ?,
+      cantidad = ?, valor_unit = ?, valor_total = ?
+      WHERE idDetalle_pedido = ?";
+      $query = $this->db->prepare($sql);
+      $query->bindParam(1,$this->Producto_Referencia);
+      $query->bindParam(2,$this->Pedido_idPedido);
+      $query->bindParam(3,$this->cantidad);
+      $query->bindParam(4,$this->valor_unit);
+      $query->bindParam(5,$this->valor_total);
+      $query->bindParam(6,$this->idDetalle_pedido);
+      return $query->execute();
+    }
+
+    public function deleteDetails()
+    {
+        $sql = "DELETE FROM detalle_pedido WHERE idDetalle_pedido = ?";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(1,$this->idDetalle_pedido);
+        return $query->execute();
     }
 
     public function buscarProducto()
@@ -56,8 +104,7 @@ class producto extends Model
         $sql = "SELECT * FROM producto WHERE referencia = ?";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->referencia);
-        $query->execute();
-        return $query->fetchAll();
+        return $query->execute();
     }
 
     public function crearProducto()

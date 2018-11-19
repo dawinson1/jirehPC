@@ -18,7 +18,7 @@
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
                         <input type="text" class="form-control" placeholder="Referencia del Producto"
-                            name="identificador" id="identificador" maxlength="29">
+                            name="identificador" id="identificador" maxlength="29" onKeyPress="notSpace()">
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -146,7 +146,7 @@
         var Max_LengthNombre = 24;
         var Max_LengthCantidad = 11;
         var Max_LengthMarca = 20;
-        
+
 
         var referencia = $('#identificador').val();
         var Max_referencia = $('#identificador').val().length;
@@ -214,11 +214,12 @@ $('#imgProdu').fileinput({
 
 $(function(){
 
-
 listarSelectCat();
-
-
 })
+
+function notSpace() {
+  if (event.keyCode == 32) event.returnValue = false;
+}
 
 function listarSelectCat(){
 $.ajax({
@@ -234,13 +235,10 @@ $.ajax({
     selectCat+='<option value='+c.id_categoria+'>'+c.Nombre+'</option>';
     })
     $('#selectCat').empty();
-    $('#selectCat').html('<option value=""selected="selected"></option>');
+    $('#selectCat').html('<option value="0" selected="selected">Seleccione una categoria</option>');
     $('#selectCat').append(selectCat);
-
-
-
-})
-
+    
+  })
 }
 
 

@@ -12,18 +12,17 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
-            <table id="tableCliente" class="table table-striped table-bordered" style="width:100%">
+            <table id="tablePedidos" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
-                  <th>Referencia</th>
-                  <th>Categoria</th>
-                  <th>Producto</th>
-                  <th>Stock</th>
-                  <th>Precio Unitario</th>
-                  <th>Marca</th>
-                  <th>Editar</th>
-                  <th>Imagen</th>
-                  <th>Actualizar Imagen</th>
+                  <th>No. Pedido</th>
+                  <th>ID Cliente</th>
+                  <th>Fecha de Entrega</th>
+                  <th>ID Empleado</th>
+                  <th>Estado</th>
+                  <th>Precio</th>
+                  <th>Ver Pedido</th>
+                  <th>Editar Pedido</th>
                   <th>Eliminar</th>
                 </tr>
                 </thead>
@@ -40,96 +39,61 @@
     <!-- /.content -->
 </div>
 
-<div class="modal fade" id="myModal" role="dialog"> <!--Div que contiene la ventana modal-->
-<div class="modal-dialog">
+<div class="modal fade" id="verPedido" role="dialog"> <!--Div que contiene la ventana modal-->
+<div class="modal-dialog" tabindex="-1">
 
-<section class="content modal-content">
+<section class="content modal-content" style="border-radius: 10px;">
 <div class="box box-info">
             <div class="box-header modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 class="box-title">Editar Clientes</h3>
+              <h3 class="box-title">Detalles del Pedido</h3>
             </div>
             <form>
-            <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
+            <div class="box-body modal-body" id=verDetalles> <!--Este Div es contenedor de los imputs-->
+              <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                  <h4>Pedido No. <span id="pedNumber"></span></h4>
+                </div>
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <h5 class="col-md-6"><b>ID Cliente: </b><span id="IDCliente"></span></h5>
+                        <h5 class="col-md-6"><b>Nombre: </b><span id="nombreCliente"></span></h5>
+                        <h5 class="col-md-6"><b>ID Empleado: </b><span id="IDEmple"></span></h5>
+                        <h5 class="col-md-6"><b>Nombre: </b><span id="nombreEmple"></span></h5>
+                        <h5 class="col-md-6"><b>Fecha Entrega: </b><span id="dateEntre"></span></h5>
+                        <h5 class="col-md-6"><b>Estado: </b><span id="estadoPedido"></span></h5>
+                        <h4 class="col-md-12"><b>Total Pedido: $</b><span id="precioTotal"></span></h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group-item">
+                    <table class="table table-striped table-bordered" style="width:100%" id="detalleProductos">
+                      <thead>
+                        <tr>
+                          <th>Referencia</th>
+                          <th>Producto</th>
+                          <th>Cantidad</th>
+                          <th>Valor c/u</th>
+                          <th>Sub Total</th>
+                        </tr>
+                      </thead>
+                      <tbody id="listadosDetalle">
 
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="identificador" >Cédula o NIT</label>
-
-                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-                        <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese su número de cedula o el NIT de la empresa"
-                            name="identificador" id="identificador">
-
-                        <div class="input-group-addon"> <!--Este div es opcional, servirá cuando queramos que en frente del input este otro icono-->
-                        <i class="glyphicon glyphicon-search"></i>
-                        </div> <!--Cierre del div opcional-->
-
-                    </div><!--cierre div del inputt-->
-                </div> <!--cierre del div contenedor del input-->
-
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="nomCliente">Nombre</label>
-
-                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-                        <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese sus nombres"
-                        name="nomCliente" id="nomCliente">
-
-                    </div><!--cierre div del inputt-->
-                </div> <!--cierre del div contenedor del input-->
-
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="apeCliente">Apellido</label>
-
-                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-                        <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese sus apellidos"
-                        name="apeCliente" id="apeCliente">
-
-                    </div><!--cierre div del inputt-->
-                </div> <!--cierre del div contenedor del input-->
-
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="correoCliente">Correo</label>
-
-                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                        <input type="email" class="form-control" placeholder="example@domain.com"
-                         name="correoCliente" id="correoCliente">
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- Table -->
 
 
-                    </div><!--cierre div del inputt-->
-                </div> <!--cierre del div contenedor del input-->
-
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="direcCliente">Dirección</label>
-
-                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-                        <span class="input-group-addon"><i class="fa fa-map-signs"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese la direccion de su hogar"
-                        name="direcCliente" id="direcCliente">
-
-                    </div><!--cierre div del inputt-->
-                </div> <!--cierre del div contenedor del input-->
-
-                <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="telCliente">Teléfono</label>
-
-                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese su número teléfonico"
-                        name="telCliente" id="telCliente">
-
-                    </div><!--cierre div del inputt-->
-                </div> <!--cierre del div contenedor del input-->
-
+              </div>
 
             </div> <!--Cierre del Div contenedor-->
             </form>
 
             <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-info pull-right" onclick="enviarEditCliente()">Modificar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
             </div>
 
@@ -141,10 +105,10 @@
 <!-- Ventan modal para la actualización de la imagen de perfil-->
 
 <div class="modal fade" id="myModalFile" role="dialog"> <!--Div que contiene la ventana modal-->
-<div class="modal-dialog">
+  <div class="modal-dialog">
 
-<section class="content modal-content">
-<div class="box box-info">
+    <section class="content modal-content">
+      <div class="box box-info">
             <div class="box-header modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h3 class="box-title">Actualizar Foto de perfil</h3>
@@ -186,7 +150,7 @@
 
           </section>
 
-</div>
+        </div>
 </div>
 
 
@@ -194,26 +158,22 @@
 
 $(document).ready(function() {
         $.fn.dataTable.ext.errMode = 'throw';
-        tabla =	$('#tableCliente').DataTable( {
+        tabla =	$('#tablePedidos').DataTable( {
         "ajax": {
-            "url": Url+'/cliente/listarCliente',
+            "url": Url+'/detalle_pedido/listPedido',
             "type": "GET",
             "dataSrc": "",
             "deferRender": true
         },
         "columns": [
-            { "data": "Cedula o NIT","className": 'centeer'  },
-            { "data": "Nombre","className": 'centeer'  },
-            { "data": "Apellido","className": 'centeer'  },
-            { "data": "Correo","className": 'centeer'  },
-            { "data": "Dirección","className": 'centeer' },
-            { "data": "Telefono", "className": 'centeer' },
+            { "data": "id_pedido","className": 'centeer'  },
+            { "data": "idCliente","className": 'centeer'  },
+            { "data": "dateEntrega","className": 'centeer'  },
+            { "data": "id_emplo","className": 'centeer'  },
+            { "data": "nomEstPedi", "className": 'centeer' },
+            { "data": "totalPedido", "className": 'centeer' },
+            { "data": "verPedi", "orderable": false  },
             { "data": "Editar", "orderable": false  },
-            { "data": "Foto Perfil", "render":function(data,type,row){
-              return '<center><img src="<?php echo URL; ?>'+data+'" width="120" height="80" /></center>';
-              }
-            },
-            { "data": "Actualizar Foto", "orderable": false  },
             { "data": "Eliminar", "orderable": false  }
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
@@ -285,39 +245,40 @@ function enviarEditCliente() //funcion para enviar los cambios al controlador
         }
 }
 
-function actuaImg() //funcion para enviar los cambios al controlador
+function verPedido(idPedido,idCli,nomCli,idEmp,nomEmp,entrega,estado,totalPed) //funcion para enviar los cambios al controlador
 {
-  var datosimg = new FormData($('#actImgPerfilClient')[0]);
-  console.log(datosimg)
-
-      $.ajax({
-          url: Url+'/cliente/actImgCliente',
-          type:'POST',
-          data: datosimg,
-          contentType: false,
-          processData: false,
-        }).done(function(data){
-          if (data=='Error Archivo') {
-            swal("Algo anda mal!", "Es posible que la imagen este dañada!", "error");
-          }
-          if (data=='img no permitida') {
-            swal("¿Que haces?", "Este formato no esta permitido!", "error");
-          }
-          if (data=='La imagen ya existe') {
-            swal("Wow", "Esta imagen ya existe! Intenta cambiarle el nombre a tu archivo.", "error");
-          }
-          if (data=='Error al guardar imagen') {
-            swal("Lo sentimos :(", "Hubo un error al guardar la imagen", "error");
-          }
-          if (data==1) {
-            swal("Bien Hecho!", "La tu imagen  ha sido actualizada!", "success");
-            $('#idClientMimg').val('');
-            $('#imgClient').fileinput('clear');
-            $("#myModalFile").modal("hide");
-            tabla.ajax.reload(null,false);
-          }
-
-          })
+  $('#pedNumber').text(idPedido);
+  $('#IDCliente').text(idCli);
+  $('#nombreCliente').text(nomCli);
+  $('#IDEmple').text(idEmp);
+  $('#nombreEmple').text(nomEmp);
+  $('#dateEntre').text(entrega);
+  $('#estadoPedido').text(estado);
+  $('#precioTotal').text(totalPed);
+  $.ajax({
+      url: Url+'/detalle_pedido/seeOrder',
+      type:'POST',
+      dataType: "json",
+      data: {
+        idP: idPedido
+      }
+    }).done(function(data){
+       //console.log(data);
+      var verPedi = '';
+      data.forEach(function(vp){
+        verPedi += `<tr>
+          <td>`+vp.refer+`</td>
+          <td>`+vp.nomPro+`</td>
+          <td>`+vp.cantSoli+`</td>
+          <td>`+vp.Vcu+`</td>
+          <td>`+vp.Vsub+`</td>
+        </tr>`;
+      })
+      $('#listadosDetalle').empty();
+      $('#listadosDetalle').append(verPedi);
+      $('#verPedido').modal('show');
+      pagTabla();
+    })
 }
 
 
@@ -375,4 +336,20 @@ function eliminarCliente(idC) {
         }
       });
 }
+
+function pagTabla() {
+  $.fn.dataTable.ext.errMode = 'throw';
+  tabla =	$('#detalleProductos').DataTable( {
+
+  "lengthMenu": [[3, 6, 12, 25, -1], [3, 6, 12, 25, "Todo"]],
+  "scrollX": false,
+  "retrieve": true,
+  "paging": true,
+  // "dom": 'lrtipB',
+  "language": {
+      "url": Url+"/js/lenguaje.json"
+  },
+  });
+}
+
 </script>
