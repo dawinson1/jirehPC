@@ -4,7 +4,7 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-       
+
 
           <div class="box">
             <div class="box-header">
@@ -12,7 +12,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <table id="tableEstadosPedidos" class="display" style="width:100%">
+            <table id="tableEstadosPedidos" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
                   <th>ID</th>
@@ -45,7 +45,7 @@
             </div>
             <form>
             <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
-              
+
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
                     <label for="identificador" >ID</label>
 
@@ -150,14 +150,14 @@ function eviarEditEstadoPedido(){
             swal("Upss", "Los campos no pueden ir vacios!", "error");
             return false;
         }
-        else if (patron.test(nombreEstado)){ 
-//sintaxis para validar que el campo no contenga números. 
+        else if (patron.test(nombreEstado)){
+//sintaxis para validar que el campo no contenga números.
 //patron es la experesion regular, dentro del .test() se pone la variable a comparar
             swal("Upss", "No se permite ingresar números!", "error");
         } else if (length_nombre>Max_LengthNombre) {
       swal("Upss", "Nombre solo debe tener Máximo 20 caracteres!", "error");
          }
-               
+
         else {
             $.ajax({
                 url: Url+'estado_pedido/editarEstadoPedido',
@@ -186,7 +186,7 @@ function eliminarEstadoPedido(idEP) {
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      }) 
+      })
       .then((willDelete) => {
         if (willDelete) {
           swal("Estado eliminado!", {

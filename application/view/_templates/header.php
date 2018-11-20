@@ -53,6 +53,10 @@
   <link rel="stylesheet" href="<?php echo URL; ?>css/datatables.min.css">
 
   <script src="<?php echo URL; ?>js/jquery.min.js"></script>
+  <!--pdf make-->
+  <script src="<?php echo URL; ?>js/pdfmake.min.js"></script>
+  <script src="<?php echo URL; ?>js/vfs_fonts.js"></script>
+
   <!--js Sweet alert-->
   <script src="<?php echo URL; ?>js/sweetalert.min.js"></script>
   <!--simple pagination-->
@@ -108,89 +112,7 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- start message -->
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="<?php echo URL; ?>img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Support Team
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <!-- end message -->
-                </ul>
-              </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
-            </ul>
-          </li>
-          <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
-            </ul>
-          </li>
-          <!-- Tasks: style can be found in dropdown.less -->
-          <li class="dropdown tasks-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-flag-o"></i>
-              <span class="label label-danger">9</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 9 tasks</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Design some buttons
-                        <small class="pull-right">20%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">20% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                </ul>
-              </li>
-              <li class="footer">
-                <a href="#">View all tasks</a>
-              </li>
-            </ul>
-          </li>
+
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -218,6 +140,7 @@
               </li>
             </ul>
           </li>
+          
         </ul>
       </div>
     </nav>
@@ -236,7 +159,7 @@
         </div>
         <div class="pull-left info">
           <p><?php echo $_SESSION['username']; ?></p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+
         </div>
       </div>
 
@@ -320,11 +243,11 @@
           </ul>
         </li>
 
-      <li class="header">Host Estados y Roles</li>
+      <li class="header">Host <!--Estados y Roles--></li>
 
       <!--roles falta-->
 
-        <li class="treeview">
+      <!--  <li class="treeview">
           <a href="#">
             <i class="fa fa-coffee"></i> <span>Rol</span>
             <span class="pull-right-container">
@@ -336,12 +259,12 @@
             <li><a href="<?php echo URL; ?>rol/formRol"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Rol</a></li>
           </ul>
 
-        </li>
+        </li> -->
       <!--roles-->
 
       <!--estados-->
 
-        <li class="treeview">
+        <!--<li class="treeview">
           <a href="#">
             <i class="fa fa-coffee"></i> <span>Estado</span>
             <span class="pull-right-container">
@@ -353,13 +276,13 @@
             <li><a href="<?php echo URL; ?>estados/formEstado"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Estado</a></li>
           </ul>
 
-        </li>
+        </li> -->
 
       <!--estados-->
 
       <!--estados pedidos-->
 
-        <li class="treeview">
+      <!--  <li class="treeview">
           <a href="#">
             <i class="fa fa-coffee"></i> <span>Estado Pedidos</span>
             <span class="pull-right-container">
@@ -371,7 +294,7 @@
             <li><a href="<?php echo URL; ?>estado_pedido/formEstadosPedidos"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Estado Pedidos</a></li>
           </ul>
 
-        </li>
+        </li> -->
 
       <!--estados pedidos-->
 
@@ -395,7 +318,7 @@
 
       <!--Tipo de Movimiento-->
 
-        <li class="treeview">
+      <!--  <li class="treeview">
           <a href="#">
             <i class="fa fa-lemon-o"></i> <span>Tipo de Entrada</span>
             <span class="pull-right-container">
@@ -407,7 +330,7 @@
             <li><a href="<?php echo URL; ?>tipo_de_entrada/formTipoEnt"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Tipo de Entrada</a></li>
           </ul>
 
-        </li>
+        </li> -->
 
       <!--Tipo de Movimiento-->
 

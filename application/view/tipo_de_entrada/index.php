@@ -4,7 +4,7 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-       
+
 
           <div class="box">
             <div class="box-header">
@@ -12,7 +12,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <table id="tableTipoDeEntrada" class="display" style="width:100%">
+            <table id="tableTipoDeEntrada" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
                   <th>ID</th>
@@ -45,7 +45,7 @@
             </div>
             <form>
             <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
-              
+
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
                     <label for="identificador" >ID</label>
 
@@ -149,8 +149,8 @@ function enviarEditTipoEnt(){
             swal("Upss", "Los campos no pueden ir vacios!", "error");
             return false;
         }
-        else if (patron.test(nombreTE)){ 
-//sintaxis para validar que el campo no contenga números. 
+        else if (patron.test(nombreTE)){
+//sintaxis para validar que el campo no contenga números.
 //patron es la experesion regular, dentro del .test() se pone la variable a comparar
             swal("Upss", "No se permite ingresar números!", "error");
         }else if (length_nombre>Max_LengthNombre) {
@@ -186,7 +186,7 @@ function eliminarTipoEnt(idTE) {
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      }) 
+      })
       .then((willDelete) => {
         if (willDelete) {
           swal("Tipo de Entrada eliminado!", {
@@ -209,4 +209,3 @@ function eliminarTipoEnt(idTE) {
       });
 }
 </script>
-

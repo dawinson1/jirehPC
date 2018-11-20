@@ -31,10 +31,10 @@ class detalle_pedidoController
                'totalPedido'=> $totalPedi,
                'verPedi'=>['<button type="button" class="btn btn-primary" onclick="verPedido
                ('.$idPed.','."'".$idCli."'".','."'".$nomCli."'".','."'".$idEmp."'".','."'".$nomEmp."'".',
-               '."'".$entrega."'".','."'".$nomEst."'".','."'".$totalPedi."'".',)">Ver Pedido</button>'],
+               '."'".$entrega."'".','."'".$nomEst."'".','."'".$totalPedi."'".',)"><i class="fa fa-file-text-o"></i></button>'],
                'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarPed
                ('.$idPed.')">Editar</button>'],
-               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarTipoEnt('.$idPed.')">Eliminar</button>']
+               'Eliminar'=>['<button type="button" class="btn btn-danger" onclick="eliminarTipoEnt('.$idPed.')">Cancelar</button>']
            );
        }
        echo json_encode($datos);

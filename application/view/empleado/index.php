@@ -12,7 +12,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <table id="tableEmpleado" class="display" style="width:100%">
+            <table id="tableEmpleado" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
                   <th>Nombre</th>

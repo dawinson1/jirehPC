@@ -20,40 +20,7 @@ class pedidoController
         require APP . 'view/pedido/formPedidos.php';
         require APP . 'view/_templates/footer.php';
     }
-    public function editCliente()
-    {
-        require APP . 'view/_templates/header.php';
-        require APP . 'view/pedido/editarProducto.php';
-        require APP . 'view/_templates/footer.php';
-    }
-    public function listarCliente()
-    {
-       $pedido = $this->pedido->listarClientes();
-       foreach($pedido as $value){
-           $idC = $value['referencia'];
-           $nomC = $value['id_categoria'];
-           $apeC = $value['nombreProducto'];
-           $CorrC = $value['cantidad'];
-           $dicCl = $value['stock'];
-           $telC = $value['precioUnit'];
-           $contrC = $value['marca'];
-           $imgC = $value['Url_imgProduct'];
-           $datos[] = array(
-               'Referencia'=> $value['id_cliente'],
-               'Nombre'=>$value['nombreCliente'],
-               'Apellido'=>$value['apellidoCliente'],
-               'Correo'=>$value['correoCliente'],
-               'Dirección'=>$value['direccionCliente'],
-               'Telefono'=>$value['telefono'],
-               'Editar'=>['<button type="button" class="btn btn-primary" id="editCliente" onclick="editarCliente
-               ('.$idC.','."'".$nomC."'".','."'".$apeC."'".','."'".$CorrC."'".','."'".$dicCl."'".','."'".$telC."'".','."'".$contrC."'".',)">Editar</button>'],
-               'Foto Perfil'=>$value['Url_imgClient'],
-               'Actualizar Foto'=>['<button type="button" class="btn btn-primary" onclick="showModalImg('.$idC.')"><i class="fa fa-file-image-o"></i></button>'],
-               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarCliente('.$idC.')">Eliminar</button>']
-           );
-       }
-       echo json_encode($datos);
-    }
+
 
     public function crearCliente()
     {

@@ -12,7 +12,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <table id="tableRol" class="display" style="width:100%">
+            <table id="tableRol" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
                   <th>ID</th>

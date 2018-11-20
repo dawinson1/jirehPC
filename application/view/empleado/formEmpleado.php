@@ -76,6 +76,10 @@
                         <input type="password" class="form-control" placeholder="Ingrese su Contraseña"
                         name="passEmpl" id="passEmpl"  autocomplete="off" maxlength="15">
 
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-light btn-flat" id="ver-pass"><i class="fa fa-eye" id="icon"></i></button>
+                        </span>
+
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
@@ -249,4 +253,16 @@ function listarSelectEstado() {
      $('#id_estado').append(valueSelectEstado);
  })
 }
+
+$(function(){
+  $("#ver-pass").mouseup(function(){//#ver-pass es el id del boton, al soltarlo el hará las siguientes instrucciones
+        $("#icon").prop('class', 'fa fa-eye');//cambiará la clase del icono
+        $("#passEmpl").prop('type', 'password');//cambiará el type al input
+    });
+    $("#ver-pass").mousedown(function(){ //#ver-pass es el id del boton al dejar presionado hará las siguientes instrucciones
+        $("#icon").prop('class', 'fa fa-eye-slash');//cambiará la clase del icono
+        $("#passEmpl").prop('type', 'text');//cambiará el type al input
+
+    });
+})
 </script>

@@ -86,6 +86,10 @@
                         <input type="password" class="form-control" placeholder="Ingrese su Contraseña" autocomplete="off"
                         name="passCliente" id="passCliente" maxlength="15">
 
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-light btn-flat" id="ver-pass"><i class="fa fa-eye" id="icon"></i></button>
+                        </span>
+
                     </div><!--cierre div del input-->
 
                 </div> <!--cierre del div contenedor del input-->
@@ -195,6 +199,15 @@ function registrar(){
         }
 }
 
+$(function(){
+  $("#ver-pass").mouseup(function(){//#ver-pass es el id del boton, al soltarlo el hará las siguientes instrucciones
+        $("#icon").prop('class', 'fa fa-eye');//cambiará la clase del icono
+        $("#passCliente").prop('type', 'password');//cambiará el type al input
+    });
+    $("#ver-pass").mousedown(function(){ //#ver-pass es el id del boton al dejar presionado hará las siguientes instrucciones
+        $("#icon").prop('class', 'fa fa-eye-slash');//cambiará la clase del icono
+        $("#passCliente").prop('type', 'text');//cambiará el type al input
 
-
+    });
+})
 </script>
