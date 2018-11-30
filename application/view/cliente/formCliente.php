@@ -8,7 +8,7 @@
             <div class="box-body"> <!--Este Div es contenedor de los imputs-->
 
                 <div class="form-group col-xs-6" id="alertID"> <!--Comienzo del div contenedor del input-->
-                    <label for="identificador" >Cédula o NIT</label>
+                    <label for="identificador" >No. Cédula</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>

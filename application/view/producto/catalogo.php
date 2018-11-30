@@ -19,8 +19,8 @@ $productosPag = $this->producto->pagProducts($limit, $start_from);
         <div class="col-md-3">
             <div class="box box-primary">
               <div class="box-body">
-              <div class="list-group" style="height: 10em;width: 15em;" >
-                <img src="<?php echo URL.$producto['Url_imgProduct'];?>" style="height: 100%;width: 100%;">
+              <div class="list-group">
+                <img src="<?php echo URL.$producto['Url_imgProduct'];?>" class="img-thumbnail" alt="Responsive image">
               </div>
                 <ul class="list-group list-group-unbordered">
                   <li class="list-group-item">

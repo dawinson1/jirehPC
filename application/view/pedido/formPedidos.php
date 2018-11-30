@@ -409,14 +409,11 @@ function agregar() {
   var patronLetrEspecial = /\D/;
   var Max_Length = 3;
 
-  var ProductText = $("#clientSelect option:selected").text();
-  var ProductVal = $("#clientSelect").val();
-  var changeText = '';
+  var clientText = $("#clientSelect option:selected").text();
+  var clientVal = $("#clientSelect").val();
+  var changeText = clientText.replace(/[^a-z\s]/gi, '');
 
-  changeText = ProductText.substring(12,ProductText.length);
-  //alert(texto);
-
-  $("#idClient").val(ProductVal);
+  $("#idClient").val(clientVal);
   $("#nomCliente").val(changeText);
   $("#modalSelectClient").modal("hide");
   listSelectClient();
@@ -426,14 +423,11 @@ function agregarEmp() {
   var patronLetrEspecial = /\D/;
   var Max_Length = 3;
 
-  var ProductText = $("#empSelect option:selected").text();
-  var ProductVal = $("#empSelect").val();
-  var changeText = '';
+  var empText = $("#empSelect option:selected").text();
+  var empVal = $("#empSelect").val();
+  var changeText = empText.replace(/[^a-z\s]/gi, '');
 
-  changeText = ProductText.substring(12,ProductText.length);
-  //alert(texto);
-
-  $("#idEmployee").val(ProductVal);
+  $("#idEmployee").val(empVal);
   $("#nomEmployee").val(changeText);
   $("#modalSelectEmp").modal("hide");
   listSelectClient();

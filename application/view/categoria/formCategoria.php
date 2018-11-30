@@ -32,40 +32,39 @@
           </div>
 
 <script>
-        function crearCategoria(){
-        var patron = /[0-9]/;  // cree la expresion regular y lo guarde en la variable patron.
-        var nombreC = $('#nomCat').val();
-        var length_nombre = $('#nomCat').val().length;
-        var Max_LengthNombre = 25;
+function crearCategoria(){
+  var patron = /[0-9]/;  // cree la expresion regular y lo guarde en la variable patron.
+  var nombreC = $('#nomCat').val();
+  var length_nombre = $('#nomCat').val().length;
+  var Max_LengthNombre = 25;
 
 
-        if ((nombreC == "")) { //Valida si los campos estan vacios
-            swal("Upss", "Los campos no pueden ir vacios!", "error");
-        }
-        else if (patron.test(nombreC)){ 
-//sintaxis para validar que el campo no contenga números. 
-//patron es la experesion regular, dentro del .test() se pone la variable a comparar
-            swal("Upss", "No se permite ingresar números!", "error");
-        }else if (length_nombre>Max_LengthNombre) {
+    if ((nombreC == "")) { //Valida si los campos estan vacios
+      swal("Upss", "Los campos no pueden ir vacios!", "error");
+    } else if (patron.test(nombreC)){
+          //sintaxis para validar que el campo no contenga números.
+          //patron es la experesion regular, dentro del .test() se pone la variable a comparar
+        swal("Upss", "No se permite ingresar números!", "error");
+    }else if (length_nombre>Max_LengthNombre) {
       swal("Upss", "Nombre solo debe tener Máximo 25 caracteres!", "error");
-         }{
-            $.ajax({
-                url: Url+'categoria/crearCategoria',
-                type:'POST',
-                data:{
-                    nomCat: nombreC,
-               }
-            }).done(function(data){
-                if(data){
-                    swal("Bien Hecho!", "El Registro ha sido completado!", "success");
-                    $('#nomCat').val('');
-                }else{
-                    swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
-                }
-            })
-        }
+    } else {
+      $.ajax({
+        url: Url+'categoria/crearCategoria',
+        type:'POST',
+        data:{
+          nomCat: nombreC
+        },
+        }).done(function(data){
+          if(data){
+            swal("Bien Hecho!", "El Registro ha sido completado!", "success");
+            $('#nomCat').val('');
+          } else {
+            swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
+          }
+        })
+    }
 
-            
+
 
     }
 
