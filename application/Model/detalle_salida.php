@@ -3,12 +3,12 @@ namespace Mini\Model;
 
 use Mini\Core\Model;
 
-class detalle_entrada extends Model
+class detalle_salida extends Model
 {
 
-    private $idDetalle_entrada;
+    private $idDetalle_salida;
     private $producto_referencia;
-    private $entrada_identrada;
+    private $salida_idsalida;
     private $cantidad;
     private $motivo;
 
@@ -48,25 +48,25 @@ class detalle_entrada extends Model
       return $query->fetchAll();
     }
 
-    public function ultimaEntrada()
+    public function ultimaSalida()
     {
-      $sql = "SELECT max(identrada) as idEntrada FROM entrada";
+      $sql = "SELECT max(idsalida) as idSalida FROM salida";
       $query = $this->db->prepare($sql);
       $query->execute();
       return $query->fetch();
     }
 
-    public function saveDetailsEnt()
+    public function saveDetailsSali()
     {
-        $sql = "INSERT INTO detalle_entrada VALUES (NULL,?,?,?,?)";
+        $sql = "INSERT INTO detalle_salida VALUES (NULL,?,?,?,?)";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->producto_referencia);
-        $query->bindParam(2,$this->entrada_identrada);
+        $query->bindParam(2,$this->salida_idsalida);
         $query->bindParam(3,$this->cantidad);
         $query->bindParam(4,$this->motivo);
-        $saveDetaEnt = $query->execute();
+        $saveDetaSali = $query->execute();
 
-        if ($saveDetaEnt) {
+        if ($saveDetaSali) {
           return true;
         } else {
           return false;

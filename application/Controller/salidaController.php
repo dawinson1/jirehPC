@@ -1,11 +1,11 @@
 <?php
 namespace Mini\Controller;
-use Mini\Model\entrada;
-class entradaController
+use Mini\Model\salida;
+class salidaController
 {
-    private $entrada;
+    private $salida;
     function __construct(){
-        $this->entrada = new entrada();
+        $this->salida = new salida();
     }
     public function index()
     {
@@ -21,14 +21,14 @@ class entradaController
         require APP . 'view/_templates/footer.php';
     }
 
-    public function saveEntrada()
+    public function saveSalida()
     {
-      $dateEnt = date("Y-m-d");
-      $idEmpEnt = $_SESSION['IdEmp'];
+      $dateSali = date("Y-m-d");
+      $idEmpSali = $_SESSION['IdEmp'];
 
-      $this->entrada->set('id_empleado', $idEmpEnt);
-      $this->entrada->set('fechaEntrada', $dateEnt);
-      $this->entrada->set('idTipo_Entrada',$_POST['idtypeEnt']);
-      echo $this->entrada->crearEntrada();
+      $this->salida->set('id_empleado', $idEmpSali);
+      $this->salida->set('fechaSalida', $dateSali);
+      $this->salida->set('idTipo_Salida',$_POST['idtypeSali']);
+      echo $this->salida->crearSalida();
     }
 }

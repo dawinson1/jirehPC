@@ -94,6 +94,7 @@ class login extends Model
 
             $_SESSION['loggedin']=true;
             $_SESSION['username']=$result2["nombre"];
+            $_SESSION['IdEmp']=$result2["idEmpleado"];
             $_SESSION['imgPerfil']=$result2["Url_imgEmpleado"];
             $_SESSION['Rol']=$result2["nombrerol"];
 
@@ -237,8 +238,8 @@ class login extends Model
         $mail->IsSMTP(); // telling the class to use SMTP
         $mail->SMTPAuth = true;
         $mail->Host = "smtp.gmail.com"; // SMTP server
-        $mail->Username = "cgsoftware01@gmail.com";        // SMTP username
-        $mail->Password = "onepiecethebest";               // SMTP password
+        $mail->Username = "***********";        // SMTP username
+        $mail->Password = "***********";               // SMTP password
 
         $mail->CharSet = 'UTF-8';
         $mail->From = "cgsoftware01@gmail.com";

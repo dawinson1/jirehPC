@@ -46,7 +46,6 @@
               <th>Stock</th>
               <th>Precio Unitario</th>
               <th>Marca</th>
-              <th>Imagen</th>
               <th>Opción</th>
             </tr>
             </thead>
@@ -125,9 +124,8 @@ function agregarProduct(){
   var Max_PrecioU = $('#preUni').val().length;
   var marca = $('#nMarc').val();
   var Max_Marca = $('#nMarc').val().length;
-  var Url_imgProduct =  $('#imgProdu').val();
 
-    if ((referencia == "") || (id_categoria == "") || (nombreProducto == "") || (cantidad == "") || (stock == "") || (precioUnit == "") || (marca == "") || (Url_imgProduct == "")) {
+    if ((referencia == "") || (id_categoria == "") || (nombreProducto == "") || (cantidad == "") || (stock == "") || (precioUnit == "") || (marca == "")) {
         swal("Upss!", "Los campos no pueden ir vacíos!", "error");
     } else if (patronLetrEspecial.test(cantidad)) {
         swal("Upss!", "En el campo Cantidad solo deben ir números!", "error");
@@ -148,34 +146,49 @@ function agregarProduct(){
           },
       }).done(function(data){
         if (data == 'ProductNotExist') {
-          var img = datosimgProd.get('imgProdu');
-          var imgName = datosimgProd.get('imgProdu')['name'];
+          var img = 'img/sinimagen.png';
+          var textTdExist = $('#td'+referencia+'').text();
+          if (referencia == textTdExist) {
+            var hidInputCant = $('#cant'+referencia+'').val();
+            var sum = (parseInt(hidInputCant) + parseInt(cantidad));
+            $('#cant'+referencia+'').val(sum);
+            $('#tableCant'+referencia+'').text(sum);
 
-        $('#inputsProdNoExist').append(
-          "<div class='hidden' id='tr"+referencia+"2'>"+
-          "<input type='hidden' name='identificador[]' value='"+referencia+"'><input type='hidden' name='selectCat[]' value='"+id_categoria+"'>"+
-          "<input type='hidden' name='prodNom[]' value='"+nombreProducto+"'><input type='hidden' name='cantPro[]' value='"+cantidad+"'>"+
-          "<input type='hidden' name='stockPro[]' value='"+stock+"'><input type='hidden' name='preUni[]' value='"+precioUnit+"'>"+
-          "<input type='hidden' name='nMarc[]' value='"+marca+"'><input type='hidden' name='imgProdu[]' value='"+img+"'>"+
-          "</div>"
-        );
+            $('#identificador').val('');
+            $('#selectCat').val(0);
+            $('#prodNom').val('');
+            $('#cantPro').val('');
+            $('#stockPro').val('');
+            $('#preUni').val('');
+            $('#nMarc').val('');
+            tablaNot();
+
+          } else {
+            $('#inputsProdNoExist').append(
+            "<div class='hidden' id='tr"+referencia+"2'>"+
+            "<input type='hidden' name='identificador[]' value='"+referencia+"'><input type='hidden' name='selectCat[]' value='"+id_categoria+"'>"+
+            "<input type='hidden' name='prodNom[]' value='"+nombreProducto+"'><input type='hidden' id='cant"+referencia+"' name='cantPro[]' value='"+cantidad+"'>"+
+            "<input type='hidden' name='stockPro[]' value='"+stock+"'><input type='hidden' name='preUni[]' value='"+precioUnit+"'>"+
+            "<input type='hidden' name='nMarc[]' value='"+marca+"'><input type='hidden' name='imgProdu[]' value='"+img+"'>"+
+            "</div>"
+          );
           var rowNotExistProd = "<tr id='tr"+referencia+"'>"+
-          "<td>"+referencia+"</td><td>"+nombreProducto+"</td><td>"+Nomcategoria+"</td>"+
-          "<td>"+cantidad+"</td><td>"+stock+"</td><td>"+precioUnit+"</td>"+
-          "<td>"+marca+"</td><td>"+imgName+"</td>"+
+          "<td id='td"+referencia+"'>"+referencia+"</td><td>"+nombreProducto+"</td><td>"+Nomcategoria+"</td>"+
+          "<td id='tableCant"+referencia+"'>"+cantidad+"</td><td>"+stock+"</td><td>"+precioUnit+"</td>"+
+          "<td>"+marca+"</td>"+
           "<td><button class='btn btn-danger' type='button'"+
           "onclick='tabla1.row($("+'"'+"#tr"+referencia+'"'+")).remove().draw(), $("+'"'+"#tr"+referencia+'2"'+").remove()'>Eliminar</button></td></tr>";
 
-        $('#identificador').val('');
-        $('#selectCat').val(0);
-        $('#prodNom').val('');
-        $('#cantPro').val('');
-        $('#stockPro').val('');
-        $('#preUni').val('');
-        $('#nMarc').val('');
-        $('#imgProdu').fileinput('clear');
-        tablaNot();
-        tabla1.rows.add($(rowNotExistProd)).draw();
+          $('#identificador').val('');
+          $('#selectCat').val(0);
+          $('#prodNom').val('');
+          $('#cantPro').val('');
+          $('#stockPro').val('');
+          $('#preUni').val('');
+          $('#nMarc').val('');
+          tablaNot();
+          tabla1.rows.add($(rowNotExistProd)).draw();
+          }
         }
         if (data == 'ProductExist') {
           $.ajax({
@@ -186,22 +199,12 @@ function agregarProduct(){
                 identificador : referencia
               },
           }).done(function(data2){
-            $('#inputsProdExist').append(
-              "<div class='hidden' id='tr"+referencia+"2'>"+
-              "<input type='hidden' name='identificador2[]' value='"+referencia+"'>"+
-              "<input type='hidden' name='cantPro2[]' value='"+cantidad+"'>"+
-              "</div>"
-            );
-            var nomprodexist = '';
-            data2.forEach(function(prd){
-              nomprodexist = prd.nombreProducto;
-            })
-              var rowExistProd = "<tr id='tr"+referencia+"'>"+
-              "<td>"+referencia+"</td>"+
-              "<td>"+nomprodexist+"</td>"+
-              "<td>"+cantidad+"</td>"+
-              "<td><button class='btn btn-danger' type='button'"+
-              "onclick='tabla2.row($("+'"'+"#tr"+referencia+'"'+")).remove().draw(), $("+'"'+"#tr"+referencia+'2"'+").remove()'>Eliminar</button></td></tr>";
+            var textTdExist = $('#td2'+referencia+'').text();
+            if (referencia == textTdExist) {
+              var hidInputCant = $('#cant2'+referencia+'').val();
+              var sum = (parseInt(hidInputCant) + parseInt(cantidad));
+              $('#cant2'+referencia+'').val(sum);
+              $('#tableCant2'+referencia+'').text(sum);
 
               $('#identificador').val('');
               $('#selectCat').val(0);
@@ -210,9 +213,37 @@ function agregarProduct(){
               $('#stockPro').val('');
               $('#preUni').val('');
               $('#nMarc').val('');
-              $('#imgProdu').fileinput('clear');
-              tablaYes();
-              tabla2.rows.add($(rowExistProd)).draw();
+              tablaNot();
+
+            } else {
+              $('#inputsProdExist').append(
+                "<div class='hidden' id='tr"+referencia+"2'>"+
+                "<input type='hidden' name='identificador2[]' value='"+referencia+"'>"+
+                "<input type='hidden' id='cant2"+referencia+"' name='cantPro2[]' value='"+cantidad+"'>"+
+                "</div>"
+              );
+              var nomprodexist = '';
+              data2.forEach(function(prd){
+                nomprodexist = prd.nombreProducto;
+              })
+                var rowExistProd = "<tr id='tr"+referencia+"'>"+
+                "<td id='td2"+referencia+"'>"+referencia+"</td>"+
+                "<td>"+nomprodexist+"</td>"+
+                "<td id='tableCant2"+referencia+"'>"+cantidad+"</td>"+
+                "<td><button class='btn btn-danger' type='button'"+
+                "onclick='tabla2.row($("+'"'+"#tr"+referencia+'"'+")).remove().draw(), $("+'"'+"#tr"+referencia+'2"'+").remove()'>Eliminar</button></td></tr>";
+
+                $('#identificador').val('');
+                $('#selectCat').val(0);
+                $('#prodNom').val('');
+                $('#cantPro').val('');
+                $('#stockPro').val('');
+                $('#preUni').val('');
+                $('#nMarc').val('');
+                $('#imgProdu').fileinput('clear');
+                tablaYes();
+                tabla2.rows.add($(rowExistProd)).draw();
+            }
           })
 
         }
@@ -236,25 +267,40 @@ function agregarProduct2() {
     },
     }).done(function(data){
       if (data== 'ProductExist') {
-        $('#inputsProdExist').append(
-          "<div class='hidden' id='tr"+referencia2+"2'>"+
-          "<input type='hidden' name='identificador2[]' value='"+referencia2+"'>"+
-          "<input type='hidden' name='cantPro2[]' value='"+cant2+"'>"+
-          "</div>"
-        );
-          var rowExistProd = "<tr id='tr"+referencia2+"'>"+
-          "<td>"+referencia2+"</td>"+
-          "<td>"+NomProd+"</td>"+
-          "<td>"+cant2+"</td>"+
-          "<td><button class='btn btn-danger' type='button'"+
-          "onclick='tabla2.row($("+'"'+"#tr"+referencia2+'"'+")).remove().draw(), $("+'"'+"#tr"+referencia2+'2"'+").remove()'>Eliminar</button></td></tr>";
+
+        var textTdExist = $('#td2'+referencia2+'').text();
+        if (referencia2 == textTdExist) {
+          var hidInputCant = $('#cant2'+referencia2+'').val();
+          var sum = (parseInt(hidInputCant) + parseInt(cant2));
+          $('#cant2'+referencia2+'').val(sum);
+          $('#tableCant2'+referencia2+'').text(sum);
 
           $('#cantPro2').val('');
           $('#selectProduct2').val(0);
           $('#NomProducto2').val('');
           tablaYes();
-          tabla2.rows.add($(rowExistProd)).draw();
-          $('#btnForm2').prop('disabled', true);
+
+        } else {
+          $('#inputsProdExist').append(
+            "<div class='hidden' id='tr"+referencia2+"2'>"+
+            "<input type='hidden' name='identificador2[]' value='"+referencia2+"'>"+
+            "<input type='hidden' id='cant2"+referencia2+"' name='cantPro2[]' value='"+cant2+"'>"+
+            "</div>"
+          );
+            var rowExistProd = "<tr id='tr"+referencia2+"'>"+
+            "<td id='td2"+referencia2+"'>"+referencia2+"</td>"+
+            "<td>"+NomProd+"</td>"+
+            "<td id='tableCant2"+referencia2+"'>"+cant2+"</td>"+
+            "<td><button class='btn btn-danger' type='button'"+
+            "onclick='tabla2.row($("+'"'+"#tr"+referencia2+'"'+")).remove().draw(), $("+'"'+"#tr"+referencia2+'2"'+").remove()'>Eliminar</button></td></tr>";
+
+            $('#cantPro2').val('');
+            $('#selectProduct2').val(0);
+            $('#NomProducto2').val('');
+            tablaYes();
+            tabla2.rows.add($(rowExistProd)).draw();
+            $('#btnForm2').prop('disabled', true);
+        }
       }
       if (data == 'ProductNotExist') {
         swal("Upss", "El producto no existe, usa el otro formulario para registrar el nuevo producto", "error");
@@ -264,27 +310,127 @@ function agregarProduct2() {
 }
 
 function registrar() {
-  var detaRegisProd = new FormData($('#datosRegistroProdNotExist')[0]);
-    console.log(detaRegisProd);
-    $.ajax({
-      url: Url+'/producto/crearProducto',
-      type:'POST',
-      //dataType: "json",
-      data: detaRegisProd,
-      contentType: false,
-      processData: false,
-    }).done(function(data){
 
-    })
-}
+  if ((!tabla1.data().count()) && (!tabla2.data().count()) ) {
+    swal("Upss", "No has agregado Productos", "error");
+  } else {
+    swal({
+      title: "Espere un momento por favor",
+      text: "Su petición se está procesando",
+      icon: Url+'img/gif/Loading_icon.gif',
+      imageClass: "contact-form-image",
+      buttons: false,
+    });
+    var typeEnt = 1;
+      //Ajax para crear la entrada (inicio)
+      $.ajax({
+        url: Url+'/entrada/saveEntrada',
+        type:'POST',
+        data: {
+          idtypeEnt : typeEnt
+        },
+      }).done(function(dataEnt){
+        if (dataEnt=='entradaCreada') {
+          var prodNotExist = new FormData($('#datosRegistroProdNotExist')[0]);
 
-function inputFile() {
-  $('#imgProdu').fileinput({
-    theme: 'fa',
-    language: 'es',
-    showUpload : false,
-    allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg']
-  });
+          if ($('#inputsProdNoExist').html()) {
+            //Ajax para registrar los nuevos productos (inicio)
+            $.ajax({
+                url: Url+'/producto/crearProductos',
+                type:'POST',
+                data: prodNotExist,
+                contentType: false,
+                processData: false,
+              }).done(function(data){
+                if (data>=1) {
+                  //Ajax para llenar la tabla de detalle Entrada
+                  $.ajax({
+                      url: Url+'/detalle_entrada/saveDetalleEntrada',
+                      type:'POST',
+                      data: prodNotExist,
+                      contentType: false,
+                      processData: false,
+                    }).done(function(data){
+                      if (data>=1) {
+                        $('#inputsProdNoExist').empty();
+                        tabla1.clear().draw();
+                        var prodExist = new FormData($('#datosRegistroProdExist')[0]);
+
+                        if ($('#inputsProdExist').html()) {
+                          //Ajax para actualizar la cantidad de los productos ya Existentes
+                          $.ajax({
+                              url: Url+'/producto/updateCantProd',
+                              type:'POST',
+                              data: prodExist,
+                              contentType: false,
+                              processData: false,
+                            }).done(function(data){
+                              if (data>=1) {
+                                //Ajax para registrar en la tabla detalle los productos existentes
+                                $.ajax({
+                                    url: Url+'/detalle_entrada/saveDetalleEntrada2',
+                                    type:'POST',
+                                    data: prodExist,
+                                    contentType: false,
+                                    processData: false,
+                                  }).done(function(data){
+                                    if (data>=1) {
+                                      $('#inputsProdExist').empty();
+                                      tabla2.clear().draw();
+                                      swal("Buen trabajo", "Los productos han sido actualizados y resgistrados", "success");
+                                    }
+                                  })
+                                  //fin ajax del registro detalle productos existentes
+                              }
+                            })
+                            //Fin Ajax de la actualizacion de productos existentes
+                        } else {
+                          swal("Bien hecho", "Los productos  han sido registrados", "success");
+                        }
+                      }
+                    })
+                    //Fin Ajax resgistro detalle entrada
+                }
+              })
+              //Fin Ajax registro productos
+          } else {
+            //aqui se ejecutara el ajax por si la tabla productos existentes esté vacia
+            var prodExist = new FormData($('#datosRegistroProdExist')[0]);
+            //Ajax para actualizar la cantidad de los productos ya Existentes
+            if ($('#inputsProdExist').html()) {
+            $.ajax({
+                url: Url+'/producto/updateCantProd',
+                type:'POST',
+                data: prodExist,
+                contentType: false,
+                processData: false,
+              }).done(function(data){
+                if (data>=1) {
+                  //Ajax para registrar en la tabla detalle los productos existentes
+                  $.ajax({
+                      url: Url+'/detalle_entrada/saveDetalleEntrada2',
+                      type:'POST',
+                      data: prodExist,
+                      contentType: false,
+                      processData: false,
+                    }).done(function(data){
+                      if (data>=1) {
+                        $('#inputsProdExist').empty();
+                        tabla2.clear().draw();
+                        swal("Buen trabajo", "Los productos han sido actualizados", "success");
+                      }
+                    })
+                    //fin ajax del registro detalle productos existentes
+                }
+              })
+              //Fin Ajax de la actualizacion de productos existentes
+          }
+        }
+        }
+      })
+      //Fin ajax registro entrada
+  }
+
 }
 
 $(function(){
@@ -356,10 +502,10 @@ function showForm() {
               <div class="box-body"> <!--Este Div es contenedor de los imputs-->
                 <div class="row"> <!--row para poder mover los inputs text y el input file -->
 
-                <div class="col-md-6">
+                <div class="col-md-12">
 
                   <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                      <label for="identificador" >Referencia</label>
+                      <label for="identificador" >Referencia *</label>
 
                       <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                           <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
@@ -370,7 +516,7 @@ function showForm() {
                   </div> <!--cierre del div contenedor del input-->
 
                   <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                      <label for="selectCat">Categoria</label>
+                      <label for="selectCat">Categoria *</label>
 
                       <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                           <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
@@ -380,7 +526,7 @@ function showForm() {
                   </div> <!--cierre del div contenedor del input-->
 
                   <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                      <label for="prodNom">Nombre</label>
+                      <label for="prodNom">Nombre *</label>
 
                       <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                           <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
@@ -391,30 +537,30 @@ function showForm() {
                   </div> <!--cierre del div contenedor del input-->
 
                   <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                      <label for="cantPro">Cantidad</label>
+                      <label for="cantPro">Cantidad *</label>
 
                       <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                           <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                           <input type="text" class="form-control" placeholder="Cantidad de Productos"
-                           name="cantPro" id="cantPro" maxlength="11">
+                           name="cantPro" id="cantPro" maxlength="3">
 
 
                       </div><!--cierre div del inputt-->
                   </div> <!--cierre del div contenedor del input-->
 
                   <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                      <label for="stockPro">Stock</label>
+                      <label for="stockPro">Stock *</label>
 
                       <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                           <span class="input-group-addon"><i class="fa fa-map-signs"></i></span>
                           <input type="text" class="form-control" placeholder="Muestra Cantidad en bodega"
-                          name="stockPro" id="stockPro" maxlength="11">
+                          name="stockPro" id="stockPro" maxlength="2">
 
                       </div><!--cierre div del inputt-->
                   </div> <!--cierre del div contenedor del input-->
 
                   <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                      <label for="preUni">Precio Unitario</label>
+                      <label for="preUni">Precio Unitario *</label>
 
                       <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                           <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
@@ -425,7 +571,7 @@ function showForm() {
                   </div> <!--cierre del div contenedor del input-->
 
                   <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                      <label for="nMarc">Marca</label>
+                      <label for="nMarc">Marca *</label>
 
                       <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                           <span class="input-group-addon"><i class="fa fa-key"></i></span>
@@ -437,25 +583,6 @@ function showForm() {
 
                 </div>
 
-                <div class="col-md-6">
-
-                            <div class="box-body"> <!--Este Div es contenedor de los imputs-->
-
-                              <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                                  <label for="imgProdu" >Seleccione imagen del Producto</label>
-
-                                  <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-
-                                      <input type="file" class="form-control"
-                                          name="imgProdu" id="imgProdu">
-
-                                  </div><!--cierre div del inputt-->
-                              </div> <!--cierre del div contenedor del input-->
-
-
-                            </div> <!--Cierre del Div contenedor-->
-
-                </div> <!--cierre div col-md-6-->
 
                 <div class="col-md-12">
                   <button type="button" class="btn btn-info pull-right" onclick="agregarProduct()">Agregar</button>
@@ -467,7 +594,6 @@ function showForm() {
               </div>`;
     $('#form1Productos').append(form1);
     listarSelectCat();
-    inputFile();
   } else if (showForm==2) {
     $('#form1Productos').empty();
     var form2 = `<div class="box box-info">
@@ -478,7 +604,7 @@ function showForm() {
 
               <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
                 <div class="form-group id_label_single">
-                    <label>Seleccione un Producto</label>
+                    <label>Seleccione un Producto *</label>
 
                     <select id="selectProduct2" class="form-control js-example-basic-single"
                       name="selectProduct2" style="width: 100%" onchange="selectProd()">
@@ -500,12 +626,12 @@ function showForm() {
             </div>
             <div class="col-md-6">
               <div class="form-group col-md-12"> <!--Comienzo del div contenedor del input-->
-                  <label for="cantPro2" >Ingrese la cantidad entrante</label>
+                  <label for="cantPro2" >Ingrese la cantidad entrante *</label>
 
                   <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                       <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
                       <input type="text" class="form-control" placeholder="Cantidad"
-                          name="cantPro2" id="cantPro2" maxlength="11" onKeyPress="notSpace()">
+                          name="cantPro2" id="cantPro2" maxlength="3" onKeyPress="notSpace()">
 
                   </div><!--cierre div del inputt-->
               </div> <!--cierre del div contenedor del input-->

@@ -1,11 +1,11 @@
 <?php
 namespace Mini\Controller;
-use Mini\Model\detalle_entrada;
-class detalle_entradaController
+use Mini\Model\detalle_salida;
+class detalle_salidaController
 {
-    private $detaEnt;
+    private $detaSali;
     function __construct(){
-        $this->detaEnt = new detalle_entrada();
+        $this->detaSali = new detalle_salida();
     }
 
     public function listPedido()
@@ -59,24 +59,21 @@ class detalle_entradaController
         echo $this->detaEnt->eliminarTipoEnt();
     }
 
-    public function saveDetalleEntrada()
+    public function saveDetalleSalida()
     {
-      //$data = json_decode($_POST['productos']);
-      //var_dump($data);
-      //var_dump($_POST);
-      $resultadoEnt = $this->detaEnt->ultimaEntrada();
-      $motivoEnt = 'Producto comprado a un proveedor';
+      $resultadoSali = $this->detaSali->ultimaSalida();
+      $motivoSali = 'Producto vendido a un Cliente';
 
-      if ($resultadoEnt != false) {
-          $ultimo = $resultadoEnt['idEntrada'];
+      if ($resultadoSali != false) {
+          $ultimo = $resultadoSali['idSalida'];
 
-        foreach ($_POST['identificador'] as $key => $value) {
+        foreach ($_POST['idProd'] as $key => $value) {
 
-          $this->detaEnt->set('entrada_identrada', $ultimo);
-          $this->detaEnt->set('producto_referencia', $value);
-          $this->detaEnt->set('cantidad', $_POST['cantPro'][$key]);
-          $this->detaEnt->set('motivo', $motivoEnt);
-          echo $this->detaEnt->saveDetailsEnt();;
+          $this->detaSali->set('salida_idsalida', $ultimo);
+          $this->detaSali->set('producto_referencia', $value);
+          $this->detaSali->set('cantidad', $_POST['cantProd'][$key]);
+          $this->detaSali->set('motivo', $motivoSali);
+          echo $this->detaSali->saveDetailsSali();;
         }
 
       } else {

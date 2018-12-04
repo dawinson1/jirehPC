@@ -62,9 +62,68 @@ class productoController
        echo json_encode($datos);
     }
 
-    public function crearProducto()
+    public function crearProductos()
     {
-      var_dump($_POST);
+      foreach ($_POST['identificador'] as $key => $value) {
+
+        $this->producto->set('referencia', $value);
+        $this->producto->set('id_categoria', $_POST['selectCat'][$key]);
+        $this->producto->set('nombreProducto', $_POST['prodNom'][$key]);
+        $this->producto->set('cantidad', $_POST['cantPro'][$key]);
+        $this->producto->set('stock', $_POST['stockPro'][$key]);
+        $this->producto->set('precioUnit', $_POST['preUni'][$key]);
+        $this->producto->set('marca', $_POST['nMarc'][$key]);
+        $this->producto->set('Url_imgProduct', $_POST['imgProdu'][$key]);
+        echo $this->producto->crearProducto();
+      }
+    }
+
+    public function updateCantProd()
+    {
+      foreach ($_POST['identificador2'] as $key => $value) {
+
+        $idprod = $value;
+        $cantPod = $this->producto->cantProducto($idprod);
+        $cantDB = $cantPod['cantidad'];
+        $cantProdDB[] = array('cantidadDB' => $cantDB);
+        $cantProdForm[] = array('cantidadForm' => $_POST['cantPro2'][$key]);
+      }
+
+      for ($i=0; $i < count($cantProdDB); $i++) {
+        $sumaCants[$i] = $cantProdDB[$i]['cantidadDB'] + $cantProdForm[$i]['cantidadForm'];
+      }
+
+      foreach ($_POST['identificador2'] as $key => $value) {
+
+        $this->producto->set('referencia', $value);
+        $this->producto->set('cantidad', $sumaCants[$key]);
+        echo $this->producto->updateCantProducto();
+      }
+
+    }
+
+    public function updateCantProdRest()
+    {
+      foreach ($_POST['idProd'] as $key => $value) {
+
+        $idprod = $value;
+        $cantPod = $this->producto->cantProducto($idprod);
+        $cantDB = $cantPod['cantidad'];
+        $cantProdDB[] = array('cantidadDB' => $cantDB);
+        $cantProdForm[] = array('cantidadForm' => $_POST['cantProd'][$key]);
+      }
+
+      for ($i=0; $i < count($cantProdDB); $i++) {
+        $restaCants[$i] = $cantProdDB[$i]['cantidadDB'] - $cantProdForm[$i]['cantidadForm'];
+      }
+
+      foreach ($_POST['idProd'] as $key => $value) {
+
+        $this->producto->set('referencia', $value);
+        $this->producto->set('cantidad', $restaCants[$key]);
+        echo $this->producto->updateCantProducto();
+      }
+
     }
 
     public function buscarProducto()

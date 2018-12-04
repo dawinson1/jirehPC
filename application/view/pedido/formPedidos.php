@@ -11,7 +11,7 @@
 
 
                 <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="idClient" >Cédula del cliente</label>
+                    <label for="idClient" >Cédula del cliente: *</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
@@ -37,7 +37,7 @@
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="idEmployee" >Cédula del empleado</label>
+                    <label for="idEmployee" >Cédula del empleado: *</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
@@ -63,7 +63,7 @@
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                    <label for="direcCliente">Estado</label>
+                    <label for="direcCliente">Estado: *</label>
 
                     <div class="input-group"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-map-signs"></i></span>
@@ -75,7 +75,7 @@
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                  <label>Fecha de Entrega:</label>
+                  <label>Fecha de Entrega: *</label>
 
                   <div class="input-group date">
                     <div class="input-group-addon">
@@ -102,13 +102,15 @@
       <div class="form-group"> <!--Comienzo del div contenedor del input-->
           <div class="col-md-offset-5"><h4>Seleccione un producto</h4></div>
 
-          <div class="input-group my-colorpicker2 colorpicker-element col-md-12"> <!--comienzo div del inputt-->
+          <div class="table-responsive"> <!--comienzo div del inputt-->
 
                 <table class="table table-striped table-bordered" id="listProducts" style="width:100%">
                     <thead>
                     <tr>
                       <th>Referencia</th>
                       <th>Producto</th>
+                      <th>Marca</th>
+                      <th>Categoria</th>
                       <th>Cantidad <br> disponible</th>
                       <th>Precio</th>
                       <th>Ingrese cantidad</th>
@@ -119,15 +121,19 @@
                       <?php foreach ($listProdPed as $list):
                         $refer = $list['referencia'];
                         $nomProd = $list['nombreProducto'];
+                        $marcaProd= $list['marca'];
+                        $CateProd = $list['nombreCate'];
                         $cantProd = $list['cantidad'];
                         $precioProd = $list['precioUnit'];
                       ?>
                         <tr>
                           <td><?php echo $refer ?></td>
                           <td><?php echo $nomProd ?></td>
-                          <td><?php echo $cantProd ?></td>
+                          <td><?php echo $marcaProd ?></td>
+                          <td><?php echo $CateProd ?></td>
+                          <td id="cantActual<?php echo $refer ?>"><?php echo $cantProd ?></td>
                           <td><?php echo $precioProd ?></td>
-                          <td> <input type="text" name="cantProdInput"  id ="<?php echo $refer; ?>" placeholder="Digite una cantidad" maxlength="3"> </td>
+                          <td> <input type="text" name="cantProdInput"  id ="cantInp<?php echo $refer; ?>" placeholder="Digite una cantidad" maxlength="3"> </td>
                           <td>
                             <button type="button" class="btn btn-primary"
                             onclick="selectProd('<?php echo $refer; ?>', '<?php echo $nomProd; ?>', '<?php echo $precioProd; ?>')">Seleccionar</button>
@@ -144,7 +150,7 @@
 
         <form enctype="multipart/form-data" autocomplete="off" id="datosDetallePedido">
           <div class="col-md-12">
-            <div class="box">
+            <div class="box table-responsive">
               <table class="table table-striped table-bordered" style="width:100%" id="addProducts">
                   <thead>
                   <tr>
@@ -286,6 +292,13 @@ function registrar(){
   } else if (id_productos === undefined || id_productos.length == 0) {
      swal("Upss", "No has asignado productos al pedido!", "error");
   } else{
+    swal({
+      title: "Espere un momento por favor",
+      text: "El pedido se está procesando",
+      icon: Url+'img/gif/Loading_icon.gif',
+      imageClass: "contact-form-image",
+      buttons: false,
+    });
     var datesPed = new FormData($('#datosPedido')[0]);
   $.ajax({
       url: Url+'/pedido/savePedido',
@@ -305,19 +318,51 @@ function registrar(){
             processData: false,
           }).done(function(data){
             if (data>=1) {
-              swal("Increible!", "El pedido ha sido guardado!", "success");
-              $('#listDetalle').empty();
-              $('#idClient').val('');
-              $('#idEmployee').val('');
-              $('#selectEstado').val('');
-              $('#datepicker').val('');
-              $('.totalPedido').val('0');
-              $('.totalPedido').text('0');
-              //tabla.ajax.reload(null,false);
+              var idtypeSali = 1;
+              $.ajax({
+                  url: Url+'/salida/saveSalida',
+                  type:'POST',
+                  data: {
+                    idtypeSali: idtypeSali
+                  },
+                }).done(function(data){
+                  if (data == 'salidaCreada') {
+                    $.ajax({
+                        url: Url+'/detalle_salida/saveDetalleSalida',
+                        type:'POST',
+                        data: datesDetalle,
+                        contentType: false,
+                        processData: false,
+                      }).done(function(data){
+                        if (data >= 1) {
+                          $.ajax({
+                              url: Url+'/producto/updateCantProdRest',
+                              type:'POST',
+                              data: datesDetalle,
+                              contentType: false,
+                              processData: false,
+                            }).done(function(data){
+                              if (data >= 1) {
+                                swal("Increible!", "El pedido ha sido guardado!", "success");
+                                $('#listDetalle').empty();
+                                $('#idClient').val('');
+                                $('#idEmployee').val('');
+                                $('#selectEstado').val('');
+                                $('#datepicker').val('');
+                                $('.totalPedido').val('0');
+                                $('.totalPedido').text('0');
+                                //tabla.ajax.reload(null,false);
+                              }
+
+                            })
+                        }
+
+                      })
+                  }
+
+                })
             }
-            if (data=='ErrorAlGuadarPedido') {
-              swal("Algo anda mal!", "El pedido no ha sido guardado!", "error");
-            }
+
           })
       }
       if (data=='errorCrearPedido') {
@@ -450,49 +495,70 @@ $(document).ready(function() {
         "lengthMenu": [[4, 8, 15, 50, -1], [4, 8, 15, 50, "Todo"]],
         "scrollX": false,
         // "dom": 'lrtipB',
+        responsive: true,
         "language": {
             "url": Url+"/js/lenguaje.json"
         },
 
-        buttons: [
-            {extend: 'copy',exportOptions: {columns: [0,1,2,3,4]}},
-            {extend: 'csv',exportOptions: {columns: [0,1,2,3,4]}},
-            {extend: 'excel',title: 'Empleado',exportOptions: {columns: [0,1,2,3,4]}},
-            {extend: 'pdf', title: 'Empleado',exportOptions: {columns: [0,1,2,3,4]}},
-            {extend: 'print',
-            exportOptions: {columns: [0,1,2,3,4]},
-            customize: function (win){
-            $(win.document.body).addClass('white-bg');
-            $(win.document.body).css('font-size', '10px');
-
-            $(win.document.body).find('table')
-            .addClass('compact')
-            .css('font-size', 'inherit');
-            }
-        }
-        ]
         } );
 
 });
 
 function selectProd(refer,nomProd,precioProd) {
-  let cantidadProd = $('#'+refer+'').val();
+  let cantidadProd = $('#cantInp'+refer+'').val();
   var totalPrecio = cantidadProd*precioProd;
+  var tdReferExist = $('#idReferTd'+refer+'').text();
+  var tdCantActual = parseInt($('#cantActual'+refer+'').text());
+
+
 
   if ((isNaN(cantidadProd))) {
     swal("Upss","Solo se permite ingresar números", "error");
+  } else if (cantidadProd > tdCantActual) {
+    swal("Upss","No se permite ingresar cantidades mayores al actual", "error");
+  } else if (cantidadProd <= 0) {
+    swal("Upss","No se permite ingresar cantidades menores o iguales a cero '0' ", "error");
   } else {
-    $('#addProducts').append(
-      "<tr id='tr"+refer+"'>"+
-      "<input type='hidden' name='idProd[]' value='"+refer+"' class='idProd'><input type='hidden' name='cantProd[]' value='"+cantidadProd+"' class='cantProd'>"+
-      "<input type='hidden' name='precUnit[]' value='"+precioProd+"' class='precUnit'><input type='hidden' name='totPrec[]' class='totPrec' value='"+totalPrecio+"' class='totPrec'>"+
-      "<td>"+refer+"</td><td>"+nomProd+"</td><td>"+cantidadProd+
-      "</td><td>"+precioProd+"</td><td>"+totalPrecio+
-      "</td><td><button class='btn btn-danger' type='button' onclick='$("+'"'+"#tr"+refer+'"'+").remove(), sumTotales()'>Eliminar</button></td></tr>"
-    );
+    if (tdReferExist == refer) {
+      var cantSeleccionada = $('#cantSele'+refer+'').text();
+      var totalprice = $('#totalPre'+refer+'').text();
+      var sumcant = (parseInt(cantSeleccionada) + parseInt(cantidadProd));
+      var restcant = (parseInt(tdCantActual) - parseInt(cantidadProd));
+      var sumtotal = (parseInt(totalPrecio) + parseInt(totalprice));
+
+      $('#cantActual'+refer+'').text(restcant);
+      $('#cantSele'+refer+'').text(sumcant);
+      $('#totalPre'+refer+'').text(sumtotal);
+      $('#cantProdSele'+refer+'').val(sumcant);
+      $('#totPrecInp'+refer+'').val(sumtotal);
+      sumTotales();
+
+    } else {
+      $('#addProducts').append(
+        "<tr id='tr"+refer+"'>"+
+        "<input type='hidden' name='idProd[]' value='"+refer+"' class='idProd'><input type='hidden' name='cantProd[]' value='"+cantidadProd+"' id='cantProdSele"+refer+"'>"+
+        "<input type='hidden' name='precUnit[]' value='"+precioProd+"' class='precUnit'><input type='hidden' name='totPrec[]' class='totPrec' value='"+totalPrecio+"' id='totPrecInp"+refer+"'>"+
+        "<td id='idReferTd"+refer+"'>"+refer+"</td><td>"+nomProd+"</td><td id='cantSele"+refer+"'>"+cantidadProd+
+        "</td><td>"+precioProd+"</td><td id='totalPre"+refer+"'>"+totalPrecio+
+        "</td><td><button class='btn btn-danger' type='button' onclick='removetr("+'"'+refer+'"'+")'>Eliminar</button></td></tr>"
+      );
+      var restcant = (parseInt(tdCantActual) - parseInt(cantidadProd));
+      $('#cantActual'+refer+'').text(restcant);
+    }
   }
 
-  $('#'+refer+'').val('');
+  $('#cantInp'+refer+'').val('');
+  sumTotales();
+}
+
+function removetr(idP) {
+  var cantActSoli = parseInt($('#cantSele'+idP+'').text());
+  var cantActTable = parseInt($('#cantActual'+idP+'').text());
+
+  var sumcant = (parseInt(cantActSoli) + parseInt(cantActTable));
+
+  $('#cantActual'+idP+'').text(sumcant)
+  $('#tr'+idP+'').remove();
   sumTotales();
 }
 
@@ -518,7 +584,6 @@ function sumTotales() {
 //plugin slect2
 $(document).ready(function() {
     $('.js-example-basic-single').select2({
-      placeholder: 'Seleccione a un clientes',
       theme: "classic"
     });
 });

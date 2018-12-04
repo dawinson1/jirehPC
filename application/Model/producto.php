@@ -90,17 +90,16 @@ class producto extends Model
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$referP);
         $query->execute();
-        return $query->fetchAll();
+        return $query->fetch();
     }
 
     public function updateCantProducto()
     {
         $sql = "UPDATE producto SET cantidad = ? WHERE referencia = ?";
         $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->referencia);
+        $query->bindParam(1,$this->cantidad);
         $query->bindParam(2,$this->referencia);
-        $query->execute();
-        return $query->fetchAll();
+        return $query->execute();
     }
 
     public function crearProducto()
@@ -118,6 +117,11 @@ class producto extends Model
         $query->bindParam(8,$this->Url_imgProduct);
         $registroP = $query->execute();
 
+        if ($registroP) {
+          return true;
+        } else {
+          return false;
+        }
 
     }
 

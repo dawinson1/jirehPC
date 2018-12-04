@@ -3,13 +3,12 @@ namespace Mini\Model;
 
 use Mini\Core\Model;
 
-class pedido extends Model
+class salida extends Model
 {
-    private $idCliente;
-    private $fechaEntrega;
+    private $idsalida;
     private $id_empleado;
-    private $idEstado_pedido;
-    private $total;
+    private $fechaSalida;
+    private $idTipo_Salida;
 
     public function set($atributo,$valor){
         $this->$atributo = $valor;
@@ -17,7 +16,7 @@ class pedido extends Model
 
     public function listarProductos()
     {
-        $sql = "SELECT p.*,c.Nombre as nombreCate FROM producto p INNER JOIN categoria c ON c.id_categoria = p.id_categoria";
+        $sql = "SELECT * FROM producto";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -64,29 +63,19 @@ class pedido extends Model
         return $query->fetchAll();
     }
 
-    private function ultimoPedido()
+    public function crearSalida()
     {
-      $sql = "SELECT max(id_pedido) as idPedido FROM pedido";
-      $query = $this->db->prepare($sql);
-      $query->execute();
-      return $query->fetch();
-    }
-
-    public function crearPedido()
-    {
-        $sql = "INSERT INTO pedido (idCliente, fechaEntrega, id_empleado, idEstado_pedido, total) VALUES (?,?,?,?,?)";
+        $sql = "INSERT INTO salida (id_empleado, fechaSalida, idTipo_Salida) VALUES (?,?,?)";
         $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->idCliente);
-        $query->bindParam(2,$this->fechaEntrega);
-        $query->bindParam(3,$this->id_empleado);
-        $query->bindParam(4,$this->idEstado_pedido);
-        $query->bindParam(5,$this->total);
-        $pedGuardado = $query->execute();
+        $query->bindParam(1,$this->id_empleado);
+        $query->bindParam(2,$this->fechaSalida);
+        $query->bindParam(3,$this->idTipo_Salida);
+        $entdGuardado = $query->execute();
 
-        if ($pedGuardado) {
-          echo 'pedidoCreado';
+        if ($entdGuardado) {
+            echo 'salidaCreada';
         } else {
-          echo 'errorCrearPedido';
+          echo 'errorCrearSalida';
         }
 
     }

@@ -63,17 +63,9 @@ class entrada extends Model
         return $query->fetchAll();
     }
 
-    private function ultimaEntrada()
-    {
-      $sql = "SELECT max(identrada) as idEntrada FROM entrada";
-      $query = $this->db->prepare($sql);
-      $query->execute();
-      return $query->fetch();
-    }
-
     public function crearEntrada()
     {
-        $sql = "INSERT INTO entrada (id_empleado, fechaEntrada, idTipo_Entrada) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO entrada (id_empleado, fechaEntrada, idTipo_Entrada) VALUES (?,?,?)";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->id_empleado);
         $query->bindParam(2,$this->fechaEntrada);
@@ -81,7 +73,7 @@ class entrada extends Model
         $entdGuardado = $query->execute();
 
         if ($entdGuardado) {
-          echo 'entradaCreada';
+            echo 'entradaCreada';
         } else {
           echo 'errorCrearEntrada';
         }
