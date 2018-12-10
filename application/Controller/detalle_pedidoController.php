@@ -32,31 +32,12 @@ class detalle_pedidoController
                'verPedi'=>['<button type="button" class="btn btn-primary" onclick="verPedido
                ('.$idPed.','."'".$idCli."'".','."'".$nomCli."'".','."'".$idEmp."'".','."'".$nomEmp."'".',
                '."'".$entrega."'".','."'".$nomEst."'".','."'".$totalPedi."'".',)"><i class="fa fa-file-text-o"></i></button>'],
-               'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarPed
-               ('.$idPed.')">Editar</button>'],
-               'Eliminar'=>['<button type="button" class="btn btn-danger" onclick="eliminarTipoEnt('.$idPed.')">Cancelar</button>']
+               'Editar'=>['<input type="checkbox" onchange="changeStatusPed('."'".$idEstPed."'".','."'".$idPed."'".')" id="togglePed_'.$idPed.'"
+               class="toggle-Pedido estPed'.$idEstPed.'" data-toggle="toggle" data-offstyle="danger" data-on="Pendiente" data-off="Finalizado">'],
+               'Eliminar'=>['<button type="button" class="btn btn-danger btnCancel'.$idEstPed.'" onclick="cancelarPed('.$idPed.')">Cancelar</button>']
            );
        }
        echo json_encode($datos);
-    }
-
-    public function crearTipoEnt()
-    {
-        $this->tipoEnt->set('Nombre',$_POST['nomTipoE']);
-        echo $this->tipoEnt->crearTipoEnt();
-    }
-
-    public function editarTipoEnt()
-    {
-        $this->tipoEnt->set('Id_tipoEnt',$_POST['identificador']);
-        $this->tipoEnt->set('Nombre',$_POST['nomTipoE']);
-        echo $this->tipoEnt->editarTipoEnt();
-    }
-
-    public function eliminarTipoEnt()
-    {
-        $this->tipoEnt->set('Id_tipoEnt',$_POST['identificador']);
-        echo $this->tipoEnt->eliminarTipoEnt();
     }
 
     public function saveDetallePedido()
@@ -84,6 +65,50 @@ class detalle_pedidoController
       }
 
     }
+
+    public function pedCancel()
+    {
+      $this->detaPedido->set('idEstado_pedido',$_POST[('idEstPed')]);
+      $this->detaPedido->set('id_pedido',$_POST[('idPedido')]);
+      $updateEstPed = $this->detaPedido->cambiarEstadoPed();
+
+      if ($updateEstPed) {
+        $this->detaPedido->set('Pedido_idPedido',$_POST['idPedido']);
+        $resultProdPed = $this->detaPedido->buscProdDetalle();
+
+        if ($resultProdPed) {
+          foreach ($resultProdPed as $value) {
+            $referProd = $value['referencia'];
+            $cantPedProd = $value['cantidad'];
+
+            $cantPed[] = array('cantPed' => $cantPedProd );
+            $refer[] = array('referPed' => $referProd );
+
+            $resultcantAct = $this->detaPedido->buscarProducto($referProd);
+            $cantDB = $resultcantAct['cantidad'];
+            $cantActDB[] = array('cantDB' => $cantDB );
+          }
+
+
+          for ($i=0; $i < count($cantActDB); $i++) {
+            $sumaCants[$i] = $cantActDB[$i]['cantDB'] + $cantPed[$i]['cantPed'];
+          }
+
+          foreach ($refer as $key => $value) {
+            $idProd = $value['referPed'];
+            $this->detaPedido->set('referencia', $idProd);
+            $this->detaPedido->set('cantidad', $sumaCants[$key]);
+            echo $this->detaPedido->updateCantProd();
+          }
+        }else {
+          echo "PedNoEncontrado";
+        }
+      } else {
+        echo "UpdateCancelError";
+      }
+    }
+
+
 
     public function seeOrder()
     {

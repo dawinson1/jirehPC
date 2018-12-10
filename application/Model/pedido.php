@@ -91,26 +91,12 @@ class pedido extends Model
 
     }
 
-    public function editarPedidos()
+    public function cambiarEstadoPed()
     {
-        $sql = "UPDATE pedido SET id_categoria = ?, nombreProducto = ?, cantidad = ?,stock = ?,precioUnit = ?,marca = ? WHERE referencia = ?";
+        $sql = "UPDATE pedido SET idEstado_pedido = ? WHERE id_pedido = ?";
         $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->id_categoria);
-        $query->bindParam(2,$this->nombreProducto);
-        $query->bindParam(3,$this->cantidad);
-        $query->bindParam(4,$this->stock);
-        $query->bindParam(5,$this->precioUnit);
-        $query->bindParam(6,$this->marca);
-        $query->bindParam(7,$this->referencia);
+        $query->bindParam(1,$this->idEstado_pedido);
+        $query->bindParam(2,$this->id_pedido);
         return $query->execute();
-    }
-
-    public function eliminarPedidos()
-    {
-        $sql = "DELETE FROM pedido WHERE referencia = ?";
-        $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->referencia);
-        return $query->execute();
-
     }
 }

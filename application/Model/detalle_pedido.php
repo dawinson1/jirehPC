@@ -13,6 +13,10 @@ class detalle_pedido extends Model
     private $valor_unit;
     private $valor_subTotal;
 
+    private $idEstado_pedido;
+    private $id_pedido;
+    private $referencia;
+
     public function set($atributo,$valor){
         $this->$atributo = $valor;
     }
@@ -76,34 +80,40 @@ class detalle_pedido extends Model
 
     }
 
-    public function updateDetails()
+
+    public function buscarProducto($id)
     {
-      $sql = "UPDATE detalle_pedido SET Producto_Referencia = ?, Pedido_idPedido = ?,
-      cantidad = ?, valor_unit = ?, valor_total = ?
-      WHERE idDetalle_pedido = ?";
+        $sql = "SELECT cantidad FROM producto WHERE referencia = ?";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(1,$id);
+        $query->execute();
+        return $query->fetch();
+    }
+
+    public function buscProdDetalle()
+    {
+      $sql = "SELECT Producto_Referencia AS referencia, cantidad FROM detalle_pedido WHERE Pedido_idPedido = ?";
       $query = $this->db->prepare($sql);
-      $query->bindParam(1,$this->Producto_Referencia);
-      $query->bindParam(2,$this->Pedido_idPedido);
-      $query->bindParam(3,$this->cantidad);
-      $query->bindParam(4,$this->valor_unit);
-      $query->bindParam(5,$this->valor_total);
-      $query->bindParam(6,$this->idDetalle_pedido);
+      $query->bindParam(1,$this->Pedido_idPedido);
+      $query->execute();
+      return $query->fetchAll();
+    }
+
+    public function updateCantProd()
+    {
+      $sql = "UPDATE producto SET cantidad = ? WHERE referencia = ?";
+      $query = $this->db->prepare($sql);
+      $query->bindParam(1,$this->cantidad);
+      $query->bindParam(2,$this->referencia);
       return $query->execute();
     }
 
-    public function deleteDetails()
+    public function cambiarEstadoPed()
     {
-        $sql = "DELETE FROM detalle_pedido WHERE idDetalle_pedido = ?";
+        $sql = "UPDATE pedido SET idEstado_pedido = ? WHERE id_pedido = ?";
         $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->idDetalle_pedido);
-        return $query->execute();
-    }
-
-    public function buscarProducto()
-    {
-        $sql = "SELECT * FROM producto WHERE referencia = ?";
-        $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->referencia);
+        $query->bindParam(1,$this->idEstado_pedido);
+        $query->bindParam(2,$this->id_pedido);
         return $query->execute();
     }
 
@@ -120,18 +130,6 @@ class detalle_pedido extends Model
         $query->bindParam(7,$this->marca);
         $query->bindParam(8,$this->Url_imgProduct);
         return $query->execute();
-
-    }
-
-    public function actualizarStock()// habrá que probar esta función solo para actualizar el campo stock en bd.
-                                     // porque todavia no tengo claro como se agrega al stock por medio de la cantidad.
-    {
-        $sql = "UPDATE producto SET (stock = stock + cantidad) = ? WHERE referencia = ?";
-        $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->stock);
-        $query->bindParam(2,$this->referencia);
-        return $query->execute();
-
     }
 
     public function editarImgProducto()
@@ -157,14 +155,6 @@ class detalle_pedido extends Model
         return $query->execute();
     }
 
-    public function eliminarProducto()
-    {
-        $sql = "DELETE FROM producto WHERE referencia = ?";
-        $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->referencia);
-        return $query->execute();
-
-    }
 
     public function pagProducts($limit, $start_from)
     {

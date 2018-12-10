@@ -21,54 +21,11 @@ class pedidoController
         require APP . 'view/_templates/footer.php';
     }
 
-
-    public function crearCliente()
-    {
-    $this->cliente->set('id_cliente',$_POST['identificador']);
-    $this->cliente->set('nombreCliente',$_POST['nomCliente']);
-    $this->cliente->set('apellidoCliente',$_POST['apeCliente']);
-    $this->cliente->set('correoCliente',$_POST['correoCliente']);
-    $this->cliente->set('direccionCliente',$_POST['direcCliente']);
-    $this->cliente->set('telefono',$_POST['telCliente']);
-    $this->cliente->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
-    $this->cliente->set('Url_imgClient',$_POST['perfilClient']);
-    echo $this->cliente->crearCliente();
-    }
-
-    public function editarCliente()
-    {
-        $this->cliente->set('id_cliente',$_POST['identificador']);
-        $this->cliente->set('nombreCliente',$_POST['nomCliente']);
-        $this->cliente->set('apellidoCliente',$_POST['apeCliente']);
-        $this->cliente->set('correoCliente',$_POST['correoCliente']);
-        $this->cliente->set('direccionCliente',$_POST['direcCliente']);
-        $this->cliente->set('telefono',$_POST['telCliente']);
-        $this->cliente->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
-        echo $this->cliente->editarCliente();
-    }
-
     public function eliminarCliente()
     {
-      $id = $_POST['identificador'];
-      $carpeta = ('img/perfiles/'.$id);
-
-
-    		foreach(glob($carpeta . "/*") as $archivos_carpeta)
-    		{
-    			if (is_dir($archivos_carpeta))
-    			{
-    				eliminarDir($archivos_carpeta);
-    			}
-    			else
-    			{
-    				unlink($archivos_carpeta);
-    			}
-    		}
-    		rmdir($carpeta);
-
-
-        $this->cliente->set('id_cliente',$_POST['identificador']);
-        echo $this->cliente->eliminarCliente();
+      $this->cliente->set('id_cliente',$_POST['identificador']);
+      $this->cliente->set('idEstado_pedido',$_POST['identificador']);
+      echo $this->cliente->eliminarCliente();
     }
 
     //listarPedidos
@@ -108,5 +65,12 @@ class pedidoController
       $this->pedido->set('idEstado_pedido',$_POST['selectEstado']);
       $this->pedido->set('total',$_POST['totalPedido']);
       echo $this->pedido->crearPedido();
+    }
+
+    public function cambiarEstadoPed()
+    {
+      $this->pedido->set('idEstado_pedido',$_POST[('idEstPed')]);
+      $this->pedido->set('id_pedido',$_POST[('idPedido')]); /*el de la izq es de la bd, izq viene por ajax*/
+      echo $this->pedido->cambiarEstadoPed();
     }
 }

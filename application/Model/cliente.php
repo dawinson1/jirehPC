@@ -15,6 +15,7 @@ class cliente extends Model
     private $contrasena;
     private $Url_imgClient;
     private $rolCliente;
+    private $estadiscli_idestadiscli;
 
     public function set($atributo,$valor){
         $this->$atributo = $valor;
@@ -22,7 +23,8 @@ class cliente extends Model
 
     public function listarClientes()
     {
-        $sql = "SELECT * FROM cliente";
+        $sql = "SELECT c.*, estCli.Nombre as nombreEstadoCli FROM cliente c
+        INNER JOIN estadiscli estCli ON estCli.idestadiscli = c.estadiscli_idestadiscli";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -75,11 +77,12 @@ class cliente extends Model
         return $query->execute();
     }
 
-    public function eliminarCliente()
+    public function cambiarEstadoCli()
     {
-        $sql = "DELETE FROM cliente WHERE id_cliente = ?";
+        $sql = "UPDATE cliente SET estadiscli_idestadiscli = ? WHERE id_cliente = ?";
         $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->id_cliente);
+        $query->bindParam(1,$this->estadiscli_idestadiscli);
+        $query->bindParam(2,$this->id_cliente);
         return $query->execute();
 
     }

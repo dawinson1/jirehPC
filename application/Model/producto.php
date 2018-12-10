@@ -14,6 +14,7 @@ class producto extends Model
     private $precioUnit;
     private $marca;
     private $Url_imgProduct;
+    private $estadosproduct_idestadosproduct;
 
     public function set($atributo,$valor){
         $this->$atributo = $valor;
@@ -21,7 +22,9 @@ class producto extends Model
 
     public function listarProductos()
     {
-        $sql = "SELECT * FROM producto";
+        $sql = "SELECT p.*,cate.Nombre as nombrecate, est.Nombre as nombreEstadoPro FROM producto p
+        INNER JOIN categoria cate ON cate.id_categoria = p.id_categoria
+        INNER JOIN estadosproduct est ON est.idestadosproduct = p.estadosproduct_idestadosproduct";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -159,11 +162,12 @@ class producto extends Model
         return $query->execute();
     }
 
-    public function eliminarProducto()
+    public function cambiarEstadoProd()
     {
-        $sql = "DELETE FROM producto WHERE referencia = ?";
+        $sql = "UPDATE producto SET estadosproduct_idestadosproduct = ? WHERE referencia = ?";
         $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->referencia);
+        $query->bindParam(1,$this->estadosproduct_idestadosproduct);
+        $query->bindParam(2,$this->referencia);
         return $query->execute();
 
     }

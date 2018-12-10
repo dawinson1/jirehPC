@@ -22,7 +22,7 @@
                   <th>Estado</th>
                   <th>Precio</th>
                   <th>Ver Pedido</th>
-                  <th>Editar Pedido</th>
+                  <th>Cambiar Estado <br>Pendiente/Finalizado</th>
                   <th>Cancelar Pedido</th>
                 </tr>
                 </thead>
@@ -190,16 +190,27 @@ $(document).ready(function() {
             { "data": "nomEstPedi", "className": 'centeer' },
             { "data": "totalPedido", "className": 'centeer' },
             { "data": "verPedi", "orderable": false  },
-            { "data": "Editar", "orderable": false  },
+            { "data": "Editar", "orderable": false, "render": function(data, type, full, meta){
+              return data;
+              }
+            },
             { "data": "Eliminar", "orderable": false  }
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
         "scrollX": false,
+        "fnDrawCallback": function() {
+          $('.estPed1').bootstrapToggle('on');
+          $('.estPed2').bootstrapToggle('off');
+          $('.estPed2').bootstrapToggle('disable');
+          $('.estPed3').bootstrapToggle('off');
+          $('.estPed3').bootstrapToggle('disable');
+          $('.btnCancel2').prop('disabled', true);
+          $('.btnCancel3').prop('disabled', true);
+        },
         // "dom": 'lrtipB',
         "language": {
             "url": Url+"/js/lenguaje.json"
         },
-
         buttons: [
             {extend: 'copy',exportOptions: {columns: [0,1,2,3,4]}},
             {extend: 'csv',exportOptions: {columns: [0,1,2,3,4]}},
@@ -221,47 +232,6 @@ $(document).ready(function() {
 
 });
 
-function enviarEditCliente() //funcion para enviar los cambios al controlador
-{
-  var id_cliente = $('#identificador').val();
-        var nombreCliente = $('#nomCliente').val();
-        var apellidoCliente = $('#apeCliente').val();
-        var correoCliente = $('#correoCliente').val();
-        var direccionCliente = $('#direcCliente').val();
-        var telefono = $('#telCliente').val();
-
-        if ((id_cliente == "") || (nombreCliente == "") || (apellidoCliente == "") || (correoCliente == "") || (direccionCliente == "") || (telefono == "")) { //Valida si los campos estan vacios
-            swal("Upss", "Los campos no pueden ir vacios!", "error");
-        } else {
-            $.ajax({
-                url: Url+'/cliente/editarCliente',
-                type:'POST',
-                data:{identificador: id_cliente,
-                nomCliente: nombreCliente,
-                apeCliente: apellidoCliente,
-                correoCliente: correoCliente,
-                direcCliente: direccionCliente,
-                telCliente: telefono
-               }
-            }).done(function(data){
-                if(data){
-                    swal("Bien Hecho!", "El Registro ha sido completado!", "success");
-                    $('#identificador').val('');
-                    $('#nomCliente').val('');
-                    $('#apeCliente').val('');
-                    $('#correoCliente').val('');
-                    $('#direcCliente').val('');
-                    $('#telCliente').val('');
-                    $("#myModal").modal("hide");
-                    //setTimeout('location.reload()',2000);
-                    tabla.ajax.reload(null,false);
-                }else{
-                    swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
-                }
-            })
-        }
-}
-
 function verPedido(idPedido,idCli,nomCli,idEmp,nomEmp,entrega,estado,totalPed) //funcion para enviar los cambios al controlador
 {
   $('.pedNumber').text(idPedido);
@@ -280,7 +250,6 @@ function verPedido(idPedido,idCli,nomCli,idEmp,nomEmp,entrega,estado,totalPed) /
         idP: idPedido
       }
     }).done(function(data){
-       //console.log(data);
       var verPedi = '';
       data.forEach(function(vp){
         verPedi += `<tr>
@@ -291,13 +260,40 @@ function verPedido(idPedido,idCli,nomCli,idEmp,nomEmp,entrega,estado,totalPed) /
           <td>`+vp.Vsub+`</td>
         </tr>`;
       })
+      pagTabla();
+      tablaverPed.rows().remove().draw();
+      tablaverPed.rows.add($(verPedi)).draw();
       $('#listadosDetalle').empty();
       $('#listadosDetalle').append(verPedi);
       $('#verPedido').modal('show');
-      pagTabla();
     })
 }
 
+function cancelarPed(idPed) {
+  swal({
+        title: "¿Estás Seguro?",
+        text: "Si Cancelas el Pedido, su estado cambiará a cancelado y los productos regresarán al inventario!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          NewEstado = 3;
+          $.ajax({
+            url: Url+'/detalle_pedido/pedCancel',
+            type:'POST',
+            data: {idPedido: idPed,
+              idEstPed: NewEstado
+            }
+          }).done(function(data){
+            tabla.ajax.reload(null,false);
+          })
+      } else {
+        tabla.ajax.reload();
+      }
+      });
+}
 
 function showModalImg(idC) //funcion plasmar los datos del usuario en los inputs
 {
@@ -320,44 +316,59 @@ function editarCliente(idC,nomC,apeC,CorrC,dicCl,telC) //funcion plasmar los dat
 }
 
 $('#imgClient').fileinput({
-        theme: 'fa',
-        language: 'es',
-        showUpload : false,
-        allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg']
-    });
+  theme: 'fa',
+  language: 'es',
+  showUpload : false,
+  allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg']
+});
 
-function eliminarCliente(idC) {
-  swal({
-        title: "¿Estas Seguro?",
-        text: "Si eliminas este registro ya no se podrá recuperar!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          swal("Registro eliminado!", {
-            icon: "success",
-          });
-          $.ajax({
-            url:Url+'/cliente/eliminarCliente',
-            type:'POST',
-            data:{identificador:idC}
-        }).done(function(data){
-            if(data){
-              tabla.ajax.reload(null,false);
-            }else{
-                swal("Algo anda mal!", "La eliminacion no se ha ejecutado!", "error");
-            }
+
+function changeStatusPed(idEst, idPed) {
+  $('#togglePed_'+idPed+'').change(function() {
+    swal({
+          title: "¿Estás Seguro?",
+          text: "Si finalizas el pedido, su estado ya no se podrá cambiar!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
         })
+        .then((willDelete) => {
+          if (willDelete) {
+            var NewEstado= '';
+            if (idEst == 1) {
+              NewEstado = 2;
+              $.ajax({
+                url: Url+'/pedido/cambiarEstadoPed',
+                type:'POST',
+                data: {idPedido: idPed,
+                  idEstPed: NewEstado
+                }
+              }).done(function(data){
+                tabla.ajax.reload(null,false);
+              })
+            } else if (idEst == 2) {
+              NewEstado = 1;
+              $.ajax({
+                url: Url+'/pedido/cambiarEstadoPed',
+                type:'POST',
+                data: {idPedido: idPed,
+                  idEstPed: NewEstado
+                }
+              }).done(function(data){
+                tabla.ajax.reload(null,false);
+              })
+            }
+        } else {
+          tabla.ajax.reload();
         }
-      });
+        });
+  })
 }
 
 function pagTabla() {
   let numPed = $('#pedNumber').text();
   $.fn.dataTable.ext.errMode = 'throw';
-  tabla =	$('#detalleProductos').DataTable( {
+  tablaverPed =	$('#detalleProductos').DataTable( {
   "lengthMenu": [[3, 6, 12, 25, -1], [3, 6, 12, 25, "Todo"]],
   "scrollX": false,
   "retrieve": true,

@@ -442,11 +442,12 @@ function ListEstados() {
      //console.log(data);
      var valueSelect = '';
      data.forEach(function(est){
-      valueSelect+='<option value='+est.idEstadoPedido+'>'+est.Nombre+'</option>';
+      valueSelect+='<option id="opt'+est.idEstadoPedido+'" value='+est.idEstadoPedido+'>'+est.Nombre+'</option>';
      })
      $('#selectEstado').empty();
      $('#selectEstado').html('<option value="0" selected="selected">Seleccione un estado al pedido</option>');
      $('#selectEstado').append(valueSelect);
+     $('#opt3').remove();
  })
 }
 

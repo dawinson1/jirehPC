@@ -22,10 +22,11 @@
                   <th>Stock</th>
                   <th>Precio Unitario</th>
                   <th>Marca</th>
-                  <th>Editar</th>
+                  <th>Estado</th>
                   <th>Imagen</th>
+                  <th>Editar</th>
                   <th>Actualizar Imagen</th>
-                  <th>Eliminar</th>
+                  <th>Cambiar estado <br> Activo/Inactivo</th>
                 </tr>
                 </thead>
               </table>
@@ -217,16 +218,24 @@ $(document).ready(function() {
             { "data": "Stock","className": 'centeer' },
             { "data": "Precio Unitario", "className": 'centeer' },
             { "data": "Marca", "className": 'centeer' },
-            { "data": "Editar", "orderable": false  },
+            { "data": "EstadoProd", "className": 'centeer' },
             { "data": "Imagen", "render":function(data,type,row){
               return '<center><img src="<?php echo URL; ?>'+data+'" width="120" height="80" /></center>';
               }
             },
+            { "data": "Editar", "orderable": false  },
             { "data": "Actualizar Imagen", "orderable": false  },
-            { "data": "Eliminar", "orderable": false  }
+            { "data": "Eliminar", "orderable": false, "render": function(data, type, full, meta){
+              return data;
+              }
+            }
         ],
         "lengthMenu": [[5, 10, 15, 100, -1], [5, 10, 15, 100, "Todo"]],
         "scrollX": false,
+        "fnDrawCallback": function() {
+          $('.estProd1').bootstrapToggle('on');
+          $('.estProd2').bootstrapToggle('off');
+        },
         // "dom": 'lrtipB',
         "language": {
             "url": Url+"/js/lenguaje.json"
@@ -428,33 +437,34 @@ $('#imgProdu').fileinput({
         language: 'es',
         showUpload : false,
         allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg']
-    });
+});
 
-function eliminarProducto(ref) {
-  swal({
-        title: "¿Estas Seguro?",
-        text: "Si eliminas este registro ya no se podrá recuperar!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          swal("Registro eliminado!", {
-            icon: "success",
-          });
-          $.ajax({
-            url:Url+'/producto/eliminarProducto',
-            type:'POST',
-            data:{identificador:ref}
-        }).done(function(data){
-            if(data){
-              tabla.ajax.reload(null,false);
-            }else{
-                swal("Algo anda mal!", "La eliminacion no se ha ejecutado!", "error");
-            }
-        })
-        }
-      });
+function changeStatusProd(idEst, idProd) {
+  $('#toggleProd_'+idProd+'').change(function() {
+    var NewEstado= '';
+      if (idEst == 1) {
+        NewEstado = 2;
+        $.ajax({
+          url: Url+'/producto/cambiarEstadoProd',
+          type:'POST',
+          data: {idProducto: idProd,
+            idEstEmp: NewEstado
+          }
+          }).done(function(data){
+            tabla.ajax.reload(null,false);
+          })
+      } else if (idEst == 2) {
+        NewEstado = 1;
+        $.ajax({
+          url: Url+'/producto/cambiarEstadoProd',
+          type:'POST',
+          data: {idProducto: idProd,
+            idEstEmp: NewEstado
+          }
+          }).done(function(data){
+            tabla.ajax.reload(null,false);
+          })
+      }
+    })
 }
 </script>

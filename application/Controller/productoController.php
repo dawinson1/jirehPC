@@ -37,26 +37,31 @@ class productoController
        $producto = $this->producto->listarProductos();
        foreach($producto as $value){
            $ref = $value['referencia'];
-           $nomCate = $value['id_categoria'];
+           $idCate = $value['id_categoria'];
+           $nomCate = $value['nombrecate'];
            $nomPr = $value['nombreProducto'];
            $cant = $value['cantidad'];
            $stck = $value['stock'];
            $price = $value['precioUnit'];
+           $idEstado =$value['estadosproduct_idestadosproduct'];
+           $nomEstEmp =$value['nombreEstadoPro'];
            $brand = $value['marca'];
            $imgP = $value['Url_imgProduct'];
            $datos[] = array(
                'Referencia'=> $value['referencia'],
-               'Categoria'=>$value['id_categoria'],
+               'Categoria'=>$value['nombrecate'],
                'Nombre'=>$value['nombreProducto'],
                'Cantidad'=>$value['cantidad'],
                'Stock'=>$value['stock'],
                'Precio Unitario'=>$value['precioUnit'],
                'Marca'=>$value['marca'],
+               'EstadoProd'=>$value['nombreEstadoPro'],
                'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarProducto
-               ('."'".$ref."'".','."'".$nomCate."'".','."'".$nomPr."'".','."'".$cant."'".','."'".$stck."'".','."'".$price."'".','."'".$brand."'".',)">Editar</button>'],
+               ('."'".$ref."'".','."'".$idCate."'".','."'".$nomPr."'".','."'".$cant."'".','."'".$stck."'".','."'".$price."'".','."'".$brand."'".',)">Editar</button>'],
                'Imagen'=>$value['Url_imgProduct'],
                'Actualizar Imagen'=>['<button type="button" class="btn btn-primary" onclick="showModalImg('."'".$ref."'".')"><i class="fa fa-file-image-o"></i></button>'],
-               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarProducto('."'".$ref."'".')">Eliminar</button>']
+               'Eliminar'=>['<input type="checkbox" onchange="changeStatusProd('."'".$idEstado."'".','."'".$ref."'".')" id="toggleProd_'.$ref.'"
+               class="toggle-Producto estProd'.$idEstado.'" data-toggle="toggle" data-offstyle="danger" data-on="Activo" data-off="Inactivo">']
            );
        }
        echo json_encode($datos);
@@ -199,28 +204,11 @@ class productoController
 
     }
 
-    public function eliminarProducto()
+    public function cambiarEstadoProd()
     {
-      $id = $_POST['identificador'];
-      $carpeta = ('img/producto/'.$id);
-
-
-    		foreach(glob($carpeta . "/*") as $archivos_carpeta)
-    		{
-    			if (is_dir($archivos_carpeta))
-    			{
-    				eliminarDir($archivos_carpeta);
-    			}
-    			else
-    			{
-    				unlink($archivos_carpeta);
-    			}
-    		}
-    		rmdir($carpeta);
-
-
-        $this->producto->set('referencia',$_POST['identificador']);
-        echo $this->producto->eliminarProducto();
+      $this->producto->set('referencia',$_POST['idProducto']);
+      $this->producto->set('estadosproduct_idestadosproduct',$_POST['idEstEmp']);
+      echo $this->producto->cambiarEstadoProd();
     }
 
     public function listarCategoria()

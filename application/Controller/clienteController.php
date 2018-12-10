@@ -36,6 +36,8 @@ class clienteController
            $CorrC = $value['correoCliente'];
            $dicCl = $value['direccionCliente'];
            $telC = $value['telefono'];
+           $idEstado =$value['estadiscli_idestadiscli'];
+           $nomEstCli =$value['nombreEstadoCli'];
            $contrC = $value['contrasena'];
            $imgC = $value['Url_imgClient'];
            $datos[] = array(
@@ -44,12 +46,14 @@ class clienteController
                'Apellido'=>$value['apellidoCliente'],
                'Correo'=>$value['correoCliente'],
                'Dirección'=>$value['direccionCliente'],
+               'EstadoCli'=>$value['nombreEstadoCli'],
                'Telefono'=>$value['telefono'],
                'Editar'=>['<button type="button" class="btn btn-primary" id="editCliente" onclick="editarCliente
                ('.$idC.','."'".$nomC."'".','."'".$apeC."'".','."'".$CorrC."'".','."'".$dicCl."'".','."'".$telC."'".','."'".$contrC."'".',)">Editar</button>'],
                'Foto Perfil'=>$value['Url_imgClient'],
                'Actualizar Foto'=>['<button type="button" class="btn btn-primary" onclick="showModalImg('.$idC.')"><i class="fa fa-file-image-o"></i></button>'],
-               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarCliente('.$idC.')">Eliminar</button>']
+               'Eliminar'=>['<input type="checkbox" onchange="changeStatusCli('."'".$idEstado."'".','."'".$idC."'".')" id="toggleCli_'.$idC.'"
+               class="toggle-Cliente estCli'.$idEstado.'" data-toggle="toggle" data-offstyle="danger" data-on="Activo" data-off="Inactivo">']
            );
        }
        echo json_encode($datos);
@@ -128,31 +132,10 @@ class clienteController
 
     }
 
-    public function eliminarCliente()
+    public function cambiarEstadoCli()
     {
-      $id = $_POST['identificador'];
-      $carpeta = ('img/perfiles/'.$id);
-
-
-    		foreach(glob($carpeta . "/*") as $archivos_carpeta)
-    		{
-    			if (is_dir($archivos_carpeta))
-    			{
-    				eliminarDir($archivos_carpeta);
-    			}
-    			else
-    			{
-    				unlink($archivos_carpeta);
-    			}
-    		}
-    		rmdir($carpeta);
-
-
-        $this->cliente->set('id_cliente',$_POST['identificador']);
-        echo $this->cliente->eliminarCliente();
-    }
-    public function cambiarEstado()
-    {
-
+      $this->cliente->set('id_cliente',$_POST['idCliente']);
+      $this->cliente->set('estadiscli_idestadiscli',$_POST['idEstCli']);
+      echo $this->cliente->cambiarEstadoCli();
     }
 }

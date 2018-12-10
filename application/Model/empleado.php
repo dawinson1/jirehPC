@@ -24,7 +24,9 @@ class empleado extends Model
     public function listarEmpleados()
     {
        // $sql = "SELECT e.nombre, e.apellido, e.telefono, e.correo, e.idEmpleado as Cédula, r.Nombre as Rol,e.id_estado from empleado e INNER JOIN rol r ON (e.id_rol=r.idRol)";
-        $sql = "SELECT e.*,r.Nombre as nombrerol FROM empleado e INNER JOIN rol r ON r.idRol = e.id_rol";
+        $sql = "SELECT e.*,r.Nombre as nombrerol, est.nombre as nombreEstadoEmp FROM empleado e
+        INNER JOIN rol r ON r.idRol = e.id_rol
+        INNER JOIN estados est ON est.id_estado = e.id_estado";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -63,7 +65,7 @@ class empleado extends Model
         $query->bindParam(9,$this->Url_imgEmpleado);
         return $query->execute();
     }
-    
+
     public function editarImgEmpleado()
     {
       $sql = "UPDATE empleado SET Url_imgEmpleado = ? WHERE idEmpleado = ?";
@@ -88,15 +90,7 @@ class empleado extends Model
         return $query->execute();
     }
 
-    public function eliminarEmpleado()
-    {
-        $sql="DELETE FROM empleado WHERE idEmpleado = ?";
-        $query = $this->db->prepare($sql);
-        $query->bindParam(1,$this->idEmpleado);
-        return $query->execute();
-    }
-
-    public function cambiarEstado()
+    public function cambiarEstadoEmp()
     {
         $sql = "UPDATE empleado set id_estado=? where idEmpleado=?";
         $query = $this->db->prepare($sql);

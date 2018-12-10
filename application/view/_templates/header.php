@@ -65,6 +65,9 @@
   <!--select2 plugin-->
   <script src="<?php echo URL; ?>js/select2.min.js"></script>
   <link rel="stylesheet" href="<?php echo URL; ?>css/select2.min.css">
+  <!--bootstrap toggle-->
+  <script src="<?php echo URL; ?>js/bootstrap-toggle.min.js"></script>
+  <link rel="stylesheet" href="<?php echo URL; ?>css/bootstrap-toggle.min.css">
   <!--js plugin file input-->
   <script src="<?php echo URL; ?>js/fileinput.min.js"></script>
   <script src="<?php echo URL; ?>js/locales/es.js"></script>
@@ -140,7 +143,7 @@
               </li>
             </ul>
           </li>
-          
+
         </ul>
       </div>
     </nav>

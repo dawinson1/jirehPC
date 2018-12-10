@@ -43,6 +43,7 @@ class empleadoController
            $nomRol= $value['nombrerol']; // se cambió por nombrerol para que apareciera el nombre del rol en la tabla
            $idRol= $value['id_rol'];
            $idEstado =$value['id_estado'];
+           $nomEstEmp =$value['nombreEstadoEmp'];
            $imgE = $value['Url_imgEmpleado'];
            $datos[] = array(
                'Nombre'=> $value['nombre'],
@@ -51,12 +52,13 @@ class empleadoController
                'Correo'=>$value['correo'],
                'Cédula'=>$value['idEmpleado'],
                'Rol'=>$value['nombrerol'],
-               'Estado'=>$value['id_estado'],
+               'Estado'=>$value['nombreEstadoEmp'],
                'Editar'=>['<button type="button" class="btn btn-primary" id="editEmpleado" onclick="editarEmpleado
                ('.$idEm.','."'".$nomEm."'".','."'".$apeEm."'".','."'".$telEm."'".','."'".$mailEm."'".','."'".$idRol."'".','."'".$idEstado."'".',)">Editar</button>'],
                'Foto Perfil'=>$value['Url_imgEmpleado'],
                'Actualizar Foto'=>['<button type="button" class="btn btn-primary" onclick="showModalImg('.$idEm.')"><i class="fa fa-file-image-o"></i></button>'],
-               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarEmpleado('.$idEm.')">Eliminar</button>']
+               'Eliminar'=>['<input type="checkbox" onchange="changeStatusEmp('."'".$idEstado."'".','."'".$idEm."'".')" id="toggleEmp_'.$idEm.'"
+               class="toggle-Empleado estEmp'.$idEstado.'" data-toggle="toggle" data-offstyle="danger" data-on="Activo" data-off="Inactivo">']
            );
        }
        echo json_encode($datos);
@@ -136,26 +138,11 @@ class empleadoController
 
     }
 
-    public function eliminarEmpleado()
+    public function cambiarEstadoEmp()
     {
-      $id = $_POST['idEmpleado'];
-      $carpeta = ('img/perfiles/'.$id);
-
-
-    		foreach(glob($carpeta . "/*") as $archivos_carpeta)
-    		{
-    			if (is_dir($archivos_carpeta))
-    			{
-    				eliminarDir($archivos_carpeta);
-    			}
-    			else
-    			{
-    				unlink($archivos_carpeta);
-    			}
-    		}
-    		rmdir($carpeta);
-        $this->empleado->set('idEmpleado',$_POST[('idEmpleado')]); /*el de la izq es de la bd, izq viene por ajax*/
-        echo $this->empleado->eliminarEmpleado();
+      $this->empleado->set('id_estado',$_POST[('idEstEmp')]);
+      $this->empleado->set('idEmpleado',$_POST[('idEmpleado')]); /*el de la izq es de la bd, izq viene por ajax*/
+      echo $this->empleado->cambiarEstadoEmp();
     }
 
     public function listarRoles()

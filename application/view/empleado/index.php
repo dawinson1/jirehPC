@@ -11,7 +11,7 @@
               <b class="box-title">Empleado</b>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body table-responsive">
             <table id="tableEmpleado" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
@@ -24,7 +24,7 @@
                   <th>Estado</th>
                   <th>Foto Perfil</th>
                   <th>Editar</th>
-                  <th>Eliminar</th>
+                  <th>Cambiar estado <br>Activo/Inactivo</th>
                   <th>Actualizar<br>Foto</th>
                 </tr>
                 </thead>
@@ -229,15 +229,23 @@ $(document).ready(function() {
               }
             },
             { "data": "Editar", "orderable": false},
-            { "data": "Eliminar", "orderable": false},
+            { "data": "Eliminar", "orderable": false, "render": function(data, type, full, meta){
+              return data;
+              }
+            },
             { "data": "Actualizar Foto", "orderable": false  }
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
         "scrollX": false,
+        "fnDrawCallback": function() {
+          $('.toggle-Empleado').bootstrapToggle();
+          $('.estEmp3').bootstrapToggle('on');
+          $('.estEmp4').bootstrapToggle('off');
+        },
         "language": {
             "url": Url+"/js/lenguaje.json"
         },
-        responsive: true,
+        //responsive: true,
         buttons: [
             {extend: 'copy',exportOptions: {columns: [0,1,2,3,4]}},
             {extend: 'csv',exportOptions: {columns: [0,1,2,3,4]}},
@@ -259,35 +267,33 @@ $(document).ready(function() {
 
 });
 
-function eliminarEmpleado(idEm) {
-  swal({
-        title: "¿Estas Seguro?",
-        text: "Si eliminas este registro ya no se podrá recuperar!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          swal("Registro eliminado!", {
-            icon: "success",
-          });
-          $.ajax({
-            url:Url+'/empleado/eliminarEmpleado',
-            type:'POST',
-            data:{idEmpleado:idEm}
-        }).done(function(data){
-            if(data){
-                tabla.ajax.reload(null,false); // usar esta funcion en vez de la de abajo
-             // setTimeout('location.reload()',1000);
-            }else{
-                swal("Algo anda mal!", "La eliminacion no se ha ejecutado!", "error");
-            }
-        })
-        } else {
-          swal("Eliminación cancelada!");
-        }
-      });
+function changeStatusEmp(idEst, idEmp) {
+  $('#toggleEmp_'+idEmp+'').change(function() {
+    var NewEstado= '';
+      if (idEst == 3) {
+        NewEstado = 4;
+        $.ajax({
+          url: Url+'/empleado/cambiarEstadoEmp',
+          type:'POST',
+          data: {idEmpleado: idEmp,
+            idEstEmp: NewEstado
+          }
+          }).done(function(data){
+            tabla.ajax.reload(null,false);
+          })
+      } else if (idEst == 4) {
+        NewEstado = 3;
+        $.ajax({
+          url: Url+'/empleado/cambiarEstadoEmp',
+          type:'POST',
+          data: {idEmpleado: idEmp,
+            idEstEmp: NewEstado
+          }
+          }).done(function(data){
+            tabla.ajax.reload(null,false);
+          })
+      }
+    })
 }
 
 function editarEmpleado(idEm,nomEm,apeEm,telEm,mailEm,idRol,idEstado) //funcion plasmar los datos del usuario en los inputs
@@ -449,6 +455,7 @@ $(function(){
   listarSelectRol();
   listarSelectEstado();
 })
+
 
 function listarSelectRol() {
   $.ajax({

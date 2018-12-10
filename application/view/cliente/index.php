@@ -21,10 +21,11 @@
                   <th>Correo</th>
                   <th>Dirección</th>
                   <th>Telefono</th>
+                  <th>Estado</th>
                   <th>Editar</th>
                   <th>Foto Perfil</th>
                   <th>Actualizar<br>Foto</th>
-                  <th>Eliminar</th>
+                  <th>Cambiar Estado <br> Activo/Inactivo</th>
                 </tr>
                 </thead>
               </table>
@@ -208,16 +209,25 @@ $(document).ready(function() {
             { "data": "Correo","className": 'centeer'  },
             { "data": "Dirección","className": 'centeer' },
             { "data": "Telefono", "className": 'centeer' },
+            { "data": "EstadoCli", "className": 'centeer' },
             { "data": "Editar", "orderable": false  },
             { "data": "Foto Perfil", "render":function(data,type,row){
               return '<center><img src="<?php echo URL; ?>'+data+'" width="120" height="80" /></center>';
               }
             },
             { "data": "Actualizar Foto", "orderable": false  },
-            { "data": "Eliminar", "orderable": false  }
+            { "data": "Eliminar", "orderable": false, "render": function(data, type, full, meta){
+              return data;
+              }
+            }
         ],
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
         "scrollX": false,
+        "fnDrawCallback": function() {
+          $('.toggle-Cliente').bootstrapToggle();
+          $('.estCli1').bootstrapToggle('on');
+          $('.estCli2').bootstrapToggle('off');
+        },
         // "dom": 'lrtipB',
         "language": {
             "url": Url+"/js/lenguaje.json"
@@ -296,7 +306,7 @@ function enviarEditCliente() //funcion para enviar los cambios al controlador
       (length_apellidoCliente>Max_LengthNomsDicc) || (length_correoCliente>Max_LengthEmail) ||
       (length_telefono>Max_LengthIDtTel)) {
 
-        swal("Upss", "Has ingresado una longitud no válida!", "error");    
+        swal("Upss", "Has ingresado una longitud no válida!", "error");
     } else {
             $.ajax({
                 url: Url+'/cliente/editarCliente',
@@ -390,31 +400,32 @@ $('#imgClient').fileinput({
         allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg']
     });
 
-function eliminarCliente(idC) {
-  swal({
-        title: "¿Estas Seguro?",
-        text: "Si eliminas este registro ya no se podrá recuperar!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          swal("Registro eliminado!", {
-            icon: "success",
-          });
-          $.ajax({
-            url:Url+'/cliente/eliminarCliente',
-            type:'POST',
-            data:{identificador:idC}
-        }).done(function(data){
-            if(data){
-              tabla.ajax.reload(null,false);
-            }else{
-                swal("Algo anda mal!", "La eliminacion no se ha ejecutado!", "error");
-            }
+    function changeStatusCli(idEst, idCli) {
+      $('#toggleCli_'+idCli+'').change(function() {
+        var NewEstado= '';
+          if (idEst == 1) {
+            NewEstado = 2;
+            $.ajax({
+              url: Url+'/cliente/cambiarEstadoCli',
+              type:'POST',
+              data: {idCliente: idCli,
+                idEstCli: NewEstado
+              }
+              }).done(function(data){
+                tabla.ajax.reload(null,false);
+              })
+          } else if (idEst == 2) {
+            NewEstado = 1;
+            $.ajax({
+              url: Url+'/cliente/cambiarEstadoCli',
+              type:'POST',
+              data: {idCliente: idCli,
+                idEstCli: NewEstado
+              }
+              }).done(function(data){
+                tabla.ajax.reload(null,false);
+              })
+          }
         })
-        }
-      });
-}
+    }
 </script>
