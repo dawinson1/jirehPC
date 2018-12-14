@@ -16,33 +16,26 @@ class detalle_salida extends Model
         $this->$atributo = $valor;
     }
 
-    public function verPedidos()
+    public function verSalidas()
     {
-        $sql = "SELECT p.idCliente AS idCli, c.nombreCliente as nomCli, e.idEmpleado AS idEmp,
-		    e.nombre AS nomEmp, p.fechaEntrega AS entrega, pr.referencia AS refer,
-		    pr.nombreProducto AS nomPro, dp.cantidad AS cantSoli,
-        dp.valor_unit AS Vcu, dp.valor_subTotal AS Vsub,
-        p.total AS Vtot, p.id_pedido AS IDPedido
-        FROM detalle_pedido dp
+        $sql = "SELECT pr.referencia AS refer, pr.nombreProducto AS nomPro,
+        dp.cantidad AS cantSoli, dp.motivo AS motivoSali
+        FROM detalle_salida dp
         INNER JOIN producto pr ON (pr.referencia = dp.Producto_Referencia)
-        INNER JOIN pedido p ON (p.id_pedido = dp.Pedido_idPedido)
-        INNER JOIN empleado e ON (e.idEmpleado = p.id_empleado)
-        INNER JOIN cliente c ON (c.id_cliente = p.idCliente)
-        WHERE p.id_pedido = ?";
+        INNER JOIN salida sali ON (sali.idsalida = dp.salida_idsalida)
+        WHERE sali.idsalida = ?";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->Pedido_idPedido);
         $query->execute();
         return $query->fetchAll();
     }
 
-    public function listarPedidos()
+    public function listarSalidas()
     {
-      $sql = "SELECT p.*, est.Nombre AS nomEst, c.nombreCliente AS nomCli,
-      e.nombre AS nomEmplo
-      FROM pedido p
-      INNER JOIN estado_pedido est ON (est.idEstadoPedido = p.idEstado_pedido)
-      INNER JOIN empleado e ON (e.idEmpleado = p.id_empleado)
-      INNER JOIN cliente c ON (c.id_cliente = p.idCliente)";
+      $sql = "SELECT sali.*, tsali.Nombre AS nomSali, e.nombre AS nomEmplo
+      FROM salida sali
+      INNER JOIN tipo_de_salida tsali ON (tsali.idTipo_salida = sali.idTipo_Salida)
+      INNER JOIN empleado e ON (e.idEmpleado = sali.id_empleado)";
       $query = $this->db->prepare($sql);
       $query->execute();
       return $query->fetchAll();

@@ -8,55 +8,27 @@ class detalle_salidaController
         $this->detaSali = new detalle_salida();
     }
 
-    public function listPedido()
+    public function listSalida()
     {
-       $listPedido = $this->detaEnt->listarPedidos();
-       foreach($listPedido as $value){
-           $idCli = $value['idCliente'];
-           $entrega = $value['fechaEntrega'];
-           $idPed = $value['id_pedido'];
+       $listEnt = $this->detaSali->listarSalidas();
+       foreach($listEnt as $value){
+           $dateSali = $value['fechaSalida'];
+           $idSali = $value['idsalida'];
            $idEmp = $value['id_empleado'];
-           $idEstPed = $value['idEstado_pedido'];
-           $nomEst = $value['nomEst'];
-           $totalPedi = $value['total'];
-           $nomCli = $value['nomCli'];
+           $nomSali = $value['nomSali'];
            $nomEmp = $value['nomEmplo'];
 
            $datos[] = array(
-               'idCliente'=> $idCli,
-               'dateEntrega'=> $entrega,
-               'id_pedido'=> $idPed,
+               'dateSali'=> $dateSali,
+               'id_Salida'=> $idSali,
                'id_emplo'=> $idEmp,
-               'nomEstPedi'=> $nomEst,
-               'totalPedido'=> $totalPedi,
-               'verPedi'=>['<button type="button" class="btn btn-primary" onclick="verPedido
-               ('.$idPed.','."'".$idCli."'".','."'".$nomCli."'".','."'".$idEmp."'".','."'".$nomEmp."'".',
-               '."'".$entrega."'".','."'".$nomEst."'".','."'".$totalPedi."'".',)"><i class="fa fa-file-text-o"></i></button>'],
-               'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarPed
-               ('.$idPed.')">Editar</button>'],
-               'Eliminar'=>['<button type="button" class="btn btn-danger" onclick="eliminarTipoEnt('.$idPed.')">Cancelar</button>']
+               'nomSali'=> $nomSali,
+               'verSali'=>['<button type="button" class="btn btn-primary" onclick="verSalida
+               ('.$idSali.','."'".$idEmp."'".','."'".$nomEmp."'".',
+               '."'".$dateSali."'".','."'".$nomSali."'".')"><i class="fa fa-file-text-o"></i></button>']
            );
        }
        echo json_encode($datos);
-    }
-
-    public function crearTipoEnt()
-    {
-        $this->detaEnt->set('Nombre',$_POST['nomTipoE']);
-        echo $this->detaEnt->crearTipoEnt();
-    }
-
-    public function editarTipoEnt()
-    {
-        $this->detaEnt->set('Id_tipoEnt',$_POST['identificador']);
-        $this->detaEnt->set('Nombre',$_POST['nomTipoE']);
-        echo $this->detaEnt->editarTipoEnt();
-    }
-
-    public function eliminarTipoEnt()
-    {
-        $this->detaEnt->set('Id_tipoEnt',$_POST['identificador']);
-        echo $this->detaEnt->eliminarTipoEnt();
     }
 
     public function saveDetalleSalida()
@@ -81,42 +53,11 @@ class detalle_salidaController
       }
     }
 
-    public function saveDetalleEntrada2()
-    {
-      //$data = json_decode($_POST['productos']);
-      //var_dump($data);
-      //var_dump($_POST);
-      $resultadoEnt = $this->detaEnt->ultimaEntrada();
-      $motivoEnt = 'Producto comprado a un proveedor';
-
-      if ($resultadoEnt != false) {
-          $ultimo = $resultadoEnt['idEntrada'];
-
-        foreach ($_POST['identificador2'] as $key => $value) {
-
-          $this->detaEnt->set('entrada_identrada', $ultimo);
-          $this->detaEnt->set('producto_referencia', $value);
-          $this->detaEnt->set('cantidad', $_POST['cantPro2'][$key]);
-          $this->detaEnt->set('motivo', $motivoEnt);
-          echo $this->detaEnt->saveDetailsEnt();;
-        }
-
-      } else {
-        echo 'ErrorAlGuadarEnt';
-      }
-
-    }
-
     public function seeOrder()
     {
-        $this->detaEnt->set('Pedido_idPedido',$_POST['idP']);
-        $infoPed = $this->detaEnt->verPedidos();
+        $this->detaSali->set('Pedido_idPedido',$_POST['idP']);
+        $infoPed = $this->detaSali->verSalidas();
         echo json_encode($infoPed);
     }
 
-    public function seeOrder2()
-    {
-      $show = $this->detaEnt->verPedidos();
-      echo json_encode($emplo);
-    }
 }

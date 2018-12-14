@@ -10,14 +10,7 @@ class salidaController
     public function index()
     {
         require APP . 'view/_templates/header.php';
-        require APP . 'view/pedido/index.php';
-        require APP . 'view/_templates/footer.php';
-    }
-    public function formPedidos()
-    {
-        $listProdPed = $this->listProd();
-        require APP . 'view/_templates/header.php';
-        require APP . 'view/pedido/formPedidos.php';
+        require APP . 'view/existencias/consultSalidas.php';
         require APP . 'view/_templates/footer.php';
     }
 

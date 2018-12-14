@@ -8,33 +8,24 @@ class detalle_entradaController
         $this->detaEnt = new detalle_entrada();
     }
 
-    public function listPedido()
+    public function listEntrada()
     {
-       $listPedido = $this->detaEnt->listarPedidos();
-       foreach($listPedido as $value){
-           $idCli = $value['idCliente'];
-           $entrega = $value['fechaEntrega'];
-           $idPed = $value['id_pedido'];
+       $listEnt = $this->detaEnt->listarEntradas();
+       foreach($listEnt as $value){
+           $datent = $value['fechaEntrada'];
+           $ident = $value['identrada'];
            $idEmp = $value['id_empleado'];
-           $idEstPed = $value['idEstado_pedido'];
-           $nomEst = $value['nomEst'];
-           $totalPedi = $value['total'];
-           $nomCli = $value['nomCli'];
+           $nomEnt = $value['nomEnt'];
            $nomEmp = $value['nomEmplo'];
 
            $datos[] = array(
-               'idCliente'=> $idCli,
-               'dateEntrega'=> $entrega,
-               'id_pedido'=> $idPed,
+               'dateEnt'=> $datent,
+               'id_entrada'=> $ident,
                'id_emplo'=> $idEmp,
-               'nomEstPedi'=> $nomEst,
-               'totalPedido'=> $totalPedi,
-               'verPedi'=>['<button type="button" class="btn btn-primary" onclick="verPedido
-               ('.$idPed.','."'".$idCli."'".','."'".$nomCli."'".','."'".$idEmp."'".','."'".$nomEmp."'".',
-               '."'".$entrega."'".','."'".$nomEst."'".','."'".$totalPedi."'".',)"><i class="fa fa-file-text-o"></i></button>'],
-               'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarPed
-               ('.$idPed.')">Editar</button>'],
-               'Eliminar'=>['<button type="button" class="btn btn-danger" onclick="eliminarTipoEnt('.$idPed.')">Cancelar</button>']
+               'nomEnt'=> $nomEnt,
+               'verEnt'=>['<button type="button" class="btn btn-primary" onclick="verEntrada
+               ('.$ident.','."'".$idEmp."'".','."'".$nomEmp."'".',
+               '."'".$datent."'".','."'".$nomEnt."'".')"><i class="fa fa-file-text-o"></i></button>']
            );
        }
        echo json_encode($datos);
@@ -113,13 +104,7 @@ class detalle_entradaController
     public function seeOrder()
     {
         $this->detaEnt->set('Pedido_idPedido',$_POST['idP']);
-        $infoPed = $this->detaEnt->verPedidos();
+        $infoPed = $this->detaEnt->verEntradas();
         echo json_encode($infoPed);
-    }
-
-    public function seeOrder2()
-    {
-      $show = $this->detaEnt->verPedidos();
-      echo json_encode($emplo);
     }
 }

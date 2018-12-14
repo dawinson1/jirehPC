@@ -242,7 +242,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-table"></i> Consultar Existencias</a></li>
+            <li><a href="<?php echo URL; ?>entrada"><i class="fa fa-table"></i> Consultar Entradas</a></li>
+            <li><a href="<?php echo URL; ?>salida"><i class="fa fa-table"></i> Consultar Salidas</a></li>
           </ul>
         </li>
 

@@ -10,23 +10,10 @@ class entradaController
     public function index()
     {
         require APP . 'view/_templates/header.php';
-        require APP . 'view/pedido/index.php';
+        require APP . 'view/existencias/index.php';
         require APP . 'view/_templates/footer.php';
     }
 
-    public function entrada()
-    {
-        require APP . 'view/_templates/header.php';
-        require APP . 'view/entrada/index.php';
-        require APP . 'view/_templates/footer.php';
-    }
-    public function formPedidos()
-    {
-        $listProdPed = $this->listProd();
-        require APP . 'view/_templates/header.php';
-        require APP . 'view/pedido/formPedidos.php';
-        require APP . 'view/_templates/footer.php';
-    }
 
     public function saveEntrada()
     {
@@ -42,6 +29,6 @@ class entradaController
 
     public function listarEntrada(){
 
-        
+
     }
 }
