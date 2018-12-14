@@ -238,8 +238,8 @@ class login extends Model
         $mail->IsSMTP(); // telling the class to use SMTP
         $mail->SMTPAuth = true;
         $mail->Host = "smtp.gmail.com"; // SMTP server
-        $mail->Username = "**********";        // SMTP username
-        $mail->Password = "**********";               // SMTP password
+        $mail->Username = "cgsoftware01@gmail.com";        // SMTP username
+        $mail->Password = "onepiecethebest";               // SMTP password
 
         $mail->CharSet = 'UTF-8';
         $mail->From = "cgsoftware01@gmail.com";

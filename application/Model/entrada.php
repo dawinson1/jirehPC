@@ -14,6 +14,16 @@ class entrada extends Model
         $this->$atributo = $valor;
     }
 
+    public function listarEntradas(){
+        $sql = "SELECT e.*,d.producto_referencia as producto, d.cantidad as cantidad,e.id_empleado as cedula, e.fechaEntrada as fecha FROM entrada e
+        INNER JOIN detalle_entrada d ON e.identrada = entrada_identrada
+        INNER JOIN producto p ON d.producto_referencia = p.referencia";
+        $query  = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+
+    }
+
     public function listarProductos()
     {
         $sql = "SELECT * FROM producto";

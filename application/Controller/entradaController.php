@@ -13,6 +13,13 @@ class entradaController
         require APP . 'view/pedido/index.php';
         require APP . 'view/_templates/footer.php';
     }
+
+    public function entrada()
+    {
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/entrada/index.php';
+        require APP . 'view/_templates/footer.php';
+    }
     public function formPedidos()
     {
         $listProdPed = $this->listProd();
@@ -30,5 +37,11 @@ class entradaController
       $this->entrada->set('fechaEntrada', $dateEnt);
       $this->entrada->set('idTipo_Entrada',$_POST['idtypeEnt']);
       echo $this->entrada->crearEntrada();
+    }
+
+
+    public function listarEntrada(){
+
+        
     }
 }
