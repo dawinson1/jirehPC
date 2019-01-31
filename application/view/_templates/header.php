@@ -215,7 +215,7 @@
           </ul>
         </li>
 
-        <?php if ($_SESSION['Rol'] == 'Administrador') {  ?> <!--ára inhabilitar  los forms en el rol cliente-->
+        <?php if ($_SESSION['Rol'] == 'Administrador') {  ?> <!--para inhabilitar  los forms en el rol cliente-->
 
         <li class="treeview">
           <a href="#">
@@ -248,6 +248,7 @@
         </li>
 
       <li class="header">Host <!--Estados y Roles--></li>
+
 
       <!--roles falta-->
 
@@ -303,7 +304,6 @@
       <!--estados pedidos-->
 
 <!--Categoria-->
-
         <li class="treeview">
           <a href="#">
             <i class="fa fa-coffee"></i> <span>Categoría</span>
@@ -317,26 +317,24 @@
           </ul>
 
         </li>
-
+      
       <!--Categoria-->
 
-      <!--Tipo de Movimiento-->
-
-      <!--  <li class="treeview">
+      <!--Mapa de Navegación-->
+        <li class="treeview">
           <a href="#">
-            <i class="fa fa-lemon-o"></i> <span>Tipo de Entrada</span>
+            <i class="glyphicon glyphicon-globe"></i> <span>Información</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo URL; ?>tipo_de_entrada"><i class="fa fa-table"></i> Consultar Tipo de Entrada</a></li>
-            <li><a href="<?php echo URL; ?>tipo_de_entrada/formTipoEnt"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Tipo de Entrada</a></li>
+                  <li><a href="<?php echo URL; ?>mapa/index"><i class="glyphicon glyphicon-hand-right"></i>Mapa de Navegación</a></li>
           </ul>
 
-        </li> -->
-
-      <!--Tipo de Movimiento-->
+        </li>
+      
+      <!--Mapa de Navegación-->
 
       <?php } ?>
 
