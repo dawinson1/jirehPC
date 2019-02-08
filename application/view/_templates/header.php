@@ -313,7 +313,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<?php echo URL; ?>categoria"><i class="fa fa-table"></i> Consultar Categorias</a></li>
-            <li><a href="<?php echo URL; ?>categoria/formCategoria"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Estado Pedidos</a></li>
+            <li><a href="<?php echo URL; ?>categoria/formCategoria"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Categoría</a></li>
           </ul>
 
         </li>
@@ -329,7 +329,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-                  <li><a href="<?php echo URL; ?>mapa/index"><i class="glyphicon glyphicon-hand-right"></i>Mapa de Navegación</a></li>
+                  <li><a href="<?php echo URL; ?>mapa"><i class="glyphicon glyphicon-hand-right"></i>Mapa de Navegación</a></li>
+                  <li><a href="<?php echo URL; ?>mapa/acercaD"><i class="glyphicon glyphicon-thumbs-up"></i>Acerca de</a></li>
+
           </ul>
 
         </li>
