@@ -94,6 +94,20 @@
 
                 </div> <!--cierre del div contenedor del input-->
 
+                <!--INPUT DE ESTADO-->
+                <div class="form-group col-xs-6"> <!--Comienzo del div contenedor del input-->
+                    <label for="id_estado">Estado:</label>
+
+                    <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
+                        <span class="input-group-addon"><i class="fa fa-coffee"></i></span>
+                        <select id="id_estado" class="form-control" name="id_estado">
+
+                        </select>
+
+                    </div><!--cierre div del inputt-->
+                </div> <!--cierre del div contenedor del input-->
+                 <!--INPUT DE ESTADO-->
+
 
             </div> <!--Cierre del Div contenedor-->
             </form>
@@ -134,6 +148,7 @@ function registrar(){
   var direccionCliente = $('#direcCliente').val();
   var telefono = $('#telCliente').val();
   var contrasena = $('#passCliente').val();
+  var estCliente = $('#id_estado').val();
   var imgClient = 'img/TedDefault.jpg';
   var rolCliente = 'Usuario';
 
@@ -167,6 +182,8 @@ function registrar(){
         swal("Upss", "Has ingresado una longitud no válida!", "error");
     }else if ((length_contrasena>Max_Lengthpass) || (length_contrasena<Min_Lengthpass)) {
       swal("Upss", "La contraseña debe tener como mínimo 8-15 caracteres!", "error");
+    } else if (estCliente == 0) {
+      swal("Upss", "No has seleccionado un estado!", "error");
     } else{
       //$( "#alertID" ).removeClass( "has-error" );
     $.ajax({
@@ -180,7 +197,8 @@ function registrar(){
         telCliente: telefono,
         passCliente: contrasena,
         perfilClient: imgClient,
-        rolCliente: rolCliente
+        rolCliente: rolCliente,
+        estCli: estCliente
         }
       }).done(function(data){
           if(data){
@@ -192,12 +210,34 @@ function registrar(){
             $('#direcCliente').val('');
             $('#telCliente').val('');
             $('#passCliente').val('');
+            $('#id_estado').val(0);
           }else{
               swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
             }
           })
         }
 }
+
+function listarSelectEstado() {
+  $.ajax({
+     url:Url+'/cliente/listarEstadosCli',
+     type:'POST',
+     dataType:'json'
+ }).done(function(data){
+     //console.log(data);
+     var valueSelectEstado = '';
+     data.forEach(function(estC){
+      valueSelectEstado+='<option value='+estC.idestadiscli+'>'+estC.Nombre+'</option>';
+     })
+     $('#id_estado').empty();
+     $('#id_estado').html('<option value="0" selected="selected">Seleccionar</option>');
+     $('#id_estado').append(valueSelectEstado);
+ })
+}
+
+$(function(){
+  listarSelectEstado();
+})
 
 $(function(){
   $("#ver-pass").mouseup(function(){//#ver-pass es el id del boton, al soltarlo el hará las siguientes instrucciones

@@ -30,6 +30,14 @@ class cliente extends Model
         return $query->fetchAll();
     }
 
+    public function listarEstClientes()
+    {
+        $sql = "SELECT * FROM estadiscli";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
     public function buscarCliente()
     {
         $sql = "SELECT * FROM cliente WHERE id_cliente = ?";
@@ -41,7 +49,7 @@ class cliente extends Model
 
     public function crearCliente()
     {
-        $sql = "INSERT INTO cliente (id_cliente, nombreCliente, apellidoCliente,correoCliente,direccionCliente,telefono,contrasena,Url_imgClient, rolCliente) VALUES (?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO cliente (id_cliente, nombreCliente, apellidoCliente,correoCliente,direccionCliente,telefono,contrasena,Url_imgClient, rolCliente, estadiscli_idestadiscli) VALUES (?,?,?,?,?,?,?,?,?,?)";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->id_cliente);
         $query->bindParam(2,$this->nombreCliente);
@@ -52,6 +60,7 @@ class cliente extends Model
         $query->bindParam(7,$this->contrasena);
         $query->bindParam(8,$this->Url_imgClient);
         $query->bindParam(9,$this->rolCliente);
+        $query->bindParam(10,$this->estadiscli_idestadiscli);
         return $query->execute();
     }
 

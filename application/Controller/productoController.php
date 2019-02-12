@@ -45,6 +45,7 @@ class productoController
            $price = $value['precioUnit'];
            $idEstado =$value['estadosproduct_idestadosproduct'];
            $nomEstEmp =$value['nombreEstadoPro'];
+           $idMarca = $value['marcaID'];
            $brand = $value['marca'];
            $imgP = $value['Url_imgProduct'];
            $datos[] = array(
@@ -57,7 +58,7 @@ class productoController
                'Marca'=>$value['marca'],
                'EstadoProd'=>$value['nombreEstadoPro'],
                'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarProducto
-               ('."'".$ref."'".','."'".$idCate."'".','."'".$nomPr."'".','."'".$cant."'".','."'".$stck."'".','."'".$price."'".','."'".$brand."'".',)">Editar</button>'],
+               ('."'".$ref."'".','."'".$idCate."'".','."'".$nomPr."'".','."'".$cant."'".','."'".$stck."'".','."'".$price."'".','."'".$idMarca."'".',)">Editar</button>'],
                'Imagen'=>$value['Url_imgProduct'],
                'Actualizar Imagen'=>['<button type="button" class="btn btn-primary" onclick="showModalImg('."'".$ref."'".')"><i class="fa fa-file-image-o"></i></button>'],
                'Eliminar'=>['<input type="checkbox" onchange="changeStatusProd('."'".$idEstado."'".','."'".$ref."'".')" id="toggleProd_'.$ref.'"
@@ -70,15 +71,15 @@ class productoController
     public function crearProductos()
     {
       foreach ($_POST['identificador'] as $key => $value) {
-
         $this->producto->set('referencia', $value);
         $this->producto->set('id_categoria', $_POST['selectCat'][$key]);
         $this->producto->set('nombreProducto', $_POST['prodNom'][$key]);
         $this->producto->set('cantidad', $_POST['cantPro'][$key]);
         $this->producto->set('stock', $_POST['stockPro'][$key]);
         $this->producto->set('precioUnit', $_POST['preUni'][$key]);
-        $this->producto->set('marca', $_POST['nMarc'][$key]);
+        $this->producto->set('idMarca', $_POST['nMarc'][$key]);
         $this->producto->set('Url_imgProduct', $_POST['imgProdu'][$key]);
+        $this->producto->set('estadosproduct_idestadosproduct', $_POST['estProd'][$key]);
         echo $this->producto->crearProducto();
       }
     }
@@ -209,6 +210,12 @@ class productoController
       $this->producto->set('referencia',$_POST['idProducto']);
       $this->producto->set('estadosproduct_idestadosproduct',$_POST['idEstEmp']);
       echo $this->producto->cambiarEstadoProd();
+    }
+
+    public function listarMarca()
+    {
+      $marca = $this->producto->listarMarca();
+      echo json_encode($marca);
     }
 
     public function listarCategoria()

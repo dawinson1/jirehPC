@@ -12,7 +12,7 @@ class producto extends Model
     private $cantidad;
     private $stock;
     private $precioUnit;
-    private $marca;
+    private $idMarca;
     private $Url_imgProduct;
     private $estadosproduct_idestadosproduct;
 
@@ -22,8 +22,9 @@ class producto extends Model
 
     public function listarProductos()
     {
-        $sql = "SELECT p.*,cate.Nombre as nombrecate, est.Nombre as nombreEstadoPro FROM producto p
+        $sql = "SELECT p.*,cate.Nombre as nombrecate, marc.idmarca as marcaID, marc.Nombre as marca, est.Nombre as nombreEstadoPro FROM producto p
         INNER JOIN categoria cate ON cate.id_categoria = p.id_categoria
+        INNER JOIN marca marc ON marc.idmarca = p.idMarca
         INNER JOIN estadosproduct est ON est.idestadosproduct = p.estadosproduct_idestadosproduct";
         $query = $this->db->prepare($sql);
         $query->execute();
@@ -33,6 +34,14 @@ class producto extends Model
     public function listarCategoria()
     {
         $sql = "SELECT * FROM categoria";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function listarMarca()
+    {
+        $sql = "SELECT * FROM marca";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -48,7 +57,8 @@ class producto extends Model
 
     public function listarCatalogo()
     {
-        $sql = "SELECT referencia, nombreProducto, cantidad, precioUnit, marca, Url_imgProduct FROM producto";
+        $sql = "SELECT referencia, nombreProducto, cantidad, precioUnit, m.Nombre as marca, Url_imgProduct FROM producto p
+        INNER JOIN marca m ON m.idmarca = p.idMarca";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -108,7 +118,7 @@ class producto extends Model
     public function crearProducto()
     {
 
-        $sql = "INSERT INTO producto (referencia, id_categoria, nombreProducto,cantidad,stock,precioUnit,marca,Url_imgProduct) VALUES (?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO producto (referencia, id_categoria, nombreProducto,cantidad,stock,precioUnit,idMarca,Url_imgProduct,estadosproduct_idestadosproduct) VALUES (?,?,?,?,?,?,?,?,?)";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->referencia);
         $query->bindParam(2,$this->id_categoria);
@@ -116,8 +126,9 @@ class producto extends Model
         $query->bindParam(4,$this->cantidad);
         $query->bindParam(5,$this->stock);
         $query->bindParam(6,$this->precioUnit);
-        $query->bindParam(7,$this->marca);
+        $query->bindParam(7,$this->idMarca);
         $query->bindParam(8,$this->Url_imgProduct);
+        $query->bindParam(9,$this->estadosproduct_idestadosproduct);
         $registroP = $query->execute();
 
         if ($registroP) {
@@ -174,7 +185,9 @@ class producto extends Model
 
     public function pagProducts($limit, $start_from)
     {
-      $sql = "SELECT * FROM producto ORDER BY referencia ASC LIMIT $start_from, $limit";
+      $sql = "SELECT p.*, m.Nombre AS marca FROM producto p
+      INNER JOIN marca m ON m.idmarca = p.idMarca
+      ORDER BY referencia ASC LIMIT $start_from, $limit";
       $query = $this->db->prepare($sql);
       $query->execute();
       return $query->fetchAll();

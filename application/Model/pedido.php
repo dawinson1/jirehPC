@@ -17,7 +17,9 @@ class pedido extends Model
 
     public function listarProductos()
     {
-        $sql = "SELECT p.*,c.Nombre as nombreCate FROM producto p INNER JOIN categoria c ON c.id_categoria = p.id_categoria WHERE estadosproduct_idestadosproduct =1";
+        $sql = "SELECT p.*,c.Nombre as nombreCate, m.Nombre as nombreMarc FROM producto p
+        INNER JOIN marca m ON m.idmarca = p.idMarca
+        INNER JOIN categoria c ON c.id_categoria = p.id_categoria WHERE estadosproduct_idestadosproduct =1";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -33,7 +35,7 @@ class pedido extends Model
 
     public function listarEmpleados()
     {
-        $sql = "SELECT * FROM empleado WHERE id_estado=3";
+        $sql = "SELECT * FROM empleado WHERE id_estado=5";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();

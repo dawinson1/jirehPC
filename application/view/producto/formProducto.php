@@ -122,8 +122,8 @@ function agregarProduct(){
   var Max_Stock = $('#stockPro').val().length;
   var precioUnit = $('#preUni').val();
   var Max_PrecioU = $('#preUni').val().length;
-  var marca = $('#nMarc').val();
-  var Max_Marca = $('#nMarc').val().length;
+  var marca = $('#selectMarc').val();
+  var NomMarca = $('#selectMarc option:selected').text();
 
     if ((referencia == "") || (id_categoria == "") || (nombreProducto == "") || (cantidad == "") || (stock == "") || (precioUnit == "") || (marca == "")) {
         swal("Upss!", "Los campos no pueden ir vacíos!", "error");
@@ -133,9 +133,7 @@ function agregarProduct(){
         swal("Upss!", "En el campo Stock solo deben ir números!", "error");
     } else if (patronLetrEspecial.test(precioUnit)) {
         swal("Upss!", "En el campo Precio Unitario solo deben ir números!", "error");
-    } else if (patronNum.test(marca)) {
-        swal("Upss!", "En el campo Marca solo deben ir Letras!", "error");
-    } else if ((Max_referencia > Max_LengthReferencia) ||(Max_nombreProducto > Max_LengthNombre) || (Max_Cantidad > Max_LengthCantidad) || (Max_Stock > Max_LengthCantidad) || (Max_PrecioU > Max_LengthCantidad) || (Max_Marca > Max_LengthMarca)) {
+    } else if ((Max_referencia > Max_LengthReferencia) ||(Max_nombreProducto > Max_LengthNombre) || (Max_Cantidad > Max_LengthCantidad) || (Max_Stock > Max_LengthCantidad) || (Max_PrecioU > Max_LengthCantidad)) {
         swal("Upss!", "Ingresaste una longitud no válida en un campo!", "error");
     } else {
       $.ajax({
@@ -160,22 +158,23 @@ function agregarProduct(){
             $('#cantPro').val('');
             $('#stockPro').val('');
             $('#preUni').val('');
-            $('#nMarc').val('');
+            $('#selectMarc').val(0);
             tablaNot();
 
           } else {
+            var estadP = 1;
             $('#inputsProdNoExist').append(
             "<div class='hidden' id='tr"+referencia+"2'>"+
             "<input type='hidden' name='identificador[]' value='"+referencia+"'><input type='hidden' name='selectCat[]' value='"+id_categoria+"'>"+
             "<input type='hidden' name='prodNom[]' value='"+nombreProducto+"'><input type='hidden' id='cant"+referencia+"' name='cantPro[]' value='"+cantidad+"'>"+
             "<input type='hidden' name='stockPro[]' value='"+stock+"'><input type='hidden' name='preUni[]' value='"+precioUnit+"'>"+
-            "<input type='hidden' name='nMarc[]' value='"+marca+"'><input type='hidden' name='imgProdu[]' value='"+img+"'>"+
+            "<input type='hidden' name='nMarc[]' value='"+marca+"'><input type='hidden' name='imgProdu[]' value='"+img+"'><input type='hidden' name='estProd[]' value='"+estadP+"'>"+
             "</div>"
           );
           var rowNotExistProd = "<tr id='tr"+referencia+"'>"+
           "<td id='td"+referencia+"'>"+referencia+"</td><td>"+nombreProducto+"</td><td>"+Nomcategoria+"</td>"+
           "<td id='tableCant"+referencia+"'>"+cantidad+"</td><td>"+stock+"</td><td>"+precioUnit+"</td>"+
-          "<td>"+marca+"</td>"+
+          "<td>"+NomMarca+"</td>"+
           "<td><button class='btn btn-danger' type='button'"+
           "onclick='tabla1.row($("+'"'+"#tr"+referencia+'"'+")).remove().draw(), $("+'"'+"#tr"+referencia+'2"'+").remove()'>Eliminar</button></td></tr>";
 
@@ -185,7 +184,7 @@ function agregarProduct(){
           $('#cantPro').val('');
           $('#stockPro').val('');
           $('#preUni').val('');
-          $('#nMarc').val('');
+          $('#selectMarc').val(0);
           tablaNot();
           tabla1.rows.add($(rowNotExistProd)).draw();
           }
@@ -212,7 +211,7 @@ function agregarProduct(){
               $('#cantPro').val('');
               $('#stockPro').val('');
               $('#preUni').val('');
-              $('#nMarc').val('');
+              $('#selectMarc').val(0);
               tablaNot();
 
             } else {
@@ -239,7 +238,7 @@ function agregarProduct(){
                 $('#cantPro').val('');
                 $('#stockPro').val('');
                 $('#preUni').val('');
-                $('#nMarc').val('');
+                $('#selectMarc').val(0);
                 $('#imgProdu').fileinput('clear');
                 tablaYes();
                 tabla2.rows.add($(rowExistProd)).draw();
@@ -462,6 +461,26 @@ $.ajax({
   })
 }
 
+function listarSelectMarc(){
+$.ajax({
+
+    url:Url+'/producto/listarMarca',
+    type: 'POST',
+    dataType:'json'
+}).done(function(data){
+
+    var selectMarc = '';
+    data.forEach(function(m){
+
+    selectMarc+='<option value='+m.idmarca+'>'+m.Nombre+'</option>';
+    })
+    $('#selectMarc').empty();
+    $('#selectMarc').html('<option value="0" selected="selected">Seleccione una Marca</option>');
+    $('#selectMarc').append(selectMarc);
+
+  })
+}
+
 function tablaNot() {
   $.fn.dataTable.ext.errMode = 'throw';
   tabla1 =	$('#ProductsNotExist').DataTable( {
@@ -571,14 +590,13 @@ function showForm() {
                   </div> <!--cierre del div contenedor del input-->
 
                   <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
-                      <label for="nMarc">Marca *</label>
+                      <label for="selectMarc">Marca *</label>
 
                       <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-                          <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                          <input type="text" class="form-control" placeholder="Ingrese marca del Producto" autocomplete="off"
-                          name="nMarc" id="nMarc" maxlength="20">
+                          <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
+                         <select id="selectMarc" class="form-control" name="selectMarc"></select>
 
-                      </div><!--cierre div del input-->
+                      </div><!--cierre div del inputt-->
                   </div> <!--cierre del div contenedor del input-->
 
                 </div>
@@ -594,6 +612,7 @@ function showForm() {
               </div>`;
     $('#form1Productos').append(form1);
     listarSelectCat();
+    listarSelectMarc();
   } else if (showForm==2) {
     $('#form1Productos').empty();
     var form2 = `<div class="box box-info">

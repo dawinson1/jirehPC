@@ -70,6 +70,7 @@ class clienteController
     $this->cliente->set('contrasena',password_hash($_POST["passCliente"],PASSWORD_BCRYPT));
     $this->cliente->set('Url_imgClient',$_POST['perfilClient']);
     $this->cliente->set('rolCliente',$_POST['rolCliente']);
+    $this->cliente->set('estadiscli_idestadiscli',$_POST['estCli']);
     echo $this->cliente->crearCliente();
     }
 
@@ -137,5 +138,11 @@ class clienteController
       $this->cliente->set('id_cliente',$_POST['idCliente']);
       $this->cliente->set('estadiscli_idestadiscli',$_POST['idEstCli']);
       echo $this->cliente->cambiarEstadoCli();
+    }
+
+    public function listarEstadosCli()
+    {
+      $cliente = $this->cliente->listarEstClientes();
+      echo json_encode($cliente);
     }
 }

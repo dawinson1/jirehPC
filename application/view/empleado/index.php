@@ -239,8 +239,8 @@ $(document).ready(function() {
         "scrollX": false,
         "fnDrawCallback": function() {
           $('.toggle-Empleado').bootstrapToggle();
-          $('.estEmp3').bootstrapToggle('on');
-          $('.estEmp4').bootstrapToggle('off');
+          $('.estEmp5').bootstrapToggle('on');
+          $('.estEmp6').bootstrapToggle('off');
         },
         "language": {
             "url": Url+"/js/lenguaje.json"
@@ -270,8 +270,8 @@ $(document).ready(function() {
 function changeStatusEmp(idEst, idEmp) {
   $('#toggleEmp_'+idEmp+'').change(function() {
     var NewEstado= '';
-      if (idEst == 3) {
-        NewEstado = 4;
+      if (idEst == 5) {
+        NewEstado = 6;
         $.ajax({
           url: Url+'/empleado/cambiarEstadoEmp',
           type:'POST',
@@ -281,8 +281,8 @@ function changeStatusEmp(idEst, idEmp) {
           }).done(function(data){
             tabla.ajax.reload(null,false);
           })
-      } else if (idEst == 4) {
-        NewEstado = 3;
+      } else if (idEst == 6) {
+        NewEstado = 5;
         $.ajax({
           url: Url+'/empleado/cambiarEstadoEmp',
           type:'POST',

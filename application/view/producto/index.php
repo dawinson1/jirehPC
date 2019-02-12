@@ -123,11 +123,9 @@
                     <label for="nMarc">Marca</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
-                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese marca del Producto" autocomplete="off"
-                        name="nMarc" id="nMarc" maxlength="20">
-
-                    </div><!--cierre div del input-->
+                        <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
+                        <select id="nMarc" class="form-control" name="nMarc"></select>
+                    </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
 
               </div>
@@ -403,11 +401,8 @@ function editarProducto(ref,nomCate,nomPr,cant,stck,price,brand) //funcion plasm
 }
 //select ventana modal categoria
 $(function(){
-
-
+listarSelectMarcs()
 listarSelectCat();
-
-
 })
 
 
@@ -425,6 +420,23 @@ function listarSelectCat() {
      $('#selectCat').empty();
      $('#selectCat').html('<option value="" selected="selected"></option>');
      $('#selectCat').append(selectCat);
+ })
+}
+
+function listarSelectMarcs() {
+  $.ajax({
+     url:Url+'/producto/listarMarca',
+     type:'POST',
+     dataType:'json'
+ }).done(function(data){
+     //console.log(data);
+     var selectMarc = '';
+     data.forEach(function(m){
+        selectMarc+='<option value='+m.idmarca+'>'+m.Nombre+'</option>';
+     })
+     $('#nMarc').empty();
+     $('#nMarc').html('<option value="" selected="selected"></option>');
+     $('#nMarc').append(selectMarc);
  })
 }
 

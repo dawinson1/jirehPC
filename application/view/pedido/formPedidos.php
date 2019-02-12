@@ -121,7 +121,7 @@
                       <?php foreach ($listProdPed as $list):
                         $refer = $list['referencia'];
                         $nomProd = $list['nombreProducto'];
-                        $marcaProd= $list['marca'];
+                        $marcaProd= $list['nombreMarc'];
                         $CateProd = $list['nombreCate'];
                         $cantProd = $list['cantidad'];
                         $precioProd = $list['precioUnit'];
