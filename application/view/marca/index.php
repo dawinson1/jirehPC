@@ -8,11 +8,11 @@
 
           <div class="box">
             <div class="box-header">
-              <b class="box-title">Categoría</b>
+              <b class="box-title">Marca</b>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <table id="tableCategoria" class="table table-striped table-bordered" style="width:100%">
+            <table id="tableMarca" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
                   <th>ID</th>
@@ -41,7 +41,7 @@
 <div class="box box-info">
             <div class="box-header modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 class="box-title">Editar Categoría</h3>
+              <h3 class="box-title">Editar Marca</h3>
             </div>
             <form>
             <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
@@ -58,12 +58,12 @@
                 </div> <!--cierre del div contenedor del input-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="nomCat">Nombre</label>
+                    <label for="nomMarca">Nombre</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-                        <input type="text" class="form-control" placeholder="Ingrese Nombre de la Categoría"
-                        name="nomCat" id="nomCat"  autocomplete="off" maxlength="20" >
+                        <input type="text" class="form-control" placeholder="Ingrese Nombre de la Marca"
+                        name="nomMarca" id="nomMarca"  autocomplete="off" maxlength="20" >
 
                     </div><!--cierre div del inputt-->
                 </div> <!--cierre del div contenedor del input-->
@@ -74,7 +74,7 @@
 
             <div class="box-footer modal-footer"> <!--Div que separa el formulario y contendrá los botones-->
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-info pull-right" onclick="enviarEditCategoria()">Modificar</button>
+                <button type="button" class="btn btn-info pull-right" onclick="enviarEditMarca()">Modificar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
             </div>
 
@@ -88,9 +88,9 @@
 
 $(document).ready(function() {
         $.fn.dataTable.ext.errMode = 'throw';
-        tabla =	$('#tableCategoria').DataTable( {
+        tabla =	$('#tableMarca').DataTable( {
         "ajax": {
-            "url": Url+'/categoria/listarCat', // función en el controlador
+            "url": Url+'/marca/listarMarca', // función en el controlador
             "type": "GET",
             "dataSrc": "",
             "deferRender": true
@@ -127,41 +127,41 @@ $(document).ready(function() {
         } );
 
 });
-function editarCategoria(idCa,nomCa) //funcion plasmar los datos del usuario en los inputs
+function editarMarca(idMar,nomMar) //funcion plasmar los datos del usuario en los inputs
 {
-  $('#identificador').val(idCa);
-  $('#nomCat').val(nomCa);
+  $('#identificador').val(idMar);
+  $('#nomMarca').val(nomMar);
   document.getElementById("identificador").disabled = true;
   $("#myModal").modal("show");
 }
 
 
-function enviarEditCategoria(){
+function enviarEditMarca(){
         var patron = /[0-9]/;
-        var nombreC = $('#nomCat').val();
-        var idCat = $('#identificador').val();
-        var length_nombre = $('#nomCat').val().length;
+        var nombreM = $('#nomMarca').val();
+        var idMarc = $('#identificador').val();
+        var length_nombre = $('#nomMarca').val().length;
         var Max_LengthNombre = 25;
 
 
 
-        if ((nombreC == "")) { //Valida si los campos estan vacios
+        if ((nombreM == "")) { //Valida si los campos estan vacios
             swal("Upss", "Los campos no pueden ir vacios!", "error");
             return false;
         }
-        else if (patron.test(nombreC)){
-//sintaxis para validar que el campo no contenga números.
-//patron es la experesion regular, dentro del .test() se pone la variable a comparar
-            swal("Upss", "No se permite ingresar números!", "error");
-        }else if (length_nombre>Max_LengthNombre) {
-      swal("Upss", "Nombre solo debe tener Máximo 25 caracteres!", "error");
+        else if (patron.test(nombreM)){
+          //sintaxis para validar que el campo no contenga números.
+          //patron es la experesion regular, dentro del .test() se pone la variable a comparar
+        swal("Upss", "No se permite ingresar números!", "error");
+    }else if (length_nombre>Max_LengthNombre) {
+      swal("Upss", "Solo debe tener un Máximo  de 25 caracteres!", "error");
          } else {
             $.ajax({
-                url: Url+'categoria/editarCategoria',
+                url: Url+'marca/editarMarca',
                 type:'POST',
                 data:{
-                    identificador: idCat,
-                    nomCat: nombreC
+                    identificador: idMarc,
+                    nomMarca: nombreM
                }
             }).done(function(data){
                 if(data){
@@ -176,8 +176,9 @@ function enviarEditCategoria(){
         }
 
     }
+    
 
-function eliminarCategoria(idCa) {
+function eliminarMarca(idMar) {
   swal({
         title: "¿Estas Seguro?",
         text: "Si eliminas este registro ya no se podrá recuperar!",
@@ -187,13 +188,13 @@ function eliminarCategoria(idCa) {
       })
       .then((willDelete) => {
         if (willDelete) {
-          swal("Estado eliminado!", {
+          swal("Marca eliminada!", {
             icon: "success",
           });
           $.ajax({
-            url:Url+'/categoria/eliminarCategoria',
+            url:Url+'/marca/eliminarMarca',
             type:'POST',
-            data:{identificador:idCa}
+            data:{identificador:idMar}
         }).done(function(data){
             if(data){
                // setTimeout('location.reload()',2000);

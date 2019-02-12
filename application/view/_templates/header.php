@@ -320,6 +320,23 @@
       
       <!--Categoria-->
 
+      <!--Marca-->
+      <li class="treeview">
+          <a href="#">
+            <i class="fa fa-coffee"></i> <span>Marcas</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo URL; ?>marca"><i class="fa fa-table"></i> Consultar Marcas</a></li>
+            <li><a href="<?php echo URL; ?>marca/formMarca"><i class="glyphicon glyphicon-plus-sign"></i> Registrar Marcas</a></li>
+          </ul>
+
+        </li>
+      
+      <!--Marca-->
+
       <!--Mapa de Navegación-->
         <li class="treeview">
           <a href="#">
