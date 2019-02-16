@@ -33,14 +33,19 @@ class categoriaController
        foreach($categoria as $value){
            $idCa = $value['id_categoria'];
            $nomCa = $value['Nombre'];
+           $id_estado =$value['idEstado'];
+           $nomEstadoCategoria =$value['nombreEstadoCat'];
 
            $datos[] = array(
                'ID'=> $value['id_categoria'],
                'Nombre'=>$value['Nombre'],
+               'Estado'=>$value['nombreEstadoCat'],
                'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarCategoria
                ('.$idCa.','."'".$nomCa."'".')">Editar</button>'],
-               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarCategoria('.$idCa.')">Eliminar</button>']
+               'Eliminar'=>['<input type="checkbox" onchange="changeStatusCategoria('."'".$id_estado."'".','."'".$idCa."'".')" id="toggleCategoria_'.$idCa.'"
+               class="toggle-Categoria estCat'.$id_estado.'" data-toggle="toggle" data-offstyle="danger" data-on="Activo" data-off="Inactivo">']
            );
+           
        }
        echo json_encode($datos);
     }
@@ -48,6 +53,7 @@ class categoriaController
     public function crearCategoria()
     {
         $this->categoria->set('Nombre',$_POST['nomCat']);
+        $this->categoria->set('idEstado',$_POST['estCategoria']);
         echo $this->categoria->crearCategoria();
     }
 
@@ -62,5 +68,12 @@ class categoriaController
     {
         $this->categoria->set('id_categoria',$_POST['identificador']);
         echo $this->categoria->eliminarCategoria();
+    }
+
+    public function cambiarEstadoCategoria()
+    {
+      $this->categoria->set('idEstado',$_POST[('idEstCat')]);
+      $this->categoria->set('id_categoria',$_POST[('id_categoria')]); /*el de la izq es de la bd, izq viene por ajax*/
+      echo $this->categoria->cambiarEstadoCategoria();
     }
 }

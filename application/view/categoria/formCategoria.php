@@ -37,6 +37,7 @@ function crearCategoria(){
   var nombreC = $('#nomCat').val();
   var length_nombre = $('#nomCat').val().length;
   var Max_LengthNombre = 25;
+  var estadoCategoria = 1;
 
 
     if ((nombreC == "")) { //Valida si los campos estan vacios
@@ -52,7 +53,8 @@ function crearCategoria(){
         url: Url+'categoria/crearCategoria',
         type:'POST',
         data:{
-          nomCat: nombreC
+          nomCat: nombreC,
+          estCategoria: estadoCategoria
         },
         }).done(function(data){
           if(data){
