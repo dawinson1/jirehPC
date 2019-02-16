@@ -27,7 +27,6 @@ class productoController
     }
     public function catalogo()
     {
-        $cantidadRegistros = $this->countCatalogo();
         require APP . 'view/_templates/header.php';
         require APP . 'view/producto/catalogo.php';
         require APP . 'view/_templates/footer.php';
@@ -244,7 +243,45 @@ class productoController
 
     public function pagProducts($limit, $start_from)
     {
-      $productosPag = $this->producto->countCatalogo();
+      $productosPag = $this->producto->pagProducts();
       return $productosPag;
+    }
+    //FUCIONES PARA LAS BUSQUEDAS POR CATEGORIA
+    public function pagProductsBYcat($limit, $start_from, $Scat)
+    {
+      $productosPag = $this->producto->pagProductsBYcat();
+      return $productosPag;
+    }
+
+    public function countCatalogoBYcat($Scat)
+    {
+      $countCatalogo = $this->producto->countCatalogoBYcat($Scat);
+      return $countCatalogo;
+    }
+
+    //FUCIONES PARA LAS BUSQUEDAS POR MARCA
+    public function pagProductsBYmc($limit, $start_from, $Smc)
+    {
+      $productosPag = $this->producto->pagProductsBYmc();
+      return $productosPag;
+    }
+
+    public function countCatalogoBYmc($Smc)
+    {
+      $countCatalogo = $this->producto->countCatalogoBYmc($Smc);
+      return $countCatalogo;
+    }
+
+    //FUCIONES PARA LAS BUSQUEDAS POR MARCA Y CATEGORIA
+    public function pagProductsBYmcycat($limit, $start_from, $Smc, $Scat)
+    {
+      $productosPag = $this->producto->pagProductsBYmc();
+      return $productosPag;
+    }
+
+    public function countCatalogoBYmcycat($Smc, $Scat)
+    {
+      $countCatalogo = $this->producto->countCatalogoBYmc($Smc, $Scat);
+      return $countCatalogo;
     }
 }

@@ -57,8 +57,9 @@ class producto extends Model
 
     public function listarCatalogo()
     {
-        $sql = "SELECT referencia, nombreProducto, cantidad, precioUnit, m.Nombre as marca, Url_imgProduct FROM producto p
-        INNER JOIN marca m ON m.idmarca = p.idMarca";
+        $sql = "SELECT referencia, nombreProducto, cantidad, precioUnit, m.Nombre as marca, c.Nombre as categoria, Url_imgProduct FROM producto p
+        INNER JOIN marca m ON m.idmarca = p.idMarca
+        INNER JOIN categoria c ON c.id_categoria = p.id_categoria";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -185,11 +186,82 @@ class producto extends Model
 
     public function pagProducts($limit, $start_from)
     {
-      $sql = "SELECT p.*, m.Nombre AS marca FROM producto p
+      $sql = "SELECT p.*, m.Nombre AS marca, c.Nombre AS categoria FROM producto p
       INNER JOIN marca m ON m.idmarca = p.idMarca
+      INNER JOIN categoria c ON c.id_categoria = p.id_categoria
+      WHERE P.estadosproduct_idestadosproduct = 1
       ORDER BY referencia ASC LIMIT $start_from, $limit";
       $query = $this->db->prepare($sql);
       $query->execute();
       return $query->fetchAll();
+    }
+
+    //CONSULTA POR CATEGORIA
+    public function pagProductsBYcat($limit, $start_from, $Scat)
+    {
+      $sql = "SELECT p.*, m.Nombre AS marca, c.Nombre AS categoria FROM producto p
+      INNER JOIN marca m ON m.idmarca = p.idMarca
+      INNER JOIN categoria c ON c.id_categoria = p.id_categoria
+      WHERE P.estadosproduct_idestadosproduct = 1
+      AND p.id_categoria = $Scat
+      ORDER BY referencia ASC LIMIT $start_from, $limit";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+      return $query->fetchAll();
+    }
+    //CONTADOR PARA LA BUSQUEDA POR CATEGORIA
+    public function countCatalogoBYcat($Scat)
+    {
+        $sql = "SELECT COUNT(*) AS conteo FROM producto
+        WHERE id_categoria = $Scat";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll()[0]['conteo'];
+    }
+
+    //CONSULTA POR MARCA
+    public function pagProductsBYmc($limit, $start_from, $Smc)
+    {
+      $sql = "SELECT p.*, m.Nombre AS marca, c.Nombre AS categoria FROM producto p
+      INNER JOIN marca m ON m.idmarca = p.idMarca
+      INNER JOIN categoria c ON c.id_categoria = p.id_categoria
+      WHERE P.estadosproduct_idestadosproduct = 1
+      AND p.idMarca = $Smc
+      ORDER BY referencia ASC LIMIT $start_from, $limit";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+      return $query->fetchAll();
+    }
+    //CONTADOR PARA LA BUSQUEDA POR MARCA
+    public function countCatalogoBYmc($Smc)
+    {
+        $sql = "SELECT COUNT(*) AS conteo FROM producto
+        WHERE idMarca = $Smc";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll()[0]['conteo'];
+    }
+
+    //CONSULTA POR MARCA y CATEGORIA
+    public function pagProductsBYmcycat($limit, $start_from, $Smc, $Scat)
+    {
+      $sql = "SELECT p.*, m.Nombre AS marca, c.Nombre AS categoria FROM producto p
+      INNER JOIN marca m ON m.idmarca = p.idMarca
+      INNER JOIN categoria c ON c.id_categoria = p.id_categoria
+      WHERE P.estadosproduct_idestadosproduct = 1
+      AND p.idMarca = $Smc AND p.id_categoria = $Scat
+      ORDER BY referencia ASC LIMIT $start_from, $limit";
+      $query = $this->db->prepare($sql);
+      $query->execute();
+      return $query->fetchAll();
+    }
+    //CONTADOR PARA LA BUSQUEDA POR MARCA y CATEGORIA
+    public function countCatalogoBYmcycat($Smc, $Scat)
+    {
+        $sql = "SELECT COUNT(*) AS conteo FROM producto
+        WHERE idMarca = $Smc AND id_categoria = $Scat";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll()[0]['conteo'];
     }
 }
