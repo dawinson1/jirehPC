@@ -37,6 +37,7 @@ function crearMarca(){
   var nombreM = $('#nomMarca').val();
   var length_nombre = $('#nomMarca').val().length;
   var Max_LengthNombre = 25;
+  var estadoMarca = 1;
 
 
     if ((nombreM == "")) { //Valida si los campos estan vacios
@@ -54,12 +55,14 @@ function crearMarca(){
         url: Url+'marca/crearMarca',
         type:'POST',
         data:{
-          nomMarca: nombreM
+          nomMarca: nombreM,
+          estMarca: estadoMarca
         },
         }).done(function(data){
           if(data){
             swal("Bien Hecho!", "El Registro ha sido completado!", "success");
             $('#nomMarca').val('');
+            //location.href = Url+'marca'
           } else {
             swal("Algo anda mal!", "El Registro no ha sido completado!", "error");
           }

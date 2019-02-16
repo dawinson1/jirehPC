@@ -33,13 +33,17 @@ class marcaController
        foreach($marca as $value){
            $idMar = $value['idmarca'];
            $nomMar = $value['Nombre'];
+           $id_estado =$value['idEstado'];
+           $nomEstadoMarca =$value['nombreEstadoMarc'];
 
            $datos[] = array(
                'ID'=> $value['idmarca'],
                'Nombre'=>$value['Nombre'],
+               'Estado'=>$value['nombreEstadoMarc'],
                'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarMarca
                ('.$idMar.','."'".$nomMar."'".')">Editar</button>'],
-               'Eliminar'=>['<button type="button" class="btn btn-primary" onclick="eliminarMarca('.$idMar.')">Eliminar</button>']
+               'Eliminar'=>['<input type="checkbox" onchange="changeStatusMarca('."'".$id_estado."'".','."'".$idMar."'".')" id="toggleMarca_'.$idMar.'"
+               class="toggle-Marca estMarc'.$id_estado.'" data-toggle="toggle" data-offstyle="danger" data-on="Activo" data-off="Inactivo">']
            );
        }
        echo json_encode($datos);
@@ -48,6 +52,7 @@ class marcaController
     public function crearMarca()
     {
         $this->marca->set('Nombre',$_POST['nomMarca']);
+        $this->marca->set('idEstado',$_POST['estMarca']);
         echo $this->marca->crearMarca();
     }
 
@@ -65,7 +70,10 @@ class marcaController
     }
 
 
-    public function cambiarEstado(){
-        
+    public function cambiarEstadoMarca()
+    {
+      $this->marca->set('idEstado',$_POST[('idEstMarca')]);
+      $this->marca->set('idmarca',$_POST[('idmarca')]); /*el de la izq es de la bd, izq viene por ajax*/
+      echo $this->marca->cambiarEstadoMarca();
     }
 }

@@ -24,7 +24,7 @@
                   <th>Estado</th>
                   <th>Foto Perfil</th>
                   <th>Editar</th>
-                  <th>Cambiar estado <br>Activo/Inactivo</th>
+                  <th>Cambiar estado: <br>Activo/Inactivo</th>
                   <th>Actualizar<br>Foto</th>
                 </tr>
                 </thead>
