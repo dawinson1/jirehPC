@@ -80,7 +80,9 @@ class login extends Model
         if (password_verify($password,$result["contrasena"])) {
 
             $_SESSION['loggedin']=true;
+            $_SESSION['usid']=$result["id_cliente"];
             $_SESSION['username']=$result["nombreCliente"];
+            $_SESSION['surname']=$result["apellidoCliente"];
             $_SESSION['imgPerfil']=$result["Url_imgClient"];
             $_SESSION['Rol']=$result["rolCliente"];
 
@@ -93,7 +95,9 @@ class login extends Model
         if (password_verify($password,$result2["pass"])) {
 
             $_SESSION['loggedin']=true;
+            $_SESSION['usid']=$result2["idEmpleado"];
             $_SESSION['username']=$result2["nombre"];
+            $_SESSION['surname']=$result2["apellido"];
             $_SESSION['IdEmp']=$result2["idEmpleado"];
             $_SESSION['imgPerfil']=$result2["Url_imgEmpleado"];
             $_SESSION['Rol']=$result2["nombrerol"];

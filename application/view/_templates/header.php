@@ -129,13 +129,13 @@
 
                 <p>
                 <?php echo $_SESSION['username']; ?>
-
                 </p>
+
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="<?php echo URL; ?>editPerfil" class="btn btn-default btn-flat">Configuración</a>
                 </div>
                 <div class="pull-right">
                   <a href="<?php echo URL; ?>login/singout" class="btn btn-default btn-flat">Desconectar</a>
@@ -247,7 +247,6 @@
           </ul>
         </li>
 
-      <li class="header">Host <!--Estados y Roles--></li>
 
 
       <!--roles falta-->
@@ -317,7 +316,7 @@
           </ul>
 
         </li>
-      
+
       <!--Categoria-->
 
       <!--Marca-->
@@ -334,7 +333,7 @@
           </ul>
 
         </li>
-      
+
       <!--Marca-->
 
       <!--Mapa de Navegación-->
@@ -352,7 +351,7 @@
           </ul>
 
         </li>
-      
+
       <!--Mapa de Navegación-->
 
       <?php } ?>
