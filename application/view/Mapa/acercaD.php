@@ -64,6 +64,28 @@ Los roles que tendrán acceso y permisos en este módulo serán Administrador y 
 Los roles que tendrán acceso y permisos en este módulo serán Administrador y Técnico.</p>
 <br>
 
+<h4 style="font-family:verdana;">Módulo de Productos:</h4>
+<p style="font-family:verdana;">El módulo de producto se encarga de gestionar el registro de productos nuevos o existentes, dichos productos abastecen el catálogo para los clientes .
+Los roles que tendrán acceso y permisos en este módulo serán Administrador y Técnico.</p>
+<br>
+<h4 style="font-family:verdana;">Módulo de Categoría:</h4>
+<p style="font-family:verdana;">El módulo de categoría se encarga de gestionar el registro de nuevas categorías de productos, se puede asignar una categoría a
+ un producto en el momento del registro y también está habilitada la opción de filtrar por <b>categoría</b> en el catálogo .
+Los roles que tendrán acceso y permisos en este módulo serán Administrador y Técnico.</p>
+<br>
+<h4 style="font-family:verdana;">Módulo de Marca:</h4>
+<p style="font-family:verdana;">El módulo de marca se encarga de gestionar las nuevas marcas de productos, se puede asignar una marca a un producto en el momento
+del registro y también está habilitada la opción de filtrar por <b>marca</b> en el catálogo .
+Los roles que tendrán acceso y permisos en este módulo serán Administrador y Técnico.</p>
+<br>
+<h4 style="font-family:verdana;">Módulo de Cliente:</h4>
+<p style="font-family:verdana;">El módulo de cliente se encarga de gestionar el registro de clientes. Los clientes tienen acceso al catálogo de productos.
+Los roles que tendrán acceso y permisos en este módulo serán Administrador y Técnico.Los usuarios externos podrán registrarse como <b>clientes</b> desde el login.</p>
+<br>
+<h4 style="font-family:verdana;">Módulo de Control de Existencias:</h4>
+<p style="font-family:verdana;">El módulo Control de Existencias nos permite visualizar las entradas de productos y la salida de estos .El rol que tendrá acceso y permisos en este módulo será Administrador.</p>
+<br>
+
 <!--FALTA TERMINAR -->
   </div>
   <!-- /.box-body -->
