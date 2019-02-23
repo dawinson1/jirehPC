@@ -15,7 +15,7 @@
             <table id="tableCliente" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
-                  <th>Cedula o NIT</th>
+                  <th>Cédula</th>
                   <th>Nombre</th>
                   <th>Apellido</th>
                   <th>Correo</th>
@@ -54,7 +54,7 @@
             <div class="box-body modal-body"> <!--Este Div es contenedor de los imputs-->
 
                 <div class="form-group"> <!--Comienzo del div contenedor del input-->
-                    <label for="identificador" >Cédula o NIT</label>
+                    <label for="identificador" >Cédula</label>
 
                     <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                         <span class="input-group-addon"><i class="fa fa-address-card"></i></span>
@@ -203,7 +203,7 @@ $(document).ready(function() {
             "deferRender": true
         },
         "columns": [
-            { "data": "Cedula o NIT","className": 'centeer'  },
+            { "data": "Cédula","className": 'centeer'  },
             { "data": "Nombre","className": 'centeer'  },
             { "data": "Apellido","className": 'centeer'  },
             { "data": "Correo","className": 'centeer'  },

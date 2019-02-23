@@ -389,7 +389,7 @@ $(function(){
 //Date picker
     $('#datepicker').datepicker({
       autoclose: true,
-      format: 'dd-mm-yy',
+      format: 'yyyy-mm-dd',
       startDate: 'd',
       clearBtn: true
     })

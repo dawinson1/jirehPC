@@ -41,7 +41,7 @@ class clienteController
            $contrC = $value['contrasena'];
            $imgC = $value['Url_imgClient'];
            $datos[] = array(
-               'Cedula'=> $value['id_cliente'],
+               'Cédula'=> $value['id_cliente'],
                'Nombre'=>$value['nombreCliente'],
                'Apellido'=>$value['apellidoCliente'],
                'Correo'=>$value['correoCliente'],
