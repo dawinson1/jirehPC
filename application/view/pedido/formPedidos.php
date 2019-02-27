@@ -457,7 +457,7 @@ function agregar() {
 
   var clientText = $("#clientSelect option:selected").text();
   var clientVal = $("#clientSelect").val();
-  var changeText = clientText.replace(/[^a-z\s]/gi, '');
+  var changeText = clientText.replace(/[^a-záéíóúüñ\s]/gi, '');
 
   $("#idClient").val(clientVal);
   $("#nomCliente").val(changeText);
@@ -471,7 +471,7 @@ function agregarEmp() {
 
   var empText = $("#empSelect option:selected").text();
   var empVal = $("#empSelect").val();
-  var changeText = empText.replace(/[^a-z\s]/gi, '');
+  var changeText = empText.replace(/[^a-záéíóúüñ\s]/gi, '');
 
   $("#idEmployee").val(empVal);
   $("#nomEmployee").val(changeText);
