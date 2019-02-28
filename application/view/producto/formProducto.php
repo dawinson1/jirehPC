@@ -85,7 +85,7 @@
 
             <div class="box-footer"> <!--Div que separa el formulario y contendrá los botones-->
                 <button type="button" class="btn btn-default">Cancelar</button>
-                <button type="button" class="btn btn-info pull-right" onclick="registrar()">Registrar</button>
+                <button type="button" id="btnregistro" class="btn btn-info pull-right" onclick="registrar()">Registrar</button>
               </div> <!--Cierra Div que separa el formulario y contendrá los botones-->
 
 </div> <!--cierre div col-md-6-->
@@ -455,7 +455,7 @@ $.ajax({
     selectCat+='<option value='+c.id_categoria+'>'+c.Nombre+'</option>';
     })
     $('#selectCat').empty();
-    $('#selectCat').html('<option value="0" selected="selected">Seleccione una categoria</option>');
+    $('#selectCat').html('<option value="0" selected="selected">Otro</option>');
     $('#selectCat').append(selectCat);
 
   })
@@ -475,7 +475,7 @@ $.ajax({
     selectMarc+='<option value='+m.idmarca+'>'+m.Nombre+'</option>';
     })
     $('#selectMarc').empty();
-    $('#selectMarc').html('<option value="0" selected="selected">Seleccione una Marca</option>');
+    $('#selectMarc').html('<option value="0" selected="selected">Otro</option>');
     $('#selectMarc').append(selectMarc);
 
   })
@@ -537,11 +537,17 @@ function showForm() {
                   <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
                       <label for="selectCat">Categoria *</label>
 
+
                       <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                           <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-                         <select id="selectCat" class="form-control" name="selectCat"></select>
+                         <select id="selectCat" class="form-control" name="selectCat" onchange="otherCat()"></select>
 
                       </div><!--cierre div del inputt-->
+                      <div class="form-group has-warning" id="divactCat">
+                      <span class="help-block">Se han desabilitado los botones de agregar y registrar, cuando termines de registrar la nueva categoria,
+                       proceda en precionar el boton de actualizar</span>
+                       <button type="button" class="btn btn-block btn-info btn-xs" onclick="dsbtncat()" style="width: auto; height:25px;">Actualizar</button>
+                      </div>
                   </div> <!--cierre del div contenedor del input-->
 
                   <div class="form-group col-md-6"> <!--Comienzo del div contenedor del input-->
@@ -594,23 +600,31 @@ function showForm() {
 
                       <div class="input-group my-colorpicker2 colorpicker-element"> <!--comienzo div del inputt-->
                           <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-                         <select id="selectMarc" class="form-control" name="selectMarc"></select>
+                         <select id="selectMarc" class="form-control" name="selectMarc" onchange="otherMar()"></select>
 
                       </div><!--cierre div del inputt-->
+                      <div class="form-group has-warning" id="divactMar">
+                      <span class="help-block">Se han desabilitado los botones de agregar y registrar, cuando termines de registrar la nueva categoria,
+                       proceda en precionar el boton de actualizar</span>
+                       <button type="button" class="btn btn-block btn-info btn-xs" onclick="dsbtnmar()" style="width: auto; height:25px;">Actualizar</button>
+                      </div>
                   </div> <!--cierre del div contenedor del input-->
 
                 </div>
 
 
                 <div class="col-md-12">
-                  <button type="button" class="btn btn-info pull-right" onclick="agregarProduct()">Agregar</button>
+                  <button type="button" id="btnForm1" class="btn btn-info pull-right" onclick="agregarProduct()">Agregar</button>
                 </div>
 
               </div> <!-- cierre del div row para mover los inputs -->
               </div> <!--Cierre del Div contenedor-->
               </form>
               </div>`;
+
     $('#form1Productos').append(form1);
+    $('#divactCat').hide();
+    $('#divactMar').hide();
     listarSelectCat();
     listarSelectMarc();
   } else if (showForm==2) {
@@ -703,5 +717,50 @@ function selectProd() {
     $('#btnForm2').prop('disabled', false);
     $('#NomProducto2').val(nomSelect);
   }
+}
+
+$(document).ready(function() {
+  $("#selectCat").on("onchange", function(){
+  });
+  $("#selectMarc").on("onchange", function(){
+  });
+});
+
+function otherCat() {
+
+  var valCat = $('#selectCat').val();
+
+  if (valCat == 0) {
+    $('#divactCat').show();
+    $('#btnForm1').prop('disabled', true);
+    $('#btnregistro').prop('disabled', true);
+    window.open(Url+'categoria/formCategoria');
+	}
+}
+
+function dsbtncat() {
+  $('#divactCat').hide();
+  listarSelectCat();
+  $('#btnForm1').prop('disabled', false);
+  $('#btnregistro').prop('disabled', false);
+}
+
+function otherMar() {
+
+  var valMar = $('#selectMarc').val();
+
+  if (valMar == 0) {
+    $('#divactMar').show();
+    $('#btnForm1').prop('disabled', true);
+    $('#btnregistro').prop('disabled', true);
+    window.open(Url+'marca/formMarca');
+	}
+}
+
+function dsbtnmar() {
+  $('#divactMar').hide();
+  listarSelectMarc();
+  $('#btnForm1').prop('disabled', false);
+  $('#btnregistro').prop('disabled', false);
 }
 </script>
