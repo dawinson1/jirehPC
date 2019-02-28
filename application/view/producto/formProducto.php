@@ -544,8 +544,8 @@ function showForm() {
 
                       </div><!--cierre div del inputt-->
                       <div class="form-group has-warning" id="divactCat">
-                      <span class="help-block">Se han desabilitado los botones de agregar y registrar, cuando termines de registrar la nueva categoria,
-                       proceda en precionar el boton de actualizar</span>
+                      <span class="help-block">Se han deshabilitado los botones de agregar y registrar, cuando termines de registrar la nueva categoria,
+                       proceda en presionar el botón de actualizar</span>
                        <button type="button" class="btn btn-block btn-info btn-xs" onclick="dsbtncat()" style="width: auto; height:25px;">Actualizar</button>
                       </div>
                   </div> <!--cierre del div contenedor del input-->
@@ -604,8 +604,8 @@ function showForm() {
 
                       </div><!--cierre div del inputt-->
                       <div class="form-group has-warning" id="divactMar">
-                      <span class="help-block">Se han desabilitado los botones de agregar y registrar, cuando termines de registrar la nueva categoria,
-                       proceda en precionar el boton de actualizar</span>
+                      <span class="help-block">Se han deshabilitado los botones de agregar y registrar, cuando termines de registrar la nueva marca,
+                       proceda en presionar el botón de actualizar</span>
                        <button type="button" class="btn btn-block btn-info btn-xs" onclick="dsbtnmar()" style="width: auto; height:25px;">Actualizar</button>
                       </div>
                   </div> <!--cierre del div contenedor del input-->
