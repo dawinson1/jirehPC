@@ -99,7 +99,7 @@ $(document).ready(function() {
         "columns": [
             { "data": "ID","className": 'centeer'  },
             { "data": "Nombre","className": 'centeer'  },
-            { "data": "Estado", "className": 'centeer'}, 
+            { "data": "Estado", "className": 'centeer'},
             { "data": "Editar", "orderable": false  },
             { "data": "Eliminar", "orderable": false, "render": function(data, type, full, meta){
               return data;  }
@@ -109,8 +109,6 @@ $(document).ready(function() {
         "scrollX": false,
         "fnDrawCallback": function() {
           $('.toggle-Categoria').bootstrapToggle();
-          $('.estCat1').bootstrapToggle('on');
-          $('.estCat2').bootstrapToggle('off');
         },
         "language": {
             "url": Url+"/js/lenguaje.json"
@@ -138,33 +136,17 @@ $(document).ready(function() {
 });
 
 
-     //CAMBIAR ESTADO
-     function changeStatusCategoria(idEst, idCa) {
-  $('#toggleCategoria_'+idCa+'').change(function() {
-    var NewEstado= '';
-      if (idEst == 1) {
-        NewEstado = 2;
-        $.ajax({
-          url: Url+'/categoria/cambiarEstadoCategoria',
-          type:'POST',
-          data: {id_categoria: idCa,
-            idEstCat: NewEstado
-          }
-          }).done(function(data){
-            tabla.ajax.reload(null,false);
-          })
-      } else if (idEst == 2) {
-        NewEstado = 1;
-        $.ajax({
-          url: Url+'/categoria/cambiarEstadoCategoria',
-          type:'POST',
-          data: {id_categoria: idCa,
-            idEstCat: NewEstado
-          }
-          }).done(function(data){
-            tabla.ajax.reload(null,false);
-          })
-      }
+//CAMBIAR ESTADO
+function changeStatusCategoria(idEst, idCa) {
+
+  $.ajax({
+    url: Url+'/categoria/cambiarEstadoCategoria',
+    type:'POST',
+    data: {id_categoria: idCa,
+      idEstCat: idEst
+    }
+    }).done(function(data){
+      tabla.ajax.reload(null,false);
     })
 }
 

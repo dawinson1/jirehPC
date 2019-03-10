@@ -35,6 +35,8 @@ class categoriaController
            $nomCa = $value['Nombre'];
            $id_estado =$value['idEstado'];
            $nomEstadoCategoria =$value['nombreEstadoCat'];
+           $id_estado =  $value['idEstado']==1?2:1;
+           $check = $id_estado==1?"checked":"";
 
            $datos[] = array(
                'ID'=> $value['id_categoria'],
@@ -42,10 +44,10 @@ class categoriaController
                'Estado'=>$value['nombreEstadoCat'],
                'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarCategoria
                ('.$idCa.','."'".$nomCa."'".')">Editar</button>'],
-               'Eliminar'=>['<input type="checkbox" onchange="changeStatusCategoria('."'".$id_estado."'".','."'".$idCa."'".')" id="toggleCategoria_'.$idCa.'"
-               class="toggle-Categoria estCat'.$id_estado.'" data-toggle="toggle" data-offstyle="danger" data-on="Activo" data-off="Inactivo">']
+               'Eliminar'=>['<input type="checkbox" '.$check.' onchange="changeStatusCategoria('."'".$id_estado."'".','."'".$idCa."'".')" id="toggleCategoria_'.$idCa.'"
+               class="toggle-Categoria estCat'.$id_estado.'" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Activar" data-off="Inactivar">']
            );
-           
+
        }
        echo json_encode($datos);
     }

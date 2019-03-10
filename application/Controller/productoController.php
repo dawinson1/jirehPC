@@ -47,6 +47,8 @@ class productoController
            $idMarca = $value['marcaID'];
            $brand = $value['marca'];
            $imgP = $value['Url_imgProduct'];
+           $idEstado =  $value['estadosproduct_idestadosproduct']==1?2:1;
+           $check = $idEstado==1?"checked":"";
            $datos[] = array(
                'Referencia'=> $value['referencia'],
                'Categoria'=>$value['nombrecate'],
@@ -60,8 +62,8 @@ class productoController
                ('."'".$ref."'".','."'".$idCate."'".','."'".$nomPr."'".','."'".$cant."'".','."'".$stck."'".','."'".$price."'".','."'".$idMarca."'".',)">Editar</button>'],
                'Imagen'=>$value['Url_imgProduct'],
                'Actualizar Imagen'=>['<button type="button" class="btn btn-primary" onclick="showModalImg('."'".$ref."'".')"><i class="fa fa-file-image-o"></i></button>'],
-               'Eliminar'=>['<input type="checkbox" onchange="changeStatusProd('."'".$idEstado."'".','."'".$ref."'".')" id="toggleProd_'.$ref.'"
-               class="toggle-Producto estProd'.$idEstado.'" data-toggle="toggle" data-offstyle="danger" data-on="Activo" data-off="Inactivo">']
+               'Eliminar'=>['<input type="checkbox" '.$check.' onchange="changeStatusProd('."'".$idEstado."'".','."'".$ref."'".')" id="toggleProd_'.$ref.'"
+               class="toggle-Producto estProd'.$idEstado.'" data-onstyle="success" data-offstyle="danger" data-on="Activar" data-off="Inactivar">']
            );
        }
        echo json_encode($datos);

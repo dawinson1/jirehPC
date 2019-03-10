@@ -225,8 +225,6 @@ $(document).ready(function() {
         "scrollX": false,
         "fnDrawCallback": function() {
           $('.toggle-Cliente').bootstrapToggle();
-          $('.estCli1').bootstrapToggle('on');
-          $('.estCli2').bootstrapToggle('off');
         },
         // "dom": 'lrtipB',
         "language": {
@@ -394,38 +392,22 @@ function editarCliente(idC,nomC,apeC,CorrC,dicCl,telC) //funcion plasmar los dat
 }
 
 $('#imgClient').fileinput({
-        theme: 'fa',
-        language: 'es',
-        showUpload : false,
-        allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg']
-    });
+  theme: 'fa',
+  language: 'es',
+  showUpload : false,
+  allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg']
+});
 
-    function changeStatusCli(idEst, idCli) {
-      $('#toggleCli_'+idCli+'').change(function() {
-        var NewEstado= '';
-          if (idEst == 1) {
-            NewEstado = 2;
-            $.ajax({
-              url: Url+'/cliente/cambiarEstadoCli',
-              type:'POST',
-              data: {idCliente: idCli,
-                idEstCli: NewEstado
-              }
-              }).done(function(data){
-                tabla.ajax.reload(null,false);
-              })
-          } else if (idEst == 2) {
-            NewEstado = 1;
-            $.ajax({
-              url: Url+'/cliente/cambiarEstadoCli',
-              type:'POST',
-              data: {idCliente: idCli,
-                idEstCli: NewEstado
-              }
-              }).done(function(data){
-                tabla.ajax.reload(null,false);
-              })
-          }
-        })
+function changeStatusCli(idEst, idCli) {
+
+  $.ajax({
+    url: Url+'/cliente/cambiarEstadoCli',
+    type:'POST',
+    data: {idCliente: idCli,
+      idEstCli: idEst
     }
+    }).done(function(data){
+      tabla.ajax.reload(null,false);
+    })
+}
 </script>

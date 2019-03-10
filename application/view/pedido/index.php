@@ -199,12 +199,10 @@ $(document).ready(function() {
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
         "scrollX": false,
         "fnDrawCallback": function() {
-          $('.estPed1').bootstrapToggle('on');
-          $('.estPed2').bootstrapToggle('off');
-          $('.estPed2').bootstrapToggle('disable');
-          $('.estPed3').bootstrapToggle('off');
+          $('.toggle-Pedido').bootstrapToggle();
+          $('.estPed1').bootstrapToggle('disable');
           $('.estPed3').bootstrapToggle('disable');
-          $('.btnCancel2').prop('disabled', true);
+          $('.btnCancel1').prop('disabled', true);
           $('.btnCancel3').prop('disabled', true);
         },
         // "dom": 'lrtipB',
@@ -324,7 +322,6 @@ $('#imgClient').fileinput({
 
 
 function changeStatusPed(idEst, idPed) {
-  $('#togglePed_'+idPed+'').change(function() {
     swal({
           title: "¿Estás Seguro?",
           text: "Si finalizas el pedido, su estado ya no se podrá cambiar!",
@@ -334,35 +331,20 @@ function changeStatusPed(idEst, idPed) {
         })
         .then((willDelete) => {
           if (willDelete) {
-            var NewEstado= '';
-            if (idEst == 1) {
-              NewEstado = 2;
               $.ajax({
                 url: Url+'/pedido/cambiarEstadoPed',
                 type:'POST',
                 data: {idPedido: idPed,
-                  idEstPed: NewEstado
+                  idEstPed: idEst
                 }
               }).done(function(data){
                 tabla.ajax.reload(null,false);
               })
-            } else if (idEst == 2) {
-              NewEstado = 1;
-              $.ajax({
-                url: Url+'/pedido/cambiarEstadoPed',
-                type:'POST',
-                data: {idPedido: idPed,
-                  idEstPed: NewEstado
-                }
-              }).done(function(data){
-                tabla.ajax.reload(null,false);
-              })
-            }
         } else {
-          tabla.ajax.reload();
+          tabla.ajax.reload(null,false);
         }
         });
-  })
+
 }
 
 function pagTabla() {

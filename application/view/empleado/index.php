@@ -239,8 +239,6 @@ $(document).ready(function() {
         "scrollX": false,
         "fnDrawCallback": function() {
           $('.toggle-Empleado').bootstrapToggle();
-          $('.estEmp5').bootstrapToggle('on');
-          $('.estEmp6').bootstrapToggle('off');
         },
         "language": {
             "url": Url+"/js/lenguaje.json"
@@ -268,31 +266,14 @@ $(document).ready(function() {
 });
 
 function changeStatusEmp(idEst, idEmp) {
-  $('#toggleEmp_'+idEmp+'').change(function() {
-    var NewEstado= '';
-      if (idEst == 5) {
-        NewEstado = 6;
-        $.ajax({
-          url: Url+'/empleado/cambiarEstadoEmp',
-          type:'POST',
-          data: {idEmpleado: idEmp,
-            idEstEmp: NewEstado
-          }
-          }).done(function(data){
-            tabla.ajax.reload(null,false);
-          })
-      } else if (idEst == 6) {
-        NewEstado = 5;
-        $.ajax({
-          url: Url+'/empleado/cambiarEstadoEmp',
-          type:'POST',
-          data: {idEmpleado: idEmp,
-            idEstEmp: NewEstado
-          }
-          }).done(function(data){
-            tabla.ajax.reload(null,false);
-          })
-      }
+  $.ajax({
+    url: Url+'/empleado/cambiarEstadoEmp',
+    type:'POST',
+    data: {idEmpleado: idEmp,
+      idEstEmp: idEst
+    }
+    }).done(function(data){
+      tabla.ajax.reload(null,false);
     })
 }
 

@@ -21,6 +21,8 @@ class detalle_pedidoController
            $totalPedi = $value['total'];
            $nomCli = $value['nomCli'];
            $nomEmp = $value['nomEmplo'];
+           $idEstPed =  $value['idEstado_pedido']==1?2:1;
+           $check = $idEstPed==1?"checked":"";
 
            $datos[] = array(
                'idCliente'=> $idCli,
@@ -32,8 +34,8 @@ class detalle_pedidoController
                'verPedi'=>['<button type="button" class="btn btn-primary" onclick="verPedido
                ('.$idPed.','."'".$idCli."'".','."'".$nomCli."'".','."'".$idEmp."'".','."'".$nomEmp."'".',
                '."'".$entrega."'".','."'".$nomEst."'".','."'".$totalPedi."'".',)"><i class="fa fa-file-text-o"></i></button>'],
-               'Editar'=>['<input type="checkbox" onchange="changeStatusPed('."'".$idEstPed."'".','."'".$idPed."'".')" id="togglePed_'.$idPed.'"
-               class="toggle-Pedido estPed'.$idEstPed.'" data-toggle="toggle" data-offstyle="danger" data-on="Pendiente" data-off="Finalizado">'],
+               'Editar'=>['<input type="checkbox" '.$check.' onchange="changeStatusPed('."'".$idEstPed."'".','."'".$idPed."'".')" id="togglePed_'.$idPed.'"
+               class="toggle-Pedido estPed'.$idEstPed.'" data-onstyle="success" data-toggle="toggle" data-offstyle="warning" data-on="Finalizado" data-off="Finalizar">'],
                'Eliminar'=>['<button type="button" class="btn btn-danger btnCancel'.$idEstPed.'" onclick="cancelarPed('.$idPed.')">Cancelar</button>']
            );
        }

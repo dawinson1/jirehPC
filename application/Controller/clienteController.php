@@ -40,6 +40,9 @@ class clienteController
            $nomEstCli =$value['nombreEstadoCli'];
            $contrC = $value['contrasena'];
            $imgC = $value['Url_imgClient'];
+           $idEstado =  $value['estadiscli_idestadiscli']==1?2:1;
+           $check = $idEstado==1?"checked":"";
+
            $datos[] = array(
                'Cédula'=> $value['id_cliente'],
                'Nombre'=>$value['nombreCliente'],
@@ -52,8 +55,8 @@ class clienteController
                ('.$idC.','."'".$nomC."'".','."'".$apeC."'".','."'".$CorrC."'".','."'".$dicCl."'".','."'".$telC."'".','."'".$contrC."'".',)">Editar</button>'],
                'Foto Perfil'=>$value['Url_imgClient'],
                'Actualizar Foto'=>['<button type="button" class="btn btn-primary" onclick="showModalImg('.$idC.')"><i class="fa fa-file-image-o"></i></button>'],
-               'Eliminar'=>['<input type="checkbox" onchange="changeStatusCli('."'".$idEstado."'".','."'".$idC."'".')" id="toggleCli_'.$idC.'"
-               class="toggle-Cliente estCli'.$idEstado.'" data-toggle="toggle" data-offstyle="danger" data-on="Activo" data-off="Inactivo">']
+               'Eliminar'=>['<input type="checkbox" '.$check.' onchange="changeStatusCli('."'".$idEstado."'".','."'".$idC."'".')" id="toggleCli_'.$idC.'"
+               class="toggle-Cliente estCli'.$idEstado.'" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Activar" data-off="Inactivar">']
            );
        }
        echo json_encode($datos);

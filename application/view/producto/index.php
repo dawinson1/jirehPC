@@ -224,6 +224,7 @@ $(document).ready(function() {
             { "data": "Editar", "orderable": false  },
             { "data": "Actualizar Imagen", "orderable": false  },
             { "data": "Eliminar", "orderable": false, "render": function(data, type, full, meta){
+
               return data;
               }
             }
@@ -231,8 +232,8 @@ $(document).ready(function() {
         "lengthMenu": [[5, 10, 15, 100, -1], [5, 10, 15, 100, "Todo"]],
         "scrollX": false,
         "fnDrawCallback": function() {
-          $('.estProd1').bootstrapToggle('on');
-          $('.estProd2').bootstrapToggle('off');
+          // $('.toggle-Producto').bootstrapToggle('destroy')
+          $('.toggle-Producto').bootstrapToggle();
         },
         // "dom": 'lrtipB',
         "language": {
@@ -452,31 +453,31 @@ $('#imgProdu').fileinput({
 });
 
 function changeStatusProd(idEst, idProd) {
-  $('#toggleProd_'+idProd+'').change(function() {
-    var NewEstado= '';
-      if (idEst == 1) {
-        NewEstado = 2;
+  // $('#toggleProd_'+idProd+'').change(function() {
+    // var NewEstado= '';
+      // if (idEst == 1) {
+      //   NewEstado = 2;
+      //   $.ajax({
+      //     url: Url+'/producto/cambiarEstadoProd',
+      //     type:'POST',
+      //     data: {idProducto: idProd,
+      //       idEstEmp: NewEstado
+      //     }
+      //     }).done(function(data){
+      //       tabla.ajax.reload(null,false);
+      //     })
+      // } else if (idEst == 2) {
+        // NewEstado = 1;
         $.ajax({
           url: Url+'/producto/cambiarEstadoProd',
           type:'POST',
           data: {idProducto: idProd,
-            idEstEmp: NewEstado
+            idEstEmp: idEst
           }
           }).done(function(data){
             tabla.ajax.reload(null,false);
           })
-      } else if (idEst == 2) {
-        NewEstado = 1;
-        $.ajax({
-          url: Url+'/producto/cambiarEstadoProd',
-          type:'POST',
-          data: {idProducto: idProd,
-            idEstEmp: NewEstado
-          }
-          }).done(function(data){
-            tabla.ajax.reload(null,false);
-          })
-      }
-    })
+      // }
+    // })
 }
 </script>

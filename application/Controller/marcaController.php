@@ -35,6 +35,8 @@ class marcaController
            $nomMar = $value['Nombre'];
            $id_estado =$value['idEstado'];
            $nomEstadoMarca =$value['nombreEstadoMarc'];
+           $id_estado =  $value['idEstado']==1?2:1;
+           $check = $id_estado==1?"checked":"";
 
            $datos[] = array(
                'ID'=> $value['idmarca'],
@@ -42,8 +44,8 @@ class marcaController
                'Estado'=>$value['nombreEstadoMarc'],
                'Editar'=>['<button type="button" class="btn btn-primary" onclick="editarMarca
                ('.$idMar.','."'".$nomMar."'".')">Editar</button>'],
-               'Eliminar'=>['<input type="checkbox" onchange="changeStatusMarca('."'".$id_estado."'".','."'".$idMar."'".')" id="toggleMarca_'.$idMar.'"
-               class="toggle-Marca estMarc'.$id_estado.'" data-toggle="toggle" data-offstyle="danger" data-on="Activo" data-off="Inactivo">']
+               'Eliminar'=>['<input type="checkbox" '.$check.' onchange="changeStatusMarca('."'".$id_estado."'".','."'".$idMar."'".')" id="toggleMarca_'.$idMar.'"
+               class="toggle-Marca estMarc'.$id_estado.'" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Activar" data-off="Inactivar">']
            );
        }
        echo json_encode($datos);

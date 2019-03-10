@@ -45,6 +45,8 @@ class empleadoController
            $idEstado =$value['id_estado'];
            $nomEstEmp =$value['nombreEstadoEmp'];
            $imgE = $value['Url_imgEmpleado'];
+           $idEstado =  $value['id_estado']==5?6:5;
+           $check = $idEstado==5?"checked":"";
            $datos[] = array(
                'Nombre'=> $value['nombre'],
                'Apellido'=>$value['apellido'],
@@ -57,8 +59,8 @@ class empleadoController
                ('.$idEm.','."'".$nomEm."'".','."'".$apeEm."'".','."'".$telEm."'".','."'".$mailEm."'".','."'".$idRol."'".','."'".$idEstado."'".',)">Editar</button>'],
                'Foto Perfil'=>$value['Url_imgEmpleado'],
                'Actualizar Foto'=>['<button type="button" class="btn btn-primary" onclick="showModalImg('.$idEm.')"><i class="fa fa-file-image-o"></i></button>'],
-               'Eliminar'=>['<input type="checkbox" onchange="changeStatusEmp('."'".$idEstado."'".','."'".$idEm."'".')" id="toggleEmp_'.$idEm.'"
-               class="toggle-Empleado estEmp'.$idEstado.'" data-toggle="toggle" data-offstyle="danger" data-on="Activo" data-off="Inactivo">']
+               'Eliminar'=>['<input type="checkbox" '.$check.' onchange="changeStatusEmp('."'".$idEstado."'".','."'".$idEm."'".')" id="toggleEmp_'.$idEm.'"
+               class="toggle-Empleado estEmp'.$idEstado.'" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Activar" data-off="Inactivar">']
            );
        }
        echo json_encode($datos);
