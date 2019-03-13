@@ -162,14 +162,14 @@ class producto extends Model
 
     public function editarProducto()
     {
-        $sql = "UPDATE producto SET id_categoria = ?, nombreProducto = ?, cantidad = ?,stock = ?,precioUnit = ?,marca = ? WHERE referencia = ?";
+        $sql = "UPDATE producto SET id_categoria = ?, nombreProducto = ?, cantidad = ?,stock = ?,precioUnit = ?,idMarca = ? WHERE referencia = ?";
         $query = $this->db->prepare($sql);
         $query->bindParam(1,$this->id_categoria);
         $query->bindParam(2,$this->nombreProducto);
         $query->bindParam(3,$this->cantidad);
         $query->bindParam(4,$this->stock);
         $query->bindParam(5,$this->precioUnit);
-        $query->bindParam(6,$this->marca);
+        $query->bindParam(6,$this->idMarca);
         $query->bindParam(7,$this->referencia);
         return $query->execute();
     }

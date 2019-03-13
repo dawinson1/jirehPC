@@ -188,7 +188,11 @@ $(document).ready(function() {
             { "data": "dateEntrega","className": 'centeer'  },
             { "data": "id_emplo","className": 'centeer'  },
             { "data": "nomEstPedi", "className": 'centeer' },
-            { "data": "totalPedido", "className": 'centeer' },
+            { "data": "totalPedido", "className": 'centeer',"render": function(data, type, full, meta){
+              var totalPrecioFormat = numberWithCommas(data);
+              return totalPrecioFormat;
+              }
+            },
             { "data": "verPedi", "orderable": false  },
             { "data": "Editar", "orderable": false, "render": function(data, type, full, meta){
               return data;
@@ -229,9 +233,14 @@ $(document).ready(function() {
         } );
 
 });
+//Foarmat number jQuery
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 function verPedido(idPedido,idCli,nomCli,idEmp,nomEmp,entrega,estado,totalPed) //funcion para enviar los cambios al controlador
 {
+  var totalPedFormat = numberWithCommas(totalPed);
   $('.pedNumber').text(idPedido);
   $('.IDCliente').text(idCli);
   $('.nombreCliente').text(nomCli);
@@ -239,7 +248,7 @@ function verPedido(idPedido,idCli,nomCli,idEmp,nomEmp,entrega,estado,totalPed) /
   $('.nombreEmple').text(nomEmp);
   $('.dateEntre').text(entrega);
   $('.estadoPedido').text(estado);
-  $('.precioTotal').text(totalPed);
+  $('.precioTotal').text(totalPedFormat);
   $.ajax({
       url: Url+'/detalle_pedido/seeOrder',
       type:'POST',
@@ -250,12 +259,14 @@ function verPedido(idPedido,idCli,nomCli,idEmp,nomEmp,entrega,estado,totalPed) /
     }).done(function(data){
       var verPedi = '';
       data.forEach(function(vp){
+        var VcuFormat = numberWithCommas(vp.Vcu);
+        var VSubFormat = numberWithCommas(vp.Vsub);
         verPedi += `<tr>
           <td>`+vp.refer+`</td>
           <td>`+vp.nomPro+`</td>
           <td>`+vp.cantSoli+`</td>
-          <td>`+vp.Vcu+`</td>
-          <td>`+vp.Vsub+`</td>
+          <td>`+VcuFormat+`</td>
+          <td>`+VSubFormat+`</td>
         </tr>`;
       })
       pagTabla();

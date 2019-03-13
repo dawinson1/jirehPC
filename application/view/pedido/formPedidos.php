@@ -132,7 +132,7 @@
                           <td><?php echo $marcaProd ?></td>
                           <td><?php echo $CateProd ?></td>
                           <td id="cantActual<?php echo $refer ?>"><?php echo $cantProd ?></td>
-                          <td><?php echo $precioProd ?></td>
+                          <td><?php echo number_format($precioProd)?></td>
                           <td> <input type="text" name="cantProdInput"  id ="cantInp<?php echo $refer; ?>" placeholder="Digite una cantidad" maxlength="3"> </td>
                           <td>
                             <button type="button" class="btn btn-primary"
@@ -386,6 +386,18 @@ $(function(){
   listSelectEmp();
 })
 
+//format number Jquery
+//function formatNumber() {
+  //var val = parseInt($('#value').text());
+  //Use the code in the answer above to replace the commas.
+  //val = numberWithCommas(val);
+  //$('#value').text(val);
+//}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 //Date picker
     $('#datepicker').datepicker({
       autoclose: true,
@@ -508,6 +520,8 @@ $(document).ready(function() {
 function selectProd(refer,nomProd,precioProd) {
   let cantidadProd = $('#cantInp'+refer+'').val();
   var totalPrecio = cantidadProd*precioProd;
+  var totalPrecioFormat = numberWithCommas(totalPrecio);
+  var precioProdFormat = numberWithCommas(precioProd);
   var tdReferExist = $('#idReferTd'+refer+'').text();
   var tdCantActual = parseInt($('#cantActual'+refer+'').text());
 
@@ -526,9 +540,11 @@ function selectProd(refer,nomProd,precioProd) {
       var sumcant = (parseInt(cantSeleccionada) + parseInt(cantidadProd));
       var restcant = (parseInt(tdCantActual) - parseInt(cantidadProd));
       var sumtotal = (parseInt(totalPrecio) + parseInt(totalprice));
+      var sumtotalFormat = numberWithCommas(sumtotal);
 
       $('#cantActual'+refer+'').text(restcant);
       $('#cantSele'+refer+'').text(sumcant);
+      $('#totalPreFormat'+refer+'').text(sumtotalFormat);
       $('#totalPre'+refer+'').text(sumtotal);
       $('#cantProdSele'+refer+'').val(sumcant);
       $('#totPrecInp'+refer+'').val(sumtotal);
@@ -540,8 +556,8 @@ function selectProd(refer,nomProd,precioProd) {
         "<input type='hidden' name='idProd[]' value='"+refer+"' class='idProd'><input type='hidden' name='cantProd[]' value='"+cantidadProd+"' id='cantProdSele"+refer+"'>"+
         "<input type='hidden' name='precUnit[]' value='"+precioProd+"' class='precUnit'><input type='hidden' name='totPrec[]' class='totPrec' value='"+totalPrecio+"' id='totPrecInp"+refer+"'>"+
         "<td id='idReferTd"+refer+"'>"+refer+"</td><td>"+nomProd+"</td><td id='cantSele"+refer+"'>"+cantidadProd+
-        "</td><td>"+precioProd+"</td><td id='totalPre"+refer+"'>"+totalPrecio+
-        "</td><td><button class='btn btn-danger' type='button' onclick='removetr("+'"'+refer+'"'+")'>Eliminar</button></td></tr>"
+        "</td><td>"+precioProdFormat+"</td><td id='totalPre"+refer+"' class='hidden'>"+totalPrecio+"</td>"+"<td id ='totalPreFormat"+refer+"'>"+totalPrecioFormat+"</td>"+
+        "<td><button class='btn btn-danger' type='button' onclick='removetr("+'"'+refer+'"'+")'>Eliminar</button></td></tr>"
       );
       var restcant = (parseInt(tdCantActual) - parseInt(cantidadProd));
       $('#cantActual'+refer+'').text(restcant);
@@ -578,7 +594,8 @@ function sumTotales() {
 
     }
   });
-  $('.totalPedido').text(suma);
+  var sumaFormat = numberWithCommas(suma);
+  $('.totalPedido').text(sumaFormat);
   $('.totalPedido').val(suma);
 }
 

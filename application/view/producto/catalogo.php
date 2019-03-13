@@ -127,7 +127,7 @@ if ((isset($_GET["page"])) | (isset($_GET["mc"])) | (isset($_GET["ct"])) ) {
                     <b>Cantidad disponible:</b> <p class="pull-right"><?php echo $producto['cantidad'];?></p>
                   </li>
                   <li class="list-group-item">
-                    <b>Precio:</b> <p class="pull-right">$<?php echo $producto['precioUnit'];?></p>
+                    <b>Precio:</b> <p class="pull-right">$<?php echo number_format($producto['precioUnit']);?></p>
                   </li>
                 </ul>
               </div>

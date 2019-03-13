@@ -154,7 +154,7 @@ class productoController
       $this->producto->set('cantidad',$_POST['cantPro']);
       $this->producto->set('stock',$_POST['stockPro']);
       $this->producto->set('precioUnit',$_POST['preUni']);
-      $this->producto->set('marca',$_POST['nMarc']);
+      $this->producto->set('idMarca',$_POST['nMarc']);
       echo $this->producto->editarProducto();
     }
 

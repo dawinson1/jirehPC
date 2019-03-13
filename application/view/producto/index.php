@@ -214,7 +214,11 @@ $(document).ready(function() {
             { "data": "Nombre","className": 'centeer'  },
             { "data": "Cantidad","className": 'centeer'  },
             { "data": "Stock","className": 'centeer' },
-            { "data": "Precio Unitario", "className": 'centeer' },
+            { "data": "Precio Unitario", "className": 'centeer', "render": function(data, type, full, meta){
+              var totalPrecioFormat = numberWithCommas(data);
+              return totalPrecioFormat;
+              }
+            },
             { "data": "Marca", "className": 'centeer' },
             { "data": "EstadoProd", "className": 'centeer' },
             { "data": "Imagen", "render":function(data,type,row){
@@ -261,6 +265,11 @@ $(document).ready(function() {
 
 });
 
+//Foarmat number jQuery
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function enviarEditProducto() //funcion para enviar los cambios al controlador
 {
 
@@ -285,7 +294,6 @@ var Max_Stock = $('#stockPro').val().length;
 var precioUnit = $('#preUni').val();
 var Max_PrecioU = $('#preUni').val().length;
 var marca = $('#nMarc').val();
-var Max_Marca = $('#nMarc').val().length;
 
 if ((referencia == "") || (id_categoria == "") || (nombreProducto == "") || (cantidad == "") || (stock == "") || (precioUnit == "") || (marca == "")) {
     swal("Upss!", "Los campos no pueden ir vacíos!", "error");
@@ -298,10 +306,7 @@ else if (patronLetrEspecial.test(stock)) {
 else if (patronLetrEspecial.test(precioUnit)) {
     swal("Upss!", "En el campo Precio Unitario solo deben ir números!", "error");
 }
-else if (patronNum.test(marca)) {
-    swal("Upss!", "En el campo Marca solo deben ir Letras!", "error");
-}
-else if ((Max_referencia > Max_LengthReferencia) ||(Max_nombreProducto > Max_LengthNombre) || (Max_Cantidad > Max_LengthCantidad) || (Max_Stock > Max_LengthCantidad) || (Max_PrecioU > Max_LengthCantidad) || (Max_Marca > Max_LengthMarca)) {
+else if ((Max_referencia > Max_LengthReferencia) ||(Max_nombreProducto > Max_LengthNombre) || (Max_Cantidad > Max_LengthCantidad) || (Max_Stock > Max_LengthCantidad) || (Max_PrecioU > Max_LengthCantidad)) {
     swal("Upss!", "Ingresaste una longitud no válida en un campo!", "error");
 } else {
 
